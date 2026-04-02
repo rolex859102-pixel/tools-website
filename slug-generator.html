@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Slug Generator</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+.container{
+width:70%;
+margin:auto;
+margin-top:50px;
+}
+
+textarea{
+width:100%;
+height:120px;
+padding:10px;
+font-size:16px;
+}
+
+button{
+padding:10px 20px;
+background:#009688;
+color:white;
+border:none;
+margin-top:15px;
+cursor:pointer;
+}
+
+#result{
+margin-top:20px;
+font-size:18px;
+background:white;
+padding:10px;
+}
+
+</style>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Slug Generator</h1>
+
+<textarea id="textInput" placeholder="Enter text"></textarea>
+
+<br>
+
+<button onclick="generateSlug()">Generate Slug</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function generateSlug(){
+
+let text=document.getElementById("textInput").value;
+
+let slug = text
+.toLowerCase()
+.trim()
+.replace(/[^a-z0-9\s-]/g,'')
+.replace(/\s+/g,'-');
+
+document.getElementById("result").innerText = slug;
+
+}
+
+</script>
+
+</body>
+</html>
