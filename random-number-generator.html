@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Random Number Generator</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+.container{
+width:70%;
+margin:auto;
+margin-top:50px;
+}
+
+input{
+padding:10px;
+font-size:16px;
+margin:10px;
+width:120px;
+}
+
+button{
+padding:10px 20px;
+background:#ff9800;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+#result{
+margin-top:20px;
+background:white;
+padding:20px;
+font-size:28px;
+font-weight:bold;
+}
+
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Random Number Generator</h1>
+
+<input type="number" id="min" placeholder="Min">
+
+<input type="number" id="max" placeholder="Max">
+
+<br>
+
+<button onclick="generateNumber()">Generate</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function generateNumber(){
+
+let min=parseInt(document.getElementById("min").value);
+
+let max=parseInt(document.getElementById("max").value);
+
+if(isNaN(min) || isNaN(max)){
+
+document.getElementById("result").innerText="Enter valid numbers";
+
+return;
+
+}
+
+let random=Math.floor(Math.random()*(max-min+1))+min;
+
+document.getElementById("result").innerText=random;
+
+}
+
+</script>
+
+</body>
+</html>

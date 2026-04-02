@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>QR Code Scanner</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+.container{
+width:80%;
+margin:auto;
+margin-top:40px;
+}
+
+#reader{
+width:300px;
+margin:auto;
+}
+
+#result{
+margin-top:20px;
+font-size:18px;
+background:white;
+padding:10px;
+}
+
+button{
+padding:10px 20px;
+margin-top:15px;
+background:#4CAF50;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>QR Code Scanner</h1>
+
+<div id="reader"></div>
+
+<button onclick="startScanner()">Start Scanner</button>
+
+<div id="result">Result will appear here</div>
+
+</div>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script>
+
+function startScanner(){
+
+const scanner = new Html5Qrcode("reader");
+
+scanner.start(
+{ facingMode: "environment" },
+{
+fps: 10,
+qrbox: 250
+},
+(qrCodeMessage)=>{
+document.getElementById("result").innerText=qrCodeMessage;
+scanner.stop();
+},
+(error)=>{
+// ignore errors
+}
+);
+
+}
+
+</script>
+
+</body>
+</html>

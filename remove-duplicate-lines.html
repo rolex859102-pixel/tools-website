@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Remove Duplicate Lines</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+.container{
+width:75%;
+margin:auto;
+margin-top:40px;
+}
+
+textarea{
+width:100%;
+height:200px;
+padding:10px;
+font-size:16px;
+}
+
+button{
+padding:10px 20px;
+background:#e91e63;
+color:white;
+border:none;
+margin-top:15px;
+cursor:pointer;
+}
+
+#result{
+margin-top:20px;
+background:white;
+padding:15px;
+font-size:18px;
+text-align:left;
+white-space:pre-wrap;
+}
+
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Remove Duplicate Lines</h1>
+
+<textarea id="inputText" placeholder="Paste text lines"></textarea>
+
+<br>
+
+<button onclick="removeDuplicates()">Remove Duplicates</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function removeDuplicates(){
+
+let text=document.getElementById("inputText").value;
+
+let lines=text.split("\n");
+
+let unique=[...new Set(lines)];
+
+document.getElementById("result").innerText=unique.join("\n");
+
+}
+
+</script>
+
+</body>
+</html>
