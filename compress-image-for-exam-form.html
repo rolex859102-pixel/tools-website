@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Compress Image for Exam Form</title>
+<style>
+body{background:#020617;color:white;text-align:center;}
+</style>
+</head>
+
+<body>
+
+<h1>Compress Image for Exam Form</h1>
+
+<input type="file"><br>
+<button onclick="compress()">Compress</button>
+
+<br><br>
+
+<a href="https://www.canva.com" target="_blank">
+<button onclick="trackClick('canva')">🔥 Try Pro Tool</button>
+</a>
+
+<p id="result"></p>
+
+<script>
+function compress(){
+document.getElementById("result").innerText="Ready!";
+}
+
+function trackClick(toolName){
+let count=localStorage.getItem(toolName)||0;
+count++;
+localStorage.setItem(toolName,count);
+alert("Opening Pro Tool 🚀");
+}
+</script>
+
+</body>
+</html>

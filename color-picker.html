@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Color Picker</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+.container{
+width:60%;
+margin:auto;
+margin-top:50px;
+}
+
+input[type="color"]{
+width:120px;
+height:60px;
+border:none;
+cursor:pointer;
+}
+
+#colorBox{
+width:200px;
+height:150px;
+margin:20px auto;
+border-radius:10px;
+border:2px solid #ccc;
+}
+
+.output{
+margin-top:15px;
+font-size:18px;
+background:white;
+padding:10px;
+}
+
+button{
+margin-top:10px;
+padding:8px 15px;
+background:#2196F3;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Color Picker</h1>
+
+<input type="color" id="colorInput" onchange="showColor()">
+
+<div id="colorBox"></div>
+
+<div class="output" id="hex">HEX: </div>
+<button onclick="copyHex()">Copy HEX</button>
+
+<div class="output" id="rgb">RGB: </div>
+<button onclick="copyRGB()">Copy RGB</button>
+
+</div>
+
+<script>
+
+function showColor(){
+
+let color=document.getElementById("colorInput").value;
+
+// box color
+document.getElementById("colorBox").style.background=color;
+
+// HEX
+document.getElementById("hex").innerText="HEX: "+color;
+
+// RGB convert
+let r=parseInt(color.substr(1,2),16);
+let g=parseInt(color.substr(3,2),16);
+let b=parseInt(color.substr(5,2),16);
+
+let rgb="rgb("+r+", "+g+", "+b+")";
+
+document.getElementById("rgb").innerText="RGB: "+rgb;
+
+}
+
+// copy functions
+function copyHex(){
+
+let text=document.getElementById("hex").innerText.replace("HEX: ","");
+
+navigator.clipboard.writeText(text);
+
+alert("HEX Copied!");
+}
+
+function copyRGB(){
+
+let text=document.getElementById("rgb").innerText.replace("RGB: ","");
+
+navigator.clipboard.writeText(text);
+
+alert("RGB Copied!");
+}
+
+</script>
+
+</body>
+</html>

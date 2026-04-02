@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Color Picker Pro</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+.container{
+width:60%;
+margin:auto;
+margin-top:40px;
+}
+
+input[type="color"]{
+width:120px;
+height:60px;
+border:none;
+cursor:pointer;
+}
+
+#colorBox{
+width:220px;
+height:150px;
+margin:20px auto;
+border-radius:10px;
+border:2px solid #ccc;
+}
+
+.output{
+margin-top:10px;
+background:white;
+padding:10px;
+font-size:18px;
+}
+
+button{
+margin:5px;
+padding:8px 15px;
+border:none;
+cursor:pointer;
+background:#2196F3;
+color:white;
+}
+
+#history{
+margin-top:20px;
+}
+
+.colorItem{
+display:inline-block;
+width:30px;
+height:30px;
+margin:5px;
+cursor:pointer;
+border:1px solid #000;
+}
+
+#gradient{
+width:100%;
+height:100px;
+margin-top:20px;
+border-radius:10px;
+}
+
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Color Picker PRO</h1>
+
+<input type="color" id="colorInput" onchange="updateColor()">
+
+<div id="colorBox"></div>
+
+<div class="output" id="hex">HEX:</div>
+<button onclick="copyText('hex')">Copy HEX</button>
+
+<div class="output" id="rgb">RGB:</div>
+<button onclick="copyText('rgb')">Copy RGB</button>
+
+<br>
+
+<button onclick="randomColor()">🎲 Random Color</button>
+
+<div id="gradient"></div>
+
+<h3>Recent Colors</h3>
+<div id="history"></div>
+
+</div>
+
+<script>
+
+let historyColors=[];
+
+function updateColor(){
+
+let color=document.getElementById("colorInput").value;
+
+document.getElementById("colorBox").style.background=color;
+
+// HEX
+document.getElementById("hex").innerText="HEX: "+color;
+
+// RGB
+let r=parseInt(color.substr(1,2),16);
+let g=parseInt(color.substr(3,2),16);
+let b=parseInt(color.substr(5,2),16);
+
+let rgb="rgb("+r+", "+g+", "+b+")";
+
+document.getElementById("rgb").innerText="RGB: "+rgb;
+
+// gradient
+let gradient="linear-gradient(to right,"+color+",#000)";
+document.getElementById("gradient").style.background=gradient;
+
+// save history
+addToHistory(color);
+
+}
+
+function copyText(id){
+
+let text=document.getElementById(id).innerText.split(": ")[1];
+
+navigator.clipboard.writeText(text);
+
+alert("Copied!");
+}
+
+function randomColor(){
+
+let random="#"+Math.floor(Math.random()*16777215).toString(16);
+
+document.getElementById("colorInput").value=random;
+
+updateColor();
+
+}
+
+function addToHistory(color){
+
+if(!historyColors.includes(color)){
+
+historyColors.push(color);
+
+let box=document.createElement("div");
+
+box.className="colorItem";
+box.style.background=color;
+
+box.onclick=function(){
+document.getElementById("colorInput").value=color;
+updateColor();
+};
+
+document.getElementById("history").appendChild(box);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

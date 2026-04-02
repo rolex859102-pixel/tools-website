@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Case Converter Advanced</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+.container{
+width:75%;
+margin:auto;
+margin-top:40px;
+}
+
+textarea{
+width:100%;
+height:150px;
+padding:10px;
+font-size:16px;
+}
+
+button{
+padding:10px 15px;
+margin:5px;
+background:#2196F3;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+#result{
+margin-top:20px;
+background:white;
+padding:15px;
+font-size:18px;
+white-space:pre-wrap;
+text-align:left;
+}
+
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Case Converter Advanced</h1>
+
+<textarea id="inputText" placeholder="Enter text"></textarea>
+
+<br>
+
+<button onclick="toUpper()">UPPERCASE</button>
+<button onclick="toLower()">lowercase</button>
+<button onclick="capitalizeWords()">Capitalize Words</button>
+<button onclick="sentenceCase()">Sentence case</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function toUpper(){
+let text=document.getElementById("inputText").value;
+document.getElementById("result").innerText=text.toUpperCase();
+}
+
+function toLower(){
+let text=document.getElementById("inputText").value;
+document.getElementById("result").innerText=text.toLowerCase();
+}
+
+function capitalizeWords(){
+let text=document.getElementById("inputText").value;
+let result=text.replace(/\b\w/g,c=>c.toUpperCase());
+document.getElementById("result").innerText=result;
+}
+
+function sentenceCase(){
+let text=document.getElementById("inputText").value.toLowerCase();
+let result=text.charAt(0).toUpperCase()+text.slice(1);
+document.getElementById("result").innerText=result;
+}
+
+</script>
+
+</body>
+</html>
