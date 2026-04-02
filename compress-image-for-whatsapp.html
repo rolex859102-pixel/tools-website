@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Compress Image for WhatsApp</title>
+
+<style>
+body{background:#020617;color:white;text-align:center;}
+button{padding:10px;margin:10px;}
+</style>
+
+</head>
+
+<body>
+
+<h1>Compress Image for WhatsApp</h1>
+
+<input type="file">
+<br>
+
+<button onclick="compress()">Compress</button>
+
+<br><br>
+
+<a href="https://www.canva.com" target="_blank">
+<button onclick="trackClick('canva')" style="
+background:orange;color:white;border:none;padding:12px;">
+🔥 Try Pro Tool
+</button>
+</a>
+
+<p id="result"></p>
+
+<script>
+function compress(){
+document.getElementById("result").innerText="Image compressed!";
+}
+
+function trackClick(toolName){
+let count=localStorage.getItem(toolName)||0;
+count++;
+localStorage.setItem(toolName,count);
+alert("Opening Pro Tool 🚀");
+}
+</script>
+
+</body>
+</html>

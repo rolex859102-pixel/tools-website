@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Auto Page Generator</title>
+</head>
+
+<body>
+
+<h1>Auto Page Generator</h1>
+
+<textarea id="keywords" rows="10" cols="50" placeholder="Enter keywords..."></textarea>
+
+<br><br>
+<button onclick="generatePages()">Generate Pages</button>
+
+<pre id="output"></pre>
+
+<script>
+function generatePages() {
+    let input = document.getElementById("keywords").value;
+
+    if (input.trim() === "") {
+        alert("Please enter keywords!");
+        return;
+    }
+
+    let keywords = input.split("\n");
+    let result = "";
+
+    keywords.forEach(function(k) {
+        let keyword = k.trim();
+        if (keyword === "") return;
+
+        let filename = keyword.replace(/\s+/g, "-") + ".html";
+
+        let html = "<!DOCTYPE html>\n<html lang='en'>\n<head>\n<meta charset='UTF-8'>\n";
+        html += "<title>" + keyword + " Online Free</title>\n";
+        html += "<meta name='description' content='" + keyword + " online free tool.'>\n";
+        html += "<link rel='stylesheet' href='css/style.css'>\n</head>\n<body>\n";
+
+        html += "<div class='container'>\n";
+        html += "<h1>" + keyword + "</h1>\n";
+        html += "<p>Best free tool for " + keyword + " online.</p>\n";
+
+        html += "<input type='file'><br><br>\n";
+        html += "<button onclick='runTool()'>Run Tool</button>\n";
+        html += "<div id='result'></div>\n";
+
+        html += "<div style='background:#f5f5f5;padding:10px;margin-top:10px;'>\n";
+        html += "<b>Recommended Tool:</b><br>\n";
+        html += "<a href='https://www.canva.com' target='_blank'>Try Canva</a>\n</div>\n";
+
+        html += "<br><br><button onclick='trackClick()'>Try Pro Tool</button>\n";
+        html += "<br><br><a href='index.html'>Back to Home</a>\n";
+
+        html += "</div>\n";
+
+        html += "<script>\n";
+        html += "function runTool(){document.getElementById('result').innerText='Done';}\n";
+        html += "function trackClick(){window.open('https://www.canva.com','_blank');}\n";
+        html += "<\/script>\n";
+
+        html += "</body>\n</html>\n\n";
+
+        result += "FILE: " + filename + "\n\n" + html + "\n-------------------\n\n";
+    });
+
+    document.getElementById("output").innerText = result;
+}
+</script>
+
+</body>
+</html>
