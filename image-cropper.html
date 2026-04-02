@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Cropper</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+.container{
+width:80%;
+margin:auto;
+margin-top:40px;
+}
+
+input{
+margin:8px;
+padding:8px;
+width:100px;
+}
+
+img{
+margin-top:20px;
+max-width:300px;
+}
+
+button{
+padding:10px 20px;
+margin-top:15px;
+background:#e91e63;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+canvas{
+display:none;
+}
+
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Image Cropper</h1>
+
+<input type="file" id="imageInput" accept="image/*">
+
+<br>
+
+<input type="number" id="x" placeholder="X">
+<input type="number" id="y" placeholder="Y">
+<input type="number" id="width" placeholder="Width">
+<input type="number" id="height" placeholder="Height">
+
+<br>
+
+<button onclick="cropImage()">Crop Image</button>
+
+<br>
+
+<img id="preview">
+
+<br>
+
+<a id="downloadLink" style="display:none;">Download Cropped Image</a>
+
+<canvas id="canvas"></canvas>
+
+</div>
+
+<script>
+
+function cropImage(){
+
+let file=document.getElementById("imageInput").files[0];
+
+let x=parseInt(document.getElementById("x").value);
+let y=parseInt(document.getElementById("y").value);
+let width=parseInt(document.getElementById("width").value);
+let height=parseInt(document.getElementById("height").value);
+
+if(!file || isNaN(x) || isNaN(y) || isNaN(width) || isNaN(height)){
+alert("Please fill all fields correctly");
+return;
+}
+
+let img=new Image();
+let reader=new FileReader();
+
+reader.onload=function(e){
+img.src=e.target.result;
+};
+
+img.onload=function(){
+
+let canvas=document.getElementById("canvas");
+let ctx=canvas.getContext("2d");
+
+canvas.width=width;
+canvas.height=height;
+
+ctx.drawImage(img,x,y,width,height,0,0,width,height);
+
+let cropped=canvas.toDataURL("image/jpeg",0.9);
+
+document.getElementById("preview").src=cropped;
+
+// download
+let link=document.getElementById("downloadLink");
+link.href=cropped;
+link.download="cropped.jpg";
+link.style.display="inline-block";
+link.innerText="Download Image";
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+</script>
+
+<footer style="text-align:center;padding:20px;background:#020617;margin-top:40px;">
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
+
+</body>
+</html>

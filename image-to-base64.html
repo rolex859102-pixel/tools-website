@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image to Base64 Converter</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+.container{
+width:80%;
+margin:auto;
+margin-top:40px;
+}
+
+input{
+margin-top:20px;
+}
+
+img{
+margin-top:20px;
+max-width:300px;
+}
+
+textarea{
+width:100%;
+height:150px;
+margin-top:20px;
+padding:10px;
+font-size:14px;
+}
+
+button{
+padding:10px 20px;
+margin-top:15px;
+background:#3f51b5;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Image to Base64 Converter</h1>
+
+<input type="file" id="imageInput" accept="image/*">
+
+<br>
+
+<img id="preview">
+
+<textarea id="output" placeholder="Base64 output will appear here"></textarea>
+
+<br>
+
+<button onclick="convertImage()">Convert</button>
+
+</div>
+
+<script>
+
+function convertImage(){
+
+let file=document.getElementById("imageInput").files[0];
+
+if(!file){
+alert("Please select an image");
+return;
+}
+
+let reader=new FileReader();
+
+reader.onload=function(){
+
+let base64=reader.result;
+
+document.getElementById("preview").src=base64;
+document.getElementById("output").value=base64;
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+</script>
+
+<footer style="text-align:center;padding:20px;background:#020617;margin-top:40px;">
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
+
+</body>
+</html>

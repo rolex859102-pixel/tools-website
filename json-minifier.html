@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JSON Minifier</title>
+<style>
+body{font-family:Arial;text-align:center;background:#f4f4f4;}
+.container{width:75%;margin:auto;margin-top:40px;}
+textarea{width:100%;height:200px;padding:10px;font-size:16px;}
+button{padding:10px 20px;background:#2196F3;color:white;border:none;margin-top:10px;}
+#result{margin-top:20px;background:white;padding:15px;font-size:18px;}
+</style>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>JSON Minifier</h1>
+
+<textarea id="input" placeholder="Paste JSON here"></textarea>
+
+<br>
+
+<button onclick="minifyJSON()">Minify</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function minifyJSON(){
+
+let input=document.getElementById("input").value;
+
+try{
+
+let parsed=JSON.parse(input);
+
+let minified=JSON.stringify(parsed);
+
+document.getElementById("result").innerText=minified;
+
+}
+catch(e){
+
+document.getElementById("result").innerText="Invalid JSON";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

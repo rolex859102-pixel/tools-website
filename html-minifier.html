@@ -1,0 +1,92 @@
+!DOCTYPE html
+html
+head
+titleHTML Minifiertitle
+
+style
+
+body{
+font-familyArial;
+text-aligncenter;
+background#f4f4f4;
+}
+
+.container{
+width75%;
+marginauto;
+margin-top40px;
+}
+
+textarea{
+width100%;
+height200px;
+padding10px;
+font-size16px;
+}
+
+button{
+padding10px 20px;
+background#ff5722;
+colorwhite;
+bordernone;
+margin-top15px;
+cursorpointer;
+}
+
+#result{
+margin-top20px;
+backgroundwhite;
+padding15px;
+text-alignleft;
+font-familymonospace;
+font-size18px;
+white-spacepre-wrap;
+}
+
+style
+
+head
+
+body
+
+div class=container
+
+h1HTML Minifierh1
+
+textarea id=htmlInput placeholder=Paste HTML codetextarea
+
+br
+
+button onclick=minifyHTML()Minify HTMLbutton
+
+div id=resultdiv
+
+div
+
+script
+
+function minifyHTML(){
+
+let html=document.getElementById(htmlInput).value;
+
+let minified = html
+.replace(ng,'')
+.replace(s+g,' ')
+.replace(s+g,'')
+.trim();
+
+document.getElementById(result).innerText=minified;
+
+}
+
+script
+
+<footer style="text-align:center;padding:20px;background:#020617;margin-top:40px;">
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
+
+body
+html

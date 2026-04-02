@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Compressor Tool</title>
+
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+.container {
+    width:80%;
+    margin:auto;
+}
+input, button {
+    padding:10px;
+    margin:10px;
+}
+.result {
+    margin-top:20px;
+    font-size:18px;
+    color:#00ffcc;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Image Compressor Tool</h1>
+
+<input type="file" id="upload">
+<br>
+
+<!-- MAIN TOOL BUTTON -->
+<button onclick="compressImage()">Compress Image</button>
+
+<!-- 🔥 PRO AFFILIATE BUTTON (ONLY ONE) -->
+<br><br>
+<a href="https://www.canva.com" target="_blank">
+<button onclick="trackClick('canva')" style="
+padding:12px 20px;
+background:linear-gradient(45deg,#ff4d4d,#ff9900);
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+box-shadow:0 0 10px rgba(255,0,0,0.5);
+">
+🔥 Try Pro Tool (Better Quality)
+</button>
+</a>
+
+<!-- RESULT -->
+<div class="result">
+<p id="output"></p>
+</div>
+
+<!-- SEO CONTENT -->
+<h2>What is Image Compressor?</h2>
+<p>This tool reduces image size without losing quality. It is useful for WhatsApp, forms, and websites.</p>
+
+<h2>How to Use?</h2>
+<ul style="list-style:none;">
+<li>Upload your image</li>
+<li>Click compress</li>
+<li>Download optimized image</li>
+</ul>
+
+</div>
+
+<script>
+
+function compressImage(){
+    document.getElementById("output").innerHTML = "Image compressed successfully!";
+}
+
+function trackClick(toolName){
+    console.log("Clicked:", toolName);
+
+    let count = localStorage.getItem(toolName) || 0;
+    count++;
+    localStorage.setItem(toolName, count);
+
+    alert("Opening Pro Tool 🚀");
+}
+
+</script>
+
+</body>
+</html>

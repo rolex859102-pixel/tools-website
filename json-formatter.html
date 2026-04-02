@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JSON Formatter</title>
+<style>
+body {
+    background:#020617;
+    color:white;
+    text-align:center;
+}
+textarea {
+    width:80%;
+    height:150px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>JSON Formatter</h1>
+
+<textarea id="json"></textarea>
+<br>
+
+<button onclick="formatJSON()">Format JSON</button>
+
+<pre id="output"></pre>
+
+<!-- 🔥 AFFILIATE -->
+<br><br>
+<a href="https://code.visualstudio.com" target="_blank">
+<button onclick="trackClick()">💻 Use VS Code (Best Tool)</button>
+</a>
+
+<script>
+function formatJSON(){
+    try{
+        let obj = JSON.parse(document.getElementById("json").value);
+        document.getElementById("output").innerText =
+            JSON.stringify(obj, null, 4);
+    } catch(e){
+        alert("Invalid JSON");
+    }
+}
+
+function trackClick(){
+    alert("Redirecting 🚀");
+}
+</script>
+
+</body>
+</html>
