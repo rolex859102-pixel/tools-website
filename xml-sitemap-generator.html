@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>XML Sitemap Generator</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+.container{
+width:75%;
+margin:auto;
+margin-top:40px;
+}
+
+textarea{
+width:100%;
+height:200px;
+padding:10px;
+font-size:16px;
+}
+
+button{
+padding:10px 20px;
+background:#4CAF50;
+color:white;
+border:none;
+margin-top:15px;
+cursor:pointer;
+}
+
+#result{
+margin-top:20px;
+background:white;
+padding:15px;
+text-align:left;
+font-family:monospace;
+font-size:18px;
+white-space:pre-wrap;
+}
+
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>XML Sitemap Generator</h1>
+
+<textarea id="urls" placeholder="Enter one URL per line"></textarea>
+
+<br>
+
+<button onclick="generateSitemap()">Generate Sitemap</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function generateSitemap(){
+
+let urls=document.getElementById("urls").value.split("\n");
+
+let sitemap='<?xml version="1.0" encoding="UTF-8"?>\n';
+sitemap+='<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+
+urls.forEach(function(url){
+
+if(url.trim()!==""){
+
+sitemap+="  <url>\n";
+sitemap+="    <loc>"+url.trim()+"</loc>\n";
+sitemap+="  </url>\n";
+
+}
+
+});
+
+sitemap+="</urlset>";
+
+document.getElementById("result").innerText=sitemap;
+
+}
+
+</script>
+
+</body>
+</html>
