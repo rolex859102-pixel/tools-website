@@ -75,7 +75,8 @@ a.tool:hover {
 
 <div class="container">
 
-<input type="text" class="search" placeholder="Search tools...">
+<!-- 🔍 SEARCH -->
+<input type="text" id="searchBox" class="search" placeholder="Search tools..." onkeyup="searchTools()">
 
 <!-- 💰 Affiliate -->
 <div class="affiliate">
@@ -86,9 +87,9 @@ a.tool:hover {
 <a class="tool" href="emi-calculator.html">EMI Calculator</a>
 </div>
 
-<!-- 💰 HIGH CPC TOOLS -->
+<!-- 💰 FINANCE -->
 <div class="tool-box">
-<h2>💰 Finance Tools (High Earning)</h2>
+<h2>💰 Finance Tools</h2>
 
 <a class="tool" href="loan-calculator.html">Loan Calculator</a>
 <a class="tool" href="emi-calculator.html">EMI Calculator</a>
@@ -133,6 +134,24 @@ a.tool:hover {
 </div>
 
 </div>
+
+<!-- 🔥 SEARCH SCRIPT -->
+<script>
+function searchTools() {
+    let input = document.getElementById("searchBox").value.toLowerCase();
+    let tools = document.getElementsByClassName("tool");
+
+    for (let i = 0; i < tools.length; i++) {
+        let text = tools[i].innerText.toLowerCase();
+
+        if (text.includes(input)) {
+            tools[i].style.display = "inline-block";
+        } else {
+            tools[i].style.display = "none";
+        }
+    }
+}
+</script>
 
 </body>
 </html>
