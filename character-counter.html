@@ -1,36 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
-<title>Character Counter</title>
-<link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="css/style.css">
+<title>Free Character Counter Tool</title>
+
+<meta name="description" content="Count characters with and without spaces instantly using our free online character counter tool.">
+
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    margin:0;
+    text-align:center;
+}
+
+header {
+    padding:20px;
+    background:#0f172a;
+}
+
+.container {
+    width:90%;
+    margin:auto;
+}
+
+textarea {
+    width:80%;
+    height:150px;
+    padding:15px;
+    border-radius:10px;
+    border:none;
+    margin-top:20px;
+    font-size:16px;
+}
+
+.result-box {
+    background:#1e293b;
+    margin:30px auto;
+    padding:20px;
+    border-radius:10px;
+    width:60%;
+}
+
+.result-box p {
+    font-size:18px;
+    margin:10px 0;
+}
+
+a {
+    color:#22c55e;
+    text-decoration:none;
+}
+
+a:hover {
+    text-decoration:underline;
+}
+</style>
+
 </head>
 
 <body>
 
-<h1>Character Counter</h1>
+<header>
+<h1>🔢 Character Counter Tool</h1>
+<p>Count characters instantly (with & without spaces)</p>
+</header>
 
-<textarea id="textInput" placeholder="Type your text here" oninput="countCharacters()"></textarea>
+<div class="container">
 
-<br><br>
+<!-- TOOL -->
+<textarea id="text" placeholder="Type or paste your text here..." onkeyup="countChars()"></textarea>
 
-<div id="result">
+<div class="result-box">
+<p>Characters: <span id="total">0</span></p>
+<p>Without Spaces: <span id="withoutSpaces">0</span></p>
+</div>
 
-<p>Characters: 0</p>
-<p>Characters (without spaces): 0</p>
+<!-- SEO CONTENT -->
+<h2>Why Use Character Counter?</h2>
+<p>This tool helps you count characters quickly for social media posts, essays, and SEO content writing.</p>
+
+<h2>Who Should Use It?</h2>
+<ul style="list-style:none;">
+<li>Students</li>
+<li>Writers</li>
+<li>Bloggers</li>
+<li>SEO Experts</li>
+</ul>
+
+<br>
+
+<a href="index.html">⬅ Back to Home</a>
 
 </div>
 
-<script src="js/character.js"></script>
+<script>
+function countChars() {
+    let text = document.getElementById("text").value;
 
-<footer style="text-align:center;padding:20px;background:#020617;margin-top:40px;">
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a> |
-<a href="privacy.html">Privacy Policy</a> |
-<a href="disclaimer.html">Disclaimer</a>
-</footer>
+    let total = text.length;
+    let withoutSpaces = text.replace(/\s/g, "").length;
+
+    document.getElementById("total").innerText = total;
+    document.getElementById("withoutSpaces").innerText = withoutSpaces;
+}
+</script>
 
 </body>
 </html>
