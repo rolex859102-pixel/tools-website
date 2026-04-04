@@ -1,23 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Best Free Word Counter Online Tool</title>
-<meta name="description" content="Find the best free word counter online tool for counting words, characters and sentences instantly.">
 
-<link rel="stylesheet" href="css/style.css">
+<meta name="description" content="Free online word counter tool to count words, characters instantly. Fast and accurate.">
+
+<style>
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+textarea{
+    width:80%;
+    height:150px;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+}
+
+.result{
+    margin-top:20px;
+    font-size:20px;
+}
+
+a{
+    color:#22c55e;
+}
+</style>
+
 </head>
 
 <body>
 
-<div class="container">
+<h1>🔥 Best Free Word Counter Online Tool</h1>
 
-<h1>Best Free Word Counter Online Tool</h1>
+<p>Type or paste your text below to count words and characters instantly.</p>
 
-<p>If you are looking for a fast and accurate word counter, this guide will help you find the best tool.</p>
+<!-- ✅ REAL TOOL -->
+<textarea id="text" placeholder="Type your text here..." onkeyup="countWords()"></textarea>
 
+<div class="result">
+<p>Words: <span id="words">0</span></p>
+<p>Characters: <span id="chars">0</span></p>
+</div>
+
+<script>
+function countWords(){
+    let text = document.getElementById("text").value;
+
+    let words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+    let chars = text.length;
+
+    document.getElementById("words").innerText = words;
+    document.getElementById("chars").innerText = chars;
+}
+</script>
+
+<hr>
+
+<!-- ✅ SEO CONTENT -->
 <h2>Why Use Word Counter?</h2>
 <ul>
 <li>Count words instantly</li>
@@ -25,19 +71,8 @@
 <li>Helpful for SEO and essays</li>
 </ul>
 
-<!-- 🔥 TOOL LINK -->
-<h2>Try Free Tool</h2>
-<a href="word-counter.html">
-👉 Click here to use Word Counter Tool
-</a>
-
-<!-- 💰 AFFILIATE -->
 <h2>Recommended Tool</h2>
-<p>For grammar checking and better writing, use this tool:</p>
-
-<a href="https://www.grammarly.com" target="_blank" onclick="trackClick()">
-👉 Use Grammarly for Better Writing
-</a>
+<p>👉 <a href="#">Use Grammarly for Better Writing</a></p>
 
 <h2>Who Should Use It?</h2>
 <ul>
@@ -47,22 +82,9 @@
 <li>SEO experts</li>
 </ul>
 
-<a href="index.html">Back to Home</a>
+<br>
 
-</div>
-
-<script>
-function trackClick(){
-window.open("https://www.grammarly.com", "_blank");
-}
-</script>
-
-<footer>
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a> |
-<a href="privacy.html">Privacy Policy</a> |
-<a href="disclaimer.html">Disclaimer</a>
-</footer>
+<a href="index.html">⬅ Back to Home</a>
 
 </body>
 </html>
