@@ -1,94 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Age Calculator</title>
+<title>Age Calculator - Calculate Your Age Online</title>
+<meta name="description" content="Free age calculator to find your exact age in years, months, and days instantly.">
 
 <style>
-
-body{
-font-family:Arial;
-text-align:center;
-background:#f4f4f4;
-}
-
-.container{
-width:70%;
-margin:auto;
-margin-top:50px;
-}
-
-input{
-padding:10px;
-font-size:16px;
-margin-top:10px;
-}
-
-button{
-padding:10px 20px;
-background:#4CAF50;
-color:white;
-border:none;
-margin-top:15px;
-cursor:pointer;
-}
-
-#result{
-margin-top:20px;
-background:white;
-padding:15px;
-font-size:20px;
-font-weight:bold;
-}
-
+body {background:#020617;color:white;text-align:center;font-family:Arial;}
+input,button {padding:10px;margin:10px;border-radius:8px;border:none;}
+button {background:#22c55e;color:white;}
 </style>
-
-<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<div class="container">
-
 <h1>Age Calculator</h1>
 
-<p>Select your Date of Birth</p>
-
 <input type="date" id="dob">
-
 <br>
-
 <button onclick="calculateAge()">Calculate Age</button>
 
-<div id="result"></div>
-
-</div>
+<h2 id="result"></h2>
 
 <script>
+function calculateAge() {
+    let dob = new Date(document.getElementById("dob").value);
+    let today = new Date();
 
-function calculateAge(){
+    let age = today.getFullYear() - dob.getFullYear();
+    let m = today.getMonth() - dob.getMonth();
 
-let dob=document.getElementById("dob").value;
+    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        age--;
+    }
 
-if(!dob){
-document.getElementById("result").innerText="Please select date of birth";
-return;
+    document.getElementById("result").innerText = "Your Age: " + age + " years";
 }
-
-let birthDate=new Date(dob);
-let today=new Date();
-
-let age=today.getFullYear()-birthDate.getFullYear();
-
-let m=today.getMonth()-birthDate.getMonth();
-
-if(m<0 || (m===0 && today.getDate()<birthDate.getDate())){
-age--;
-}
-
-document.getElementById("result").innerText="Your Age: "+age+" Years";
-
-}
-
 </script>
 
 </body>
