@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EMI Calculator - Loan EMI Calculator Online</title>
+<meta name="description" content="Calculate your EMI instantly with this free EMI calculator.">
+
+<style>
+body {background:#020617;color:white;text-align:center;font-family:Arial;}
+input,button {padding:10px;margin:10px;border-radius:8px;border:none;}
+button {background:#22c55e;color:white;}
+</style>
+</head>
+
+<body>
+
+<h1>EMI Calculator</h1>
+
+<input type="number" id="loan" placeholder="Loan Amount">
+<input type="number" id="rate" placeholder="Interest Rate">
+<input type="number" id="months" placeholder="Months">
+
+<br>
+<button onclick="calcEMI()">Calculate EMI</button>
+
+<h2 id="emi"></h2>
+
+<script>
+function calcEMI(){
+let P = document.getElementById("loan").value;
+let r = document.getElementById("rate").value/12/100;
+let n = document.getElementById("months").value;
+
+let emi = (P*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+
+document.getElementById("emi").innerText = "EMI: ₹" + Math.round(emi);
+}
+</script>
+
+</body>
+</html>
