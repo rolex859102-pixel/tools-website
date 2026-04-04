@@ -1,50 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>JSON Formatter</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Free JSON Formatter & Validator Tool</title>
+
+<meta name="description" content="Format, beautify and validate JSON online instantly with our free JSON formatter tool.">
+
 <style>
 body {
     background:#020617;
     color:white;
+    font-family:Arial;
+    margin:0;
     text-align:center;
 }
+
+header {
+    padding:20px;
+    background:#0f172a;
+}
+
+.container {
+    width:90%;
+    margin:auto;
+}
+
 textarea {
     width:80%;
     height:150px;
+    padding:15px;
+    border-radius:10px;
+    border:none;
+    margin-top:20px;
+    font-size:14px;
+}
+
+button {
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    background:#22c55e;
+    color:white;
+    cursor:pointer;
+}
+
+.result-box {
+    background:#1e293b;
+    margin:30px auto;
+    padding:20px;
+    border-radius:10px;
+    width:80%;
+    text-align:left;
+    white-space:pre-wrap;
+}
+
+a {
+    color:#22c55e;
+    text-decoration:none;
 }
 </style>
+
 </head>
 
 <body>
 
-<h1>JSON Formatter</h1>
+<header>
+<h1>🧾 JSON Formatter Tool</h1>
+<p>Format & validate JSON instantly</p>
+</header>
 
-<textarea id="json"></textarea>
+<div class="container">
+
+<!-- TOOL -->
+<textarea id="input" placeholder="Paste your JSON here..."></textarea>
+
 <br>
 
 <button onclick="formatJSON()">Format JSON</button>
 
-<pre id="output"></pre>
+<div class="result-box" id="output">Formatted JSON will appear here...</div>
 
-<!-- 🔥 AFFILIATE -->
-<br><br>
-<a href="https://code.visualstudio.com" target="_blank">
-<button onclick="trackClick()">💻 Use VS Code (Best Tool)</button>
-</a>
+<!-- SEO CONTENT -->
+<h2>Why Use JSON Formatter?</h2>
+<p>This tool helps developers format and validate JSON data quickly for better readability and debugging.</p>
+
+<h2>Who Should Use It?</h2>
+<ul style="list-style:none;">
+<li>Developers</li>
+<li>Students</li>
+<li>API testers</li>
+<li>Web designers</li>
+</ul>
+
+<br>
+
+<a href="index.html">⬅ Back to Home</a>
+
+</div>
 
 <script>
-function formatJSON(){
-    try{
-        let obj = JSON.parse(document.getElementById("json").value);
-        document.getElementById("output").innerText =
-            JSON.stringify(obj, null, 4);
-    } catch(e){
-        alert("Invalid JSON");
-    }
-}
+function formatJSON() {
+    let input = document.getElementById("input").value;
 
-function trackClick(){
-    alert("Redirecting 🚀");
+    try {
+        let parsed = JSON.parse(input);
+        let formatted = JSON.stringify(parsed, null, 4);
+        document.getElementById("output").innerText = formatted;
+    } catch (e) {
+        document.getElementById("output").innerText = "❌ Invalid JSON";
+    }
 }
 </script>
 
