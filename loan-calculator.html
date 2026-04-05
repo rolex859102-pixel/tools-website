@@ -1,108 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Loan Calculator - Calculate Loan EMI & Interest</title>
-
-<meta name="description" content="Free loan calculator to calculate EMI, total interest and total payment instantly. Best online loan calculator.">
-
+<title>Loan Calculator</title>
 <style>
-body {
-    background:#020617;
-    color:white;
-    font-family:Arial;
-    text-align:center;
-}
-
-input, button {
-    padding:12px;
-    margin:10px;
-    border-radius:8px;
-    border:none;
-}
-
-button {
-    background:#22c55e;
-    color:white;
-    cursor:pointer;
-}
-
-.container {
-    width:90%;
-    margin:auto;
-}
-
-/* 💰 Affiliate Box */
-.affiliate {
-    background:#111827;
-    padding:20px;
-    margin:20px auto;
-    border-radius:10px;
-    width:80%;
-}
-
-.affiliate a {
-    background:#ff4d4d;
-    padding:10px 15px;
-    color:white;
-    text-decoration:none;
-    border-radius:6px;
-}
+body{background:#020617;color:white;text-align:center;font-family:Arial;}
+input{padding:10px;margin:10px;border-radius:8px;border:none;}
+button{padding:10px 20px;background:#22c55e;border:none;color:white;border-radius:8px;}
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
+<h1>🏦 Loan Calculator</h1>
 
-<h1>Loan Calculator</h1>
-<p>This loan calculator helps you calculate EMI, interest and total payment easily. It is useful for home loan, personal loan and car loan calculations.</p>
-
-<p>Use this free loan calculator to calculate EMI, total interest and total payment easily.</p>
-
-<!-- 💰 Affiliate -->
-<div class="affiliate">
-<h3>🔥 Get Instant Loan Offer</h3>
-<p>Check best loan offers from trusted platforms</p>
-
-<a href="https://www.example.com/?ref=yourid" target="_blank">
-👉 Apply for Loan Now
-</a>
-</div>
-
-<input type="number" id="loan" placeholder="Loan Amount (₹)">
-<input type="number" id="rate" placeholder="Interest Rate (%)">
-<input type="number" id="years" placeholder="Loan Tenure (Years)">
+<input type="number" id="amount" placeholder="Loan Amount">
+<input type="number" id="rate" placeholder="Interest Rate">
+<input type="number" id="years" placeholder="Years">
 
 <br>
 
-<button onclick="calculateLoan()">Calculate</button>
+<button onclick="calc()">Calculate</button>
 
-<h2 id="emi"></h2>
-<h3 id="interest"></h3>
-<h3 id="total"></h3>
-
-</div>
+<h2 id="out"></h2>
 
 <script>
-function calculateLoan() {
+function calc(){
+let p=amount.value;
+let r=rate.value/100;
+let t=years.value;
 
-let P = document.getElementById("loan").value;
-let r = document.getElementById("rate").value / 12 / 100;
-let n = document.getElementById("years").value * 12;
+let total=p+(p*r*t);
 
-let emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-let total = emi * n;
-let interest = total - P;
-
-document.getElementById("emi").innerText = "Monthly EMI: ₹" + Math.round(emi);
-document.getElementById("interest").innerText = "Total Interest: ₹" + Math.round(interest);
-document.getElementById("total").innerText = "Total Payment: ₹" + Math.round(total);
-
+out.innerHTML="Total Payable: ₹"+total;
 }
 </script>
 
