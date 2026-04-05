@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SIP Calculator</title>
+<style>
+body{background:#020617;color:white;text-align:center;font-family:Arial;}
+input{padding:10px;margin:10px;border-radius:8px;border:none;}
+button{padding:10px 20px;background:#22c55e;border:none;color:white;border-radius:8px;}
+</style>
+</head>
+
+<body>
+
+<h1>📈 SIP Calculator</h1>
+
+<input type="number" id="monthly" placeholder="Monthly Investment">
+<input type="number" id="rate" placeholder="Return Rate (%)">
+<input type="number" id="years" placeholder="Years">
+
+<br>
+
+<button onclick="calcSIP()">Calculate</button>
+
+<h2 id="result"></h2>
+
+<script>
+function calcSIP(){
+let P=monthly.value;
+let r=rate.value/12/100;
+let n=years.value*12;
+
+let FV=P*((Math.pow(1+r,n)-1)/r)*(1+r);
+
+result.innerHTML="Future Value: ₹"+FV.toFixed(2);
+}
+</script>
+
+</body>
+</html>
