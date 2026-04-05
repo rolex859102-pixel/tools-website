@@ -4,77 +4,29 @@
 <title>Text to Speech</title>
 
 <style>
-
-body{
-font-family:Arial;
-text-align:center;
-background:#f4f4f4;
-}
-
-.container{
-width:75%;
-margin:auto;
-margin-top:40px;
-}
-
-textarea{
-width:100%;
-height:150px;
-padding:10px;
-font-size:16px;
-}
-
-button{
-padding:10px 20px;
-margin:10px;
-background:#009688;
-color:white;
-border:none;
-cursor:pointer;
-}
-
+body{background:#020617;color:white;text-align:center;font-family:Arial;}
+textarea{width:80%;height:120px;margin:20px;border-radius:10px;border:none;}
+button{padding:10px;background:#22c55e;border:none;color:white;border-radius:8px;}
 </style>
 
-<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<div class="container">
+<h1>🔊 Text to Speech</h1>
 
-<h1>Text to Speech</h1>
-
-<textarea id="text" placeholder="Enter text"></textarea>
+<textarea id="text" placeholder="Enter text..."></textarea>
 
 <br>
 
-<button onclick="speakText()">Speak</button>
-<button onclick="stopText()">Stop</button>
-
-</div>
+<button onclick="speak()">Speak</button>
 
 <script>
-
-let speech;
-
-function speakText(){
-
+function speak(){
 let text=document.getElementById("text").value;
-
-speech=new SpeechSynthesisUtterance(text);
-
-speech.lang="en-US";
-
-window.speechSynthesis.speak(speech);
-
+let speech=new SpeechSynthesisUtterance(text);
+speechSynthesis.speak(speech);
 }
-
-function stopText(){
-
-window.speechSynthesis.cancel();
-
-}
-
 </script>
 
 </body>
