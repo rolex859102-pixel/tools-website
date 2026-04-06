@@ -5,9 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Free Character Counter Tool</title>
-
-<meta name="description" content="Count characters with and without spaces instantly using our free online character counter tool.">
+<title>Character Counter Tool</title>
 
 <style>
 body {
@@ -23,11 +21,6 @@ header {
     background:#0f172a;
 }
 
-.container {
-    width:90%;
-    margin:auto;
-}
-
 textarea {
     width:80%;
     height:150px;
@@ -35,7 +28,6 @@ textarea {
     border-radius:10px;
     border:none;
     margin-top:20px;
-    font-size:16px;
 }
 
 .result-box {
@@ -48,16 +40,6 @@ textarea {
 
 .result-box p {
     font-size:18px;
-    margin:10px 0;
-}
-
-a {
-    color:#22c55e;
-    text-decoration:none;
-}
-
-a:hover {
-    text-decoration:underline;
 }
 </style>
 
@@ -66,47 +48,23 @@ a:hover {
 <body>
 
 <header>
-<h1>🔢 Character Counter Tool</h1>
-<p>Count characters instantly (with & without spaces)</p>
+<h1>🔢 Character Counter</h1>
+<p>Count characters instantly</p>
 </header>
 
-<div class="container">
-
-<!-- TOOL -->
-<textarea id="text" placeholder="Type or paste your text here..." onkeyup="countChars()"></textarea>
+<textarea id="text" placeholder="Type here..." onkeyup="count()"></textarea>
 
 <div class="result-box">
-<p>Characters: <span id="total">0</span></p>
-<p>Without Spaces: <span id="withoutSpaces">0</span></p>
-</div>
-
-<!-- SEO CONTENT -->
-<h2>Why Use Character Counter?</h2>
-<p>This tool helps you count characters quickly for social media posts, essays, and SEO content writing.</p>
-
-<h2>Who Should Use It?</h2>
-<ul style="list-style:none;">
-<li>Students</li>
-<li>Writers</li>
-<li>Bloggers</li>
-<li>SEO Experts</li>
-</ul>
-
-<br>
-
-<a href="index.html">⬅ Back to Home</a>
-
+<p>Total Characters: <span id="total">0</span></p>
+<p>Without Spaces: <span id="nospace">0</span></p>
 </div>
 
 <script>
-function countChars() {
-    let text = document.getElementById("text").value;
+function count(){
+let text=document.getElementById("text").value;
 
-    let total = text.length;
-    let withoutSpaces = text.replace(/\s/g, "").length;
-
-    document.getElementById("total").innerText = total;
-    document.getElementById("withoutSpaces").innerText = withoutSpaces;
+document.getElementById("total").innerText=text.length;
+document.getElementById("nospace").innerText=text.replace(/\s/g,'').length;
 }
 </script>
 
