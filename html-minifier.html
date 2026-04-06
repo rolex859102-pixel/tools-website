@@ -1,92 +1,76 @@
-!DOCTYPE html
-html
-head
-titleHTML Minifiertitle
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-style
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-body{
-font-familyArial;
-text-aligncenter;
-background#f4f4f4;
+<title>HTML Minifier Tool</title>
+
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    margin:0;
+    text-align:center;
 }
 
-.container{
-width75%;
-marginauto;
-margin-top40px;
+header {
+    padding:20px;
+    background:#0f172a;
 }
 
-textarea{
-width100%;
-height200px;
-padding10px;
-font-size16px;
+textarea {
+    width:80%;
+    height:150px;
+    padding:15px;
+    border-radius:10px;
+    border:none;
+    margin-top:20px;
 }
 
-button{
-padding10px 20px;
-background#ff5722;
-colorwhite;
-bordernone;
-margin-top15px;
-cursorpointer;
+button {
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    background:#22c55e;
+    color:white;
 }
 
-#result{
-margin-top20px;
-backgroundwhite;
-padding15px;
-text-alignleft;
-font-familymonospace;
-font-size18px;
-white-spacepre-wrap;
+.result-box {
+    background:#1e293b;
+    margin:30px auto;
+    padding:20px;
+    border-radius:10px;
+    width:80%;
+    white-space:pre-wrap;
 }
+</style>
 
-style
+</head>
 
-head
+<body>
 
-body
+<header>
+<h1>💻 HTML Minifier</h1>
+<p>Minify your HTML code instantly</p>
+</header>
 
-div class=container
+<textarea id="input" placeholder="Paste HTML code..."></textarea><br>
 
-h1HTML Minifierh1
+<button onclick="minify()">Minify</button>
 
-textarea id=htmlInput placeholder=Paste HTML codetextarea
+<div class="result-box" id="output"></div>
 
-br
-
-button onclick=minifyHTML()Minify HTMLbutton
-
-div id=resultdiv
-
-div
-
-script
-
-function minifyHTML(){
-
-let html=document.getElementById(htmlInput).value;
-
-let minified = html
-.replace(ng,'')
-.replace(s+g,' ')
-.replace(s+g,'')
-.trim();
-
-document.getElementById(result).innerText=minified;
-
+<script>
+function minify(){
+let code=document.getElementById("input").value;
+let minified=code.replace(/\n/g,'').replace(/\s+/g,' ');
+document.getElementById("output").innerText=minified;
 }
+</script>
 
-script
-
-<footer style="text-align:center;padding:20px;background:#020617;margin-top:40px;">
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a> |
-<a href="privacy.html">Privacy Policy</a> |
-<a href="disclaimer.html">Disclaimer</a>
-</footer>
-
-body
-html
+</body>
+</html>
