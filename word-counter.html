@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Word Counter Tool</title>
+
+<style>
+body{background:#020617;color:white;text-align:center;font-family:Arial;}
+textarea{width:80%;height:150px;padding:10px;}
+button{padding:10px;margin:10px;}
+.result{font-size:18px;color:#00ffcc;}
+</style>
+
+</head>
+
+<body>
+
+<h1>Word Counter Tool</h1>
+
+<textarea id="text" placeholder="Type your text here..."></textarea>
+<br>
+
+<button onclick="countWords()">Count Words</button>
+
+<!-- 🔥 AFFILIATE BUTTON -->
+<br><br>
+<a href="https://www.grammarly.com" target="_blank">
+<button onclick="trackClick('grammarly')" style="
+padding:12px 20px;
+background:linear-gradient(45deg,#00c6ff,#0072ff);
+color:white;border:none;border-radius:8px;cursor:pointer;">
+✨ Improve Writing (Pro Tool)
+</button>
+</a>
+
+<p id="result" class="result"></p>
+
+<h2>What is Word Counter?</h2>
+<p>This tool helps you count words and characters instantly.</p>
+
+<script>
+function countWords(){
+let text=document.getElementById("text").value;
+let words=text.trim().split(/\s+/).filter(w=>w.length>0);
+document.getElementById("result").innerHTML=
+"Words: "+words.length+"<br>Characters: "+text.length;
+}
+
+function trackClick(toolName){
+let count=localStorage.getItem(toolName)||0;
+count++;
+localStorage.setItem(toolName,count);
+alert("Opening Pro Tool 🚀");
+}
+</script>
+
+</body>
+</html>
