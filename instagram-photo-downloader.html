@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<title>Instagram Photo Downloader Online - Download Insta Images Free</title>
+
+<meta name="description" content="Download Instagram photos online for free. Save high quality Instagram images instantly with this fast and easy tool.">
+
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container {
+    margin-top:40px;
+}
+
+input {
+    padding:10px;
+    width:300px;
+    border-radius:10px;
+    border:none;
+}
+
+button {
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:#ff4d4d;
+    color:white;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Instagram Photo Downloader</h1>
+
+<input type="text" id="url" placeholder="Paste Instagram Post URL">
+<br><br>
+
+<button onclick="downloadInsta()">Download Photo</button>
+
+<div id="result"></div>
+
+<!-- 🔥 AFFILIATE -->
+<div style="margin-top:30px;">
+<h2>📸 Best Camera Accessories</h2>
+<p>Upgrade your content quality</p>
+
+<a href="https://amzn.in/d/0bX59mc8" target="_blank" style="color:#ff4d4d;">
+👉 Buy Now
+</a>
+</div>
+
+<!-- 🔥 SEO CONTENT -->
+<h2>About Instagram Photo Downloader</h2>
+<p>This free tool helps you download Instagram photos in high quality. It is useful for creators, designers and social media users.</p>
+
+<h2>How to Download Instagram Photos</h2>
+<p>Paste the Instagram post URL and click download. You will be redirected to a secure page to save the image.</p>
+
+</div>
+
+<script>
+function downloadInsta() {
+    let url = document.getElementById("url").value;
+
+    if(url === "") {
+        alert("Please paste Instagram URL");
+        return;
+    }
+
+    // Redirect to external downloader
+    window.open("https://snapinsta.app/", "_blank");
+}
+</script>
+
+</body>
+</html>
