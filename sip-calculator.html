@@ -1,37 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>SIP Calculator</title>
+<meta charset="UTF-8">
+<title>SIP Calculator Online - Calculate SIP Returns & Investment Growth</title>
+
+<meta name="description" content="Free SIP calculator to calculate your investment returns, maturity amount and wealth growth instantly. Best tool for mutual fund planning.">
+
 <style>
-body{background:#020617;color:white;text-align:center;font-family:Arial;}
-input{padding:10px;margin:10px;border-radius:8px;border:none;}
-button{padding:10px 20px;background:#22c55e;border:none;color:white;border-radius:8px;}
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container {
+    width:90%;
+    margin:auto;
+    margin-top:40px;
+}
+
+input {
+    padding:10px;
+    margin:10px;
+    width:250px;
+    border-radius:10px;
+    border:none;
+}
+
+button {
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:#ff4d4d;
+    color:white;
+    cursor:pointer;
+}
+
+.result {
+    margin-top:20px;
+    font-size:18px;
+}
 </style>
 </head>
 
 <body>
 
-<h1>📈 SIP Calculator</h1>
+<div class="container">
 
-<input type="number" id="monthly" placeholder="Monthly Investment">
-<input type="number" id="rate" placeholder="Return Rate (%)">
-<input type="number" id="years" placeholder="Years">
+<h1>SIP Calculator Online Tool</h1>
 
+<input type="number" id="monthly" placeholder="Monthly Investment (₹)">
 <br>
 
-<button onclick="calcSIP()">Calculate</button>
+<input type="number" id="rate" placeholder="Expected Return Rate (%)">
+<br>
 
-<h2 id="result"></h2>
+<input type="number" id="years" placeholder="Investment Duration (Years)">
+<br>
+
+<button onclick="calculateSIP()">Calculate</button>
+
+<div class="result" id="result"></div>
+
+<!-- 🔥 AFFILIATE BOX -->
+<div class="affiliate-box" style="margin-top:30px;">
+<h2>💳 Start Investing Today</h2>
+<p>Open Demat account & invest in SIP easily</p>
+
+<a href="https://bitli.in/T0q2Paf" target="_blank" style="color:#ff4d4d;">
+👉 Start Investing Now
+</a>
+</div>
+
+<!-- 🔥 SEO CONTENT -->
+<h2>About SIP Calculator</h2>
+<p>This free SIP calculator helps you calculate your investment returns, maturity value and wealth growth easily. It is ideal for mutual fund investors and long-term financial planning.</p>
+
+<h2>How to Use SIP Calculator</h2>
+<p>Enter your monthly investment amount, expected return rate and duration to calculate your future investment value instantly.</p>
+
+</div>
 
 <script>
-function calcSIP(){
-let P=monthly.value;
-let r=rate.value/12/100;
-let n=years.value*12;
+function calculateSIP() {
+    let P = document.getElementById("monthly").value;
+    let r = document.getElementById("rate").value / 100 / 12;
+    let n = document.getElementById("years").value * 12;
 
-let FV=P*((Math.pow(1+r,n)-1)/r)*(1+r);
+    let futureValue = P * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
 
-result.innerHTML="Future Value: ₹"+FV.toFixed(2);
+    document.getElementById("result").innerHTML =
+    "💰 Future Value: ₹" + Math.round(futureValue);
 }
 </script>
 
