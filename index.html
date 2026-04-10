@@ -96,36 +96,23 @@ footer {
 
 </header>
 
-<!-- 🔥 AFFILIATE SECTION -->
+<!-- 🔥 AFFILIATE -->
 <div class="affiliate-box">
-
 <h2>🔥 Best Laptop Deal (Limited Offer)</h2>
 <p>Check best laptop under ₹50,000 with latest features</p>
-
-<a href="https://amzn.in/d/0bX59mc8" target="_blank" class="affiliate-btn">
-💻 Buy Now on Amazon
-</a>
-
+<a href="https://amzn.in/d/0bX59mc8" target="_blank" class="affiliate-btn">💻 Buy Now on Amazon</a>
 </div>
 
-<!-- 🔥 FINANCE TOOLS -->
+<!-- 💰 FINANCE -->
 <div class="section">
-    
+
 <div class="affiliate-box">
-<h2>💳 Credit Card Offers (Instant Approval)</h2>
-<p>Get best cashback & rewards credit cards in India</p>
-
-<a href="https://bitli.in/T0q2Paf" target="_blank" class="affiliate-btn">
-💳 Apply Now → 🔥 Get Instant Credit Card
-</a>
-
-<a href="https://bitli.in/T0q2Paf" target="_blank" class="affiliate-btn">
-⚡ Check Eligibility Now
-</a>
+<h2>💳 Credit Card Offers</h2>
+<p>Get best cashback & rewards credit cards</p>
+<a href="https://bitli.in/T0q2Paf" target="_blank" class="affiliate-btn">💳 Apply Now</a>
 </div>
-    
-<h2>💰 Finance Tools</h2>
 
+<h2>💰 Finance Tools</h2>
 <a class="tool" href="loan-calculator.html">Loan Calculator</a>
 <a class="tool" href="emi-calculator.html">EMI Calculator</a>
 <a class="tool" href="gst-calculator.html">GST Calculator</a>
@@ -134,85 +121,72 @@ footer {
 
 </div>
 
-<!-- 🔥 PDF TOOLS (NEW - SEO BOOST) -->
+<!-- 📄 PDF TOOLS -->
 <div class="section">
 <h2>📄 PDF Tools</h2>
-
 <a class="tool" href="pdf-to-word.html">PDF to Word Converter</a>
-
 </div>
 
-<!-- 🔥 IMAGE TOOLS -->
+<!-- 🖼 IMAGE -->
 <div class="section">
 <h2>🖼 Image Tools</h2>
-
-<a class="tool" href="youtube-video-downloader.html">🔥 YouTube Video Downloader</a>
-<a class="tool" href="instagram-photo-downloader.html">🔥 Instagram Photo Downloader</a>
-<a class="tool" href="youtube-thumbnail-downloader.html">🔥 YouTube Thumbnail Downloader</a>
 <a class="tool" href="image-compressor.html">Image Compressor</a>
-
-<div class="affiliate-box">
-<h2>🎧 Best Headphones for Creators</h2>
-<p>Improve your editing & focus with high-quality sound</p>
-
-<a href="https://amzn.in/d/0815lvoe" target="_blank" class="affiliate-btn">
-🎧 Buy Headphones Now
-</a>
-</div>
-
 <a class="tool" href="image-resizer.html">Image Resizer</a>
-
 </div>
 
-<!-- 🔥 TEXT TOOLS -->
+<!-- 📝 TEXT -->
 <div class="section">
 <h2>📝 Text Tools</h2>
-
 <a class="tool" href="word-counter.html">Word Counter</a>
 <a class="tool" href="character-counter.html">Character Counter</a>
 <a class="tool" href="uppercase-converter.html">Uppercase Converter</a>
-
 </div>
 
-<!-- 🔥 DEV TOOLS -->
+<!-- 💻 DEV -->
 <div class="section">
 <h2>💻 Developer Tools</h2>
-
 <a class="tool" href="json-formatter.html">JSON Formatter</a>
 <a class="tool" href="html-minifier.html">HTML Minifier</a>
-
 </div>
 
-<!-- 🔥 UTILITY TOOLS -->
+<!-- 🧰 UTILITY -->
 <div class="section">
 <h2>🧰 Utility Tools</h2>
-
 <a class="tool" href="password-generator.html">Password Generator</a>
 <a class="tool" href="age-calculator.html">Age Calculator</a>
-
 </div>
 
 <div class="affiliate-box">
 <h2>🔥 Today’s Best Deal</h2>
-<p>Don’t miss this limited time offer</p>
-
-<a href="https://amzn.in/d/0bX59mc8" target="_blank" class="affiliate-btn">
-🛒 Shop Now on Amazon
-</a>
-
-<a href="https://bitli.in/T0q2Paf" target="_blank" class="affiliate-btn">
-💳 Get Instant Credit Card
-</a>
+<a href="https://amzn.in/d/0bX59mc8" target="_blank" class="affiliate-btn">🛒 Shop Now</a>
 </div>
 
 <footer>
-
 <a href="about.html">About</a> |
 <a href="contact.html">Contact</a> |
 <a href="privacy-policy.html">Privacy Policy</a> |
 <a href="disclaimer.html">Disclaimer</a>
-
 </footer>
+
+<!-- 🔍 SEARCH SCRIPT -->
+<script>
+const searchInput = document.querySelector(".search");
+
+searchInput.addEventListener("keyup", function() {
+    let filter = searchInput.value.toLowerCase();
+    let tools = document.querySelectorAll(".tool");
+
+    tools.forEach(function(tool) {
+        let text = tool.textContent.toLowerCase();
+
+        if (text.includes(filter)) {
+            tool.style.display = "inline-block";
+        } else {
+            tool.style.display = "none";
+        }
+    });
+});
+</script>
 
 </body>
 </html>
