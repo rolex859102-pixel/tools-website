@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>PDF to Word Converter Online (Free & Fast) | 100 Tools</title>
+    <meta name="description" content="Convert PDF to Word online for free. Fast, secure and easy to use PDF to DOC converter tool. No signup required.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            padding: 40px 20px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #94a3b8;
+        }
+
+        .upload-box {
+            border: 2px dashed #334155;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 400px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        input {
+            display: none;
+        }
+
+        .btn {
+            background: #22c55e;
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            background: #16a34a;
+        }
+
+        .affiliate-box {
+            margin-top: 40px;
+            padding: 20px;
+            background: #1e293b;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>PDF to Word Converter</h1>
+    <p>Convert your PDF files into editable Word documents instantly.</p>
+
+    <!-- Upload Box -->
+    <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+        Click to upload PDF
+    </div>
+
+    <input type="file" id="fileInput" accept=".pdf">
+
+    <br>
+
+    <button class="btn" onclick="convertPDF()">Convert to Word</button>
+
+    <!-- Affiliate Section -->
+    <div class="affiliate-box">
+        <h3>Recommended Tools</h3>
+        <p>Need advanced PDF editing?</p>
+        <a href="YOUR_AFFILIATE_LINK" target="_blank" class="btn">Try Premium PDF Tool</a>
+    </div>
+
+</div>
+
+<script>
+function convertPDF() {
+    let file = document.getElementById('fileInput').files[0];
+
+    if (!file) {
+        alert("Please upload a PDF file first!");
+        return;
+    }
+
+    // External redirect (safe & easy)
+    window.open("https://www.ilovepdf.com/pdf_to_word", "_blank");
+}
+</script>
+
+</body>
+</html>
