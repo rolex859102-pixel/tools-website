@@ -1,13 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>s
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Resize Image Online (Free Tool)</title>
-<meta name="description" content="Resize image online free without losing quality.">
+<title>Image Resizer Online Free | Resize Image Without Losing Quality</title>
+<meta name="description" content="Resize images online for free. Change image width and height without losing quality. Fast and easy image resizer tool.">
 
-<link rel="stylesheet" href="css/style.css">
+<style>
+body {
+    background:#0f172a;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container {
+    padding:40px 20px;
+}
+
+input, button {
+    padding:10px;
+    margin:10px;
+    border-radius:5px;
+    border:none;
+}
+
+button {
+    background:#22c55e;
+    color:white;
+    cursor:pointer;
+}
+
+canvas {
+    margin-top:20px;
+    max-width:100%;
+}
+
+.affiliate-box {
+    margin-top:40px;
+    padding:20px;
+    background:#1e293b;
+    border-radius:10px;
+}
+</style>
 </head>
 
 <body>
@@ -15,37 +51,87 @@
 <div class="container">
 
 <h1>Image Resizer Tool</h1>
+<p><strong>Resize images online free without losing quality.</strong></p>
 
-<input type="file">
-<br><br>
-<input type="number" placeholder="Width">
-<input type="number" placeholder="Height">
-<br><br>
+<input type="file" id="upload" accept="image/*"><br>
 
-<button onclick="resize()">Resize</button>
+<input type="number" id="width" placeholder="Width">
+<input type="number" id="height" placeholder="Height"><br>
 
-<div id="result"></div>
+<button onclick="resizeImage()">Resize Image</button>
 
-<!-- 💰 AFFILIATE -->
+<br>
 
-<h2>Recommended Design Tool</h2>
-<p>Create professional graphics easily:</p>
-
-<a href="https://www.canva.com" target="_blank" onclick="trackClick()">
-Try Canva Design Tool
+<a id="downloadBtn" style="display:none;" download="resized-image.jpg">
+<button>Download Image</button>
 </a>
 
-<a href="index.html">Back to Home</a>
+<canvas id="canvas"></canvas>
+
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Best Editing Tool</h3>
+<p>Upgrade your image editing experience</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium Tool</a>
+</div>
+
+<!-- SEO CONTENT -->
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.6;">
+
+<h2>Free Image Resizer Online</h2>
+<p>Resize your images quickly without losing quality. Perfect for social media and websites.</p>
+
+<h2>How to Resize Image?</h2>
+<ul>
+<li>Upload image</li>
+<li>Enter width and height</li>
+<li>Click resize</li>
+<li>Download image</li>
+</ul>
+
+<h2>Features</h2>
+<ul>
+<li>No quality loss</li>
+<li>Fast processing</li>
+<li>Mobile friendly</li>
+</ul>
+
+</div>
 
 </div>
 
 <script>
-function resize(){
-document.getElementById("result").innerText="Image resized (demo)";
-}
+function resizeImage() {
+    const file = document.getElementById('upload').files[0];
+    const width = document.getElementById('width').value;
+    const height = document.getElementById('height').value;
 
-function trackClick(){
-console.log("Affiliate link clicked");
+    if (!file || !width || !height) {
+        alert("Please upload image and enter width & height");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = function(event) {
+        const img = new Image();
+        img.src = event.target.result;
+
+        img.onload = function() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = width;
+            canvas.height = height;
+
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const downloadBtn = document.getElementById('downloadBtn');
+            downloadBtn.href = canvas.toDataURL();
+            downloadBtn.style.display = "inline-block";
+        }
+    }
 }
 </script>
 
