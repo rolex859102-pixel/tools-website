@@ -1,26 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>PDF to JPG Converter</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PDF to JPG Converter Online Free | Convert PDF to Image</title>
+<meta name="description" content="Convert PDF to JPG online for free. Fast and secure PDF to image converter. No signup required.">
 
 <style>
-body{background:#020617;color:white;text-align:center;font-family:Arial;}
-input{margin:20px;}
-</style>
+body {
+    background-color:#0f172a;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
 
+.container {
+    padding:40px 20px;
+}
+
+.upload-box {
+    border:2px dashed #334155;
+    padding:40px;
+    margin:20px auto;
+    max-width:400px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.btn {
+    background:#22c55e;
+    border:none;
+    padding:12px 20px;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.affiliate-box {
+    margin-top:40px;
+    padding:20px;
+    background:#1e293b;
+    border-radius:10px;
+}
+</style>
 </head>
 
 <body>
 
-<h1>📄 PDF to JPG Converter</h1>
+<div class="container">
 
-<p>Select PDF file (demo tool)</p>
+<h1>PDF to JPG Converter</h1>
+<p><strong>Convert PDF to JPG online free without losing quality.</strong></p>
+<p>Convert your PDF pages into high-quality JPG images instantly.</p>
 
-<input type="file">
+<div class="upload-box" onclick="document.getElementById('fileInput').click()">
+Click to upload PDF
+</div>
 
-<p>👉 For advanced conversion use premium tool below</p>
+<input type="file" id="fileInput" accept=".pdf">
 
-<a href="#" style="color:#22c55e;">Convert PDF Now</a>
+<br><br>
+
+<button class="btn" onclick="convertPDF()">Convert to JPG</button>
+
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Best PDF Tool</h3>
+<p>Need advanced editing?</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank" class="btn">Try Premium Tool</a>
+</div>
+
+<!-- SEO CONTENT -->
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.6;">
+
+<h2>Free PDF to JPG Converter</h2>
+<p>
+Use our online tool to convert PDF files into JPG images quickly and easily.
+No installation required.
+</p>
+
+<h2>How to Convert PDF to JPG?</h2>
+<ul>
+<li>Upload your PDF file</li>
+<li>Click convert button</li>
+<li>Download JPG images</li>
+</ul>
+
+<h2>Features</h2>
+<ul>
+<li>Fast conversion</li>
+<li>Free to use</li>
+<li>Works on mobile</li>
+</ul>
+
+</div>
+
+</div>
+
+<script>
+function convertPDF() {
+    let file = document.getElementById('fileInput').files[0];
+
+    if (!file) {
+        alert("Upload PDF first!");
+        return;
+    }
+
+    window.open("https://www.ilovepdf.com/pdf_to_jpg", "_blank");
+}
+</script>
 
 </body>
 </html>
