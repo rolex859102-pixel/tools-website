@@ -1,53 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Image Compressor Online - Reduce Image Size Without Losing Quality</title>
-  <meta name="description" content="Free online image compressor to reduce image size without losing quality. Compress JPG, PNG images instantly for web, Instagram and more.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Image Compressor Online Free | Reduce Image Size Without Losing Quality</title>
+<meta name="description" content="Compress images online free. Reduce image file size without losing quality. Fast and easy image compressor tool.">
 
 <style>
-body{background:#020617;color:white;text-align:center;font-family:Arial;}
-input{margin:20px;}
-</style>
+body {
+    background:#0f172a;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
 
+.container {
+    padding:40px 20px;
+}
+
+input, button {
+    padding:10px;
+    margin:10px;
+    border-radius:5px;
+    border:none;
+}
+
+button {
+    background:#22c55e;
+    color:white;
+    cursor:pointer;
+}
+
+canvas {
+    margin-top:20px;
+    max-width:100%;
+}
+
+.affiliate-box {
+    margin-top:40px;
+    padding:20px;
+    background:#1e293b;
+    border-radius:10px;
+}
+</style>
 </head>
 
 <body>
 
-<h1>Image Compressor Online Tool</h1>
+<div class="container">
 
-<input type="file" accept="image/*" onchange="compressImage(event)">
+<h1>Image Compressor Tool</h1>
+<p><strong>Compress images online free without losing quality.</strong></p>
+
+<input type="file" id="upload" accept="image/*"><br>
+
+<input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.7">
+<p>Compression Level: <span id="qValue">0.7</span></p>
+
+<button onclick="compressImage()">Compress Image</button>
+
+<br>
+
+<a id="downloadBtn" style="display:none;" download="compressed-image.jpg">
+<button>Download Image</button>
+</a>
 
 <canvas id="canvas"></canvas>
 
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Best Image Tool</h3>
+<p>Upgrade your editing tools</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium Tool</a>
+</div>
+
+<!-- SEO CONTENT -->
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.6;">
+
+<h2>Free Image Compressor Online</h2>
+<p>Reduce image file size without losing quality. Perfect for websites, blogs, and social media.</p>
+
+<h2>How to Compress Image?</h2>
+<ul>
+<li>Upload image</li>
+<li>Select compression level</li>
+<li>Click compress</li>
+<li>Download image</li>
+</ul>
+
+<h2>Features</h2>
+<ul>
+<li>Fast compression</li>
+<li>No quality loss</li>
+<li>Mobile friendly</li>
+</ul>
+
+</div>
+
+</div>
+
 <script>
-function compressImage(event){
-let file=event.target.files[0];
-let reader=new FileReader();
+const qualitySlider = document.getElementById("quality");
+const qValue = document.getElementById("qValue");
 
-reader.onload=function(e){
-let img=new Image();
-img.src=e.target.result;
+qualitySlider.oninput = function() {
+    qValue.textContent = this.value;
+};
 
-img.onload=function(){
-let canvas=document.getElementById("canvas");
-let ctx=canvas.getContext("2d");
+function compressImage() {
+    const file = document.getElementById('upload').files[0];
+    const quality = parseFloat(document.getElementById('quality').value);
 
-canvas.width=img.width/2;
-canvas.height=img.height/2;
+    if (!file) {
+        alert("Upload image first!");
+        return;
+    }
 
-ctx.drawImage(img,0,0,canvas.width,canvas.height);
-}
-}
-reader.readAsDataURL(file);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = function(event) {
+        const img = new Image();
+        img.src = event.target.result;
+
+        img.onload = function() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.drawImage(img, 0, 0);
+
+            const downloadBtn = document.getElementById('downloadBtn');
+            downloadBtn.href = canvas.toDataURL('image/jpeg', quality);
+            downloadBtn.style.display = "inline-block";
+        }
+    }
 }
 </script>
-  
-  <h2>About Image Compressor</h2>
-<p>This free online image compressor helps you reduce image file size without losing quality. It supports JPG, PNG and other formats, making it perfect for websites, social media and email use.</p>
-<p>This tool is ideal for compressing images for websites, blogs, Instagram, WhatsApp and email attachments.</p>
-  
-<h2>How to Compress Images</h2>
-<p>Upload your image, adjust compression settings if needed, and download the optimized file instantly. No software installation required.</p>
 
 </body>
 </html>
