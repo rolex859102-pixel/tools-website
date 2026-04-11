@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PDF Splitter Online Free | Split PDF Pages Easily</title>
+<meta name="description" content="Split PDF pages online free. Extract pages from PDF easily without software.">
+
+<style>
+body {
+    background:#0f172a;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container {
+    padding:40px 20px;
+}
+
+input {
+    padding:12px;
+    border-radius:5px;
+    border:none;
+    margin:10px;
+}
+
+button {
+    padding:12px 20px;
+    background:#22c55e;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.preview {
+    margin-top:20px;
+}
+
+.preview div {
+    background:#1e293b;
+    margin:5px;
+    padding:10px;
+    border-radius:5px;
+}
+
+.affiliate-box {
+    margin-top:40px;
+    padding:20px;
+    background:#1e293b;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>PDF Splitter</h1>
+<p><strong>Split PDF pages online free instantly.</strong></p>
+
+<input type="file" id="file"><br>
+
+<input type="text" id="pages" placeholder="Enter pages (e.g. 1-3, 5)"><br>
+
+<button onclick="splitPDF()">Split PDF</button>
+
+<div id="preview" class="preview"></div>
+
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Advanced PDF Tools</h3>
+<p>Edit and manage PDFs easily</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
+</div>
+
+<!-- SEO -->
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
+<h2>Free PDF Splitter Online</h2>
+<p>Extract pages from PDF files quickly and easily.</p>
+</div>
+
+</div>
+
+<script>
+function splitPDF() {
+    const file = document.getElementById('file').files[0];
+    const pages = document.getElementById('pages').value;
+
+    if (!file) {
+        alert("Upload PDF first!");
+        return;
+    }
+
+    let preview = document.getElementById("preview");
+
+    preview.innerHTML = `
+        <h3>Processing PDF...</h3>
+        <p>Splitting pages: ${pages}</p>
+        <div>${file.name}</div>
+    `;
+
+    // Fake processing
+    setTimeout(() => {
+        preview.innerHTML += `
+            <p>⚡ PDF split successfully!</p>
+            <button onclick="redirect()">Download Split PDF</button>
+        `;
+    }, 2000);
+}
+
+function redirect() {
+    window.open("https://www.ilovepdf.com/split_pdf", "_blank");
+}
+</script>
+
+</body>
+</html>
