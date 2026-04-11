@@ -1,39 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Age Calculator - Calculate Your Age Online</title>
-<meta name="description" content="Free age calculator to find your exact age in years, months, and days instantly.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Age Calculator Online Free | Calculate Your Exact Age</title>
+<meta name="description" content="Calculate your exact age in years, months and days online free. Fast and easy age calculator tool.">
 
 <style>
-body {background:#020617;color:white;text-align:center;font-family:Arial;}
-input,button {padding:10px;margin:10px;border-radius:8px;border:none;}
-button {background:#22c55e;color:white;}
+body {
+    background:#0f172a;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container {
+    padding:40px 20px;
+}
+
+input {
+    padding:12px;
+    border-radius:5px;
+    border:none;
+    margin:10px;
+}
+
+button {
+    padding:12px 20px;
+    background:#22c55e;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+#result {
+    margin-top:20px;
+    font-size:18px;
+}
+
+.affiliate-box {
+    margin-top:40px;
+    padding:20px;
+    background:#1e293b;
+    border-radius:10px;
+}
 </style>
 </head>
 
 <body>
 
-<h1>Age Calculator</h1>
+<div class="container">
 
-<input type="date" id="dob">
-<br>
+<h1>Age Calculator</h1>
+<p><strong>Calculate your exact age in years, months and days.</strong></p>
+
+<input type="date" id="dob"><br>
+
 <button onclick="calculateAge()">Calculate Age</button>
 
-<h2 id="result"></h2>
+<div id="result"></div>
+
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Health & Fitness Tools</h3>
+<p>Track your age, BMI and health</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
+</div>
+
+<!-- SEO -->
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
+<h2>Free Age Calculator</h2>
+<p>Find your exact age instantly using this tool.</p>
+</div>
+
+</div>
 
 <script>
 function calculateAge() {
-    let dob = new Date(document.getElementById("dob").value);
-    let today = new Date();
+    let dob = document.getElementById("dob").value;
 
-    let age = today.getFullYear() - dob.getFullYear();
-    let m = today.getMonth() - dob.getMonth();
-
-    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-        age--;
+    if (!dob) {
+        alert("Select your date of birth!");
+        return;
     }
 
-    document.getElementById("result").innerText = "Your Age: " + age + " years";
+    let birthDate = new Date(dob);
+    let today = new Date();
+
+    let years = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    let days = today.getDate() - birthDate.getDate();
+
+    if (days < 0) {
+        months--;
+        days += 30;
+    }
+
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    document.getElementById("result").innerText =
+        `You are ${years} years, ${months} months, and ${days} days old.`;
 }
 </script>
 
