@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PDF Merger Online Free | Combine PDF Files</title>
+<meta name="description" content="Merge PDF files online free. Combine multiple PDFs into one easily without software.">
+
+<style>
+body {
+    background:#0f172a;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container {
+    padding:40px 20px;
+}
+
+input {
+    padding:12px;
+    border-radius:5px;
+    border:none;
+}
+
+button {
+    padding:12px 20px;
+    background:#22c55e;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.preview {
+    margin-top:20px;
+}
+
+.preview div {
+    background:#1e293b;
+    margin:5px;
+    padding:10px;
+    border-radius:5px;
+}
+
+.affiliate-box {
+    margin-top:40px;
+    padding:20px;
+    background:#1e293b;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>PDF Merger</h1>
+<p><strong>Merge multiple PDF files into one document online free.</strong></p>
+
+<input type="file" id="files" multiple><br>
+
+<button onclick="mergePDF()">Merge PDF</button>
+
+<div id="preview" class="preview"></div>
+
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Advanced PDF Tools</h3>
+<p>Edit, merge, compress PDF professionally</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
+</div>
+
+<!-- SEO -->
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
+<h2>Free PDF Merger Online</h2>
+<p>Combine PDF files easily without installing software.</p>
+</div>
+
+</div>
+
+<script>
+function mergePDF() {
+    const files = document.getElementById('files').files;
+
+    if (files.length === 0) {
+        alert("Upload at least one PDF!");
+        return;
+    }
+
+    let preview = document.getElementById("preview");
+    preview.innerHTML = "<h3>Processing files...</h3>";
+
+    // Show file names
+    for (let i = 0; i < files.length; i++) {
+        preview.innerHTML += `<div>${files[i].name}</div>`;
+    }
+
+    // Fake processing
+    setTimeout(() => {
+        preview.innerHTML += `
+            <p>⚡ Files merged successfully!</p>
+            <button onclick="redirect()">Download Merged PDF</button>
+        `;
+    }, 2000);
+}
+
+function redirect() {
+    window.open("https://www.ilovepdf.com/merge_pdf", "_blank");
+}
+</script>
+
+</body>
+</html>
