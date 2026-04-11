@@ -1,31 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Text to Speech</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Text to Speech Converter Online Free | TTS Tool</title>
+<meta name="description" content="Convert text to speech online free. Generate voice from text instantly using this TTS tool.">
 
 <style>
-body{background:#020617;color:white;text-align:center;font-family:Arial;}
-textarea{width:80%;height:120px;margin:20px;border-radius:10px;border:none;}
-button{padding:10px;background:#22c55e;border:none;color:white;border-radius:8px;}
-</style>
+body {
+    background:#0f172a;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
 
+.container {
+    padding:40px 20px;
+}
+
+textarea {
+    width:80%;
+    height:150px;
+    padding:10px;
+    border-radius:5px;
+    border:none;
+}
+
+select {
+    padding:10px;
+    margin-top:10px;
+    border-radius:5px;
+}
+
+button {
+    padding:12px 20px;
+    background:#22c55e;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    margin:10px;
+}
+
+.affiliate-box {
+    margin-top:40px;
+    padding:20px;
+    background:#1e293b;
+    border-radius:10px;
+}
+</style>
 </head>
 
 <body>
 
-<h1>🔊 Text to Speech</h1>
+<div class="container">
 
-<textarea id="text" placeholder="Enter text..."></textarea>
+<h1>Text to Speech Converter</h1>
+<p><strong>Convert text into voice online free instantly.</strong></p>
 
-<br>
+<textarea id="text" placeholder="Enter text here..."></textarea><br>
 
-<button onclick="speak()">Speak</button>
+<select id="voiceSelect"></select><br>
+
+<button onclick="speakText()">🔊 Play Voice</button>
+<button onclick="stopText()">⛔ Stop</button>
+
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Premium AI Voice Generator</h3>
+<p>Create studio-quality voiceovers</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
+</div>
+
+<!-- SEO -->
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
+
+<h2>Free Text to Speech Tool</h2>
+<p>Convert text into natural sounding voice using this free TTS tool.</p>
+
+<h2>How to Use?</h2>
+<ul>
+<li>Enter your text</li>
+<li>Select voice</li>
+<li>Click play</li>
+</ul>
+
+<h2>Features</h2>
+<ul>
+<li>Multiple voices</li>
+<li>Fast conversion</li>
+<li>No login required</li>
+</ul>
+
+</div>
+
+</div>
 
 <script>
-function speak(){
-let text=document.getElementById("text").value;
-let speech=new SpeechSynthesisUtterance(text);
-speechSynthesis.speak(speech);
+let voices = [];
+let speech = new SpeechSynthesisUtterance();
+
+function loadVoices() {
+    voices = speechSynthesis.getVoices();
+    let voiceSelect = document.getElementById("voiceSelect");
+
+    voiceSelect.innerHTML = "";
+
+    voices.forEach((voice, i) => {
+        let option = document.createElement("option");
+        option.value = i;
+        option.textContent = voice.name;
+        voiceSelect.appendChild(option);
+    });
+}
+
+speechSynthesis.onvoiceschanged = loadVoices;
+
+function speakText() {
+    let text = document.getElementById("text").value;
+    let voiceIndex = document.getElementById("voiceSelect").value;
+
+    if (!text) {
+        alert("Enter text first!");
+        return;
+    }
+
+    speech.text = text;
+    speech.voice = voices[voiceIndex];
+
+    speechSynthesis.speak(speech);
+}
+
+function stopText() {
+    speechSynthesis.cancel();
 }
 </script>
 
