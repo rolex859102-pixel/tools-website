@@ -68,16 +68,48 @@ button {
 </div>
 
 <script>
-function downloadVideo() {
-    let url = document.getElementById("url").value;
+function startDownload(type) {
+    let link = document.getElementById('link').value;
 
-    if(url === "") {
-        alert("Please paste a YouTube URL");
+    if (!link) {
+        alert("Please paste link first!");
         return;
     }
 
-    // Redirect to external downloader
-    window.open("https://en.savefrom.net/1-youtube-video-downloader-53/", "_blank");
+    // Step 1: Show processing UI
+    document.getElementById("result").innerHTML = `
+        <h3>Processing your link...</h3>
+        <p>Fetching video quality (1080p, 720p, 480p)...</p>
+    `;
+
+    // Step 2: Fake loading delay
+    setTimeout(() => {
+
+        document.getElementById("result").innerHTML = `
+            <h3>Select Quality</h3>
+            <button onclick="finalDownload('${type}')">Download 1080p</button><br><br>
+            <button onclick="finalDownload('${type}')">Download 720p</button><br><br>
+            <button onclick="finalDownload('${type}')">Download 480p</button>
+        `;
+
+    }, 2000);
+}
+
+function finalDownload(type) {
+
+    let url = "";
+
+    if (type === "youtube") {
+        url = "https://y2mate.nu/";
+    }
+    else if (type === "reels") {
+        url = "https://igram.world/";
+    }
+    else if (type === "insta") {
+        url = "https://igram.world/";
+    }
+
+    window.open(url, "_blank");
 }
 </script>
 
