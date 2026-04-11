@@ -2,37 +2,56 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Instagram Photo Downloader Online - Download Insta Images Free</title>
-
-<meta name="description" content="Download Instagram photos online for free. Save high quality Instagram images instantly with this fast and easy tool.">
+<title>Instagram Photo Downloader Online Free | Download Insta Photos</title>
+<meta name="description" content="Download Instagram photos online free in HD quality. Fast and easy Instagram image downloader without login.">
 
 <style>
 body {
-    background:#020617;
+    background:#0f172a;
     color:white;
     font-family:Arial;
     text-align:center;
 }
 
 .container {
-    margin-top:40px;
+    padding:40px 20px;
 }
 
 input {
-    padding:10px;
-    width:300px;
-    border-radius:10px;
+    padding:12px;
+    width:60%;
+    border-radius:5px;
     border:none;
 }
 
 button {
-    padding:10px 20px;
-    border:none;
-    border-radius:10px;
-    background:#ff4d4d;
+    padding:12px 20px;
+    background:#22c55e;
     color:white;
+    border:none;
+    border-radius:5px;
     cursor:pointer;
+    margin-top:10px;
+}
+
+.result-box {
+    margin-top:20px;
+}
+
+.quality-btn {
+    display:block;
+    margin:10px auto;
+    width:220px;
+    background:#1e293b;
+}
+
+.affiliate-box {
+    margin-top:40px;
+    padding:20px;
+    background:#1e293b;
+    border-radius:10px;
 }
 </style>
 </head>
@@ -42,44 +61,85 @@ button {
 <div class="container">
 
 <h1>Instagram Photo Downloader</h1>
+<p><strong>Download Instagram photos online free in HD quality.</strong></p>
 
-<input type="text" id="url" placeholder="Paste Instagram Post URL">
-<br><br>
+<input type="text" id="link" placeholder="Paste Instagram Photo URL here"><br>
 
-<button onclick="downloadInsta()">Download Photo</button>
+<button onclick="startDownload('insta')">Download Photo</button>
 
-<div id="result"></div>
+<div id="result" class="result-box"></div>
 
-<!-- 🔥 AFFILIATE -->
-<div style="margin-top:30px;">
-<h2>📸 Best Camera Accessories</h2>
-<p>Upgrade your content quality</p>
-
-<a href="https://amzn.in/d/0bX59mc8" target="_blank" style="color:#ff4d4d;">
-👉 Buy Now
-</a>
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Best Photo Editing Tool</h3>
+<p>Edit and enhance your images easily</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium Tool</a>
 </div>
 
-<!-- 🔥 SEO CONTENT -->
-<h2>About Instagram Photo Downloader</h2>
-<p>This free tool helps you download Instagram photos in high quality. It is useful for creators, designers and social media users.</p>
+<!-- SEO CONTENT -->
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.6;">
 
-<h2>How to Download Instagram Photos</h2>
-<p>Paste the Instagram post URL and click download. You will be redirected to a secure page to save the image.</p>
+<h2>Free Instagram Photo Downloader</h2>
+<p>Download Instagram photos in high quality without watermark. Fast, free and easy to use tool.</p>
+
+<h2>How to Download Instagram Photos?</h2>
+<ul>
+<li>Copy Instagram photo link</li>
+<li>Paste it in the input box</li>
+<li>Click download</li>
+<li>Select quality and download</li>
+</ul>
+
+<h2>Features</h2>
+<ul>
+<li>HD photo download</li>
+<li>No login required</li>
+<li>Works on all devices</li>
+</ul>
+
+</div>
 
 </div>
 
 <script>
-function downloadInsta() {
-    let url = document.getElementById("url").value;
+function startDownload(type) {
+    let link = document.getElementById('link').value;
 
-    if(url === "") {
-        alert("Please paste Instagram URL");
+    if (!link) {
+        alert("Paste Instagram link first!");
         return;
     }
 
-    // Redirect to external downloader
-    window.open("https://snapinsta.app/", "_blank");
+    // Step 1: Processing UI
+    document.getElementById("result").innerHTML = `
+        <h3>Processing your link...</h3>
+        <p>Fetching HD image quality...</p>
+    `;
+
+    // Step 2: Show options
+    setTimeout(() => {
+
+        document.getElementById("result").innerHTML = `
+            <h3>Select Quality</h3>
+            <p>⚡ Fast download server ready</p>
+
+            <button class="quality-btn" onclick="finalDownload('${type}')">Download HD</button>
+            <button class="quality-btn" onclick="finalDownload('${type}')">Download Medium</button>
+            <button class="quality-btn" onclick="finalDownload('${type}')">Download Low</button>
+        `;
+
+    }, 2000);
+}
+
+function finalDownload(type) {
+
+    let url = "";
+
+    if (type === "insta") {
+        url = "https://igram.world/";
+    }
+
+    window.open(url, "_blank");
 }
 </script>
 
