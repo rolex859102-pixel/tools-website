@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Instagram Reels Downloader Online Free | Download Insta Reels</title>
-<meta name="description" content="Download Instagram reels online free. Fast and easy Instagram video downloader tool without login.">
+<meta name="description" content="Download Instagram reels online free without watermark. Fast and easy tool.">
 
 <style>
 body {
@@ -36,6 +36,17 @@ button {
     margin-top:10px;
 }
 
+.result-box {
+    margin-top:20px;
+}
+
+.quality-btn {
+    display:block;
+    margin:10px auto;
+    width:200px;
+    background:#1e293b;
+}
+
 .affiliate-box {
     margin-top:40px;
     padding:20px;
@@ -54,7 +65,9 @@ button {
 
 <input type="text" id="link" placeholder="Paste Instagram Reel URL here"><br>
 
-<button onclick="downloadReel()">Download Reel</button>
+<button onclick="startDownload('reels')">Download Reel</button>
+
+<div id="result" class="result-box"></div>
 
 <!-- Affiliate -->
 <div class="affiliate-box">
@@ -73,7 +86,8 @@ button {
 <ul>
 <li>Copy Instagram reel link</li>
 <li>Paste it above</li>
-<li>Click download</li>
+<li>Select quality</li>
+<li>Download video</li>
 </ul>
 
 <h2>Features</h2>
@@ -88,7 +102,7 @@ button {
 </div>
 
 <script>
-function downloadReel() {
+function startDownload(type) {
     let link = document.getElementById('link').value;
 
     if (!link) {
@@ -96,8 +110,36 @@ function downloadReel() {
         return;
     }
 
-    // External redirect method
-    window.open("https://igram.world/", "_blank");
+    // Step 1: Fake processing UI
+    document.getElementById("result").innerHTML = `
+        <h3>Processing your link...</h3>
+        <p>Fetching video quality (1080p, 720p, 480p)...</p>
+    `;
+
+    // Step 2: Show quality options
+    setTimeout(() => {
+
+        document.getElementById("result").innerHTML = `
+            <h3>Select Quality</h3>
+            <p>⚡ Fast download server ready</p>
+
+            <button class="quality-btn" onclick="finalDownload('${type}')">Download 1080p</button>
+            <button class="quality-btn" onclick="finalDownload('${type}')">Download 720p</button>
+            <button class="quality-btn" onclick="finalDownload('${type}')">Download 480p</button>
+        `;
+
+    }, 2000);
+}
+
+function finalDownload(type) {
+
+    let url = "";
+
+    if (type === "reels") {
+        url = "https://igram.world/";
+    }
+
+    window.open(url, "_blank");
 }
 </script>
 
