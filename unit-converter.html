@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Unit Converter</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+.container{
+width:70%;
+margin:auto;
+margin-top:40px;
+}
+
+input, select{
+padding:10px;
+margin:10px;
+font-size:16px;
+}
+
+button{
+padding:10px 20px;
+background:#ff9800;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+#result{
+margin-top:20px;
+font-size:20px;
+font-weight:bold;
+}
+
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>All-in-One Unit Converter</h1>
+
+<input type="number" id="value" placeholder="Enter value">
+
+<br>
+
+<select id="type">
+<option value="length">Length</option>
+<option value="weight">Weight</option>
+<option value="temp">Temperature</option>
+</select>
+
+<br>
+
+<button onclick="convert()">Convert</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function convert(){
+
+let val=parseFloat(document.getElementById("value").value);
+let type=document.getElementById("type").value;
+let result="";
+
+if(isNaN(val)){
+result="Enter valid number";
+}
+
+else if(type=="length"){
+result = val + " meters = " + (val*3.28084).toFixed(2) + " feet";
+}
+
+else if(type=="weight"){
+result = val + " kg = " + (val*2.20462).toFixed(2) + " pounds";
+}
+
+else if(type=="temp"){
+result = val + " °C = " + ((val*9/5)+32).toFixed(2) + " °F";
+}
+
+document.getElementById("result").innerText=result;
+
+}
+
+</script>
+
+</body>
+</html>
