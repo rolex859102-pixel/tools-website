@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Facebook Reels Downloader Online Free | Download FB Reels</title>
-<meta name="description" content="Download Facebook reels online free instantly. Save FB reels in HD quality easily.">
+<title>Facebook Reels Downloader HD | Download FB Reels 1080p</title>
+<meta name="description" content="Download Facebook reels in HD quality (1080p, 720p). Fast and free FB reels downloader.">
 
 <style>
 body {
@@ -19,11 +19,12 @@ body {
     padding:40px 20px;
 }
 
-input {
+input, select {
     padding:12px;
     width:60%;
     border-radius:5px;
     border:none;
+    margin:10px;
 }
 
 button {
@@ -33,11 +34,21 @@ button {
     border:none;
     border-radius:5px;
     cursor:pointer;
-    margin-top:10px;
 }
 
-#result {
-    margin-top:20px;
+.progress {
+    width:60%;
+    height:10px;
+    background:#1e293b;
+    margin:20px auto;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.bar {
+    height:10px;
+    width:0%;
+    background:#22c55e;
 }
 
 .affiliate-box {
@@ -54,31 +65,38 @@ button {
 <div class="container">
 
 <h1>Facebook Reels Downloader</h1>
-<p><strong>Download Facebook reels online free instantly.</strong></p>
+<p><strong>Download FB reels in HD quality (1080p, 720p).</strong></p>
 
 <input type="text" id="link" placeholder="Paste Facebook Reels URL"><br>
 
-<button onclick="downloadReel()">Download</button>
+<select id="quality">
+<option>1080p (HD)</option>
+<option>720p</option>
+<option>480p</option>
+<option>360p</option>
+</select><br>
 
-<div id="result"></div>
+<button onclick="startDownload()">Download</button>
+
+<div id="status"></div>
+
+<div class="progress">
+    <div class="bar" id="bar"></div>
+</div>
+
+<div id="downloadBtn"></div>
 
 <!-- Affiliate -->
 <div class="affiliate-box">
-<h3>Video Downloader Pro</h3>
-<p>Download videos in HD without watermark</p>
+<h3>Pro Video Downloader</h3>
+<p>Download without watermark in full HD</p>
 <a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
-</div>
-
-<!-- SEO -->
-<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
-<h2>Free Facebook Reels Downloader</h2>
-<p>Save Facebook reels videos easily in high quality.</p>
 </div>
 
 </div>
 
 <script>
-function downloadReel() {
+function startDownload() {
     let link = document.getElementById("link").value;
 
     if (!link) {
@@ -86,24 +104,38 @@ function downloadReel() {
         return;
     }
 
-    let result = document.getElementById("result");
+    let quality = document.getElementById("quality").value;
+    let status = document.getElementById("status");
+    let bar = document.getElementById("bar");
 
-    result.innerHTML = `
-        <h3>Processing your video...</h3>
-        <p>Fetching HD quality...</p>
-    `;
+    status.innerHTML = "Fetching video data...";
+    bar.style.width = "10%";
 
-    // Fake processing
     setTimeout(() => {
-        result.innerHTML += `
-            <p>⚡ Video ready!</p>
-            <button onclick="redirect()">Download Now</button>
-        `;
+        status.innerHTML = "Processing video...";
+        bar.style.width = "40%";
+    }, 1000);
+
+    setTimeout(() => {
+        status.innerHTML = "Applying selected quality: " + quality;
+        bar.style.width = "70%";
     }, 2000);
+
+    setTimeout(() => {
+        status.innerHTML = "Finalizing download...";
+        bar.style.width = "100%";
+    }, 3000);
+
+    setTimeout(() => {
+        status.innerHTML = "⚡ Video ready!";
+        document.getElementById("downloadBtn").innerHTML = `
+            <button onclick="redirect()">Download ${quality}</button>
+        `;
+    }, 4000);
 }
 
 function redirect() {
-    window.open("https://fdown.net/", "_blank");
+    window.open("https://snapsave.app/facebook-reels-download", "_blank");
 }
 </script>
 
