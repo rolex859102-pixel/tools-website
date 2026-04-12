@@ -2,42 +2,60 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>YouTube Thumbnail Downloader Online - Download HD Thumbnails Free</title>
-
-<meta name="description" content="Download YouTube video thumbnails in HD quality for free. Get high resolution thumbnails instantly using this fast and easy tool.">
+<title>YouTube Thumbnail Downloader Online Free | HD Thumbnail</title>
+<meta name="description" content="Download YouTube thumbnails in HD quality free. Get 1080p, 720p thumbnail easily.">
 
 <style>
 body {
-    background:#020617;
+    background:#0f172a;
     color:white;
     font-family:Arial;
     text-align:center;
 }
 
 .container {
-    margin-top:40px;
+    padding:40px 20px;
 }
 
 input {
-    padding:10px;
-    width:300px;
-    border-radius:10px;
+    padding:12px;
+    width:60%;
+    border-radius:5px;
     border:none;
 }
 
 button {
-    padding:10px 20px;
-    border:none;
-    border-radius:10px;
-    background:#ff4d4d;
+    padding:12px 20px;
+    background:#22c55e;
     color:white;
+    border:none;
+    border-radius:5px;
     cursor:pointer;
+    margin-top:10px;
 }
 
-img {
+#result img {
     margin-top:20px;
-    width:300px;
+    max-width:300px;
+    border-radius:10px;
+}
+
+.download-btn {
+    display:block;
+    margin:10px auto;
+    padding:10px;
+    background:#1e293b;
+    color:white;
+    border-radius:5px;
+    text-decoration:none;
+}
+
+.affiliate-box {
+    margin-top:40px;
+    padding:20px;
+    background:#1e293b;
     border-radius:10px;
 }
 </style>
@@ -48,48 +66,62 @@ img {
 <div class="container">
 
 <h1>YouTube Thumbnail Downloader</h1>
+<p><strong>Download YouTube thumbnails in HD quality instantly.</strong></p>
 
-<input type="text" id="url" placeholder="Paste YouTube Video URL">
-<br><br>
+<input type="text" id="link" placeholder="Paste YouTube video URL here"><br>
 
 <button onclick="getThumbnail()">Get Thumbnail</button>
 
 <div id="result"></div>
 
-<!-- 🔥 AFFILIATE -->
-<div style="margin-top:30px;">
-<h2>🎧 Best Headphones for Creators</h2>
-<p>Improve your editing experience</p>
-
-<a href="https://amzn.in/d/0bX59mc8" target="_blank" style="color:#ff4d4d;">
-👉 Buy Now
-</a>
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Best Thumbnail Maker Tool</h3>
+<p>Create eye-catching thumbnails easily</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
 </div>
 
-<!-- 🔥 SEO CONTENT -->
-<h2>About YouTube Thumbnail Downloader</h2>
-<p>This free tool allows you to download YouTube video thumbnails in HD quality. Perfect for content creators, bloggers and designers.</p>
-
-<h2>How to Download Thumbnail</h2>
-<p>Paste the YouTube video URL and click the button to instantly view and download the thumbnail image.</p>
+<!-- SEO -->
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
+<h2>Free YouTube Thumbnail Downloader</h2>
+<p>Download thumbnails in HD, SD quality easily.</p>
+</div>
 
 </div>
 
 <script>
 function getThumbnail() {
-    let url = document.getElementById("url").value;
+    let url = document.getElementById("link").value;
 
-    let videoId = url.split("v=")[1];
-    let ampersandPosition = videoId.indexOf("&");
-
-    if(ampersandPosition != -1) {
-        videoId = videoId.substring(0, ampersandPosition);
+    if (!url) {
+        alert("Paste YouTube link!");
+        return;
     }
 
-    let thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/maxresdefault.jpg";
+    let videoId = "";
 
-    document.getElementById("result").innerHTML =
-    "<img src='" + thumbnailUrl + "'><br><a href='" + thumbnailUrl + "' download style='color:#ff4d4d;'>Download Thumbnail</a>";
+    // Extract video ID
+    if (url.includes("v=")) {
+        videoId = url.split("v=")[1].substring(0,11);
+    } else if (url.includes("youtu.be/")) {
+        videoId = url.split("youtu.be/")[1].substring(0,11);
+    }
+
+    if (!videoId) {
+        alert("Invalid URL!");
+        return;
+    }
+
+    let result = document.getElementById("result");
+
+    result.innerHTML = `
+        <h3>Thumbnail Preview</h3>
+        <img src="https://img.youtube.com/vi/${videoId}/maxresdefault.jpg">
+        
+        <a class="download-btn" href="https://img.youtube.com/vi/${videoId}/maxresdefault.jpg" download>Download HD</a>
+        <a class="download-btn" href="https://img.youtube.com/vi/${videoId}/hqdefault.jpg" download>Download Medium</a>
+        <a class="download-btn" href="https://img.youtube.com/vi/${videoId}/mqdefault.jpg" download>Download Low</a>
+    `;
 }
 </script>
 
