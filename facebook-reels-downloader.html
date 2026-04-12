@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Facebook Reels Downloader Online Free | Download FB Reels</title>
+<meta name="description" content="Download Facebook reels online free instantly. Save FB reels in HD quality easily.">
+
+<style>
+body {
+    background:#0f172a;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container {
+    padding:40px 20px;
+}
+
+input {
+    padding:12px;
+    width:60%;
+    border-radius:5px;
+    border:none;
+}
+
+button {
+    padding:12px 20px;
+    background:#22c55e;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+#result {
+    margin-top:20px;
+}
+
+.affiliate-box {
+    margin-top:40px;
+    padding:20px;
+    background:#1e293b;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Facebook Reels Downloader</h1>
+<p><strong>Download Facebook reels online free instantly.</strong></p>
+
+<input type="text" id="link" placeholder="Paste Facebook Reels URL"><br>
+
+<button onclick="downloadReel()">Download</button>
+
+<div id="result"></div>
+
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Video Downloader Pro</h3>
+<p>Download videos in HD without watermark</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
+</div>
+
+<!-- SEO -->
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
+<h2>Free Facebook Reels Downloader</h2>
+<p>Save Facebook reels videos easily in high quality.</p>
+</div>
+
+</div>
+
+<script>
+function downloadReel() {
+    let link = document.getElementById("link").value;
+
+    if (!link) {
+        alert("Paste Facebook link!");
+        return;
+    }
+
+    let result = document.getElementById("result");
+
+    result.innerHTML = `
+        <h3>Processing your video...</h3>
+        <p>Fetching HD quality...</p>
+    `;
+
+    // Fake processing
+    setTimeout(() => {
+        result.innerHTML += `
+            <p>⚡ Video ready!</p>
+            <button onclick="redirect()">Download Now</button>
+        `;
+    }, 2000);
+}
+
+function redirect() {
+    window.open("https://fdown.net/", "_blank");
+}
+</script>
+
+</body>
+</html>
