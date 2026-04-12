@@ -37,6 +37,7 @@ button {
     border:none;
     border-radius:8px;
     cursor:pointer;
+    margin-top:10px;
 }
 
 button:hover {
@@ -67,12 +68,6 @@ button:hover {
 #downloadBtn button {
     background:#22c55e;
     margin-top:15px;
-}
-
-.note {
-    color:#94a3b8;
-    font-size:14px;
-    margin-top:10px;
 }
 
 .affiliate-box {
@@ -123,7 +118,7 @@ button:hover {
 
 <div id="downloadBtn"></div>
 
-<p class="note">✔ No watermark • ✔ Fast download • ✔ HD quality</p>
+<p style="color:#94a3b8;">✔ No watermark • ✔ Fast download • ✔ HD quality</p>
 
 </div>
 
@@ -137,10 +132,31 @@ button:hover {
 </a>
 </div>
 
-<!-- 🔥 SEO -->
+<!-- 🔥 SEO CONTENT -->
 <div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.6;">
+
 <h2>Facebook Reels Downloader Online Free</h2>
-<p>Download Facebook reels easily in HD quality without watermark.</p>
+<p>Download Facebook reels easily in HD quality. Save your favorite videos without watermark in just one click.</p>
+
+<h2>How to Download FB Reels?</h2>
+<ul>
+<li>Paste Facebook reels link</li>
+<li>Select video quality</li>
+<li>Click download</li>
+</ul>
+
+<h2>Features</h2>
+<ul>
+<li>HD quality download</li>
+<li>Fast processing</li>
+<li>No login required</li>
+</ul>
+
+<h3>🔥 Try More Tools</h3>
+<a style="color:#38bdf8;" href="youtube-thumbnail-downloader.html">YouTube Thumbnail Downloader</a><br>
+<a style="color:#38bdf8;" href="image-compressor.html">Image Compressor</a><br>
+<a style="color:#38bdf8;" href="pdf-to-word.html">PDF to Word Converter</a>
+
 </div>
 
 <script>
@@ -156,41 +172,32 @@ function startDownload() {
     let status = document.getElementById("status");
     let bar = document.getElementById("bar");
 
-    status.innerHTML = "🔍 Fetching video data...";
+    status.innerHTML = "Fetching video data...";
     bar.style.width = "10%";
 
     setTimeout(() => {
-        status.innerHTML = "⚙️ Processing video...";
+        status.innerHTML = "Processing video...";
         bar.style.width = "40%";
     }, 1000);
 
     setTimeout(() => {
-        status.innerHTML = "🎯 Applying " + quality;
+        status.innerHTML = "Applying " + quality;
         bar.style.width = "70%";
     }, 2000);
 
     setTimeout(() => {
-        status.innerHTML = "🚀 Preparing secure download...";
+        status.innerHTML = "Finalizing download...";
         bar.style.width = "100%";
     }, 3000);
 
     setTimeout(() => {
-        status.innerHTML = "⚡ Video Ready! Click below to download";
-
+        status.innerHTML = "⚡ Video Ready!";
         document.getElementById("downloadBtn").innerHTML =
-        `<button onclick="redirect()">Download ${quality}</button>
-         <p class="note">Auto-copy enabled for faster download</p>`;
+            `<button onclick="redirect()">Download ${quality}</button>`;
     }, 4000);
 }
 
 function redirect() {
-    let link = document.getElementById("link").value;
-
-    // Copy link automatically
-    navigator.clipboard.writeText(link);
-
-    alert("✅ Link copied! Paste it on next page & download.");
-
     window.open("https://snapsave.app/facebook-reels-download", "_blank");
 }
 </script>
