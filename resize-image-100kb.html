@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Resize Image to 100KB Online Free</title>
+<meta name="description" content="Resize image to 100KB online free for forms and uploads.">
+
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container { padding:40px; }
+
+input, button {
+    padding:12px;
+    margin:10px;
+    border-radius:10px;
+    border:none;
+}
+
+button {
+    background:#ff4d4d;
+    color:white;
+    cursor:pointer;
+}
+
+img { max-width:250px; margin-top:20px; }
+
+.tool-links a {
+    display:inline-block;
+    margin:8px;
+    padding:8px 14px;
+    background:#1e293b;
+    color:white;
+    border-radius:6px;
+    text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Resize Image to 100KB</h1>
+<p><strong>Reduce image size to 100KB instantly.</strong></p>
+
+<input type="file" id="upload"><br>
+<button onclick="resize()">Resize</button>
+
+<div id="result"></div>
+</div>
+
+<script>
+function resize() {
+    let file = document.getElementById("upload").files[0];
+    if (!file) return alert("Upload image!");
+
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        let img = new Image();
+        img.src = e.target.result;
+
+        img.onload = function() {
+            let canvas = document.createElement("canvas");
+            let ctx = canvas.getContext("2d");
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.drawImage(img, 0, 0);
+
+            let quality = 0.9;
+
+            function reduce() {
+                let data = canvas.toDataURL("image/jpeg", quality);
+                let size = (data.length * 3/4) / 1024;
+
+                if (size > 100 && quality > 0.1) {
+                    quality -= 0.05;
+                    reduce();
+                } else {
+                    document.getElementById("result").innerHTML = `
+                        <p>Size: ${Math.round(size)} KB</p>
+                        <img src="${data}">
+                        <br>
+                        <a href="${data}" download="resized.jpg">
+                        <button>Download</button></a>
+                    `;
+                }
+            }
+
+            reduce();
+        };
+    };
+    reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>
