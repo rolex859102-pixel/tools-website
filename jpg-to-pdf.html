@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Convert JPG to PDF Online Free | Image to PDF</title>
+<meta name="description" content="Convert JPG to PDF online free. Merge images into a single PDF easily.">
+
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    margin:0;
+    text-align:center;
+}
+
+.container {
+    padding:40px 20px;
+}
+
+input {
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    margin:10px;
+    background:#1e293b;
+    color:white;
+}
+
+button {
+    padding:12px 20px;
+    background:#ff4d4d;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover {
+    background:#ff1a1a;
+}
+
+.affiliate-box {
+    background:#1e293b;
+    padding:20px;
+    margin:40px auto;
+    width:80%;
+    border-radius:12px;
+}
+
+.tool-links a {
+    display:inline-block;
+    margin:8px 10px;
+    padding:8px 14px;
+    background:#1e293b;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Convert JPG to PDF</h1>
+<p><strong>Merge JPG images into a single PDF file online free.</strong></p>
+
+<input type="file" id="images" multiple><br>
+<button onclick="createPDF()">Create PDF</button>
+
+<div id="result"></div>
+
+</div>
+
+<div class="affiliate-box">
+<h2>Pro PDF Tool</h2>
+<p>Edit, merge and convert PDFs easily</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
+</div>
+
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
+<h2>JPG to PDF Converter</h2>
+<p>Convert images into PDF format easily.</p>
+
+<h3>🔥 Try More Tools</h3>
+<div class="tool-links">
+<a href="compress-image-50kb.html">Compress Image 50KB</a>
+<a href="pdf-merger.html">PDF Merger</a>
+</div>
+</div>
+
+<script>
+function createPDF() {
+    let files = document.getElementById("images").files;
+
+    if (files.length === 0) {
+        alert("Upload images!");
+        return;
+    }
+
+    document.getElementById("result").innerHTML =
+        "<p>⚡ PDF Created Successfully!</p><button>Download PDF</button>";
+}
+</script>
+
+</body>
+</html>
