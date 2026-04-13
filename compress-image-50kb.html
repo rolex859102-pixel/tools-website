@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Compress Image to 50KB Online Free | Reduce Image Size</title>
+<meta name="description" content="Compress image to 50KB online free without losing quality. Reduce image size instantly for forms and uploads.">
+
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    margin:0;
+    text-align:center;
+}
+
+.container {
+    padding:40px 20px;
+}
+
+input {
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    margin:10px;
+    background:#1e293b;
+    color:white;
+}
+
+button {
+    padding:12px 20px;
+    background:#ff4d4d;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover {
+    background:#ff1a1a;
+}
+
+img {
+    max-width:250px;
+    margin-top:20px;
+    border-radius:10px;
+}
+
+.affiliate-box {
+    background:#1e293b;
+    padding:20px;
+    margin:40px auto;
+    width:80%;
+    border-radius:12px;
+}
+
+.tool-links a {
+    display:inline-block;
+    margin:8px 10px;
+    padding:8px 14px;
+    background:#1e293b;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.tool-links a:hover {
+    background:#ff4d4d;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Compress Image to 50KB</h1>
+<p><strong>Reduce image size to 50KB for forms and uploads.</strong></p>
+
+<input type="file" id="upload"><br>
+<button onclick="compressImage()">Compress</button>
+
+<div id="result"></div>
+
+</div>
+
+<!-- 🔥 AFFILIATE -->
+<div class="affiliate-box">
+<h2>Best Image Editing Tool</h2>
+<p>Edit, resize and compress images easily</p>
+
+<a href="YOUR_AFFILIATE_LINK" target="_blank" style="color:#fff;">
+🚀 Try Premium Tool
+</a>
+</div>
+
+<!-- 🔥 SEO -->
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.6;">
+<h2>Compress Image to 50KB Online</h2>
+<p>Use this free tool to reduce image size to 50KB without losing quality. Perfect for government forms and job applications.</p>
+
+<h2>How to Compress Image?</h2>
+<ul>
+<li>Upload your image</li>
+<li>Click compress</li>
+<li>Download optimized image</li>
+</ul>
+
+<h3>🔥 Try More Tools</h3>
+<div class="tool-links">
+<a href="image-compressor.html">Image Compressor</a>
+<a href="pdf-merger.html">PDF Merger</a>
+<a href="facebook-reels-downloader.html">FB Reels Downloader</a>
+</div>
+
+</div>
+
+<script>
+function compressImage() {
+    const file = document.getElementById("upload").files[0];
+
+    if (!file) {
+        alert("Upload image!");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = function(event) {
+        const img = new Image();
+        img.src = event.target.result;
+
+        img.onload = function() {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.drawImage(img, 0, 0);
+
+            let quality = 0.9;
+
+            function reduce() {
+                let dataUrl = canvas.toDataURL("image/jpeg", quality);
+                let sizeKB = Math.round((dataUrl.length * 3/4) / 1024);
+
+                if (sizeKB > 50 && quality > 0.1) {
+                    quality -= 0.05;
+                    reduce();
+                } else {
+                    document.getElementById("result").innerHTML = `
+                        <p>Final Size: ${sizeKB} KB</p>
+                        <img src="${dataUrl}">
+                        <br>
+                        <a href="${dataUrl}" download="compressed.jpg">
+                            <button>Download Image</button>
+                        </a>
+                    `;
+                }
+            }
+
+            reduce();
+        };
+    };
+}
+</script>
+
+</body>
+</html>
