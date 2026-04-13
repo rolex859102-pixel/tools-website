@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Convert JPG to PNG Online Free</title>
+
+<style>
+body {background:#020617;color:white;text-align:center;font-family:Arial;}
+.container {padding:40px;}
+input,button {padding:12px;margin:10px;border-radius:10px;border:none;}
+button {background:#ff4d4d;color:white;}
+img {max-width:250px;margin-top:20px;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>JPG to PNG Converter</h1>
+
+<input type="file" id="file"><br>
+<button onclick="convert()">Convert</button>
+
+<div id="output"></div>
+</div>
+
+<script>
+function convert(){
+let file=document.getElementById("file").files[0];
+if(!file) return alert("Upload image!");
+
+let reader=new FileReader();
+reader.onload=function(e){
+let img=new Image();
+img.src=e.target.result;
+
+img.onload=function(){
+let canvas=document.createElement("canvas");
+canvas.width=img.width;
+canvas.height=img.height;
+
+let ctx=canvas.getContext("2d");
+ctx.drawImage(img,0,0);
+
+let png=canvas.toDataURL("image/png");
+
+document.getElementById("output").innerHTML=`
+<img src="${png}">
+<br>
+<a href="${png}" download="image.png">
+<button>Download PNG</button></a>
+`;
+}
+}
+reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>
