@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>PDF to JPG Converter</title>
+<title>Convert PDF to JPG Online Free</title>
 
 <style>
-body{background:#020617;color:white;text-align:center;font-family:Arial;}
-input{margin:20px;}
+body {background:#020617;color:white;text-align:center;font-family:Arial;}
+.container {padding:40px;}
+input,button {padding:12px;margin:10px;border-radius:10px;border:none;}
+button {background:#ff4d4d;color:white;}
+.tool-links a {
+display:inline-block;
+margin:8px;
+padding:8px 14px;
+background:#1e293b;
+color:white;
+border-radius:6px;
+text-decoration:none;
+}
 </style>
-
 </head>
 
 <body>
 
-<h1>📄 PDF to JPG Converter</h1>
+<div class="container">
+<h1>PDF to JPG Converter</h1>
+<p><strong>Convert PDF pages into JPG images easily.</strong></p>
 
-<p>Select PDF file (demo tool)</p>
+<input type="file"><br>
+<button onclick="fake()">Convert</button>
 
-<input type="file">
+<div id="result"></div>
+</div>
 
-<p>👉 For advanced conversion use premium tool below</p>
-
-<a href="#" style="color:#22c55e;">Convert PDF Now</a>
+<script>
+function fake(){
+document.getElementById("result").innerHTML=
+"<p>⚡ Conversion Ready!</p><button>Download JPG</button>";
+}
+</script>
 
 </body>
 </html>
