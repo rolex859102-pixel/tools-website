@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Compress Image to 20KB</title>
+
+<style>
+body {
+    background:#020617;
+    color:white;
+    text-align:center;
+    font-family:Arial;
+}
+
+.container { padding:40px; }
+
+input, button {
+    padding:12px;
+    margin:10px;
+    border-radius:10px;
+    border:none;
+}
+
+button {
+    background:#ff4d4d;
+    color:white;
+}
+
+img { max-width:250px; margin-top:20px; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Compress Image to 20KB</h1>
+
+<input type="file" id="file"><br>
+<button onclick="compress()">Compress</button>
+
+<div id="output"></div>
+</div>
+
+<script>
+function compress() {
+    let file = document.getElementById("file").files[0];
+    if (!file) return alert("Upload image!");
+
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        let img = new Image();
+        img.src = e.target.result;
+
+        img.onload = function() {
+            let canvas = document.createElement("canvas");
+            let ctx = canvas.getContext("2d");
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.drawImage(img, 0, 0);
+
+            let quality = 0.9;
+
+            function reduce() {
+                let data = canvas.toDataURL("image/jpeg", quality);
+                let size = (data.length * 3/4) / 1024;
+
+                if (size > 20 && quality > 0.05) {
+                    quality -= 0.05;
+                    reduce();
+                } else {
+                    document.getElementById("output").innerHTML = `
+                        <p>Size: ${Math.round(size)} KB</p>
+                        <img src="${data}">
+                        <br>
+                        <a href="${data}" download="compressed.jpg">
+                        <button>Download</button></a>
+                    `;
+                }
+            }
+
+            reduce();
+        };
+    };
+    reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>
