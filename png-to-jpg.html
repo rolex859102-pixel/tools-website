@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Convert PNG to JPG Online Free | Image Converter</title>
+<meta name="description" content="Convert PNG to JPG online free instantly without losing quality.">
+
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    margin:0;
+    text-align:center;
+}
+
+.container {
+    padding:40px 20px;
+}
+
+input {
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    margin:10px;
+    background:#1e293b;
+    color:white;
+}
+
+button {
+    padding:12px 20px;
+    background:#ff4d4d;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover {
+    background:#ff1a1a;
+}
+
+img {
+    max-width:250px;
+    margin-top:20px;
+}
+
+.tool-links a {
+    display:inline-block;
+    margin:8px 10px;
+    padding:8px 14px;
+    background:#1e293b;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Convert PNG to JPG</h1>
+<p><strong>Convert PNG images into JPG format instantly.</strong></p>
+
+<input type="file" id="upload"><br>
+<button onclick="convert()">Convert</button>
+
+<div id="result"></div>
+
+</div>
+
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
+<h2>PNG to JPG Converter</h2>
+<p>Convert PNG images to JPG format easily.</p>
+
+<h3>🔥 Try More Tools</h3>
+<div class="tool-links">
+<a href="compress-image-50kb.html">Compress Image 50KB</a>
+<a href="jpg-to-pdf.html">JPG to PDF</a>
+</div>
+</div>
+
+<script>
+function convert() {
+    let file = document.getElementById("upload").files[0];
+
+    if (!file) {
+        alert("Upload PNG!");
+        return;
+    }
+
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        let img = new Image();
+        img.src = e.target.result;
+
+        img.onload = function() {
+            let canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            let ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+
+            let jpg = canvas.toDataURL("image/jpeg");
+
+            document.getElementById("result").innerHTML = `
+                <img src="${jpg}">
+                <br>
+                <a href="${jpg}" download="converted.jpg">
+                <button>Download JPG</button></a>
+            `;
+        };
+    };
+    reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>
