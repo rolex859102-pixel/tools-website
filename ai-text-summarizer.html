@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Text Summarizer Online Free</title>
+
+<style>
+body {background:#020617;color:white;text-align:center;font-family:Arial;}
+.container {padding:40px;}
+textarea {width:60%;height:120px;padding:10px;border-radius:10px;background:#1e293b;color:white;}
+button {padding:12px;margin:10px;border-radius:10px;border:none;background:#ff4d4d;color:white;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>AI Text Summarizer</h1>
+<p><strong>Summarize long text into short version instantly.</strong></p>
+
+<textarea id="input"></textarea><br>
+<button onclick="summarize()">Summarize</button>
+
+<div id="output"></div>
+</div>
+
+<script>
+function summarize(){
+let text=document.getElementById("input").value;
+if(!text) return alert("Enter text!");
+
+let summary=text.split(" ").slice(0,30).join(" ") + "...";
+
+document.getElementById("output").innerHTML="<p>"+summary+"</p>";
+}
+</script>
+
+</body>
+</html>
