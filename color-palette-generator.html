@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Color Palette Generator</title>
+
+<style>
+body {background:#020617;color:white;text-align:center;font-family:Arial;}
+.container {padding:40px;}
+.color {
+width:100px;
+height:100px;
+display:inline-block;
+margin:10px;
+border-radius:10px;
+}
+button {padding:12px;margin:10px;border-radius:10px;border:none;background:#ff4d4d;color:white;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Color Palette Generator</h1>
+<p><strong>Generate beautiful color combinations.</strong></p>
+
+<button onclick="generate()">Generate</button>
+
+<div id="palette"></div>
+</div>
+
+<script>
+function generate(){
+let colors="";
+for(let i=0;i<5;i++){
+let color="#"+Math.floor(Math.random()*16777215).toString(16);
+colors+=`<div class="color" style="background:${color}"></div>`;
+}
+document.getElementById("palette").innerHTML=colors;
+}
+</script>
+
+</body>
+</html>
