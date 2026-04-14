@@ -1,131 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>QR Code Generator Online Free | Create QR Code Instantly</title>
-<meta name="description" content="Generate QR code online free for links, text, WhatsApp and more. Fast and easy QR generator tool.">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<title>QR Code Generator Online Free</title>
 
 <style>
-body {
-    background:#0f172a;
-    color:white;
-    font-family:Arial;
-    text-align:center;
-}
-
-.container {
-    padding:40px 20px;
-}
-
-input {
-    padding:12px;
-    width:60%;
-    border-radius:5px;
-    border:none;
-}
-
-button {
-    padding:12px 20px;
-    background:#22c55e;
-    color:white;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-#qrcode {
-    margin-top:20px;
-}
-
-.affiliate-box {
-    margin-top:40px;
-    padding:20px;
-    background:#1e293b;
-    border-radius:10px;
-}
+body {background:#020617;color:white;text-align:center;font-family:Arial;}
+.container {padding:40px;}
+input,button {padding:12px;margin:10px;border-radius:10px;border:none;}
+button {background:#ff4d4d;color:white;}
+img {margin-top:20px;}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-
 <h1>QR Code Generator</h1>
-<p><strong>Create QR code online free instantly.</strong></p>
+<p><strong>Create QR codes instantly.</strong></p>
 
-<input type="text" id="text" placeholder="Enter URL or text"><br>
+<input type="text" id="text" placeholder="Enter text or URL"><br>
+<button onclick="generate()">Generate</button>
 
-<button onclick="generateQR()">Generate QR Code</button>
-
-<div id="qrcode"></div>
-
-<button id="downloadBtn" style="display:none;" onclick="downloadQR()">Download QR</button>
-
-<!-- Affiliate -->
-<div class="affiliate-box">
-<h3>Business QR Tools</h3>
-<p>Create advanced QR codes for marketing</p>
-<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
-</div>
-
-<!-- SEO CONTENT -->
-<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
-
-<h2>Free QR Code Generator Online</h2>
-<p>Create QR codes for websites, WhatsApp, WiFi and more easily.</p>
-
-<h2>How to Create QR Code?</h2>
-<ul>
-<li>Enter text or URL</li>
-<li>Click generate</li>
-<li>Download QR code</li>
-</ul>
-
-<h2>Features</h2>
-<ul>
-<li>Instant generation</li>
-<li>Free to use</li>
-<li>Mobile friendly</li>
-</ul>
-
-</div>
-
+<div id="output"></div>
 </div>
 
 <script>
-let qr;
+function generate(){
+let text=document.getElementById("text").value;
+if(!text) return alert("Enter text!");
 
-function generateQR() {
-    let text = document.getElementById("text").value;
+let url="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+encodeURIComponent(text);
 
-    if (!text) {
-        alert("Enter text or URL!");
-        return;
-    }
-
-    document.getElementById("qrcode").innerHTML = "";
-
-    qr = new QRCode(document.getElementById("qrcode"), {
-        text: text,
-        width: 200,
-        height: 200
-    });
-
-    document.getElementById("downloadBtn").style.display = "inline-block";
-}
-
-function downloadQR() {
-    let img = document.querySelector("#qrcode img");
-    let link = document.createElement("a");
-
-    link.href = img.src;
-    link.download = "qr-code.png";
-    link.click();
+document.getElementById("output").innerHTML=`
+<img src="${url}">
+<br>
+<a href="${url}" download="qr.png">
+<button>Download QR</button></a>
+`;
 }
 </script>
 
