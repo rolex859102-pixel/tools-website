@@ -5,59 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Convert PNG to JPG Online Free (High Quality)</title>
-<meta name="description" content="Convert PNG to JPG online free without losing quality. Fast and simple image converter tool.">
+<meta name="description" content="Convert PNG to JPG online free without losing quality. Fast and easy image converter tool.">
 
 <style>
 body {
     background:#020617;
     color:white;
     font-family:Arial;
-    margin:0;
     text-align:center;
+    margin:0;
 }
 
-.container {
-    padding:40px 20px;
-}
+.container { padding:40px; }
 
-input {
+input, button {
     padding:12px;
+    margin:10px;
     border-radius:10px;
     border:none;
-    margin:10px;
-    background:#1e293b;
-    color:white;
 }
 
 button {
-    padding:12px 20px;
     background:#ff4d4d;
     color:white;
-    border:none;
-    border-radius:8px;
     cursor:pointer;
 }
 
-button:hover {
-    background:#ff1a1a;
-}
+img { max-width:250px; margin-top:20px; }
 
-img {
-    max-width:250px;
-    margin-top:20px;
-}
-
-.tool-links a {
+.tool-btn {
     display:inline-block;
-    margin:8px 10px;
-    padding:8px 14px;
+    margin:8px;
+    padding:10px 18px;
     background:#1e293b;
     color:white;
     text-decoration:none;
-    border-radius:6px;
+    border-radius:10px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.tool-btn:hover {
+    background:#ff4d4d;
 }
 </style>
-
 </head>
 
 <body>
@@ -65,67 +56,27 @@ img {
 <div class="container">
 
 <h1>Convert PNG to JPG</h1>
-<p><strong>Convert PNG images into JPG format instantly.</strong></p>
+<p><strong>Convert PNG images to JPG instantly without losing quality.</strong></p>
 
-<input type="file" id="upload"><br>
+<input type="file" id="upload" accept="image/png"><br>
 <button onclick="convert()">Convert</button>
 
 <div id="result"></div>
 
+<h3 style="margin-top:40px;">🔥 Related Tools</h3>
+
+<div style="margin-top:20px;">
+<a href="jpg-to-png.html" class="tool-btn">JPG to PNG Converter</a>
+<a href="compress-image-50kb.html" class="tool-btn">Compress Image 50KB</a>
+<a href="resize-image-100kb.html" class="tool-btn">Resize Image 100KB</a>
 </div>
 
-<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.7;">
-
-<h2>Convert PNG to JPG Online Free</h2>
-<p>This free PNG to JPG converter helps you change image format instantly without losing quality. PNG images are usually larger in size, while JPG format reduces file size and is more suitable for uploads and sharing.</p>
-
-<p>You can easily convert your PNG images into JPG format in just one click. No software or signup is required.</p>
-
-<h2>How to Convert PNG to JPG?</h2>
-<ul>
-<li>Upload your PNG image</li>
-<li>Click on convert button</li>
-<li>Wait for processing</li>
-<li>Download your JPG file</li>
-</ul>
-
-<h2>Features of PNG to JPG Converter</h2>
-<ul>
-<li>Free and fast conversion</li>
-<li>No quality loss</li>
-<li>Works on all devices</li>
-<li>No registration needed</li>
-</ul>
-
-<h2>Why Convert PNG to JPG?</h2>
-<p>JPG files are smaller in size compared to PNG. This helps in faster uploads, better performance and saving storage space. It is especially useful for online forms and websites.</p>
-
-<h2>Best Use Cases</h2>
-<ul>
-<li>Website image optimization</li>
-<li>Social media uploads</li>
-<li>Email attachments</li>
-<li>Online form submissions</li>
-</ul>
-
-</div>
-
-<h3>🔥 Try More Tools</h3>
-<div class="tool-links">
-<a href="jpg-to-png.html">JPG to PNG Converter</a><br>
-<a href="compress-image-50kb.html">Compress Image 50KB</a><br>
-<a href="resize-image-100kb.html">Resize Image 100KB</a>
-</div>
 </div>
 
 <script>
 function convert() {
     let file = document.getElementById("upload").files[0];
-
-    if (!file) {
-        alert("Upload PNG!");
-        return;
-    }
+    if (!file) return alert("Upload PNG image!");
 
     let reader = new FileReader();
     reader.onload = function(e) {
@@ -134,18 +85,23 @@ function convert() {
 
         img.onload = function() {
             let canvas = document.createElement("canvas");
+            let ctx = canvas.getContext("2d");
+
             canvas.width = img.width;
             canvas.height = img.height;
 
-            let ctx = canvas.getContext("2d");
+            // White background for JPG
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
             ctx.drawImage(img, 0, 0);
 
-            let jpg = canvas.toDataURL("image/jpeg");
+            let data = canvas.toDataURL("image/jpeg", 0.9);
 
             document.getElementById("result").innerHTML = `
-                <img src="${jpg}">
+                <img src="${data}">
                 <br>
-                <a href="${jpg}" download="converted.jpg">
+                <a href="${data}" download="converted.jpg">
                 <button>Download JPG</button></a>
             `;
         };
