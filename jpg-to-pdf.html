@@ -5,59 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Convert JPG to PDF Online Free (Fast & Easy)</title>
-<meta name="description" content="Convert JPG images to PDF online free. Merge images into a single PDF quickly and easily.">
+<meta name="description" content="Convert JPG images to PDF online free. Merge multiple images into a single PDF quickly and easily.">
 
 <style>
 body {
     background:#020617;
     color:white;
     font-family:Arial;
-    margin:0;
     text-align:center;
+    margin:0;
 }
 
-.container {
-    padding:40px 20px;
-}
+.container { padding:40px; }
 
-input {
+input, button {
     padding:12px;
+    margin:10px;
     border-radius:10px;
     border:none;
-    margin:10px;
-    background:#1e293b;
-    color:white;
 }
 
 button {
-    padding:12px 20px;
     background:#ff4d4d;
     color:white;
-    border:none;
-    border-radius:8px;
     cursor:pointer;
 }
 
-button:hover {
-    background:#ff1a1a;
-}
-
-.affiliate-box {
-    background:#1e293b;
-    padding:20px;
-    margin:40px auto;
-    width:80%;
-    border-radius:12px;
-}
-
-.tool-links a {
+.tool-btn {
     display:inline-block;
-    margin:8px 10px;
-    padding:8px 14px;
+    margin:8px;
+    padding:10px 18px;
     background:#1e293b;
     color:white;
     text-decoration:none;
-    border-radius:6px;
+    border-radius:10px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.tool-btn:hover {
+    background:#ff4d4d;
 }
 </style>
 
@@ -68,77 +55,55 @@ button:hover {
 <div class="container">
 
 <h1>Convert JPG to PDF</h1>
-<p><strong>Merge JPG images into a single PDF file online free.</strong></p>
+<p><strong>Merge multiple JPG images into one PDF instantly.</strong></p>
 
-<input type="file" id="images" multiple><br>
-<button onclick="createPDF()">Create PDF</button>
+<input type="file" id="upload" multiple accept="image/jpeg"><br>
+<button onclick="createPDF()">Convert to PDF</button>
 
 <div id="result"></div>
 
+<h3 style="margin-top:40px;">🔥 Related Tools</h3>
+
+<div style="margin-top:20px;">
+<a href="pdf-to-word.html" class="tool-btn">PDF to Word</a>
+<a href="pdf-to-jpg.html" class="tool-btn">PDF to JPG</a>
+<a href="compress-pdf-100kb.html" class="tool-btn">Compress PDF</a>
 </div>
-
-<div class="affiliate-box">
-<h2>Pro PDF Tool</h2>
-<p>Edit, merge and convert PDFs easily</p>
-<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
-</div>
-
-<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.7;">
-
-<h2>Convert JPG to PDF Online Free</h2>
-<p>Looking to convert JPG to PDF online for free? This tool allows you to merge multiple JPG images into a single PDF file quickly and easily. It is perfect for students, office work and document submissions.</p>
-
-<p>You can upload one or multiple images and create a PDF file instantly without installing any software. The process is fast, secure and works on all devices.</p>
-
-<h2>How to Convert JPG to PDF?</h2>
-<ul>
-<li>Select one or more JPG images</li>
-<li>Click on the convert button</li>
-<li>Wait a few seconds for processing</li>
-<li>Download your PDF file</li>
-</ul>
-
-<h2>Features of JPG to PDF Tool</h2>
-<ul>
-<li>100% free online tool</li>
-<li>Fast and simple conversion</li>
-<li>No signup required</li>
-<li>Supports multiple images</li>
-<li>Works on mobile and desktop</li>
-</ul>
-
-<h2>Why Use JPG to PDF Converter?</h2>
-<p>PDF files are widely accepted for document sharing. This tool helps you combine images into one file, making it easier to upload, share and print documents.</p>
-
-<h2>Best Use Cases</h2>
-<ul>
-<li>Assignment submission</li>
-<li>Office documents</li>
-<li>ID proof uploads</li>
-<li>Online form submission</li>
-</ul>
 
 </div>
 
-<h3>🔥 Try More Tools</h3>
-<div class="tool-links">
-<a href="pdf-to-word.html">PDF to Word</a><br>
-<a href="pdf-to-jpg.html">PDF to JPG</a><br>
-<a href="compress-pdf-100kb.html">Compress PDF</a>
-</div>
-</div>
+<!-- jsPDF CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-function createPDF() {
-    let files = document.getElementById("images").files;
+async function createPDF() {
+    const { jsPDF } = window.jspdf;
+    let files = document.getElementById("upload").files;
 
-    if (files.length === 0) {
-        alert("Upload images!");
-        return;
+    if (files.length === 0) return alert("Upload JPG images!");
+
+    let pdf = new jsPDF();
+
+    for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        let reader = new FileReader();
+
+        await new Promise(resolve => {
+            reader.onload = function(e) {
+                let img = new Image();
+                img.src = e.target.result;
+
+                img.onload = function() {
+                    if (i > 0) pdf.addPage();
+                    pdf.addImage(img, 'JPEG', 10, 10, 180, 160);
+                    resolve();
+                };
+            };
+            reader.readAsDataURL(file);
+        });
     }
 
-    document.getElementById("result").innerHTML =
-        "<p>⚡ PDF Created Successfully!</p><button>Download PDF</button>";
+    pdf.save("converted.pdf");
 }
 </script>
 
