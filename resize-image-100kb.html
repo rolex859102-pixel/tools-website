@@ -13,6 +13,7 @@ body {
     color:white;
     font-family:Arial;
     text-align:center;
+    margin:0;
 }
 
 .container { padding:40px; }
@@ -32,14 +33,21 @@ button {
 
 img { max-width:250px; margin-top:20px; }
 
-.tool-links a {
+/* 🔥 BUTTON STYLE (NEW) */
+.tool-btn {
     display:inline-block;
     margin:8px;
-    padding:8px 14px;
+    padding:10px 18px;
     background:#1e293b;
     color:white;
-    border-radius:6px;
     text-decoration:none;
+    border-radius:10px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.tool-btn:hover {
+    background:#ff4d4d;
 }
 </style>
 </head>
@@ -47,6 +55,7 @@ img { max-width:250px; margin-top:20px; }
 <body>
 
 <div class="container">
+
 <h1>Resize Image to 100KB</h1>
 <p><strong>Reduce image size to 100KB instantly.</strong></p>
 
@@ -54,18 +63,18 @@ img { max-width:250px; margin-top:20px; }
 <button onclick="resize()">Resize</button>
 
 <div id="result"></div>
-</div>
+
+<!-- 🔥 RELATED TOOLS (FIXED + CLEAN) -->
 <h3 style="margin-top:40px;">🔥 Related Tools</h3>
 
 <div style="margin-top:20px;">
-
 <a href="png-to-jpg.html" class="tool-btn">PNG to JPG Converter</a>
 <a href="compress-image-20kb.html" class="tool-btn">Compress Image 20KB</a>
-<a href="resize-image-100kb.html" class="tool-btn">Resize Image 100KB</a>
-
+<a href="compress-image-50kb.html" class="tool-btn">Compress Image 50KB</a>
 </div>
 
 </div>
+
 <script>
 function resize() {
     let file = document.getElementById("upload").files[0];
