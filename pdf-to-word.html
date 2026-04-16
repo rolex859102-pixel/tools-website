@@ -1,145 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO -->
-   <title>Convert PDF to Word Online Free (Editable DOC)</title>
+<title>Convert PDF to Word Online Free (Editable DOC)</title>
 <meta name="description" content="Convert PDF to Word online free without losing formatting. Easy and fast PDF converter tool.">
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
 
-    <style>
-        body {
-            background-color: #0f172a;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    margin:0;
+}
 
-        .container {
-            padding: 40px 20px;
-        }
+.container { padding:40px; }
 
-        h1 {
-            margin-bottom: 10px;
-        }
+input, button {
+    padding:12px;
+    margin:10px;
+    border-radius:10px;
+    border:none;
+}
 
-        p {
-            color: #94a3b8;
-        }
+button {
+    background:#ff4d4d;
+    color:white;
+    cursor:pointer;
+}
 
-        .upload-box {
-            border: 2px dashed #334155;
-            padding: 40px;
-            margin: 20px auto;
-            max-width: 400px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
+.tool-btn {
+    display:inline-block;
+    margin:8px;
+    padding:10px 18px;
+    background:#1e293b;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-size:14px;
+    transition:0.3s;
+}
 
-        input {
-            display: none;
-        }
+.tool-btn:hover {
+    background:#ff4d4d;
+}
 
-        .btn {
-            background: #22c55e;
-            border: none;
-            padding: 12px 20px;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
+#loading {
+    display:none;
+    margin-top:20px;
+    font-size:18px;
+    color:#ff4d4d;
+}
+</style>
 
-        .btn:hover {
-            background: #16a34a;
-        }
-
-        .affiliate-box {
-            margin-top: 40px;
-            padding: 20px;
-            background: #1e293b;
-            border-radius: 10px;
-        }
-    </style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <h1>PDF to Word Converter</h1>
-    <p>Convert your PDF files into editable Word documents instantly.</p>
-    <p><strong>Convert PDF to Word online free without losing formatting.</strong></p>
+<h1>Convert PDF to Word</h1>
+<p><strong>Convert PDF file into editable Word document easily.</strong></p>
 
-    <!-- Upload Box -->
-    <div class="upload-box" onclick="document.getElementById('fileInput').click()">
-        Click to upload PDF
-    </div>
+<input type="file" id="upload" accept="application/pdf"><br>
+<button onclick="convertPDF()">Convert to Word</button>
 
-    <input type="file" id="fileInput" accept=".pdf">
+<div id="loading">⏳ Processing your file... Please wait</div>
 
-    <br>
+<h3 style="margin-top:40px;">🔥 Related Tools</h3>
 
-    <button class="btn" onclick="convertPDF()">Convert to Word</button>
-
-    <!-- Affiliate Section -->
-    <div class="affiliate-box">
-        <h3>Recommended Tools</h3>
-        <p>Need advanced PDF editing?</p>
-        <a href="YOUR_AFFILIATE_LINK" target="_blank" class="btn">Try Premium PDF Tool</a>
-    </div>
+<div style="margin-top:20px;">
+<a href="jpg-to-pdf.html" class="tool-btn">JPG to PDF</a>
+<a href="pdf-to-jpg.html" class="tool-btn">PDF to JPG</a>
+<a href="compress-pdf-100kb.html" class="tool-btn">Compress PDF</a>
+</div>
 
 </div>
-    <div style="max-width:800px; margin:40px auto; text-align:left; color:#cbd5f5; line-height:1.6;">
 
-<h2>Free PDF to Word Converter Online</h2>
-<p>
-Our PDF to Word converter allows you to quickly convert PDF files into editable Word documents.
-This tool is fast, secure, and works on all devices without installation.
-</p>
-
-<h2>How to Convert PDF to Word?</h2>
-<ul>
-<li>Upload your PDF file</li>
-<li>Click on "Convert to Word"</li>
-<li>You will be redirected to the conversion tool</li>
-<li>Download your converted Word file</li>
-</ul>
-
-<h2>Why Use Our PDF to DOC Converter?</h2>
-
-<ul>
-<li>100% Free and easy to use</li>
-<li>No sign-up required</li>
-<li>Works on mobile and desktop</li>
-<li>Fast and secure processing</li>
-</ul>
-
-<h2>Best Use Cases</h2>
-<p>
-Students, professionals, and businesses can use this tool to edit PDFs, create reports, and reuse content easily.
-</p>
-
-</div>
-<h3>🔥 Related Tools</h3>
-<div class="tool-links">
-<a href="jpg-to-pdf.html">JPG to PDF</a><br>
-<a href="pdf-to-jpg.html">PDF to JPG</a><br>
-<a href="compress-pdf-100kb.html">Compress PDF</a>
 <script>
 function convertPDF() {
-    let file = document.getElementById('fileInput').files[0];
+    let file = document.getElementById("upload").files[0];
+    if (!file) return alert("Upload PDF file!");
 
-    if (!file) {
-        alert("Please upload a PDF file first!");
-        return;
-    }
+    document.getElementById("loading").style.display = "block";
 
-    // External redirect (safe & easy)
-    window.open("https://www.ilovepdf.com/pdf_to_word", "_blank");
+    setTimeout(() => {
+        // 🔥 Replace with your chosen converter link
+        window.open("https://www.ilovepdf.com/pdf_to_word", "_blank");
+    }, 2000);
 }
 </script>
 
