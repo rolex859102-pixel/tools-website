@@ -1,36 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Compress PDF to 100KB Online Free</title>
+<meta name="description" content="Compress PDF to 100KB online free for forms and job applications. Fast and easy PDF compressor.">
 
 <style>
-body {background:#020617;color:white;text-align:center;font-family:Arial;}
-.container {padding:40px;}
-input,button {padding:12px;margin:10px;border-radius:10px;border:none;}
-button {background:#ff4d4d;color:white;}
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    margin:0;
+}
+
+.container { padding:40px; }
+
+input, button {
+    padding:12px;
+    margin:10px;
+    border-radius:10px;
+    border:none;
+}
+
+button {
+    background:#ff4d4d;
+    color:white;
+    cursor:pointer;
+}
+
+.tool-btn {
+    display:inline-block;
+    margin:8px;
+    padding:10px 18px;
+    background:#1e293b;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.tool-btn:hover {
+    background:#ff4d4d;
+}
+
+#loading {
+    display:none;
+    margin-top:20px;
+    font-size:18px;
+    color:#ff4d4d;
+}
 </style>
 </head>
 
 <body>
 
 <div class="container">
+
 <h1>Compress PDF to 100KB</h1>
-<p><strong>Reduce PDF size easily.</strong></p>
+<p><strong>Reduce PDF file size to 100KB easily for online forms.</strong></p>
 
-<input type="file"><br>
-<button onclick="fake()">Compress</button>
+<input type="file" id="upload" accept="application/pdf"><br>
+<button onclick="compressPDF()">Compress PDF</button>
 
-<div id="result"></div>
+<div id="loading">⏳ Compressing your PDF... Please wait</div>
+
+<h3 style="margin-top:40px;">🔥 Related Tools</h3>
+
+<div style="margin-top:20px;">
+<a href="pdf-to-word.html" class="tool-btn">PDF to Word</a>
+<a href="pdf-to-jpg.html" class="tool-btn">PDF to JPG</a>
+<a href="jpg-to-pdf.html" class="tool-btn">JPG to PDF</a>
 </div>
-<h3>🔥 Related Tools</h3>
-<div class="tool-links">
-<a href="pdf-to-word.html">PDF to Word</a><br>
-<a href="jpg-to-pdf.html">JPG to PDF</a><br>
-<a href="pdf-to-jpg.html">PDF to JPG</a>
+
+</div>
+
 <script>
-function fake(){
-document.getElementById("result").innerHTML=
-"<p>⚡ PDF Ready!</p><button>Download PDF</button>";
+function compressPDF() {
+    let file = document.getElementById("upload").files[0];
+    if (!file) return alert("Upload PDF file!");
+
+    document.getElementById("loading").style.display = "block";
+
+    setTimeout(() => {
+        // 🔥 Change this to your preferred PDF compressor
+        window.open("https://www.ilovepdf.com/compress_pdf", "_blank");
+    }, 2000);
 }
 </script>
 
