@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Resize Image to 100KB Online Free</title>
-<meta name="description" content="Resize image to 100KB online free for forms and uploads.">
+<meta name="description" content="Resize image to 100KB online free for forms and uploads. Fast and easy image resizer tool.">
 
 <style>
 body {
@@ -33,7 +33,6 @@ button {
 
 img { max-width:250px; margin-top:20px; }
 
-/* 🔥 BUTTON STYLE (NEW) */
 .tool-btn {
     display:inline-block;
     margin:8px;
@@ -60,23 +59,22 @@ img { max-width:250px; margin-top:20px; }
 <p><strong>Reduce image size to 100KB instantly.</strong></p>
 
 <input type="file" id="upload"><br>
-<button onclick="resize()">Resize</button>
+<button onclick="resizeImage()">Resize</button>
 
 <div id="result"></div>
 
-<!-- 🔥 RELATED TOOLS (FIXED + CLEAN) -->
 <h3 style="margin-top:40px;">🔥 Related Tools</h3>
 
 <div style="margin-top:20px;">
-<a href="png-to-jpg.html" class="tool-btn">PNG to JPG Converter</a>
-<a href="compress-image-20kb.html" class="tool-btn">Compress Image 20KB</a>
 <a href="compress-image-50kb.html" class="tool-btn">Compress Image 50KB</a>
+<a href="compress-image-20kb.html" class="tool-btn">Compress Image 20KB</a>
+<a href="png-to-jpg.html" class="tool-btn">PNG to JPG Converter</a>
 </div>
 
 </div>
 
 <script>
-function resize() {
+function resizeImage() {
     let file = document.getElementById("upload").files[0];
     if (!file) return alert("Upload image!");
 
@@ -100,12 +98,12 @@ function resize() {
                 let data = canvas.toDataURL("image/jpeg", quality);
                 let size = (data.length * 3/4) / 1024;
 
-                if (size > 100 && quality > 0.1) {
-                    quality -= 0.05;
+                if (size > 100 && quality > 0.05) {
+                    quality -= 0.03; // smoother reduction
                     reduce();
                 } else {
                     document.getElementById("result").innerHTML = `
-                        <p>Size: ${Math.round(size)} KB</p>
+                        <p>Final Size: ${Math.round(size)} KB</p>
                         <img src="${data}">
                         <br>
                         <a href="${data}" download="resized.jpg">
