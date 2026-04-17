@@ -4,75 +4,59 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Instagram Photo Downloader Online Free | Download Insta Photos</title>
-<meta name="description" content="Download Instagram photos online free in HD quality. Fast and easy Instagram image downloader without login.">
+<title>Instagram Photo Downloader Online Free (HD)</title>
+<meta name="description" content="Download Instagram photos online free in HD quality. Fast and easy Instagram image downloader tool.">
 
 <style>
 body {
-    background:#0f172a;
+    background:#020617;
     color:white;
     font-family:Arial;
     text-align:center;
+    margin:0;
 }
 
-.container {
-    padding:40px 20px;
-}
+.container { padding:40px; }
 
-input {
+input, button {
     padding:12px;
-    width:60%;
-    border-radius:5px;
+    margin:10px;
+    border-radius:10px;
     border:none;
+    width:80%;
+    max-width:400px;
 }
 
 button {
-    padding:12px 20px;
-    background:#22c55e;
+    background:#ff4d4d;
     color:white;
-    border:none;
-    border-radius:5px;
     cursor:pointer;
-    margin-top:10px;
 }
 
-.result-box {
-    margin-top:20px;
-}
-
-.quality-btn {
-    display:block;
-    margin:10px auto;
-    width:220px;
-    background:#1e293b;
-}
-
-.affiliate-box {
-    margin-top:40px;
-    padding:20px;
-    background:#1e293b;
-    border-radius:10px;
-}
-    .tool-links {
-    margin-top:20px;
-}
-
-.tool-links a {
+.tool-btn {
     display:inline-block;
-    margin:8px 10px;
-    padding:8px 14px;
+    margin:8px;
+    padding:10px 18px;
     background:#1e293b;
     color:white;
     text-decoration:none;
-    border-radius:6px;
+    border-radius:10px;
     font-size:14px;
     transition:0.3s;
 }
 
-.tool-links a {
-    box-shadow:0 0 10px rgba(0,0,0,0.3);
+.tool-btn:hover {
+    background:#ff4d4d;
+}
+
+#loading {
+    display:none;
+    margin-top:20px;
+    font-size:18px;
+    color:#ff4d4d;
 }
 </style>
+
 </head>
 
 <body>
@@ -80,115 +64,37 @@ button {
 <div class="container">
 
 <h1>Instagram Photo Downloader</h1>
-<p><strong>Download Instagram photos online free in HD quality.</strong></p>
+<p><strong>Download Instagram photos in HD quality instantly.</strong></p>
 
-<input type="text" id="link" placeholder="Paste Instagram Photo URL here"><br>
+<input type="text" id="link" placeholder="Paste Instagram Photo Link Here"><br>
+<button onclick="downloadPhoto()">Download</button>
 
-<button onclick="startDownload('insta')">Download Photo</button>
+<div id="loading">⏳ Fetching photo... Please wait</div>
 
-<div id="result" class="result-box"></div>
+<h3 style="margin-top:40px;">🔥 Related Tools</h3>
 
-<!-- Affiliate -->
-<div class="affiliate-box">
-<h3>Best Photo Editing Tool</h3>
-<p>Edit and enhance your images easily</p>
-<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium Tool</a>
-</div>
-
-<!-- SEO CONTENT -->
-<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.6;">
-
-<h2>Free Instagram Photo Downloader</h2>
-<p>Download Instagram photos in high quality without watermark. Fast, free and easy to use tool.</p>
-
-<h2>How to Download Instagram Photos?</h2>
-<ul>
-<li>Copy Instagram photo link</li>
-<li>Paste it in the input box</li>
-<li>Click download</li>
-<li>Select quality and download</li>
-</ul>
-
-<h2>Features</h2>
-<ul>
-<li>HD photo download</li>
-<li>No login required</li>
-<li>Works on all devices</li>
-</ul>
-
+<div style="margin-top:20px;">
+<a href="instagram-reels-downloader.html" class="tool-btn">Instagram Reels Downloader</a>
+<a href="facebook-reels-downloader.html" class="tool-btn">Facebook Reels Downloader</a>
+<a href="youtube-video-downloader.html" class="tool-btn">YouTube Video Downloader</a>
 </div>
 
 </div>
 
 <script>
-function startDownload(type) {
-    let link = document.getElementById('link').value;
+function downloadPhoto() {
+    let link = document.getElementById("link").value;
 
-    if (!link) {
-        alert("Paste Instagram link first!");
-        return;
-    }
+    if (!link) return alert("Paste Instagram photo link!");
 
-    // Step 1: Processing UI
-    document.getElementById("result").innerHTML = `
-        <h3>Processing your link...</h3>
-        <p>Fetching HD image quality...</p>
-    `;
+    document.getElementById("loading").style.display = "block";
 
-    // Step 2: Show options
     setTimeout(() => {
-
-        document.getElementById("result").innerHTML = `
-            <h3>Select Quality</h3>
-            <p>⚡ Fast download server ready</p>
-
-            <button class="quality-btn" onclick="finalDownload('${type}')">Download HD</button>
-            <button class="quality-btn" onclick="finalDownload('${type}')">Download Medium</button>
-            <button class="quality-btn" onclick="finalDownload('${type}')">Download Low</button>
-        `;
-
-    }, 2000);
-}
-
-function finalDownload(type) {
-
-    let url = "";
-
-    if (type === "insta") {
-        url = "https://saveclip.app/en";
-    }
-
-    window.open(url, "_blank");
+        // 🔥 Replace with your preferred downloader link
+        window.open("https://saveclip.app/en", "_blank");
+    }, 1500);
 }
 </script>
 
-    <div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.6;">
-
-<h2>Free Instagram Photo Downloader</h2>
-<p>Download Instagram Photo in HD quality without watermark. This tool helps you save videos quickly and easily.</p>
-
-<h2>How to Use This Tool?</h2>
-<ul>
-<li>Paste Instagram Photo link</li>
-<li>Select quality</li>
-<li>Click download</li>
-</ul>
-
-<h2>Features</h2>
-<ul>
-<li>HD download</li>
-<li>Fast processing</li>
-<li>No login required</li>
-</ul>
-
-</div>
-    <h3>🔥 Try More Tools</h3>
-
-<div class="tool-links">
-<a href="image-compressor.html">Image Compressor</a>
-<a href="pdf-merger.html">PDF Merger</a>
-<a class="tool" href="facebook-reels-downloader.html">Facebook Reels Downloader</a>
-</div>
-    
 </body>
 </html>
