@@ -4,78 +4,59 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>YouTube Video Downloader Online Free | Download YouTube Videos</title>
-<meta name="description" content="Download YouTube videos online free in HD quality. Fast and easy YouTube downloader without software.">
+<title>YouTube Video Downloader Online Free (HD)</title>
+<meta name="description" content="Download YouTube videos online free in HD quality. Fast and easy video downloader tool.">
 
 <style>
 body {
-    background:#0f172a;
+    background:#020617;
     color:white;
     font-family:Arial;
     text-align:center;
+    margin:0;
 }
 
-.container {
-    padding:40px 20px;
-}
+.container { padding:40px; }
 
-input {
+input, button {
     padding:12px;
-    width:60%;
-    border-radius:5px;
+    margin:10px;
+    border-radius:10px;
     border:none;
+    width:80%;
+    max-width:400px;
 }
 
 button {
-    padding:12px 20px;
-    background:#22c55e;
+    background:#ff4d4d;
     color:white;
-    border:none;
-    border-radius:5px;
     cursor:pointer;
-    margin-top:10px;
 }
 
-.result-box {
-    margin-top:20px;
-}
-
-.quality-btn {
-    display:block;
-    margin:10px auto;
-    width:220px;
-    background:#1e293b;
-}
-
-.affiliate-box {
-    margin-top:40px;
-    padding:20px;
-    background:#1e293b;
-    border-radius:10px;
-}
-    .tool-links {
-    margin-top:20px;
-}
-
-.tool-links a {
+.tool-btn {
     display:inline-block;
-    margin:8px 10px;
-    padding:8px 14px;
+    margin:8px;
+    padding:10px 18px;
     background:#1e293b;
     color:white;
     text-decoration:none;
-    border-radius:6px;
+    border-radius:10px;
     font-size:14px;
     transition:0.3s;
 }
 
-.tool-links a:hover {
+.tool-btn:hover {
     background:#ff4d4d;
 }
-    .tool-links a {
-    box-shadow:0 0 10px rgba(0,0,0,0.3);
+
+#loading {
+    display:none;
+    margin-top:20px;
+    font-size:18px;
+    color:#ff4d4d;
 }
 </style>
+
 </head>
 
 <body>
@@ -83,117 +64,37 @@ button {
 <div class="container">
 
 <h1>YouTube Video Downloader</h1>
-<p><strong>Download YouTube videos online free in HD quality.</strong></p>
+<p><strong>Download YouTube videos in HD quality easily.</strong></p>
 
-<input type="text" id="link" placeholder="Paste YouTube Video URL here"><br>
+<input type="text" id="link" placeholder="Paste YouTube Video Link Here"><br>
+<button onclick="downloadYT()">Download</button>
 
-<button onclick="startDownload('youtube')">Download Video</button>
+<div id="loading">⏳ Fetching video... Please wait</div>
 
-<div id="result" class="result-box"></div>
+<h3 style="margin-top:40px;">🔥 Related Tools</h3>
 
-<!-- Affiliate -->
-<div class="affiliate-box">
-<h3>Best Video Editing Tool</h3>
-<p>Edit and create videos like a pro</p>
-<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium Tool</a>
-</div>
-
-<!-- SEO CONTENT -->
-<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.6;">
-
-<h2>Free YouTube Video Downloader</h2>
-<p>Download YouTube videos in HD quality without installing any software. Fast and easy to use.</p>
-
-<h2>How to Download YouTube Videos?</h2>
-<ul>
-<li>Copy YouTube video link</li>
-<li>Paste it in the input box</li>
-<li>Click download</li>
-<li>Select quality and download</li>
-</ul>
-
-<h2>Features</h2>
-<ul>
-<li>HD video download</li>
-<li>No login required</li>
-<li>Works on mobile and desktop</li>
-</ul>
-
+<div style="margin-top:20px;">
+<a href="youtube-thumbnail-downloader.html" class="tool-btn">YouTube Thumbnail Downloader</a>
+<a href="instagram-reels-downloader.html" class="tool-btn">Instagram Reels Downloader</a>
+<a href="facebook-reels-downloader.html" class="tool-btn">Facebook Reels Downloader</a>
 </div>
 
 </div>
 
 <script>
-function startDownload(type) {
-    let link = document.getElementById('link').value;
+function downloadYT() {
+    let link = document.getElementById("link").value;
 
-    if (!link) {
-        alert("Paste YouTube link first!");
-        return;
-    }
+    if (!link) return alert("Paste YouTube link!");
 
-    // Step 1: Processing UI
-    document.getElementById("result").innerHTML = `
-        <h3>Processing your video...</h3>
-        <p>Fetching video quality (1080p, 720p, 480p)...</p>
-    `;
+    document.getElementById("loading").style.display = "block";
 
-    // Step 2: Show quality options
     setTimeout(() => {
-
-        document.getElementById("result").innerHTML = `
-            <h3>Select Quality</h3>
-            <p>⚡ Fast download server ready</p>
-
-            <button class="quality-btn" onclick="finalDownload('${type}')">Download 1080p</button>
-            <button class="quality-btn" onclick="finalDownload('${type}')">Download 720p</button>
-            <button class="quality-btn" onclick="finalDownload('${type}')">Download 480p</button>
-            <button class="quality-btn" onclick="finalDownload('${type}')">Download MP3 Audio</button>
-        `;
-
-    }, 2000);
-}
-
-function finalDownload(type) {
-
-    let url = "";
-
-    if (type === "youtube") {
-        url = "https://yt5s.to/";
-    }
-
-    window.open(url, "_blank");
+        // 🔥 Replace with your preferred downloader
+        window.open("https://yt5s.rip/en11/", "_blank");
+    }, 1500);
 }
 </script>
 
-    <div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.6;">
-
-<h2>Free YouTube Video Downloader</h2>
-<p>Download YouTube Video in HD quality without watermark. This tool helps you save videos quickly and easily.</p>
-
-<h2>How to Use This Tool?</h2>
-<ul>
-<li>Paste YouTube Video link</li>
-<li>Select quality</li>
-<li>Click download</li>
-</ul>
-
-<h2>Features</h2>
-<ul>
-<li>HD download</li>
-<li>Fast processing</li>
-<li>No login required</li>
-</ul>
-
-</div>
-   
-    <h3>🔥 Try More Tools</h3>
-
-<div class="tool-links">
-<a href="image-compressor.html">Image Compressor</a>
-<a href="pdf-merger.html">PDF Merger</a>
-<a href="youtube-thumbnail-downloader.html">YouTube Thumbnail Downloader</a>
-</div>
-    
 </body>
 </html>
