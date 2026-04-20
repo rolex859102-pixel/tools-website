@@ -2,28 +2,81 @@
 <html>
 <head>
 <title>Percentage Calculator</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 <style>
-body{
+body {
     background:#020617;
     color:white;
-    text-align:center;
     font-family:Arial;
+    text-align:center;
+    margin:0;
 }
 
-input{
-    padding:10px;
-    margin:10px;
-    border-radius:8px;
+/* 🔥 MAIN FIX */
+.container {
+    max-width:500px;
+    width:100%;
+    margin:auto;
+    padding:30px 15px;
+    box-sizing:border-box;
+}
+
+/* 🔥 INPUT + BUTTON FIX */
+input, textarea, button {
+    width:100%;
+    max-width:350px;
+    padding:12px;
+    margin:10px auto;
+    border-radius:10px;
     border:none;
+    display:block;
+    box-sizing:border-box;
 }
 
-button{
-    padding:10px 20px;
+button {
     background:#22c55e;
-    border:none;
     color:white;
-    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+/* 🔥 RESULT */
+#result {
+    margin-top:20px;
+    font-size:18px;
+}
+
+/* 🔥 FOOTER */
+footer {
+    margin-top:40px;
+    font-size:17px;
+}
+
+footer a {
+    color:white;
+    margin:0 8px;
+    text-decoration:none;
+}
+
+footer a:hover {
+    color:#60a5fa;
+}
+
+/* 🔥 MOBILE PERFECT FIX */
+@media (max-width:600px) {
+    .container {
+        padding:25px 12px;
+    }
+
+    h1 {
+        font-size:22px;
+    }
+
+    input, textarea, button {
+        max-width:100%;
+        width:100%;
+    }
 }
 </style>
 
