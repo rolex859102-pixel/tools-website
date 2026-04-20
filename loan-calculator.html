@@ -1,52 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Loan Calculator</title>
+
 <style>
-body{background:#020617;color:white;text-align:center;font-family:Arial;}
-input{padding:10px;margin:10px;border-radius:8px;border:none;}
-button{padding:10px 20px;background:#22c55e;border:none;color:white;border-radius:8px;}
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    margin:0;
+}
+
+.container {
+    max-width:500px;
+    margin:auto;
+    padding:30px 15px;
+}
+
+h1 {
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+p {
+    font-size:14px;
+}
+
+input {
+    width:90%;
+    max-width:350px;
+    padding:12px;
+    margin:10px auto;
+    border-radius:10px;
+    border:none;
+    display:block;
+}
+
+button {
+    width:90%;
+    max-width:350px;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+#result {
+    margin-top:20px;
+    font-size:18px;
+}
+
+footer {
+    margin-top:40px;
+    font-size:17px;
+}
+
+footer a {
+    color:#60a5fa;
+    margin:0 8px;
+    text-decoration:none;
+}
+
+@media (max-width:600px) {
+    h1 { font-size:24px; }
+    .container { padding:25px 10px; }
+}
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
 <h1>🏦 Loan Calculator</h1>
+
 <p><strong>100% Free • Calculate Loan Instantly • Accurate Results</strong></p>
+
 <input type="number" id="amount" placeholder="Loan Amount">
-<input type="number" id="rate" placeholder="Interest Rate">
+<input type="number" id="rate" placeholder="Interest Rate (%)">
 <input type="number" id="years" placeholder="Years">
 
-<br>
+<button onclick="calculateLoan()">Calculate</button>
 
-<button onclick="calc()">Calculate</button>
+<div id="result"></div>
 
-<h2 id="out"></h2>
+</div>
+
+<footer>
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy-policy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
 
 <script>
-function calc(){
-let p=amount.value;
-let r=rate.value/100;
-let t=years.value;
+function calculateLoan() {
+    let P = document.getElementById("amount").value;
+    let r = document.getElementById("rate").value / 100 / 12;
+    let n = document.getElementById("years").value * 12;
 
-let total=p+(p*r*t);
+    if (!P || !r || !n) return alert("Enter all fields");
 
-out.innerHTML="Total Payable: ₹"+total;
+    let emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+
+    document.getElementById("result").innerHTML =
+        "Monthly EMI: ₹" + Math.round(emi);
 }
 </script>
- 
-<footer style="margin-top:60px; padding:20px 0; font-size:17px; border-top:1px solid #1e293b;">
 
-<a href="about.html" style="color:white; margin:0 12px; text-decoration:none;">About</a> |
-<a href="contact.html" style="color:white; margin:0 12px; text-decoration:none;">Contact</a> |
-<a href="privacy-policy.html" style="color:white; margin:0 12px; text-decoration:none;">Privacy Policy</a> |
-<a href="disclaimer.html" style="color:white; margin:0 12px; text-decoration:none;">Disclaimer</a>
-
-</footer>
-
-</footer>
-</footer>
-</footer>
-  
 </body>
 </html>
