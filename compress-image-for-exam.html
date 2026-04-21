@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Compress Image for Exam Form Upload (Free & Fast)</title>
+<meta name="description" content="Compress image for exam form upload. Reduce image size instantly for online exams and applications.">
+
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    margin:0;
+}
+
+.container {
+    max-width:500px;
+    margin:auto;
+    padding:30px 15px;
+}
+
+h1 {
+    font-size:26px;
+}
+
+input, button {
+    width:100%;
+    max-width:350px;
+    padding:12px;
+    margin:10px auto;
+    border-radius:10px;
+    border:none;
+    display:block;
+}
+
+button {
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+#result {
+    margin-top:20px;
+}
+
+footer {
+    margin-top:40px;
+    font-size:17px;
+}
+
+footer a {
+    color:white;
+    margin:0 8px;
+    text-decoration:none;
+}
+
+footer a:hover {
+    color:#60a5fa;
+}
+
+@media (max-width:600px) {
+    .container { padding:25px 10px; }
+    h1 { font-size:22px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📝 Compress Image for Exam</h1>
+
+<p><strong>100% Free • Perfect for Exam Form Upload • No Signup Required</strong></p>
+
+<input type="file" id="upload">
+<button onclick="compress()">Compress Image</button>
+
+<div id="result"></div>
+
+</div>
+
+<footer>
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy-policy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
+
+<script>
+function compress(){
+let file=document.getElementById("upload").files[0];
+if(!file) return alert("Upload image!");
+
+let reader=new FileReader();
+reader.onload=function(e){
+let img=new Image();
+img.src=e.target.result;
+
+img.onload=function(){
+let canvas=document.createElement("canvas");
+let ctx=canvas.getContext("2d");
+
+canvas.width=img.width;
+canvas.height=img.height;
+
+ctx.drawImage(img,0,0);
+
+let quality=0.9;
+
+function reduce(){
+let data=canvas.toDataURL("image/jpeg",quality);
+let size=(data.length*3/4)/1024;
+
+// Exam portals usually require small size
+if(size>100 && quality>0.05){
+quality-=0.03;
+reduce();
+}else{
+document.getElementById("result").innerHTML=`
+<p>Final Size: ${Math.round(size)} KB</p>
+<img src="${data}" style="max-width:200px;"><br>
+<a href="${data}" download="exam-photo.jpg">
+<button>Download</button>
+</a>
+`;
+}
+}
+
+reduce();
+};
+};
+
+reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>
