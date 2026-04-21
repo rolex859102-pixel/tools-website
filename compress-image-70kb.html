@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Compress Image to 70KB Online Free</title>
+<meta name="description" content="Compress image to 100KB online free for forms, exams, and uploads.">
+
+<style>
+body{background:#020617;color:white;font-family:Arial;text-align:center;margin:0;}
+.container{max-width:500px;margin:auto;padding:30px 15px;}
+input,button{width:100%;max-width:350px;padding:12px;margin:10px auto;border-radius:10px;border:none;display:block;}
+button{background:#22c55e;color:white;}
+footer a{color:white;margin:0 8px;text-decoration:none;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Compress Image to 70KB</h1>
+
+<p><strong>100% Free • Compress Image to 70KB Instantly • No Signup Required</strong></p>
+
+<input type="file" id="upload">
+<button onclick="compress()">Compress</button>
+
+<div id="result"></div>
+
+</div>
+
+<footer>
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy-policy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
+
+<script>
+function compress(){
+let file=document.getElementById("upload").files[0];
+let reader=new FileReader();
+reader.onload=function(e){
+let img=new Image();
+img.src=e.target.result;
+img.onload=function(){
+let canvas=document.createElement("canvas");
+let ctx=canvas.getContext("2d");
+canvas.width=img.width;
+canvas.height=img.height;
+ctx.drawImage(img,0,0);
+
+let q=0.9;
+function reduce(){
+let data=canvas.toDataURL("image/jpeg",q);
+let size=(data.length*3/4)/1024;
+if(size>100 && q>0.1){
+q-=0.05;
+reduce();
+}else{
+result.innerHTML=`<p>${Math.round(size)} KB</p><img src="${data}" width="200"><br><a href="${data}" download><button>Download</button></a>`;
+}
+}
+reduce();
+};
+};
+reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>
