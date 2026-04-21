@@ -56,9 +56,9 @@ let q=0.9;
 function reduce(){
 let data=canvas.toDataURL("image/jpeg",q);
 let size=(data.length*3/4)/1024;
-if(size>100 && q>0.1){
-q-=0.05;
-reduce();
+if(size > 70 && q > 0.05){
+    q -= 0.03;
+    reduce();
 }else{
 result.innerHTML=`<p>${Math.round(size)} KB</p><img src="${data}" width="200"><br><a href="${data}" download><button>Download</button></a>`;
 }
