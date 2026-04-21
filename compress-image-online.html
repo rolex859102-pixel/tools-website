@@ -101,10 +101,10 @@ function compress() {
                 let data = canvas.toDataURL("image/jpeg", quality);
                 let size = (data.length * 3/4) / 1024;
 
-                if (size > 200 && quality > 0.1) {
-                    quality -= 0.05;
+                if (size > 150 && quality > 0.05) {
+                    quality -= 0.03;
                     reduce();
-                } else {
+                    } else {
                     document.getElementById("result").innerHTML = `
                         <p>Size: ${Math.round(size)} KB</p>
                         <img src="${data}">
