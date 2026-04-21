@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Free Image Compressor Online (Fast & Easy)</title>
+<meta name="description" content="Compress image to 50KB online free without losing quality. Fast and easy tool for forms and uploads.">
+
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    margin:0;
+}
+
+.container { padding:40px; }
+
+input, button {
+    padding:12px;
+    margin:10px;
+    border-radius:10px;
+    border:none;
+}
+
+button {
+    background:#ff4d4d;
+    color:white;
+    cursor:pointer;
+}
+
+img { max-width:250px; margin-top:20px; }
+
+/* 🔥 BUTTON STYLE */
+.tool-btn {
+    display:inline-block;
+    margin:8px;
+    padding:10px 18px;
+    background:#1e293b;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.tool-btn:hover {
+    background:#ff4d4d;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Free Image Compressor</h1>
+<p><strong>Reduce image size to 50KB online free instantly.</strong></p>
+<p><strong>100% Free • Compress Images Instantly • No Signup Required</strong></p>
+    
+<input type="file" id="upload"><br>
+<button onclick="compress()">Compress</button>
+
+<div id="result"></div>
+
+<!-- 🔥 RELATED TOOLS -->
+<h3 style="margin-top:40px;">🔥 Related Tools</h3>
+
+<div style="margin-top:20px;">
+<a href="compress-image-20kb.html" class="tool-btn">Compress Image 20KB</a>
+<a href="resize-image-100kb.html" class="tool-btn">Resize Image 100KB</a>
+<a href="png-to-jpg.html" class="tool-btn">PNG to JPG Converter</a>
+</div>
+
+</div>
+
+<script>
+function compress() {
+    let file = document.getElementById("upload").files[0];
+    if (!file) return alert("Upload image!");
+
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        let img = new Image();
+        img.src = e.target.result;
+
+        img.onload = function() {
+            let canvas = document.createElement("canvas");
+            let ctx = canvas.getContext("2d");
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.drawImage(img, 0, 0);
+
+            let quality = 0.9;
+
+            function reduce() {
+                let data = canvas.toDataURL("image/jpeg", quality);
+                let size = (data.length * 3/4) / 1024;
+
+                if (size > 200 && quality > 0.1) {
+                    quality -= 0.05;
+                    reduce();
+                } else {
+                    document.getElementById("result").innerHTML = `
+                        <p>Size: ${Math.round(size)} KB</p>
+                        <img src="${data}">
+                        <br>
+                        <a href="${data}" download="compressed.jpg">
+                        <button>Download</button></a>
+                    `;
+                }
+            }
+
+            reduce();
+        };
+    };
+    reader.readAsDataURL(file);
+}
+</script>
+<footer style="margin-top:60px; padding:20px 0; font-size:17px; border-top:1px solid #1e293b;">
+
+<a href="about.html" style="color:white; margin:0 12px; text-decoration:none;">About</a> |
+<a href="contact.html" style="color:white; margin:0 12px; text-decoration:none;">Contact</a> |
+<a href="privacy-policy.html" style="color:white; margin:0 12px; text-decoration:none;">Privacy Policy</a> |
+<a href="disclaimer.html" style="color:white; margin:0 12px; text-decoration:none;">Disclaimer</a>
+
+</footer>
+</body>
+</html>
