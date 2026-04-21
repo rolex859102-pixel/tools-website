@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Resize Image for Exam Form Upload (Online Free)</title>
+<meta name="description" content="Resize image for exam form upload. Adjust dimensions and compress image for online exams easily.">
+
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    margin:0;
+}
+
+.container {
+    max-width:500px;
+    margin:auto;
+    padding:30px 15px;
+}
+
+h1 {
+    font-size:26px;
+}
+
+input, button {
+    width:100%;
+    max-width:350px;
+    padding:12px;
+    margin:10px auto;
+    border-radius:10px;
+    border:none;
+    display:block;
+}
+
+button {
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+#result {
+    margin-top:20px;
+}
+
+footer {
+    margin-top:40px;
+    font-size:17px;
+}
+
+footer a {
+    color:white;
+    margin:0 8px;
+    text-decoration:none;
+}
+
+footer a:hover {
+    color:#60a5fa;
+}
+
+@media (max-width:600px) {
+    .container { padding:25px 10px; }
+    h1 { font-size:22px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📝 Resize Image for Exam</h1>
+
+<p><strong>100% Free • Resize & Optimize for Exam Upload • No Signup Required</strong></p>
+
+<input type="file" id="upload">
+
+<input type="number" id="width" placeholder="Width (px)">
+<input type="number" id="height" placeholder="Height (px)">
+
+<button onclick="resize()">Resize Image</button>
+
+<div id="result"></div>
+
+</div>
+
+<footer>
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy-policy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
+
+<script>
+function resize(){
+let file=document.getElementById("upload").files[0];
+let w=document.getElementById("width").value;
+let h=document.getElementById("height").value;
+
+if(!file || !w || !h) return alert("Fill all fields");
+
+let reader=new FileReader();
+reader.onload=function(e){
+let img=new Image();
+img.src=e.target.result;
+
+img.onload=function(){
+let canvas=document.createElement("canvas");
+let ctx=canvas.getContext("2d");
+
+canvas.width=w;
+canvas.height=h;
+
+ctx.drawImage(img,0,0,w,h);
+
+let quality=0.9;
+
+function reduce(){
+let data=canvas.toDataURL("image/jpeg",quality);
+let size=(data.length*3/4)/1024;
+
+// Exam upload friendly size
+if(size>100 && quality>0.05){
+quality-=0.03;
+reduce();
+}else{
+document.getElementById("result").innerHTML=`
+<p>Final Size: ${Math.round(size)} KB</p>
+<img src="${data}" style="max-width:200px;"><br>
+<a href="${data}" download="exam-resized.jpg">
+<button>Download</button>
+</a>
+`;
+}
+}
+
+reduce();
+};
+};
+
+reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>
