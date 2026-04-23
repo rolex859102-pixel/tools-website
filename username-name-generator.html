@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Username Generator (Cool, Unique, Instagram Names)</title>
+<meta name="description" content="Generate cool and unique usernames for Instagram, gaming and social media. Free username generator tool.">
+
+<style>
+body{background:#020617;color:white;font-family:Arial;text-align:center;margin:0;}
+.container{max-width:500px;margin:auto;padding:30px 15px;}
+input,select,button{
+width:100%;max-width:350px;padding:12px;margin:10px auto;
+border-radius:10px;border:none;display:block;
+}
+button{background:#22c55e;color:white;}
+.copy-btn{background:#3b82f6;}
+.name-item{
+background:#1e293b;padding:8px;margin:5px 0;border-radius:6px;text-align:left;
+}
+footer{margin-top:40px;font-size:17px;}
+footer a{color:white;margin:0 8px;text-decoration:none;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🔥 Username Generator</h1>
+
+<p><strong>Generate Cool & Unique Usernames Instantly</strong></p>
+
+<input type="text" id="keyword" placeholder="Enter keyword (optional)">
+
+<input type="number" id="count" value="20">
+
+<select id="style">
+<option value="cool">Cool</option>
+<option value="attitude">Attitude</option>
+<option value="gaming">Gaming</option>
+</select>
+
+<button onclick="generate()">Generate Usernames</button>
+<button class="copy-btn" onclick="copyNames()">Copy</button>
+
+<div id="result"></div>
+
+</div>
+
+<!-- SEO CONTENT -->
+<div class="container">
+
+<h2>About This Tool</h2>
+<p>This username generator helps you create cool and unique usernames for Instagram, gaming and social media platforms instantly.</p>
+
+<h2>How to Use</h2>
+<p>Enter a keyword (optional), select style and click generate to get usernames.</p>
+
+<h2>Features</h2>
+<ul>
+<li>Unlimited username ideas</li>
+<li>Cool, gaming & attitude styles</li>
+<li>Fast and free tool</li>
+</ul>
+
+<h3>Related Tools</h3>
+<a href="random-name-generator.html">Name Generator</a><br>
+<a href="male-name-generator.html">Male Name Generator</a><br>
+<a href="female-name-generator.html">Female Name Generator</a>
+
+</div>
+
+<footer>
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy-policy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
+
+<script>
+
+const styles = {
+cool:["king","boss","real","pro","elite","prime"],
+attitude:["killer","devil","badboy","psycho","danger","legend"],
+gaming:["gamer","sniper","hunter","warrior","x","yt"]
+};
+
+function generate(){
+let keyword=document.getElementById("keyword").value.toLowerCase();
+let count=parseInt(document.getElementById("count").value);
+let style=document.getElementById("style").value;
+
+let result=document.getElementById("result");
+result.innerHTML="";
+
+for(let i=0;i<count;i++){
+
+let base = keyword ? keyword : "user";
+let suffix = styles[style][Math.floor(Math.random()*styles[style].length)];
+let number = Math.floor(Math.random()*999);
+
+let username = base + "_" + suffix + number;
+
+result.innerHTML += `<div class="name-item">${i+1}. ${username}</div>`;
+}
+}
+
+function copyNames(){
+let text=document.getElementById("result").innerText;
+navigator.clipboard.writeText(text);
+alert("Copied!");
+}
+
+</script>
+
+</body>
+</html>
