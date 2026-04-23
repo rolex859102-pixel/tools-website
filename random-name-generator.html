@@ -4,59 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Random Name Generator (Male, Female, Indian, English)</title>
+<title>Unlimited Random Name Generator</title>
 
 <style>
-body{
-    background:#020617;
-    color:white;
-    font-family:Arial;
-    text-align:center;
-    margin:0;
+body{background:#020617;color:white;font-family:Arial;text-align:center;margin:0;}
+.container{max-width:500px;margin:auto;padding:30px 15px;}
+input,select,button{
+width:100%;max-width:350px;padding:12px;margin:10px auto;
+border-radius:10px;border:none;display:block;
 }
-
-.container{
-    max-width:500px;
-    margin:auto;
-    padding:30px 15px;
-}
-
-h1{
-    font-size:26px;
-}
-
-input, select, button{
-    width:100%;
-    max-width:350px;
-    padding:12px;
-    margin:10px auto;
-    border-radius:10px;
-    border:none;
-    display:block;
-}
-
-button{
-    background:#22c55e;
-    color:white;
-    cursor:pointer;
-}
-
-.copy-btn{
-    background:#3b82f6;
-}
-
-.download-btn{
-    background:#f59e0b;
-}
-
+button{background:#22c55e;color:white;cursor:pointer;}
+.copy-btn{background:#3b82f6;}
+.download-btn{background:#f59e0b;}
 .name-item{
-    background:#1e293b;
-    padding:8px;
-    margin:5px 0;
-    border-radius:6px;
-    text-align:left;
+background:#1e293b;padding:8px;margin:5px 0;border-radius:6px;text-align:left;
 }
-
 </style>
 </head>
 
@@ -64,15 +26,13 @@ button{
 
 <div class="container">
 
-<h1>🎲 Random Name Generator</h1>
+<h1>🎲 Unlimited Name Generator</h1>
 
-<p><strong>Generate Names by Gender & Country • Free Tool</strong></p>
-
-<input type="number" id="count" value="20">
+<input type="number" id="count" value="50">
 
 <select id="type">
-<option value="indian">Indian Names</option>
-<option value="english">English Names</option>
+<option value="indian">Indian</option>
+<option value="english">English</option>
 </select>
 
 <select id="gender">
@@ -83,9 +43,9 @@ button{
 
 <label><input type="checkbox" id="unique" checked> No Repeat</label>
 
-<button onclick="generate()">Generate Names</button>
+<button onclick="generate()">Generate</button>
 <button class="copy-btn" onclick="copyNames()">Copy</button>
-<button class="download-btn" onclick="downloadNames()">Download TXT</button>
+<button class="download-btn" onclick="downloadNames()">Download</button>
 
 <div id="result"></div>
 
@@ -93,16 +53,36 @@ button{
 
 <script>
 
-const data = {
+// Base real names (seed)
+const base = {
 indian: {
-male: ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul","Vikram","Ravi"],
-female: ["Saanvi","Aanya","Diya","Myra","Ananya","Riya","Kavya","Pooja","Sneha","Divya"]
+male:["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul"],
+female:["Saanvi","Aanya","Diya","Myra","Ananya","Riya","Kavya","Pooja"]
 },
-english: {
-male: ["James","John","Robert","Michael","William","David","Richard","Joseph"],
-female: ["Mary","Patricia","Jennifer","Linda","Elizabeth","Susan","Jessica","Sarah"]
+english:{
+male:["James","John","Michael","David","Robert","William"],
+female:["Mary","Linda","Patricia","Jennifer","Susan","Jessica"]
 }
 };
+
+// Syllables for infinite generation
+const syllables = {
+indian:["ra","vi","an","ar","ka","na","ya","shi","ri","ta","ma","ni","sa","ha"],
+english:["al","be","ro","mi","da","el","sa","jo","li","na","te","ri","on","ke"]
+};
+
+function createName(type){
+let parts = syllables[type];
+let name = "";
+let len = Math.floor(Math.random()*2)+2;
+
+for(let i=0;i<len;i++){
+name += parts[Math.floor(Math.random()*parts.length)];
+}
+
+// Capitalize
+return name.charAt(0).toUpperCase()+name.slice(1);
+}
 
 function generate(){
 let count = parseInt(document.getElementById("count").value);
@@ -110,29 +90,35 @@ let type = document.getElementById("type").value;
 let gender = document.getElementById("gender").value;
 let unique = document.getElementById("unique").checked;
 
-let pool = [];
+let pool = [...base[type].male, ...base[type].female];
 
-if(gender==="all"){
-pool = [...data[type].male, ...data[type].female];
-}else{
-pool = data[type][gender];
-}
+if(gender==="male") pool = base[type].male;
+if(gender==="female") pool = base[type].female;
 
 let result = document.getElementById("result");
-result.innerHTML="";
+result.innerHTML = "";
 
-if(unique){
-let shuffled = [...pool].sort(()=>0.5-Math.random());
-let selected = shuffled.slice(0,count);
+let used = new Set();
 
-selected.forEach((name,i)=>{
-result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
-});
-}else{
 for(let i=0;i<count;i++){
-let name = pool[Math.floor(Math.random()*pool.length)];
-result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
+let name;
+
+// Try real names first, then generate new
+if(i < pool.length){
+name = pool[Math.floor(Math.random()*pool.length)];
+}else{
+name = createName(type);
 }
+
+// Ensure unique
+if(unique){
+while(used.has(name)){
+name = createName(type);
+}
+used.add(name);
+}
+
+result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
 }
 }
 
