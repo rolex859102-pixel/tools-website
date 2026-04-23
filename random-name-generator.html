@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Random Name Generator (Free & Fast)</title>
+<title>Random Name Generator (Male, Female, Indian, English)</title>
 
 <style>
 body{
@@ -25,7 +25,7 @@ h1{
     font-size:26px;
 }
 
-input, button{
+input, select, button{
     width:100%;
     max-width:350px;
     padding:12px;
@@ -39,12 +39,14 @@ button{
     background:#22c55e;
     color:white;
     cursor:pointer;
-    font-size:16px;
 }
 
-#result{
-    margin-top:20px;
-    text-align:left;
+.copy-btn{
+    background:#3b82f6;
+}
+
+.download-btn{
+    background:#f59e0b;
 }
 
 .name-item{
@@ -52,21 +54,7 @@ button{
     padding:8px;
     margin:5px 0;
     border-radius:6px;
-}
-
-.copy-btn{
-    background:#3b82f6;
-}
-
-footer{
-    margin-top:40px;
-    font-size:17px;
-}
-
-footer a{
-    color:white;
-    margin:0 8px;
-    text-decoration:none;
+    text-align:left;
 }
 
 </style>
@@ -78,68 +66,89 @@ footer a{
 
 <h1>🎲 Random Name Generator</h1>
 
-<p><strong>100% Free • Generate Unlimited Names • No Signup</strong></p>
+<p><strong>Generate Names by Gender & Country • Free Tool</strong></p>
 
-<input type="number" id="count" placeholder="How many names?" value="20">
+<input type="number" id="count" value="20">
 
-<label>
-<input type="checkbox" id="unique" checked> No Repeat Names
-</label>
+<select id="type">
+<option value="indian">Indian Names</option>
+<option value="english">English Names</option>
+</select>
+
+<select id="gender">
+<option value="all">All</option>
+<option value="male">Male</option>
+<option value="female">Female</option>
+</select>
+
+<label><input type="checkbox" id="unique" checked> No Repeat</label>
 
 <button onclick="generate()">Generate Names</button>
-
-<button class="copy-btn" onclick="copyNames()">Copy All Names</button>
+<button class="copy-btn" onclick="copyNames()">Copy</button>
+<button class="download-btn" onclick="downloadNames()">Download TXT</button>
 
 <div id="result"></div>
 
 </div>
 
-<footer>
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a> |
-<a href="privacy-policy.html">Privacy Policy</a> |
-<a href="disclaimer.html">Disclaimer</a>
-</footer>
-
 <script>
 
-const names = [
-"Aarav","Vivaan","Aditya","Vihaan","Arjun","Reyansh","Krishna","Ishaan","Kabir","Aryan",
-"Saanvi","Aanya","Diya","Myra","Ananya","Sara","Riya","Aadhya","Ira","Kavya",
-"Rahul","Amit","Rohit","Priya","Neha","Pooja","Karan","Simran","Raj","Ankit",
-"Ravi","Suresh","Vikram","Meena","Sunita","Alok","Deepak","Manoj","Nisha","Pankaj",
-"Rakesh","Kunal","Sneha","Divya","Harsh","Nitin","Ayesha","Zoya","Farhan","Imran"
-];
+const data = {
+indian: {
+male: ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul","Vikram","Ravi"],
+female: ["Saanvi","Aanya","Diya","Myra","Ananya","Riya","Kavya","Pooja","Sneha","Divya"]
+},
+english: {
+male: ["James","John","Robert","Michael","William","David","Richard","Joseph"],
+female: ["Mary","Patricia","Jennifer","Linda","Elizabeth","Susan","Jessica","Sarah"]
+}
+};
 
 function generate(){
 let count = parseInt(document.getElementById("count").value);
+let type = document.getElementById("type").value;
+let gender = document.getElementById("gender").value;
 let unique = document.getElementById("unique").checked;
-let result = document.getElementById("result");
 
-result.innerHTML = "";
+let pool = [];
+
+if(gender==="all"){
+pool = [...data[type].male, ...data[type].female];
+}else{
+pool = data[type][gender];
+}
+
+let result = document.getElementById("result");
+result.innerHTML="";
 
 if(unique){
-let shuffled = [...names].sort(() => 0.5 - Math.random());
-let selected = shuffled.slice(0, count);
+let shuffled = [...pool].sort(()=>0.5-Math.random());
+let selected = shuffled.slice(0,count);
 
-selected.forEach((name, index)=>{
-result.innerHTML += `<div class="name-item">${index+1}. ${name}</div>`;
+selected.forEach((name,i)=>{
+result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
 });
-
 }else{
-for(let i=0; i<count; i++){
-let randomName = names[Math.floor(Math.random()*names.length)];
-result.innerHTML += `<div class="name-item">${i+1}. ${randomName}</div>`;
+for(let i=0;i<count;i++){
+let name = pool[Math.floor(Math.random()*pool.length)];
+result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
 }
 }
 }
 
 function copyNames(){
 let text = document.getElementById("result").innerText;
-
-navigator.clipboard.writeText(text).then(()=>{
+navigator.clipboard.writeText(text);
 alert("Copied!");
-});
+}
+
+function downloadNames(){
+let text = document.getElementById("result").innerText;
+let blob = new Blob([text], {type:"text/plain"});
+let link = document.createElement("a");
+link.href = URL.createObjectURL(blob);
+link.download = "names.txt";
+link.click();
 }
 
 </script>
