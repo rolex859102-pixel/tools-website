@@ -25,6 +25,7 @@ header {
 .search {
     padding:10px;
     width:60%;
+    max-width:400px;
     border-radius:10px;
     border:none;
     margin-top:15px;
@@ -34,11 +35,27 @@ header {
     margin-top:40px;
 }
 
+.tool {
+    display:inline-block;
+    margin:8px;
+    padding:10px 15px;
+    background:#1e293b;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:14px;
+}
+
+.tool:hover {
+    background:#ff4d4d;
+}
+
 .affiliate-box {
     background:#1e293b;
     padding:20px;
     margin:30px auto;
-    width:80%;
+    width:90%;
+    max-width:600px;
     border-radius:12px;
 }
 
@@ -52,33 +69,16 @@ header {
     border-radius:8px;
     font-weight:bold;
 }
-  /* 🔥 HOMEPAGE TOOLS (TRENDING FIX) */
-.home-tools{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:15px;
-    margin-top:15px;
-}
-
-.home-tools .tool{
-    display:inline-block;
-    padding:10px 15px;
-    background:#1e293b;
-    color:white;
-    text-decoration:none;
-    border-radius:8px;
-    font-size:14px;
-}
-
-.home-tools .tool:hover{
-    background:#ff4d4d;
-}
 
 footer {
     margin-top:50px;
     padding:20px;
     background:#0f172a;
+}
+
+@media (max-width:600px){
+    h1 {font-size:22px;}
+    .tool {font-size:13px;}
 }
 </style>
 
@@ -87,7 +87,7 @@ footer {
 <body>
 
 <header>
-
+    
 <h1>100+ Free Online Tools for Daily Use</h1>
 <p>Fast, Free & Easy Tools</p>
 
