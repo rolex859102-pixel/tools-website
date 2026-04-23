@@ -4,35 +4,94 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Random Indian Name Generator (Free & Unlimited)</title>
-<p><strong>Try all name generators: Indian, Male, Female, Baby, Username & Unique Names</strong></p>
-<meta name="description" content="Generate unlimited Indian names online. Male, female, unique random Indian name generator free tool.">
+<title>Random Indian Name Generator</title>
 
 <style>
-body{background:#020617;color:white;font-family:Arial;text-align:center;margin:0;}
-.container{max-width:500px;margin:auto;padding:30px 15px;}
+body{
+background:#020617;
+color:white;
+font-family:Arial;
+text-align:center;
+margin:0;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+padding:30px 15px;
+}
+
 input,select,button{
-width:100%;max-width:350px;padding:12px;margin:10px auto;
-border-radius:10px;border:none;display:block;
+width:100%;
+max-width:350px;
+padding:12px;
+margin:10px auto;
+border-radius:10px;
+border:none;
+display:block;
 }
-button{background:#22c55e;color:white;}
+
+button{
+background:#22c55e;
+color:white;
+}
+
 .name-item{
-background:#1e293b;padding:8px;margin:5px 0;border-radius:6px;text-align:left;
+background:#1e293b;
+padding:8px;
+margin:5px 0;
+border-radius:6px;
+text-align:left;
 }
-footer{margin-top:40px;font-size:17px;}
-footer a{color:white;margin:0 8px;text-decoration:none;}
+
+/* 🔥 RELATED TOOLS FIX */
+.tools-row{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:10px;
+margin-top:15px;
+}
+
+.tools-row a{
+background:#1e293b;
+padding:10px 14px;
+border-radius:8px;
+text-decoration:none;
+color:white;
+font-size:14px;
+display:inline-block;
+}
+
+.tools-row a:hover{
+background:#22c55e;
+}
+
+footer{
+margin-top:40px;
+font-size:16px;
+}
+
+footer a{
+color:white;
+margin:0 8px;
+text-decoration:none;
+}
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>🇮🇳 Random Indian Name Generator</h1>
-
 <p style="font-size:14px; opacity:0.8;">
 Explore all tools: Indian • Male • Female • Baby • Username • Unique Names
 </p>
+
+<h1>🇮🇳 Random Indian Name Generator</h1>
+
+<p><strong>Generate Unlimited Indian Names • Free Tool</strong></p>
 
 <input type="number" id="count" value="20">
 
@@ -54,34 +113,30 @@ Explore all tools: Indian • Male • Female • Baby • Username • Unique N
 <div class="container">
 
 <h2>About This Tool</h2>
-<p>This random Indian name generator helps you generate unlimited Indian names instantly. You can filter male and female names easily.</p>
+<p>This random Indian name generator helps you generate unlimited Indian names instantly.</p>
 
 <h2>How to Use</h2>
-<p>Select gender, enter number of names and click generate.</p>
+<p>Select gender, enter number and click generate.</p>
 
 <h2>Features</h2>
-<ul>
-<li>Unlimited Indian names</li>
-<li>Male & Female filter</li>
+<ul style="text-align:left; max-width:300px; margin:auto;">
+<li>Unlimited names</li>
+<li>Male & female filter</li>
 <li>No repeat option</li>
-<li>Free and fast</li>
+<li>Fast & free</li>
 </ul>
 
+<!-- 🔥 RELATED TOOLS -->
 <h3>🔥 Related Name Tools</h3>
 
 <div class="tools-row">
-
-<a class="tool" href="random-indian-name-generator.html">Indian Name Generator</a>
-
-<a class="tool" href="male-name-generator.html">Male Name Generator</a>
-
-<a class="tool" href="female-name-generator.html">Female Name Generator</a>
-
-<a class="tool" href="baby-name-generator.html">Baby Name Generator</a>
-
-<a class="tool" href="username-name-generator.html">Username Generator</a>
-
-<a class="tool" href="unique-name-generator.html">Unique Name Generator</a>
+<a href="random-indian-name-generator.html">Indian Name Generator</a>
+<a href="male-name-generator.html">Male Name Generator</a>
+<a href="female-name-generator.html">Female Name Generator</a>
+<a href="baby-name-generator.html">Baby Name Generator</a>
+<a href="username-name-generator.html">Username Generator</a>
+<a href="unique-name-generator.html">Unique Name Generator</a>
+</div>
 
 </div>
 
@@ -94,24 +149,12 @@ Explore all tools: Indian • Male • Female • Baby • Username • Unique N
 
 <script>
 
-const male = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul","Vikram","Ravi"];
-const female = ["Saanvi","Aanya","Diya","Myra","Ananya","Riya","Kavya","Pooja","Sneha","Divya"];
-
-const syllables = ["ra","vi","an","ar","ka","na","ya","shi","ri","ta","ma","ni","sa","ha"];
-
-function createName(){
-let name="";
-let len=Math.floor(Math.random()*2)+2;
-for(let i=0;i<len;i++){
-name+=syllables[Math.floor(Math.random()*syllables.length)];
-}
-return name.charAt(0).toUpperCase()+name.slice(1);
-}
+const male=["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul"];
+const female=["Saanvi","Aanya","Diya","Myra","Ananya","Riya","Kavya","Pooja"];
 
 function generate(){
 let count=parseInt(document.getElementById("count").value);
 let gender=document.getElementById("gender").value;
-let unique=document.getElementById("unique").checked;
 
 let pool=[...male,...female];
 if(gender==="male") pool=male;
@@ -120,24 +163,8 @@ if(gender==="female") pool=female;
 let result=document.getElementById("result");
 result.innerHTML="";
 
-let used=new Set();
-
 for(let i=0;i<count;i++){
-let name;
-
-if(i<pool.length){
-name=pool[Math.floor(Math.random()*pool.length)];
-}else{
-name=createName();
-}
-
-if(unique){
-while(used.has(name)){
-name=createName();
-}
-used.add(name);
-}
-
+let name=pool[Math.floor(Math.random()*pool.length)];
 result.innerHTML+=`<div class="name-item">${i+1}. ${name}</div>`;
 }
 }
