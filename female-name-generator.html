@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Female Name Generator (Free & Unlimited)</title>
+<meta name="description" content="Generate unlimited female names online. Random female name generator with unique names for girls.">
+
+<style>
+body{background:#020617;color:white;font-family:Arial;text-align:center;margin:0;}
+.container{max-width:500px;margin:auto;padding:30px 15px;}
+input,select,button{
+width:100%;max-width:350px;padding:12px;margin:10px auto;
+border-radius:10px;border:none;display:block;
+}
+button{background:#22c55e;color:white;}
+.name-item{
+background:#1e293b;padding:8px;margin:5px 0;border-radius:6px;text-align:left;
+}
+footer{margin-top:40px;font-size:17px;}
+footer a{color:white;margin:0 8px;text-decoration:none;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>👩 Random Female Name Generator</h1>
+
+<p><strong>Generate Unlimited Female Names • Free Tool</strong></p>
+
+<input type="number" id="count" value="20">
+
+<select id="type">
+<option value="indian">Indian</option>
+<option value="english">English</option>
+</select>
+
+<label><input type="checkbox" id="unique" checked> No Repeat</label>
+
+<button onclick="generate()">Generate Names</button>
+
+<div id="result"></div>
+
+</div>
+
+<!-- SEO CONTENT -->
+<div class="container">
+
+<h2>About This Tool</h2>
+<p>This random female name generator helps you generate unlimited female names instantly. Choose Indian or English names and get unique results.</p>
+
+<h2>How to Use</h2>
+<p>Select name type, enter number of names and click generate.</p>
+
+<h2>Features</h2>
+<ul>
+<li>Unlimited female names</li>
+<li>Indian & English names</li>
+<li>No repeat option</li>
+<li>Fast and free</li>
+</ul>
+
+<h3>Related Tools</h3>
+<a href="random-indian-name-generator.html">Indian Name Generator</a><br>
+<a href="male-name-generator.html">Male Name Generator</a><br>
+<a href="random-name-generator.html">All Name Generator</a>
+
+</div>
+
+<footer>
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy-policy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
+
+<script>
+
+const indianFemale = ["Saanvi","Aanya","Diya","Myra","Ananya","Riya","Kavya","Pooja","Sneha","Divya"];
+const englishFemale = ["Mary","Linda","Patricia","Jennifer","Susan","Jessica","Sarah","Karen"];
+
+const syllables = {
+indian:["ra","vi","an","ya","shi","ri","ta","ma","ni","sa"],
+english:["al","be","ro","mi","da","el","sa","li","na","te"]
+};
+
+function createName(type){
+let parts = syllables[type];
+let name="";
+let len=Math.floor(Math.random()*2)+2;
+
+for(let i=0;i<len;i++){
+name+=parts[Math.floor(Math.random()*parts.length)];
+}
+
+return name.charAt(0).toUpperCase()+name.slice(1);
+}
+
+function generate(){
+let count=parseInt(document.getElementById("count").value);
+let type=document.getElementById("type").value;
+let unique=document.getElementById("unique").checked;
+
+let pool = type==="indian" ? indianFemale : englishFemale;
+
+let result=document.getElementById("result");
+result.innerHTML="";
+
+let used=new Set();
+
+for(let i=0;i<count;i++){
+let name;
+
+if(i < pool.length){
+name = pool[Math.floor(Math.random()*pool.length)];
+}else{
+name = createName(type);
+}
+
+if(unique){
+while(used.has(name)){
+name = createName(type);
+}
+used.add(name);
+}
+
+result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
+}
+}
+
+</script>
+
+</body>
+</html>
