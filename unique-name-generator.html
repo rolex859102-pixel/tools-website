@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unique Name Generator (Unlimited Cool & Rare Names)</title>
+<meta name="description" content="Generate unique and rare names instantly. Free unique name generator for boys, girls and usernames.">
+
+<style>
+body{background:#020617;color:white;font-family:Arial;text-align:center;margin:0;}
+.container{max-width:500px;margin:auto;padding:30px 15px;}
+input,select,button{
+width:100%;max-width:350px;padding:12px;margin:10px auto;
+border-radius:10px;border:none;display:block;
+}
+button{background:#22c55e;color:white;}
+.name-item{
+background:#1e293b;padding:8px;margin:5px 0;border-radius:6px;text-align:left;
+}
+footer{margin-top:40px;font-size:17px;}
+footer a{color:white;margin:0 8px;text-decoration:none;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>✨ Unique Name Generator</h1>
+
+<p><strong>Generate Rare & Unique Names Instantly</strong></p>
+
+<input type="number" id="count" value="20">
+
+<select id="type">
+<option value="indian">Indian</option>
+<option value="english">English</option>
+</select>
+
+<select id="gender">
+<option value="all">All</option>
+<option value="male">Male</option>
+<option value="female">Female</option>
+</select>
+
+<label><input type="checkbox" id="unique" checked> No Repeat</label>
+
+<button onclick="generate()">Generate Unique Names</button>
+
+<div id="result"></div>
+
+</div>
+
+<!-- SEO CONTENT -->
+<div class="container">
+
+<h2>About This Tool</h2>
+<p>This unique name generator helps you create rare and creative names instantly. Perfect for baby names, usernames and branding ideas.</p>
+
+<h2>How to Use</h2>
+<p>Select name type and gender, enter number of names and click generate.</p>
+
+<h2>Features</h2>
+<ul>
+<li>Unlimited unique names</li>
+<li>Indian & English options</li>
+<li>No repeat mode</li>
+<li>Fast and free</li>
+</ul>
+
+<h3>Related Tools</h3>
+<a href="baby-name-generator.html">Baby Name Generator</a><br>
+<a href="username-name-generator.html">Username Generator</a><br>
+<a href="random-indian-name-generator.html">Indian Name Generator</a>
+
+</div>
+
+<footer>
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy-policy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
+
+<script>
+
+const indianMale = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan"];
+const indianFemale = ["Saanvi","Aanya","Diya","Myra","Ananya","Riya"];
+
+const englishMale = ["James","John","Michael","David","Robert"];
+const englishFemale = ["Mary","Linda","Patricia","Jennifer","Susan"];
+
+const syllables = {
+indian:["ra","vi","an","ar","ka","na","ya","shi","ri","ta","ma","ni"],
+english:["al","be","ro","mi","da","el","sa","li","na","te","ri","on"]
+};
+
+function createName(type){
+let parts = syllables[type];
+let name="";
+let len=Math.floor(Math.random()*2)+2;
+
+for(let i=0;i<len;i++){
+name+=parts[Math.floor(Math.random()*parts.length)];
+}
+
+return name.charAt(0).toUpperCase()+name.slice(1);
+}
+
+function generate(){
+let count=parseInt(document.getElementById("count").value);
+let type=document.getElementById("type").value;
+let gender=document.getElementById("gender").value;
+let unique=document.getElementById("unique").checked;
+
+let pool=[];
+
+if(type==="indian"){
+if(gender==="male") pool=indianMale;
+else if(gender==="female") pool=indianFemale;
+else pool=[...indianMale,...indianFemale];
+}else{
+if(gender==="male") pool=englishMale;
+else if(gender==="female") pool=englishFemale;
+else pool=[...englishMale,...englishFemale];
+}
+
+let result=document.getElementById("result");
+result.innerHTML="";
+
+let used=new Set();
+
+for(let i=0;i<count;i++){
+let name;
+
+if(i < pool.length){
+name = pool[Math.floor(Math.random()*pool.length)];
+}else{
+name = createName(type);
+}
+
+if(unique){
+while(used.has(name)){
+name = createName(type);
+}
+used.add(name);
+}
+
+result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
+}
+}
+
+</script>
+
+</body>
+</html>
