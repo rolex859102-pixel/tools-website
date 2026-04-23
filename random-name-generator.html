@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Random Name Generator</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
+<title>Random Name Generator (Free & Fast)</title>
+
 <style>
-body {
+body{
     background:#020617;
     color:white;
     font-family:Arial;
@@ -13,17 +15,17 @@ body {
     margin:0;
 }
 
-/* 🔥 MAIN FIX */
-.container {
+.container{
     max-width:500px;
-    width:100%;
     margin:auto;
     padding:30px 15px;
-    box-sizing:border-box;
 }
 
-/* 🔥 INPUT + BUTTON FIX */
-input, textarea, button {
+h1{
+    font-size:26px;
+}
+
+input, button{
     width:100%;
     max-width:350px;
     padding:12px;
@@ -31,81 +33,116 @@ input, textarea, button {
     border-radius:10px;
     border:none;
     display:block;
-    box-sizing:border-box;
 }
 
-button {
+button{
     background:#22c55e;
     color:white;
-    font-size:16px;
     cursor:pointer;
+    font-size:16px;
 }
 
-/* 🔥 RESULT */
-#result {
+#result{
     margin-top:20px;
-    font-size:18px;
+    text-align:left;
 }
 
-/* 🔥 FOOTER */
-footer {
+.name-item{
+    background:#1e293b;
+    padding:8px;
+    margin:5px 0;
+    border-radius:6px;
+}
+
+.copy-btn{
+    background:#3b82f6;
+}
+
+footer{
     margin-top:40px;
     font-size:17px;
 }
 
-footer a {
+footer a{
     color:white;
     margin:0 8px;
     text-decoration:none;
 }
 
-footer a:hover {
-    color:#60a5fa;
-}
-
-/* 🔥 MOBILE PERFECT FIX */
-@media (max-width:600px) {
-    .container {
-        padding:25px 12px;
-    }
-
-    h1 {
-        font-size:22px;
-    }
-
-    input, textarea, button {
-        max-width:100%;
-        width:100%;
-    }
-}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-<h1>Random Name Generator</h1>
-<p><strong>Generate random names instantly.</strong></p>
-<p><strong>100% Free • Generate Random Names Instantly • No Signup Required</strong></p>
-<button onclick="generate()">Generate Name</button>
+
+<h1>🎲 Random Name Generator</h1>
+
+<p><strong>100% Free • Generate Unlimited Names • No Signup</strong></p>
+
+<input type="number" id="count" placeholder="How many names?" value="20">
+
+<label>
+<input type="checkbox" id="unique" checked> No Repeat Names
+</label>
+
+<button onclick="generate()">Generate Names</button>
+
+<button class="copy-btn" onclick="copyNames()">Copy All Names</button>
 
 <div id="result"></div>
+
 </div>
 
-<script>
-function generate(){
-let names=["Rahul","Amit","John","Emma","Sophia","Arjun","Priya"];
-let random=names[Math.floor(Math.random()*names.length)];
-document.getElementById("result").innerHTML="<h2>"+random+"</h2>";
-}
-</script>
-<footer style="margin-top:60px; padding:20px 0; font-size:17px; border-top:1px solid #1e293b;">
-
-<a href="about.html" style="color:white; margin:0 12px; text-decoration:none;">About</a> |
-<a href="contact.html" style="color:white; margin:0 12px; text-decoration:none;">Contact</a> |
-<a href="privacy-policy.html" style="color:white; margin:0 12px; text-decoration:none;">Privacy Policy</a> |
-<a href="disclaimer.html" style="color:white; margin:0 12px; text-decoration:none;">Disclaimer</a>
-
+<footer>
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy-policy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
 </footer>
+
+<script>
+
+const names = [
+"Aarav","Vivaan","Aditya","Vihaan","Arjun","Reyansh","Krishna","Ishaan","Kabir","Aryan",
+"Saanvi","Aanya","Diya","Myra","Ananya","Sara","Riya","Aadhya","Ira","Kavya",
+"Rahul","Amit","Rohit","Priya","Neha","Pooja","Karan","Simran","Raj","Ankit",
+"Ravi","Suresh","Vikram","Meena","Sunita","Alok","Deepak","Manoj","Nisha","Pankaj",
+"Rakesh","Kunal","Sneha","Divya","Harsh","Nitin","Ayesha","Zoya","Farhan","Imran"
+];
+
+function generate(){
+let count = parseInt(document.getElementById("count").value);
+let unique = document.getElementById("unique").checked;
+let result = document.getElementById("result");
+
+result.innerHTML = "";
+
+if(unique){
+let shuffled = [...names].sort(() => 0.5 - Math.random());
+let selected = shuffled.slice(0, count);
+
+selected.forEach((name, index)=>{
+result.innerHTML += `<div class="name-item">${index+1}. ${name}</div>`;
+});
+
+}else{
+for(let i=0; i<count; i++){
+let randomName = names[Math.floor(Math.random()*names.length)];
+result.innerHTML += `<div class="name-item">${i+1}. ${randomName}</div>`;
+}
+}
+}
+
+function copyNames(){
+let text = document.getElementById("result").innerText;
+
+navigator.clipboard.writeText(text).then(()=>{
+alert("Copied!");
+});
+}
+
+</script>
+
 </body>
 </html>
