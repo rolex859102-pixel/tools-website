@@ -34,6 +34,7 @@ display:block;
 button{
 background:#22c55e;
 color:white;
+cursor:pointer;
 }
 
 .name-item{
@@ -60,7 +61,6 @@ border-radius:8px;
 text-decoration:none;
 color:white;
 font-size:14px;
-display:inline-block;
 }
 
 .tools-row a:hover{
@@ -93,14 +93,16 @@ Explore all tools: Indian • Male • Female • Baby • Username • Unique N
 
 <p><strong>Generate Unlimited Male Names • Free Tool</strong></p>
 
-<input type="number" id="count" value="20">
+<input type="number" id="count" value="20" min="1" max="500">
 
 <select id="type">
 <option value="indian">Indian</option>
 <option value="english">English</option>
 </select>
 
-<label><input type="checkbox" id="unique" checked> No Repeat</label>
+<label>
+<input type="checkbox" id="unique" checked> No Repeat
+</label>
 
 <button onclick="generate()">Generate Names</button>
 
@@ -148,33 +150,49 @@ Explore all tools: Indian • Male • Female • Baby • Username • Unique N
 
 <script>
 
-const indian=["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul"];
-const english=["James","John","Michael","David","Robert","William","Daniel"];
+// 🔥 DATA
+const indian = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul"];
+const english = ["James","John","Michael","David","Robert","William","Daniel"];
 
+// 🔥 GENERATE FUNCTION
 function generate(){
-let count=parseInt(document.getElementById("count").value);
-let type=document.getElementById("type").value;
-let unique=document.getElementById("unique").checked;
 
-let pool = type==="indian" ? indian : english;
+let count = parseInt(document.getElementById("count").value);
+let type = document.getElementById("type").value;
+let unique = document.getElementById("unique").checked;
 
-let result=document.getElementById("result");
-result.innerHTML="";
+if(!count || count < 1){
+count = 10;
+}
 
-let used=new Set();
+if(count > 500){
+alert("Max 500 names allowed");
+return;
+}
 
-for(let i=0;i<count;i++){
-let name=pool[Math.floor(Math.random()*pool.length)];
+let pool = (type === "indian") ? indian : english;
+
+let result = document.getElementById("result");
+result.innerHTML = "";
+
+let used = new Set();
+
+for(let i = 0; i < count; i++){
+
+let name = pool[Math.floor(Math.random() * pool.length)];
 
 if(unique){
-while(used.has(name)){
-name=pool[Math.floor(Math.random()*pool.length)];
+let tries = 0;
+while(used.has(name) && tries < 10){
+name = pool[Math.floor(Math.random() * pool.length)];
+tries++;
 }
 used.add(name);
 }
 
-result.innerHTML+=`<div class="name-item">${i+1}. ${name}</div>`;
+result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
 }
+
 }
 
 </script>
