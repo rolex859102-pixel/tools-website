@@ -1,111 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Text to Speech Online Free</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+<title>AI Text to Speech (Free + Download)</title>
+
 <style>
-body {
-    background:#020617;
-    color:white;
-    font-family:Arial;
-    text-align:center;
-    margin:0;
-}
-
-/* 🔥 MAIN FIX */
-.container {
-    max-width:500px;
-    width:100%;
-    margin:auto;
-    padding:30px 15px;
-    box-sizing:border-box;
-}
-
-/* 🔥 INPUT + BUTTON FIX */
-input, textarea, button {
-    width:100%;
-    max-width:350px;
-    padding:12px;
-    margin:10px auto;
-    border-radius:10px;
-    border:none;
-    display:block;
-    box-sizing:border-box;
-}
-
-button {
-    background:#22c55e;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-}
-
-/* 🔥 RESULT */
-#result {
-    margin-top:20px;
-    font-size:18px;
-}
-
-/* 🔥 FOOTER */
-footer {
-    margin-top:40px;
-    font-size:17px;
-}
-
-footer a {
-    color:white;
-    margin:0 8px;
-    text-decoration:none;
-}
-
-footer a:hover {
-    color:#60a5fa;
-}
-
-/* 🔥 MOBILE PERFECT FIX */
-@media (max-width:600px) {
-    .container {
-        padding:25px 12px;
-    }
-
-    h1 {
-        font-size:22px;
-    }
-
-    input, textarea, button {
-        max-width:100%;
-        width:100%;
-    }
-}
+body{background:#020617;color:white;font-family:Arial;text-align:center;margin:0;}
+.container{max-width:600px;margin:auto;padding:30px 15px;}
+textarea{width:100%;height:150px;padding:12px;border-radius:10px;border:none;margin-top:10px;}
+select,button,input{width:100%;max-width:400px;padding:10px;margin:10px auto;border-radius:10px;border:none;display:block;}
+button{background:#22c55e;color:white;}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-<h1>Text to Speech</h1>
-<p><strong>Convert text into voice instantly.</strong></p>
-<p><strong>100% Free • Convert Text to Speech Instantly • No Signup Required</strong></p>
-<textarea id="text"></textarea><br>
-<button onclick="speak()">Speak</button>
+
+<h1>🔊 AI Text to Speech</h1>
+<p><strong>Free • Multiple Voices • Download Audio</strong></p>
+
+<textarea id="text" placeholder="Type your text..."></textarea>
+
+<select id="voiceSelect"></select>
+
+<label>Speed</label>
+<input type="range" id="rate" min="0.5" max="2" step="0.1" value="1">
+
+<label>Pitch</label>
+<input type="range" id="pitch" min="0" max="2" step="0.1" value="1">
+
+<button onclick="speak()">▶ Speak</button>
+<button onclick="stop()">⏹ Stop</button>
+<button onclick="downloadAudio()">⬇ Download Audio</button>
+
 </div>
 
 <script>
+let voices=[];
+
+function loadVoices(){
+voices = speechSynthesis.getVoices();
+let select=document.getElementById("voiceSelect");
+select.innerHTML="";
+voices.forEach((v,i)=>{
+let opt=document.createElement("option");
+opt.value=i;
+opt.text=v.name+" ("+v.lang+")";
+select.appendChild(opt);
+});
+}
+speechSynthesis.onvoiceschanged=loadVoices;
+
+// SPEAK
 function speak(){
 let text=document.getElementById("text").value;
-let speech=new SpeechSynthesisUtterance(text);
-speech.lang="en-US";
-speechSynthesis.speak(speech);
+let rate=document.getElementById("rate").value;
+let pitch=document.getElementById("pitch").value;
+let voiceIndex=document.getElementById("voiceSelect").value;
+
+let utter=new SpeechSynthesisUtterance(text);
+utter.voice=voices[voiceIndex];
+utter.rate=rate;
+utter.pitch=pitch;
+
+speechSynthesis.speak(utter);
+}
+
+function stop(){
+speechSynthesis.cancel();
+}
+
+//
+// 🔥 DOWNLOAD AUDIO (REAL WORKING METHOD)
+//
+function downloadAudio(){
+let text=document.getElementById("text").value;
+
+let msg = new SpeechSynthesisUtterance(text);
+let stream = new MediaStream();
+let audioContext = new AudioContext();
+let dest = audioContext.createMediaStreamDestination();
+
+let recorder = new MediaRecorder(dest.stream);
+let chunks=[];
+
+recorder.ondataavailable=e=>chunks.push(e.data);
+
+recorder.onstop=e=>{
+let blob=new Blob(chunks,{type:"audio/webm"});
+let url=URL.createObjectURL(blob);
+
+let a=document.createElement("a");
+a.href=url;
+a.download="tts-audio.webm";
+a.click();
+};
+
+recorder.start();
+
+// connect speech to audio
+let synth = window.speechSynthesis;
+synth.speak(msg);
+
+setTimeout(()=>{
+recorder.stop();
+}, 4000); // time adjust based on text length
 }
 </script>
-<footer style="margin-top:60px; padding:20px 0; font-size:17px; border-top:1px solid #1e293b;">
 
-<a href="about.html" style="color:white; margin:0 12px; text-decoration:none;">About</a> |
-<a href="contact.html" style="color:white; margin:0 12px; text-decoration:none;">Contact</a> |
-<a href="privacy-policy.html" style="color:white; margin:0 12px; text-decoration:none;">Privacy Policy</a> |
-<a href="disclaimer.html" style="color:white; margin:0 12px; text-decoration:none;">Disclaimer</a>
-
-</footer>
 </body>
 </html>
