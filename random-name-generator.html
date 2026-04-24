@@ -4,20 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Unlimited Random Name Generator</title>
+<title>Random Name Generator (Indian & English)</title>
 
 <style>
-body{background:#020617;color:white;font-family:Arial;text-align:center;margin:0;}
-.container{max-width:500px;margin:auto;padding:30px 15px;}
-input,select,button{
-width:100%;max-width:350px;padding:12px;margin:10px auto;
-border-radius:10px;border:none;display:block;
+body{
+background:#020617;
+color:white;
+font-family:Arial;
+text-align:center;
+margin:0;
 }
-button{background:#22c55e;color:white;cursor:pointer;}
-.copy-btn{background:#3b82f6;}
-.download-btn{background:#f59e0b;}
+
+.container{
+max-width:500px;
+margin:auto;
+padding:30px 15px;
+}
+
+input,select,button{
+width:100%;
+max-width:350px;
+padding:12px;
+margin:10px auto;
+border-radius:10px;
+border:none;
+display:block;
+}
+
+button{
+background:#10b981;
+color:white;
+cursor:pointer;
+}
+
 .name-item{
-background:#1e293b;padding:8px;margin:5px 0;border-radius:6px;text-align:left;
+background:#1e293b;
+padding:10px;
+margin:6px 0;
+border-radius:6px;
+text-align:left;
+cursor:pointer;
+}
+
+.name-item:hover{
+background:#10b981;
 }
 </style>
 </head>
@@ -26,11 +56,13 @@ background:#1e293b;padding:8px;margin:5px 0;border-radius:6px;text-align:left;
 
 <div class="container">
 
-<h1>🎲 Unlimited Name Generator</h1>
+<h1>🎲 Random Name Generator</h1>
+<p><strong>Indian • English • Male • Female • 100% Real Names</strong></p>
 
-<input type="number" id="count" value="50">
+<input type="number" id="count" value="20" min="1" max="300">
 
-<select id="type">
+<select id="country">
+<option value="all">All (Indian + English)</option>
 <option value="indian">Indian</option>
 <option value="english">English</option>
 </select>
@@ -41,11 +73,11 @@ background:#1e293b;padding:8px;margin:5px 0;border-radius:6px;text-align:left;
 <option value="female">Female</option>
 </select>
 
-<label><input type="checkbox" id="unique" checked> No Repeat</label>
+<label>
+<input type="checkbox" id="unique" checked> No Repeat
+</label>
 
-<button onclick="generate()">Generate</button>
-<button class="copy-btn" onclick="copyNames()">Copy</button>
-<button class="download-btn" onclick="downloadNames()">Download</button>
+<button onclick="generate()">Generate Names</button>
 
 <div id="result"></div>
 
@@ -53,88 +85,81 @@ background:#1e293b;padding:8px;margin:5px 0;border-radius:6px;text-align:left;
 
 <script>
 
-// Base real names (seed)
-const base = {
-indian: {
-male:["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul"],
-female:["Saanvi","Aanya","Diya","Myra","Ananya","Riya","Kavya","Pooja"]
-},
-english:{
-male:["James","John","Michael","David","Robert","William"],
-female:["Mary","Linda","Patricia","Jennifer","Susan","Jessica"]
-}
-};
+// 🔥 INDIAN MALE
+const indianMale = [
+"Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Rahul","Krishna","Shivam","Aman",
+"Nikhil","Yash","Aryan","Ravi","Vikas","Raj","Amit","Akash","Karan","Mohit"
+];
 
-// Syllables for infinite generation
-const syllables = {
-indian:["ra","vi","an","ar","ka","na","ya","shi","ri","ta","ma","ni","sa","ha"],
-english:["al","be","ro","mi","da","el","sa","jo","li","na","te","ri","on","ke"]
-};
+// 🔥 INDIAN FEMALE
+const indianFemale = [
+"Aaradhya","Ananya","Aditi","Anushka","Pooja","Priya","Riya","Sneha","Simran","Neha",
+"Kavita","Shreya","Shivani","Swati","Tanisha","Trisha","Isha","Kajal","Radhika","Sonia"
+];
 
-function createName(type){
-let parts = syllables[type];
-let name = "";
-let len = Math.floor(Math.random()*2)+2;
+// 🔥 ENGLISH MALE
+const englishMale = [
+"James","John","Michael","David","Robert","William","Daniel","Matthew","Joseph","Thomas"
+];
 
-for(let i=0;i<len;i++){
-name += parts[Math.floor(Math.random()*parts.length)];
-}
-
-// Capitalize
-return name.charAt(0).toUpperCase()+name.slice(1);
-}
+// 🔥 ENGLISH FEMALE
+const englishFemale = [
+"Emily","Sophia","Olivia","Emma","Ava","Isabella","Mia","Charlotte","Amelia","Harper"
+];
 
 function generate(){
+
 let count = parseInt(document.getElementById("count").value);
-let type = document.getElementById("type").value;
+let country = document.getElementById("country").value;
 let gender = document.getElementById("gender").value;
 let unique = document.getElementById("unique").checked;
 
-let pool = [...base[type].male, ...base[type].female];
+let pool = [];
 
-if(gender==="male") pool = base[type].male;
-if(gender==="female") pool = base[type].female;
+// 🔥 BUILD POOL
+if(country === "indian" || country === "all"){
+if(gender === "male" || gender === "all") pool = pool.concat(indianMale);
+if(gender === "female" || gender === "all") pool = pool.concat(indianFemale);
+}
+
+if(country === "english" || country === "all"){
+if(gender === "male" || gender === "all") pool = pool.concat(englishMale);
+if(gender === "female" || gender === "all") pool = pool.concat(englishFemale);
+}
 
 let result = document.getElementById("result");
 result.innerHTML = "";
 
+// 🔥 LIMIT
+if(unique && count > pool.length){
+alert("Only " + pool.length + " unique names available");
+count = pool.length;
+}
+
 let used = new Set();
 
-for(let i=0;i<count;i++){
+for(let i=0; i<count; i++){
+
 let name;
 
-// Try real names first, then generate new
-if(i < pool.length){
-name = pool[Math.floor(Math.random()*pool.length)];
-}else{
-name = createName(type);
-}
-
-// Ensure unique
 if(unique){
-while(used.has(name)){
-name = createName(type);
-}
+do{
+name = pool[Math.floor(Math.random()*pool.length)];
+} while(used.has(name));
 used.add(name);
+}else{
+name = pool[Math.floor(Math.random()*pool.length)];
 }
 
-result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
-}
+result.innerHTML += `<div class="name-item" onclick="copyText('${name}')">${i+1}. ${name}</div>`;
 }
 
-function copyNames(){
-let text = document.getElementById("result").innerText;
+}
+
+// 🔥 COPY
+function copyText(text){
 navigator.clipboard.writeText(text);
-alert("Copied!");
-}
-
-function downloadNames(){
-let text = document.getElementById("result").innerText;
-let blob = new Blob([text], {type:"text/plain"});
-let link = document.createElement("a");
-link.href = URL.createObjectURL(blob);
-link.download = "names.txt";
-link.click();
+alert("Copied: " + text);
 }
 
 </script>
