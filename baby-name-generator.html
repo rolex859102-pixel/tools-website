@@ -4,22 +4,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Baby Name Generator (Indian & English, Unique Names)</title>
-<meta name="description" content="Generate baby names instantly. Find unique baby boy and girl names with our free baby name generator tool.">
+<title>Baby Name Generator (Indian)</title>
 
 <style>
-body{background:#020617;color:white;font-family:Arial;text-align:center;margin:0;}
-.container{max-width:500px;margin:auto;padding:30px 15px;}
+body{
+background:#020617;
+color:white;
+font-family:Arial;
+text-align:center;
+margin:0;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+padding:30px 15px;
+}
+
 input,select,button{
-width:100%;max-width:350px;padding:12px;margin:10px auto;
-border-radius:10px;border:none;display:block;
+width:100%;
+max-width:350px;
+padding:12px;
+margin:10px auto;
+border-radius:10px;
+border:none;
+display:block;
 }
-button{background:#22c55e;color:white;}
+
+button{
+background:#f59e0b;
+color:white;
+cursor:pointer;
+}
+
 .name-item{
-background:#1e293b;padding:8px;margin:5px 0;border-radius:6px;text-align:left;
+background:#1e293b;
+padding:8px;
+margin:5px 0;
+border-radius:6px;
+text-align:left;
 }
-footer{margin-top:40px;font-size:17px;}
-footer a{color:white;margin:0 8px;text-decoration:none;}
 </style>
 </head>
 
@@ -28,127 +52,83 @@ footer a{color:white;margin:0 8px;text-decoration:none;}
 <div class="container">
 
 <h1>👶 Baby Name Generator</h1>
+<p><strong>100% Real Indian Names • Male + Female</strong></p>
 
-<p><strong>Find Perfect Baby Names Instantly</strong></p>
-
-<input type="number" id="count" value="20">
-
-<select id="type">
-<option value="indian">Indian</option>
-<option value="english">English</option>
-</select>
+<input type="number" id="count" value="20" min="1" max="300">
 
 <select id="gender">
-<option value="all">Boy & Girl</option>
-<option value="male">Boy</option>
-<option value="female">Girl</option>
+<option value="all">All</option>
+<option value="male">Boy Names</option>
+<option value="female">Girl Names</option>
 </select>
 
-<label><input type="checkbox" id="unique" checked> Unique Names</label>
+<label>
+<input type="checkbox" id="unique" checked> No Repeat
+</label>
 
-<button onclick="generate()">Generate Baby Names</button>
+<button onclick="generate()">Generate Names</button>
 
 <div id="result"></div>
 
 </div>
 
-<!-- SEO CONTENT -->
-<div class="container">
-
-<h2>About This Tool</h2>
-<p>This baby name generator helps parents find unique and meaningful names for boys and girls. Generate Indian and English baby names instantly.</p>
-
-<h2>How to Use</h2>
-<p>Select name type and gender, enter number of names and click generate.</p>
-
-<h2>Features</h2>
-<ul>
-<li>Unlimited baby names</li>
-<li>Boy & girl names</li>
-<li>Indian & English options</li>
-<li>Free and fast tool</li>
-</ul>
-
-<h3>Related Tools</h3>
-<a href="random-indian-name-generator.html">Indian Name Generator</a><br>
-<a href="male-name-generator.html">Boy Name Generator</a><br>
-<a href="female-name-generator.html">Girl Name Generator</a>
-
-</div>
-
-<footer>
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a> |
-<a href="privacy-policy.html">Privacy Policy</a> |
-<a href="disclaimer.html">Disclaimer</a>
-</footer>
-
 <script>
 
-const indianMale = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul"];
-const indianFemale = ["Saanvi","Aanya","Diya","Myra","Ananya","Riya","Kavya","Pooja"];
+// 🔥 MALE NAMES (short list reuse)
+const male = [
+"Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul","Krishna","Shivam",
+"Aman","Nikhil","Yash","Aryan","Ravi","Vikas","Raj","Amit","Akash","Karan"
+];
 
-const englishMale = ["James","John","Michael","David","Robert","William"];
-const englishFemale = ["Mary","Linda","Patricia","Jennifer","Susan","Jessica"];
-
-const syllables = {
-indian:["ra","vi","an","ar","ka","na","ya","shi","ri","ta"],
-english:["al","be","ro","mi","da","el","sa","li","na","te"]
-};
-
-function createName(type){
-let parts = syllables[type];
-let name="";
-let len=Math.floor(Math.random()*2)+2;
-
-for(let i=0;i<len;i++){
-name+=parts[Math.floor(Math.random()*parts.length)];
-}
-
-return name.charAt(0).toUpperCase()+name.slice(1);
-}
+// 🔥 FEMALE NAMES
+const female = [
+"Aaradhya","Ananya","Aditi","Anushka","Pooja","Priya","Riya","Sneha","Simran","Neha",
+"Kavita","Shreya","Shivani","Swati","Tanisha","Trisha","Isha","Kajal","Radhika","Sonia"
+];
 
 function generate(){
-let count=parseInt(document.getElementById("count").value);
-let type=document.getElementById("type").value;
-let gender=document.getElementById("gender").value;
-let unique=document.getElementById("unique").checked;
 
-let pool=[];
+let count = parseInt(document.getElementById("count").value);
+let gender = document.getElementById("gender").value;
+let unique = document.getElementById("unique").checked;
 
-if(type==="indian"){
-if(gender==="male") pool=indianMale;
-else if(gender==="female") pool=indianFemale;
-else pool=[...indianMale,...indianFemale];
+let pool = [];
+
+if(gender === "male"){
+pool = male;
+}else if(gender === "female"){
+pool = female;
 }else{
-if(gender==="male") pool=englishMale;
-else if(gender==="female") pool=englishFemale;
-else pool=[...englishMale,...englishFemale];
+pool = male.concat(female);
 }
 
-let result=document.getElementById("result");
-result.innerHTML="";
+let result = document.getElementById("result");
+result.innerHTML = "";
 
-let used=new Set();
+// limit
+if(unique && count > pool.length){
+alert("Only " + pool.length + " unique names available");
+count = pool.length;
+}
 
-for(let i=0;i<count;i++){
+let used = new Set();
+
+for(let i=0; i<count; i++){
+
 let name;
 
-if(i < pool.length){
-name = pool[Math.floor(Math.random()*pool.length)];
-}else{
-name = createName(type);
-}
-
 if(unique){
-while(used.has(name)){
-name = createName(type);
-}
+do{
+name = pool[Math.floor(Math.random()*pool.length)];
+} while(used.has(name));
 used.add(name);
+}else{
+name = pool[Math.floor(Math.random()*pool.length)];
 }
 
 result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
 }
+
 }
 
 </script>
