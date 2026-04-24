@@ -151,50 +151,64 @@ Explore all tools: Indian • Male • Female • Baby • Username • Unique N
 <script>
 
 // 🔥 DATA
-const indian = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul"];
-const english = ["James","John","Michael","David","Robert","William","Daniel"];
+const indianBase = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul"];
+const englishBase = ["James","John","Michael","David","Robert","William","Daniel"];
 
-// 🔥 GENERATE FUNCTION
+const syllables = ["ra","vi","an","ar","ka","na","ya","shi","ri","ta","ma","ni","lo","ke","sa","de"];
+
+// 🔥 dynamic name generator
+function createName(){
+    let name = "";
+    let length = Math.floor(Math.random()*2)+2;
+
+    for(let i=0;i<length;i++){
+        name += syllables[Math.floor(Math.random()*syllables.length)];
+    }
+
+    return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
 function generate(){
 
 let count = parseInt(document.getElementById("count").value);
 let type = document.getElementById("type").value;
 let unique = document.getElementById("unique").checked;
 
-if(!count || count < 1){
-count = 10;
-}
-
 if(count > 500){
 alert("Max 500 names allowed");
 return;
 }
 
-let pool = (type === "indian") ? indian : english;
+let base = (type === "indian") ? indianBase : englishBase;
 
 let result = document.getElementById("result");
 result.innerHTML = "";
 
 let used = new Set();
 
-for(let i = 0; i < count; i++){
+for(let i=0; i<count; i++){
 
-let name = pool[Math.floor(Math.random() * pool.length)];
+let name;
 
-if(unique){
-let tries = 0;
-while(used.has(name) && tries < 10){
-name = pool[Math.floor(Math.random() * pool.length)];
-tries++;
+// 🔥 first use real names, then generate unlimited
+if(i < base.length){
+    name = base[Math.floor(Math.random()*base.length)];
+} else {
+    name = createName();
 }
-used.add(name);
+
+// 🔥 ensure no repeat
+if(unique){
+    while(used.has(name)){
+        name = createName();
+    }
+    used.add(name);
 }
 
 result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
 }
 
 }
-
 </script>
 
 </body>
