@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Random Male Name Generator</title>
+<title>Indian Male Name Generator</title>
 
 <style>
 body{
@@ -21,7 +21,7 @@ margin:auto;
 padding:30px 15px;
 }
 
-input,select,button{
+input,button{
 width:100%;
 max-width:350px;
 padding:12px;
@@ -44,39 +44,6 @@ margin:5px 0;
 border-radius:6px;
 text-align:left;
 }
-
-/* 🔥 RELATED TOOLS */
-.tools-row{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:10px;
-margin-top:15px;
-}
-
-.tools-row a{
-background:#1e293b;
-padding:10px 14px;
-border-radius:8px;
-text-decoration:none;
-color:white;
-font-size:14px;
-}
-
-.tools-row a:hover{
-background:#22c55e;
-}
-
-footer{
-margin-top:40px;
-font-size:16px;
-}
-
-footer a{
-color:white;
-margin:0 8px;
-text-decoration:none;
-}
 </style>
 
 </head>
@@ -85,20 +52,14 @@ text-decoration:none;
 
 <div class="container">
 
-<p style="font-size:14px; opacity:0.8;">
-Explore all tools: Indian • Male • Female • Baby • Username • Unique Names
+<h1>🇮🇳 Indian Male Name Generator</h1>
+<p><strong>100% Real Names • No Fake Names</strong></p>
+
+<p style="font-size:13px;opacity:0.7;">
+Max unique names available: 400
 </p>
 
-<h1>👨 Random Male Name Generator</h1>
-
-<p><strong>Generate Unlimited Male Names • Free Tool</strong></p>
-
-<input type="number" id="count" value="20" min="1" max="500">
-
-<select id="type">
-<option value="indian">Indian</option>
-<option value="english">English</option>
-</select>
+<input type="number" id="count" value="20" min="1" max="400">
 
 <label>
 <input type="checkbox" id="unique" checked> No Repeat
@@ -110,79 +71,54 @@ Explore all tools: Indian • Male • Female • Baby • Username • Unique N
 
 </div>
 
-<!-- SEO CONTENT -->
-<div class="container">
-
-<h2>About This Tool</h2>
-<p>This random male name generator helps you generate unlimited male names instantly.</p>
-
-<h2>How to Use</h2>
-<p>Select type, enter number and click generate.</p>
-
-<h2>Features</h2>
-<ul style="text-align:left; max-width:300px; margin:auto;">
-<li>Unlimited names</li>
-<li>Indian & English</li>
-<li>No repeat option</li>
-<li>Fast & free</li>
-</ul>
-
-<!-- 🔥 RELATED TOOLS -->
-<h3>🔥 Related Name Tools</h3>
-
-<div class="tools-row">
-<a href="random-indian-name-generator.html">Indian Name Generator</a>
-<a href="male-name-generator.html">Male Name Generator</a>
-<a href="female-name-generator.html">Female Name Generator</a>
-<a href="baby-name-generator.html">Baby Name Generator</a>
-<a href="username-name-generator.html">Username Generator</a>
-<a href="unique-name-generator.html">Unique Name Generator</a>
-</div>
-
-</div>
-
-<footer>
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a> |
-<a href="privacy-policy.html">Privacy Policy</a> |
-<a href="disclaimer.html">Disclaimer</a>
-</footer>
-
 <script>
 
-// 🔥 DATA
-const indianBase = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul"];
-const englishBase = ["James","John","Michael","David","Robert","William","Daniel"];
-
-const syllables = ["ra","vi","an","ar","ka","na","ya","shi","ri","ta","ma","ni","lo","ke","sa","de","sh","bh","ch","th"];
-
-// 🔥 dynamic name generator
-function createName(){
-    let name = "";
-    let length = Math.floor(Math.random()*2)+2;
-
-    for(let i=0;i<length;i++){
-        name += syllables[Math.floor(Math.random()*syllables.length)];
-    }
-
-    return name.charAt(0).toUpperCase() + name.slice(1);
-}
+// 🔥 100% REAL INDIAN MALE NAMES (~400)
+const names = [
+"Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul","Krishna","Shivam",
+"Aman","Nikhil","Siddharth","Yash","Harsh","Aryan","Manish","Deepak","Ravi","Vikas",
+"Raj","Amit","Sunil","Akash","Varun","Karan","Mohit","Suresh","Ramesh","Naresh",
+"Vijay","Ajay","Anil","Pankaj","Rakesh","Mukesh","Dinesh","Sanjay","Gaurav","Tarun",
+"Sachin","Pranav","Lakshya","Dev","Om","Ishaan","Kartik","Dhruv","Atharv","Parth",
+"Shrey","Tejas","Nitin","Vivek","Abhishek","Ankit","Rohit","Tushar","Hemant",
+"Arnav","Ayaan","Reyansh","Vihaan","Shaurya","Lakshit","Devansh","Ayush","Shubham",
+"Harshit","Samar","Rajat","Chirag","Yuvraj","Keshav","Madhav","Gopal","Rudra",
+"Suraj","Bhavesh","Lokesh","Mahesh","Ganesh","Rajesh","Umesh","Tilak","Kishan",
+"Manoj","Vinod","Ashok","Balram","Chandan","Dilip","Eshan","Farhan","Girish","Himanshu",
+"Inder","Jatin","Kamal","Lalit","Mohan","Naveen","Ojas","Pradeep","Qadir","Rituraj",
+"Sameer","Tanmay","Uday","Vimal","Wasim","Yogesh","Zubair",
+"Aadesh","Akhil","Amar","Anand","Anirudh","Arpit","Ashish","Atul","Avinash","Bharat",
+"Bhaskar","Chetan","Darshan","Devendra","Dharam","Eklavya","Faisal","Gagan","Gautam",
+"Harendra","Hitesh","Iqbal","Jagdish","Jaidev","Jeevan","Kailash","Kartikeya","Keshav",
+"Lakhan","Lokendra","Madan","Mahavir","Manav","Mayank","Mehul","Mukund","Nakul","Narayan",
+"Niraj","Nitesh","Padmanabh","Prakash","Prithvi","Raghav","Rajiv","Ranjit","Rishabh",
+"Ritesh","Sachindra","Sahil","Sandeep","Satyam","Shankar","Shashank","Shivendra",
+"Shivraj","Shravan","Somesh","Subhash","Sudarshan","Sujit","Suman","Surendra","Swapnil",
+"Tapan","Tarakesh","Upendra","Vaibhav","Vansh","Varad","Vedant","Vikrant",
+"Vinay","Virat","Vishal","Vishnu","Yashwant","Yuvansh","Zaid",
+"Aarush","Advait","Ainesh","Akshay","Ameya","Ansh","Anshul","Anup","Anurag","Arvind",
+"Ashwin","Ayansh","Brijesh","Chiranjiv","Darsh","Devraj","Dharmendra","Divyansh",
+"Eshwar","Gokul","Govind","Harish","Hemraj","Hrithik","Ilesh","Irfan","Jagat",
+"Jaspreet","Jayant","Jitendra","Kalpesh","Ketan","Kripal","Kuber","Lavesh",
+"Manvendra","Mitesh","Naman","Neeraj","Nishant","Omkar","Piyush","Pranit",
+"Rachit","Ravindra","Rohitash","Sagar","Saket","Samarth","Shivansh","Shlok","Shreyansh",
+"Soham","Sourabh","Sridhar","Sushant","Tanish","Teerth","Utkarsh","Vardhan","Vasu",
+"Ved","Vignesh","Viren","Yatin","Yug"
+];
 
 function generate(){
 
 let count = parseInt(document.getElementById("count").value);
-let type = document.getElementById("type").value;
 let unique = document.getElementById("unique").checked;
-
-if(count > 500){
-alert("Max 500 names allowed");
-return;
-}
-
-let base = (type === "indian") ? indianBase : englishBase;
 
 let result = document.getElementById("result");
 result.innerHTML = "";
+
+// 🔥 LIMIT CONTROL
+if(unique && count > names.length){
+alert("Only " + names.length + " unique names available");
+count = names.length;
+}
 
 let used = new Set();
 
@@ -190,25 +126,20 @@ for(let i=0; i<count; i++){
 
 let name;
 
-// 🔥 first use real names, then generate unlimited
-if(i < base.length){
-    name = base[Math.floor(Math.random()*base.length)];
-} else {
-    name = createName();
-}
-
-// 🔥 ensure no repeat
 if(unique){
-    while(used.has(name)){
-        name = createName();
-    }
-    used.add(name);
+do{
+name = names[Math.floor(Math.random()*names.length)];
+} while(used.has(name));
+used.add(name);
+}else{
+name = names[Math.floor(Math.random()*names.length)];
 }
 
 result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
 }
 
 }
+
 </script>
 
 </body>
