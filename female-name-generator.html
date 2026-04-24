@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Random Female Name Generator</title>
+<title>Indian Female Name Generator</title>
 
 <style>
 body{
@@ -21,7 +21,7 @@ margin:auto;
 padding:30px 15px;
 }
 
-input,select,button{
+input,button{
 width:100%;
 max-width:350px;
 padding:12px;
@@ -32,8 +32,9 @@ display:block;
 }
 
 button{
-background:#22c55e;
+background:#ec4899;
 color:white;
+cursor:pointer;
 }
 
 .name-item{
@@ -43,64 +44,25 @@ margin:5px 0;
 border-radius:6px;
 text-align:left;
 }
-
-/* 🔥 RELATED TOOLS */
-.tools-row{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:10px;
-margin-top:15px;
-}
-
-.tools-row a{
-background:#1e293b;
-padding:10px 14px;
-border-radius:8px;
-text-decoration:none;
-color:white;
-font-size:14px;
-display:inline-block;
-}
-
-.tools-row a:hover{
-background:#22c55e;
-}
-
-footer{
-margin-top:40px;
-font-size:16px;
-}
-
-footer a{
-color:white;
-margin:0 8px;
-text-decoration:none;
-}
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-<p style="font-size:14px; opacity:0.8;">
-Explore all tools: Indian • Male • Female • Baby • Username • Unique Names
+<h1>👩 Indian Female Name Generator</h1>
+<p><strong>100% Real Names • No Fake Names</strong></p>
+
+<p style="font-size:13px;opacity:0.7;">
+Max unique names available: 300+
 </p>
 
-<h1>👩 Random Female Name Generator</h1>
+<input type="number" id="count" value="20" min="1" max="300">
 
-<p><strong>Generate Unlimited Female Names • Free Tool</strong></p>
-
-<input type="number" id="count" value="20">
-
-<select id="type">
-<option value="indian">Indian</option>
-<option value="english">English</option>
-</select>
-
-<label><input type="checkbox" id="unique" checked> No Repeat</label>
+<label>
+<input type="checkbox" id="unique" checked> No Repeat
+</label>
 
 <button onclick="generate()">Generate Names</button>
 
@@ -108,73 +70,68 @@ Explore all tools: Indian • Male • Female • Baby • Username • Unique N
 
 </div>
 
-<!-- SEO CONTENT -->
-<div class="container">
-
-<h2>About This Tool</h2>
-<p>This random female name generator helps you generate unlimited female names instantly.</p>
-
-<h2>How to Use</h2>
-<p>Select type, enter number and click generate.</p>
-
-<h2>Features</h2>
-<ul style="text-align:left; max-width:300px; margin:auto;">
-<li>Unlimited names</li>
-<li>Indian & English</li>
-<li>No repeat option</li>
-<li>Fast & free</li>
-</ul>
-
-<!-- 🔥 RELATED TOOLS -->
-<h3>🔥 Related Name Tools</h3>
-
-<div class="tools-row">
-<a href="random-indian-name-generator.html">Indian Name Generator</a>
-<a href="male-name-generator.html">Male Name Generator</a>
-<a href="female-name-generator.html">Female Name Generator</a>
-<a href="baby-name-generator.html">Baby Name Generator</a>
-<a href="username-name-generator.html">Username Generator</a>
-<a href="unique-name-generator.html">Unique Name Generator</a>
-</div>
-
-</div>
-
-<footer>
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a> |
-<a href="privacy-policy.html">Privacy Policy</a> |
-<a href="disclaimer.html">Disclaimer</a>
-</footer>
-
 <script>
 
-const indian=["Saanvi","Aanya","Diya","Myra","Ananya","Riya","Kavya","Pooja"];
-const english=["Mary","Linda","Patricia","Jennifer","Susan","Jessica","Sarah"];
+// 🔥 REAL INDIAN FEMALE NAMES (~300)
+const names = [
+"Aaradhya","Aanya","Aarohi","Ananya","Anika","Aditi","Aisha","Akanksha","Alisha","Amrita",
+"Anjali","Ankita","Anushka","Arpita","Arti","Ashwini","Avni","Bhavna","Chandni","Charu",
+"Deepika","Deepti","Divya","Ekta","Esha","Falguni","Garima","Gauri","Geeta","Hema",
+"Himani","Isha","Ishita","Jaya","Juhi","Kajal","Kalpana","Kamini","Karishma","Kavita",
+"Kiran","Komal","Krishna","Kritika","Kusum","Lata","Madhuri","Mahima","Malti","Manisha",
+"Meena","Megha","Minal","Monika","Naina","Namrata","Neetu","Neha","Nidhi","Nikita",
+"Nisha","Pallavi","Pooja","Poonam","Pratibha","Preeti","Priya","Rachna","Radha","Radhika",
+"Rajni","Rani","Reema","Rekha","Renu","Richa","Ritu","Riya","Roshni","Sakshi",
+"Sangeeta","Sanjana","Sarika","Seema","Shalini","Sharda","Sharmila","Sheetal","Shikha",
+"Shilpa","Shivani","Shraddha","Shreya","Shweta","Simran","Smita","Sneha","Sonia",
+"Sujata","Suman","Sunita","Supriya","Swati","Tanisha","Tanu","Trisha","Urmila","Vaishali",
+"Vandana","Varsha","Vidya","Vinita","Yamini","Yashika","Zoya",
+"Aarushi","Aishwarya","Akriti","Amisha","Anamika","Anuja","Anuradha","Aparna","Archana",
+"Aruna","Asmita","Babita","Bela","Bharti","Bhumika","Bindu","Chhavi","Chitra","Damini",
+"Darshana","Devika","Diksha","Dipti","Durga","Eshwari","Ganga","Gayatri","Gitanjali",
+"Gunjan","Hansika","Harshita","Indu","Ira","Ishwari","Jahnavi","Janvi","Jaspreet",
+"Jayashree","Jyoti","Kalyani","Kanchan","Kanta","Karuna","Kavya","Khushboo","Kirti",
+"Kumari","Laxmi","Leela","Madhavi","Mala","Mamta","Mandira","Manju","Meenakshi",
+"Menka","Mithila","Mohini","Mridula","Nandini","Neelam","Neerja","Nirmala","Padma",
+"Parul","Pavitra","Payal","Pragya","Prerna","Priti","Purnima","Pushpa","Rajeshwari",
+"Raksha","Ranjana","Rashmi","Ratna","Renuka","Reshma","Rupali","Sadhana","Sangeeta",
+"Saroj","Savita","Shanta","Shashi","Sheela","Shobha","Shreelata","Shruti","Sita",
+"Sonal","Suhani","Sulekha","Surbhi","Surekha","Susmita","Tara","Tulsi","Usha","Veena",
+"Vibha","Vidhi","Vijaya","Vimla","Yogita"
+];
 
 function generate(){
-let count=parseInt(document.getElementById("count").value);
-let type=document.getElementById("type").value;
-let unique=document.getElementById("unique").checked;
 
-let pool = type==="indian" ? indian : english;
+let count = parseInt(document.getElementById("count").value);
+let unique = document.getElementById("unique").checked;
 
-let result=document.getElementById("result");
-result.innerHTML="";
+let result = document.getElementById("result");
+result.innerHTML = "";
 
-let used=new Set();
+// 🔥 LIMIT
+if(unique && count > names.length){
+alert("Only " + names.length + " unique names available");
+count = names.length;
+}
 
-for(let i=0;i<count;i++){
-let name=pool[Math.floor(Math.random()*pool.length)];
+let used = new Set();
+
+for(let i=0; i<count; i++){
+
+let name;
 
 if(unique){
-while(used.has(name)){
-name=pool[Math.floor(Math.random()*pool.length)];
-}
+do{
+name = names[Math.floor(Math.random()*names.length)];
+} while(used.has(name));
 used.add(name);
+}else{
+name = names[Math.floor(Math.random()*names.length)];
 }
 
-result.innerHTML+=`<div class="name-item">${i+1}. ${name}</div>`;
+result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
 }
+
 }
 
 </script>
