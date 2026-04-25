@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Unique Name Generator (Cool & Brand Names)</title>
+<title>Unique Name Generator (Stylish & Rare Names)</title>
 
 <style>
 body{
@@ -16,14 +16,14 @@ margin:0;
 }
 
 .container{
-max-width:500px;
+max-width:520px;
 margin:auto;
 padding:30px 15px;
 }
 
 input,select,button{
 width:100%;
-max-width:350px;
+max-width:360px;
 padding:12px;
 margin:10px auto;
 border-radius:10px;
@@ -32,7 +32,7 @@ display:block;
 }
 
 button{
-background:#a855f7;
+background:#06b6d4;
 color:white;
 cursor:pointer;
 }
@@ -47,9 +47,10 @@ cursor:pointer;
 }
 
 .name-item:hover{
-background:#a855f7;
+background:#06b6d4;
 }
 </style>
+
 </head>
 
 <body>
@@ -57,24 +58,21 @@ background:#a855f7;
 <div class="container">
 
 <h1>✨ Unique Name Generator</h1>
-<p><strong>Cool • Brand • Stylish Names</strong></p>
+<p><strong>Rare • Stylish • Modern • Unlimited</strong></p>
 
-<input type="text" id="keyword" placeholder="Enter keyword (optional)">
+<input type="number" id="count" value="30" min="1" max="500">
 
-<input type="number" id="count" value="20" min="1" max="200">
-
-<select id="type">
-<option value="brand">Brand Names</option>
-<option value="cool">Cool Names</option>
-<option value="modern">Modern Names</option>
-<option value="short">Short Names</option>
+<select id="style">
+<option value="modern">Modern</option>
+<option value="stylish">Stylish</option>
+<option value="brand">Brand Style</option>
 </select>
 
 <label>
 <input type="checkbox" id="unique" checked> No Repeat
 </label>
 
-<button onclick="generate()">Generate Names</button>
+<button onclick="generate()">Generate Unique Names</button>
 
 <div id="result"></div>
 
@@ -82,10 +80,13 @@ background:#a855f7;
 
 <script>
 
-// 🔥 WORD BANK
-const start = ["neo","zen","pro","ultra","meta","next","smart","quick","hyper","prime"];
-const middle = ["tech","zone","hub","lab","world","space","link","craft","core","byte"];
-const end = ["x","ify","ly","ster","io","hub","pro","max","plus","go"];
+// 🔥 NAME PARTS
+const start = ["Ka","Ra","Vi","Sa","Ni","Lu","Ze","Ari","Neo","Zy"];
+const middle = ["an","ar","en","ix","on","al","ir","os"];
+const end = ["ya","it","ex","or","an","esh","io","us","ax"];
+
+const stylishEnd = ["X","Z","99","YT","Pro","King","Live"];
+const brandEnd = ["ify","ly","ster","hub","zone","labs","tech"];
 
 function random(arr){
 return arr[Math.floor(Math.random()*arr.length)];
@@ -93,9 +94,8 @@ return arr[Math.floor(Math.random()*arr.length)];
 
 function generate(){
 
-let keyword = document.getElementById("keyword").value.trim().toLowerCase();
 let count = parseInt(document.getElementById("count").value);
-let type = document.getElementById("type").value;
+let style = document.getElementById("style").value;
 let unique = document.getElementById("unique").checked;
 
 let result = document.getElementById("result");
@@ -105,21 +105,31 @@ let used = new Set();
 
 for(let i=0;i<count;i++){
 
-let name;
+let name = random(start) + random(middle) + random(end);
 
-// 🔥 NAME LOGIC
-if(type === "short"){
-name = random(start) + Math.floor(Math.random()*99);
-}else{
-name = random(start) + (keyword || random(middle)) + random(end);
+// 🔥 STYLE APPLY
+if(style === "stylish"){
+name += random(stylishEnd);
 }
 
-// clean
-name = name.replace(/\s+/g,"");
+if(style === "brand"){
+name = name.toLowerCase() + random(brandEnd);
+}
 
+// 🔥 UNIQUE FIX
 if(unique){
-while(used.has(name)){
+let attempts = 0;
+while(used.has(name) && attempts < 50){
 name = random(start) + random(middle) + random(end);
+
+if(style === "stylish"){
+name += random(stylishEnd);
+}
+if(style === "brand"){
+name = name.toLowerCase() + random(brandEnd);
+}
+
+attempts++;
 }
 used.add(name);
 }
@@ -129,7 +139,7 @@ result.innerHTML += `<div class="name-item" onclick="copyText('${name}')">${i+1}
 
 }
 
-// 🔥 COPY FUNCTION
+// 🔥 COPY
 function copyText(text){
 navigator.clipboard.writeText(text);
 alert("Copied: " + text);
