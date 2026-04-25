@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Username Generator (Stylish & Random)</title>
+<title>Username Generator (Stylish & Unique)</title>
 
 <style>
 body{
@@ -16,14 +16,14 @@ margin:0;
 }
 
 .container{
-max-width:500px;
+max-width:520px;
 margin:auto;
 padding:30px 15px;
 }
 
 input,select,button{
 width:100%;
-max-width:350px;
+max-width:360px;
 padding:12px;
 margin:10px auto;
 border-radius:10px;
@@ -32,7 +32,7 @@ display:block;
 }
 
 button{
-background:#3b82f6;
+background:#8b5cf6;
 color:white;
 cursor:pointer;
 }
@@ -47,9 +47,10 @@ cursor:pointer;
 }
 
 .name-item:hover{
-background:#3b82f6;
+background:#8b5cf6;
 }
 </style>
+
 </head>
 
 <body>
@@ -57,18 +58,21 @@ background:#3b82f6;
 <div class="container">
 
 <h1>🔥 Username Generator</h1>
-<p><strong>Stylish • Cool • Unlimited Usernames</strong></p>
+<p><strong>Stylish • Unique • Instagram • Gaming</strong></p>
 
-<input type="text" id="keyword" placeholder="Enter keyword (optional)">
+<input type="text" id="name" placeholder="Enter your name (optional)">
 
-<input type="number" id="count" value="20" min="1" max="200">
+<input type="number" id="count" value="30" min="1" max="200">
 
 <select id="style">
-<option value="cool">Cool</option>
+<option value="simple">Simple</option>
+<option value="stylish">Stylish</option>
 <option value="gaming">Gaming</option>
-<option value="instagram">Instagram</option>
-<option value="short">Short</option>
 </select>
+
+<label>
+<input type="checkbox" id="unique" checked> No Repeat
+</label>
 
 <button onclick="generate()">Generate Usernames</button>
 
@@ -78,42 +82,76 @@ background:#3b82f6;
 
 <script>
 
-const words1 = ["king","pro","dark","real","mr","official","crazy","legend","silent","cool"];
-const words2 = ["gamer","boy","yt","live","zone","world","x","hub","army","vibes"];
+const prefixes = ["real","its","the","official","mr","iam","legend","dark","pro"];
+const suffixes = ["yt","official","gaming","live","x","zone","007","king","boss"];
 
-function randomWord(arr){
+const gamingWords = ["killer","sniper","shadow","ghost","dragon","hunter","warrior","beast"];
+
+function random(arr){
 return arr[Math.floor(Math.random()*arr.length)];
 }
 
 function generate(){
 
-let keyword = document.getElementById("keyword").value.trim();
+let name = document.getElementById("name").value.trim().toLowerCase();
 let count = parseInt(document.getElementById("count").value);
 let style = document.getElementById("style").value;
+let unique = document.getElementById("unique").checked;
 
 let result = document.getElementById("result");
 result.innerHTML = "";
 
+let used = new Set();
+
 for(let i=0;i<count;i++){
 
-let name = "";
+let username;
 
-// 🔥 username logic
-if(style === "short"){
-name = randomWord(words1) + Math.floor(Math.random()*99);
-}else{
-name = randomWord(words1) + (keyword || randomWord(words2)) + Math.floor(Math.random()*999);
+// 🔥 BASE NAME
+let base = name ? name : random(["user","cool","star","hero","player"]);
+
+// 🔥 STYLE LOGIC
+if(style === "simple"){
+username = base + random(suffixes);
 }
 
-// clean
-name = name.replace(/\s+/g, "").toLowerCase();
+else if(style === "stylish"){
+username = random(prefixes) + "_" + base + "_" + random(suffixes);
+}
 
-result.innerHTML += `<div class="name-item" onclick="copyText('${name}')">${i+1}. ${name}</div>`;
+else{
+// gaming
+username = base + "_" + random(gamingWords) + random(["x","99","007"]);
+}
+
+// 🔥 UNIQUE FIX
+if(unique){
+let attempts = 0;
+while(used.has(username) && attempts < 50){
+
+base = name ? name : random(["user","cool","star","hero","player"]);
+
+if(style === "simple"){
+username = base + random(suffixes);
+}
+else if(style === "stylish"){
+username = random(prefixes) + "_" + base + "_" + random(suffixes);
+}
+else{
+username = base + "_" + random(gamingWords) + random(["x","99","007"]);
+}
+
+attempts++;
+}
+used.add(username);
+}
+
+result.innerHTML += `<div class="name-item" onclick="copyText('${username}')">${i+1}. ${username}</div>`;
 }
 
 }
 
-// 🔥 click to copy
+// 🔥 COPY
 function copyText(text){
 navigator.clipboard.writeText(text);
 alert("Copied: " + text);
