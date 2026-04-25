@@ -16,14 +16,14 @@ margin:0;
 }
 
 .container{
-max-width:500px;
+max-width:520px;
 margin:auto;
 padding:30px 15px;
 }
 
 input,select,button{
 width:100%;
-max-width:350px;
+max-width:360px;
 padding:12px;
 margin:10px auto;
 border-radius:10px;
@@ -50,6 +50,7 @@ cursor:pointer;
 background:#10b981;
 }
 </style>
+
 </head>
 
 <body>
@@ -57,20 +58,20 @@ background:#10b981;
 <div class="container">
 
 <h1>🎲 Random Name Generator</h1>
-<p><strong>Indian • English • Male • Female • 100% Real Names</strong></p>
+<p><strong>Indian • English • Male • Female • Unlimited</strong></p>
 
-<input type="number" id="count" value="20" min="1" max="300">
-
-<select id="country">
-<option value="all">All (Indian + English)</option>
-<option value="indian">Indian</option>
-<option value="english">English</option>
-</select>
+<input type="number" id="count" value="50" min="1" max="1000">
 
 <select id="gender">
-<option value="all">All</option>
 <option value="male">Male</option>
 <option value="female">Female</option>
+<option value="both">Both</option>
+</select>
+
+<select id="type">
+<option value="indian">Indian</option>
+<option value="english">English</option>
+<option value="mixed">Mixed</option>
 </select>
 
 <label>
@@ -85,70 +86,93 @@ background:#10b981;
 
 <script>
 
-// 🔥 INDIAN MALE
-const indianMale = [
-"Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Rahul","Krishna","Shivam","Aman",
-"Nikhil","Yash","Aryan","Ravi","Vikas","Raj","Amit","Akash","Karan","Mohit"
-];
+// 🔥 DATA
 
-// 🔥 INDIAN FEMALE
-const indianFemale = [
-"Aaradhya","Ananya","Aditi","Anushka","Pooja","Priya","Riya","Sneha","Simran","Neha",
-"Kavita","Shreya","Shivani","Swati","Tanisha","Trisha","Isha","Kajal","Radhika","Sonia"
-];
+const indianMale = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Aryan","Krishna","Shivam","Aman","Rahul","Kunal"];
+const indianFemale = ["Aaradhya","Ananya","Aditi","Anushka","Pooja","Priya","Riya","Sneha","Simran","Neha","Kavita","Shreya"];
 
-// 🔥 ENGLISH MALE
-const englishMale = [
-"James","John","Michael","David","Robert","William","Daniel","Matthew","Joseph","Thomas"
-];
+const englishMale = ["James","John","Michael","David","Robert","Daniel","Matthew","Joseph"];
+const englishFemale = ["Emily","Sophia","Olivia","Emma","Ava","Isabella","Mia","Charlotte"];
 
-// 🔥 ENGLISH FEMALE
-const englishFemale = [
-"Emily","Sophia","Olivia","Emma","Ava","Isabella","Mia","Charlotte","Amelia","Harper"
-];
+const indianLast = ["Sharma","Verma","Gupta","Yadav","Patel","Singh","Reddy","Nair"];
+const englishLast = ["Smith","Johnson","Brown","Taylor","Anderson","White","Martin"];
+
+function random(arr){
+return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function getFirstName(gender,type){
+
+// 🔥 MALE
+if(gender === "male"){
+if(type === "english") return random(englishMale);
+return random(indianMale);
+}
+
+// 🔥 FEMALE
+if(gender === "female"){
+if(type === "english") return random(englishFemale);
+return random(indianFemale);
+}
+
+// 🔥 BOTH
+if(type === "english"){
+return random([...englishMale, ...englishFemale]);
+}
+
+if(type === "indian"){
+return random([...indianMale, ...indianFemale]);
+}
+
+// mixed
+return Math.random() > 0.5
+? random([...indianMale, ...indianFemale])
+: random([...englishMale, ...englishFemale]);
+
+}
+
+function getLastName(type){
+
+if(type === "indian") return random(indianLast);
+if(type === "english") return random(englishLast);
+
+// mixed (safe)
+return Math.random() > 0.5 ? random(indianLast) : random(englishLast);
+
+}
 
 function generate(){
 
 let count = parseInt(document.getElementById("count").value);
-let country = document.getElementById("country").value;
 let gender = document.getElementById("gender").value;
+let type = document.getElementById("type").value;
 let unique = document.getElementById("unique").checked;
-
-let pool = [];
-
-// 🔥 BUILD POOL
-if(country === "indian" || country === "all"){
-if(gender === "male" || gender === "all") pool = pool.concat(indianMale);
-if(gender === "female" || gender === "all") pool = pool.concat(indianFemale);
-}
-
-if(country === "english" || country === "all"){
-if(gender === "male" || gender === "all") pool = pool.concat(englishMale);
-if(gender === "female" || gender === "all") pool = pool.concat(englishFemale);
-}
 
 let result = document.getElementById("result");
 result.innerHTML = "";
 
-// 🔥 LIMIT
-if(unique && count > pool.length){
-alert("Only " + pool.length + " unique names available");
-count = pool.length;
-}
-
 let used = new Set();
 
-for(let i=0; i<count; i++){
+for(let i=0;i<count;i++){
 
-let name;
+let first = getFirstName(gender,type);
+let last = getLastName(type);
+let name = first + " " + last;
 
+// 🔥 NO REPEAT
 if(unique){
-do{
-name = pool[Math.floor(Math.random()*pool.length)];
-} while(used.has(name));
+let attempts = 0;
+
+while(used.has(name) && attempts < 100){
+
+first = getFirstName(gender,type);
+last = getLastName(type);
+name = first + " " + last;
+
+attempts++;
+}
+
 used.add(name);
-}else{
-name = pool[Math.floor(Math.random()*pool.length)];
 }
 
 result.innerHTML += `<div class="name-item" onclick="copyText('${name}')">${i+1}. ${name}</div>`;
