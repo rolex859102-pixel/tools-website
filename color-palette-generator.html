@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Color Palette Generator</title>
+<title>Unlimited Color Palette Generator</title>
 
 <style>
 body{
@@ -16,7 +16,7 @@ margin:0;
 }
 
 .container{
-padding:30px 15px;
+padding:20px;
 }
 
 button{
@@ -26,25 +26,25 @@ border:none;
 color:white;
 border-radius:8px;
 cursor:pointer;
+margin:10px;
 }
 
 .palette{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
-margin-top:20px;
 }
 
 .color-box{
-width:120px;
-height:120px;
-margin:10px;
+width:110px;
+height:110px;
+margin:8px;
 border-radius:10px;
 display:flex;
 align-items:flex-end;
 justify-content:center;
-font-size:14px;
-padding:10px;
+font-size:13px;
+padding:8px;
 cursor:pointer;
 }
 </style>
@@ -54,9 +54,9 @@ cursor:pointer;
 
 <div class="container">
 
-<h1>🎨 Color Palette Generator</h1>
+<h1>🎨 Unlimited Color Palette Generator</h1>
 
-<button onclick="generate()">Generate Palette</button>
+<button onclick="generateColors(12)">Generate More Colors</button>
 
 <div id="palette" class="palette"></div>
 
@@ -75,29 +75,41 @@ color += letters[Math.floor(Math.random()*16)];
 return color;
 }
 
-function generate(){
+function generateColors(count){
 
 let palette = document.getElementById("palette");
-palette.innerHTML = "";
 
-for(let i=0;i<6;i++){
+for(let i=0;i<count;i++){
 
 let color = randomColor();
 
-palette.innerHTML += `
-<div class="color-box" style="background:${color}" onclick="copyColor('${color}')">
-${color}
-</div>
-`;
+let div = document.createElement("div");
+div.className = "color-box";
+div.style.background = color;
+div.innerText = color;
 
-}
-
-}
-
-function copyColor(color){
+div.onclick = function(){
 navigator.clipboard.writeText(color);
 alert("Copied: " + color);
+};
+
+palette.appendChild(div);
+
 }
+
+}
+
+// 🔥 AUTO LOAD ON SCROLL (INFINITE FEEL)
+window.addEventListener("scroll", function(){
+
+if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 50){
+generateColors(6);
+}
+
+});
+
+// 🔥 INITIAL LOAD
+generateColors(12);
 
 </script>
 
