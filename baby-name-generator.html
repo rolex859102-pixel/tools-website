@@ -86,24 +86,47 @@ background:#f59e0b;
 
 <script>
 
-// 🔥 INDIAN BOY
-const indianBoy = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Aryan","Krishna","Shivam","Aman"];
+// 🔥 DATA
 
-// 🔥 INDIAN GIRL
+const indianBoy = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Aryan","Krishna","Shivam","Aman"];
 const indianGirl = ["Aaradhya","Ananya","Aditi","Anushka","Pooja","Priya","Riya","Sneha","Simran","Neha"];
 
-// 🔥 ENGLISH BOY
 const englishBoy = ["James","John","Michael","David","Robert","Daniel","Matthew"];
-
-// 🔥 ENGLISH GIRL
 const englishGirl = ["Emily","Sophia","Olivia","Emma","Ava","Isabella","Mia"];
 
-// 🔥 LAST NAMES (REAL)
-const indianLast = ["Sharma","Verma","Gupta","Yadav","Patel","Singh","Khan"];
+const indianLast = ["Sharma","Verma","Gupta","Yadav","Patel","Singh"];
 const englishLast = ["Smith","Johnson","Brown","Taylor","Anderson","White"];
 
 function random(arr){
 return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function getFirstName(gender,type){
+
+if(gender === "boy"){
+return type === "english" ? random(englishBoy) : random(indianBoy);
+}
+
+if(gender === "girl"){
+return type === "english" ? random(englishGirl) : random(indianGirl);
+}
+
+// both
+if(type === "english"){
+return random([...englishBoy, ...englishGirl]);
+}
+return random([...indianBoy, ...indianGirl]);
+
+}
+
+function getLastName(type){
+
+if(type === "indian") return random(indianLast);
+if(type === "english") return random(englishLast);
+
+// mixed (no weird mix logic)
+return Math.random() > 0.5 ? random(indianLast) : random(englishLast);
+
 }
 
 function generate(){
@@ -120,46 +143,23 @@ let used = new Set();
 
 for(let i=0;i<count;i++){
 
-let first, last, name;
+let first = getFirstName(gender,type);
+let last = getLastName(type);
+let name = first + " " + last;
 
-// 🔥 GENDER LOGIC
-if(gender === "boy"){
-first = type === "english" ? random(englishBoy) : random(indianBoy);
-}
-else if(gender === "girl"){
-first = type === "english" ? random(englishGirl) : random(indianGirl);
-}
-else{
-let allFirst = [...indianBoy, ...indianGirl, ...englishBoy, ...englishGirl];
-first = random(allFirst);
-}
-
-// 🔥 TYPE LOGIC (NO WEIRD MIX)
-if(type === "indian"){
-last = random(indianLast);
-}
-else if(type === "english"){
-last = random(englishLast);
-}
-else{
-if(Math.random() > 0.5){
-last = random(indianLast);
-}else{
-last = random(englishLast);
-}
-}
-
-name = first + " " + last;
-
-// 🔥 NO REPEAT
+// 🔥 NO REPEAT FIX
 if(unique){
 let attempts = 0;
-while(used.has(name) && attempts < 50){
-first = random([...indianBoy, ...indianGirl]);
-last = random(indianLast);
+
+while(used.has(name) && attempts < 100){
+
+first = getFirstName(gender,type);
+last = getLastName(type);
 name = first + " " + last;
+
 attempts++;
 }
+
 used.add(name);
 }
 
@@ -168,7 +168,7 @@ result.innerHTML += `<div class="name-item" onclick="copyText('${name}')">${i+1}
 
 }
 
-// 🔥 COPY
+// 🔥 COPY FUNCTION
 function copyText(text){
 navigator.clipboard.writeText(text);
 alert("Copied: " + text);
