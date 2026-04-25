@@ -1,82 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Color Palette Generator</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
+<title>Color Palette Generator</title>
+
 <style>
-body {
-    background:#020617;
-    color:white;
-    font-family:Arial;
-    text-align:center;
-    margin:0;
+body{
+background:#020617;
+color:white;
+font-family:Arial;
+text-align:center;
+margin:0;
 }
 
-/* 🔥 MAIN FIX */
-.container {
-    max-width:500px;
-    width:100%;
-    margin:auto;
-    padding:30px 15px;
-    box-sizing:border-box;
+.container{
+padding:30px 15px;
 }
 
-/* 🔥 INPUT + BUTTON FIX */
-input, textarea, button {
-    width:100%;
-    max-width:350px;
-    padding:12px;
-    margin:10px auto;
-    border-radius:10px;
-    border:none;
-    display:block;
-    box-sizing:border-box;
+button{
+padding:12px 20px;
+background:#3b82f6;
+border:none;
+color:white;
+border-radius:8px;
+cursor:pointer;
 }
 
-button {
-    background:#22c55e;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
+.palette{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+margin-top:20px;
 }
 
-/* 🔥 RESULT */
-#result {
-    margin-top:20px;
-    font-size:18px;
-}
-
-/* 🔥 FOOTER */
-footer {
-    margin-top:40px;
-    font-size:17px;
-}
-
-footer a {
-    color:white;
-    margin:0 8px;
-    text-decoration:none;
-}
-
-footer a:hover {
-    color:#60a5fa;
-}
-
-/* 🔥 MOBILE PERFECT FIX */
-@media (max-width:600px) {
-    .container {
-        padding:25px 12px;
-    }
-
-    h1 {
-        font-size:22px;
-    }
-
-    input, textarea, button {
-        max-width:100%;
-        width:100%;
-    }
+.color-box{
+width:120px;
+height:120px;
+margin:10px;
+border-radius:10px;
+display:flex;
+align-items:flex-end;
+justify-content:center;
+font-size:14px;
+padding:10px;
+cursor:pointer;
 }
 </style>
 </head>
@@ -84,31 +53,53 @@ footer a:hover {
 <body>
 
 <div class="container">
-<h1>Color Palette Generator</h1>
-<p><strong>Generate beautiful color combinations.</strong></p>
-<p><strong>100% Free • Generate Color Palettes Instantly • No Signup Required</strong></p>
-<button onclick="generate()">Generate</button>
 
-<div id="palette"></div>
+<h1>🎨 Color Palette Generator</h1>
+
+<button onclick="generate()">Generate Palette</button>
+
+<div id="palette" class="palette"></div>
+
 </div>
 
 <script>
+
+function randomColor(){
+let letters = "0123456789ABCDEF";
+let color = "#";
+
+for(let i=0;i<6;i++){
+color += letters[Math.floor(Math.random()*16)];
+}
+
+return color;
+}
+
 function generate(){
-let colors="";
-for(let i=0;i<5;i++){
-let color="#"+Math.floor(Math.random()*16777215).toString(16);
-colors+=`<div class="color" style="background:${color}"></div>`;
+
+let palette = document.getElementById("palette");
+palette.innerHTML = "";
+
+for(let i=0;i<6;i++){
+
+let color = randomColor();
+
+palette.innerHTML += `
+<div class="color-box" style="background:${color}" onclick="copyColor('${color}')">
+${color}
+</div>
+`;
+
 }
-document.getElementById("palette").innerHTML=colors;
+
 }
+
+function copyColor(color){
+navigator.clipboard.writeText(color);
+alert("Copied: " + color);
+}
+
 </script>
-<footer style="margin-top:60px; padding:20px 0; font-size:17px; border-top:1px solid #1e293b;">
 
-<a href="about.html" style="color:white; margin:0 12px; text-decoration:none;">About</a> |
-<a href="contact.html" style="color:white; margin:0 12px; text-decoration:none;">Contact</a> |
-<a href="privacy-policy.html" style="color:white; margin:0 12px; text-decoration:none;">Privacy Policy</a> |
-<a href="disclaimer.html" style="color:white; margin:0 12px; text-decoration:none;">Disclaimer</a>
-
-</footer>
 </body>
 </html>
