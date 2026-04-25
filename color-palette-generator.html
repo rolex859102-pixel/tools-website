@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Color Palette Generator Pro</title>
+<title>Unlimited Color Palette Generator</title>
 
 <style>
 body{
@@ -29,10 +29,11 @@ background:#3b82f6;
 color:white;
 }
 
+/* TOP PALETTE */
 .palette{
 display:flex;
-flex-wrap:wrap;
 justify-content:center;
+flex-wrap:wrap;
 }
 
 .color-box{
@@ -45,8 +46,6 @@ flex-direction:column;
 justify-content:flex-end;
 align-items:center;
 padding:10px;
-font-size:13px;
-cursor:pointer;
 position:relative;
 }
 
@@ -54,7 +53,27 @@ position:relative;
 position:absolute;
 top:5px;
 right:5px;
-font-size:18px;
+cursor:pointer;
+}
+
+/* UNLIMITED GRID */
+.grid{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+margin-top:30px;
+}
+
+.grid-box{
+width:100px;
+height:100px;
+margin:6px;
+border-radius:8px;
+display:flex;
+align-items:flex-end;
+justify-content:center;
+font-size:12px;
+padding:5px;
 cursor:pointer;
 }
 </style>
@@ -64,13 +83,19 @@ cursor:pointer;
 
 <div class="container">
 
-<h1>🎨 Color Palette Generator PRO</h1>
+<h1>🎨 Color Palette PRO MAX</h1>
 
 <button onclick="generatePalette()">🔄 Shuffle</button>
 <button onclick="copyAll()">📋 Copy All</button>
-<button onclick="downloadImage()">⬇️ Download</button>
+<button onclick="addMore()">➕ Generate More</button>
 
+<!-- TOP 6 COLORS -->
 <div id="palette" class="palette"></div>
+
+<h2>🔥 Unlimited Colors</h2>
+
+<!-- UNLIMITED COLORS -->
+<div id="grid" class="grid"></div>
 
 </div>
 
@@ -79,6 +104,7 @@ cursor:pointer;
 let colors = [];
 let locked = [];
 
+// 🔥 RANDOM COLOR
 function randomColor(){
 let letters = "0123456789ABCDEF";
 let color = "#";
@@ -88,6 +114,7 @@ color += letters[Math.floor(Math.random()*16)];
 return color;
 }
 
+// 🔥 TOP PALETTE (6 COLORS)
 function generatePalette(){
 
 let palette = document.getElementById("palette");
@@ -116,46 +143,59 @@ palette.appendChild(div);
 }
 }
 
-function toggleLock(index, e){
+// 🔒 LOCK
+function toggleLock(i, e){
 e.stopPropagation();
-locked[index] = !locked[index];
+locked[i] = !locked[i];
 generatePalette();
 }
 
+// 📋 COPY
 function copyColor(color){
 navigator.clipboard.writeText(color);
 alert("Copied: " + color);
 }
 
+// 📋 COPY ALL
 function copyAll(){
-let text = colors.join(", ");
-navigator.clipboard.writeText(text);
-alert("All colors copied!");
+navigator.clipboard.writeText(colors.join(", "));
+alert("All copied!");
 }
 
-// 🔥 DOWNLOAD IMAGE
-function downloadImage(){
+// ➕ ADD MORE COLORS (UNLIMITED)
+function addMore(){
 
-let canvas = document.createElement("canvas");
-canvas.width = 600;
-canvas.height = 200;
+let grid = document.getElementById("grid");
 
-let ctx = canvas.getContext("2d");
+for(let i=0;i<12;i++){
 
-for(let i=0;i<colors.length;i++){
-ctx.fillStyle = colors[i];
-ctx.fillRect(i*100, 0, 100, 200);
+let color = randomColor();
+
+let div = document.createElement("div");
+div.className = "grid-box";
+div.style.background = color;
+div.innerText = color;
+
+div.onclick = function(){
+copyColor(color);
+};
+
+grid.appendChild(div);
+}
 }
 
-let link = document.createElement("a");
-link.download = "palette.png";
-link.href = canvas.toDataURL();
-link.click();
+// 🔥 AUTO SCROLL LOAD
+window.addEventListener("scroll", function(){
 
+if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 50){
+addMore();
 }
+
+});
 
 // INIT
 generatePalette();
+addMore();
 
 </script>
 
