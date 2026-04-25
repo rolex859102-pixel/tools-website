@@ -93,15 +93,15 @@ Explore all tools: Indian • Male • Female • Baby • Username • Unique N
 
 <p><strong>Generate Unlimited Indian Names • Free Tool</strong></p>
 
-<input type="number" id="count" value="20">
+<input type="number" id="count" value="20" min="1" max="400">
 
-<select id="gender">
-<option value="all">All</option>
-<option value="male">Male</option>
-<option value="female">Female</option>
-</select>
+<label>
+<input type="checkbox" id="unique" checked> No Repeat
+</label>
 
-<label><input type="checkbox" id="unique" checked> No Repeat</label>
+<p style="font-size:13px;opacity:0.7;">
+No repeat works up to available names limit
+</p>
 
 <button onclick="generate()">Generate Names</button>
 
@@ -149,24 +149,53 @@ Explore all tools: Indian • Male • Female • Baby • Username • Unique N
 
 <script>
 
-const male=["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul"];
-const female=["Saanvi","Aanya","Diya","Myra","Ananya","Riya","Kavya","Pooja"];
+
+// 🔥 Shuffle function (Fisher-Yates)
+function shuffle(array){
+for(let i = array.length - 1; i > 0; i--){
+let j = Math.floor(Math.random() * (i + 1));
+[array[i], array[j]] = [array[j], array[i]];
+}
+return array;
+}
 
 function generate(){
-let count=parseInt(document.getElementById("count").value);
-let gender=document.getElementById("gender").value;
 
-let pool=[...male,...female];
-if(gender==="male") pool=male;
-if(gender==="female") pool=female;
+let count = parseInt(document.getElementById("count").value);
+let unique = document.getElementById("unique").checked;
 
-let result=document.getElementById("result");
-result.innerHTML="";
+let result = document.getElementById("result");
+result.innerHTML = "";
 
-for(let i=0;i<count;i++){
-let name=pool[Math.floor(Math.random()*pool.length)];
-result.innerHTML+=`<div class="name-item">${i+1}. ${name}</div>`;
+// 👉 copy array (important)
+let pool = [...names];
+
+// 🔥 shuffle once
+pool = shuffle(pool);
+
+// 🔥 LIMIT FIX
+if(unique){
+if(count > pool.length){
+alert("Only " + pool.length + " unique names available");
+count = pool.length;
 }
+
+// 👉 direct slice (NO repeat possible)
+pool = pool.slice(0, count);
+}else{
+// repeat allowed
+for(let i=0;i<count;i++){
+let name = pool[Math.floor(Math.random()*pool.length)];
+result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
+}
+return;
+}
+
+// 👉 print unique
+pool.forEach((name,index)=>{
+result.innerHTML += `<div class="name-item">${index+1}. ${name}</div>`;
+});
+
 }
 
 </script>
