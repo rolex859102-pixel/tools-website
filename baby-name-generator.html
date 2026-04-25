@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Baby Name Generator (Indian)</title>
+<title>Baby Name Generator (Unlimited & Unique)</title>
 
 <style>
 body{
@@ -16,14 +16,14 @@ margin:0;
 }
 
 .container{
-max-width:500px;
+max-width:520px;
 margin:auto;
 padding:30px 15px;
 }
 
 input,select,button{
 width:100%;
-max-width:350px;
+max-width:360px;
 padding:12px;
 margin:10px auto;
 border-radius:10px;
@@ -39,12 +39,18 @@ cursor:pointer;
 
 .name-item{
 background:#1e293b;
-padding:8px;
-margin:5px 0;
+padding:10px;
+margin:6px 0;
 border-radius:6px;
 text-align:left;
+cursor:pointer;
+}
+
+.name-item:hover{
+background:#f59e0b;
 }
 </style>
+
 </head>
 
 <body>
@@ -52,14 +58,20 @@ text-align:left;
 <div class="container">
 
 <h1>👶 Baby Name Generator</h1>
-<p><strong>100% Real Indian Names • Male + Female</strong></p>
+<p><strong>Boy • Girl • Indian • English • Unlimited</strong></p>
 
-<input type="number" id="count" value="20" min="1" max="300">
+<input type="number" id="count" value="50" min="1" max="1000">
 
 <select id="gender">
-<option value="all">All</option>
-<option value="male">Boy Names</option>
-<option value="female">Girl Names</option>
+<option value="boy">Boy</option>
+<option value="girl">Girl</option>
+<option value="both">Both</option>
+</select>
+
+<select id="type">
+<option value="indian">Indian</option>
+<option value="english">English</option>
+<option value="mixed">Mixed</option>
 </select>
 
 <label>
@@ -74,61 +86,92 @@ text-align:left;
 
 <script>
 
-// 🔥 MALE NAMES (short list reuse)
-const male = [
-"Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul","Krishna","Shivam",
-"Aman","Nikhil","Yash","Aryan","Ravi","Vikas","Raj","Amit","Akash","Karan"
-];
+// 🔥 INDIAN BOY
+const indianBoy = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Aryan","Krishna","Shivam","Aman"];
 
-// 🔥 FEMALE NAMES
-const female = [
-"Aaradhya","Ananya","Aditi","Anushka","Pooja","Priya","Riya","Sneha","Simran","Neha",
-"Kavita","Shreya","Shivani","Swati","Tanisha","Trisha","Isha","Kajal","Radhika","Sonia"
-];
+// 🔥 INDIAN GIRL
+const indianGirl = ["Aaradhya","Ananya","Aditi","Anushka","Pooja","Priya","Riya","Sneha","Simran","Neha"];
+
+// 🔥 ENGLISH BOY
+const englishBoy = ["James","John","Michael","David","Robert","Daniel","Matthew"];
+
+// 🔥 ENGLISH GIRL
+const englishGirl = ["Emily","Sophia","Olivia","Emma","Ava","Isabella","Mia"];
+
+// 🔥 LAST NAMES (REAL)
+const indianLast = ["Sharma","Verma","Gupta","Yadav","Patel","Singh","Khan"];
+const englishLast = ["Smith","Johnson","Brown","Taylor","Anderson","White"];
+
+function random(arr){
+return arr[Math.floor(Math.random()*arr.length)];
+}
 
 function generate(){
 
 let count = parseInt(document.getElementById("count").value);
 let gender = document.getElementById("gender").value;
+let type = document.getElementById("type").value;
 let unique = document.getElementById("unique").checked;
-
-let pool = [];
-
-if(gender === "male"){
-pool = male;
-}else if(gender === "female"){
-pool = female;
-}else{
-pool = male.concat(female);
-}
 
 let result = document.getElementById("result");
 result.innerHTML = "";
 
-// limit
-if(unique && count > pool.length){
-alert("Only " + pool.length + " unique names available");
-count = pool.length;
-}
-
 let used = new Set();
 
-for(let i=0; i<count; i++){
+for(let i=0;i<count;i++){
 
-let name;
+let first, last, name;
 
-if(unique){
-do{
-name = pool[Math.floor(Math.random()*pool.length)];
-} while(used.has(name));
-used.add(name);
+// 🔥 GENDER LOGIC
+if(gender === "boy"){
+first = type === "english" ? random(englishBoy) : random(indianBoy);
+}
+else if(gender === "girl"){
+first = type === "english" ? random(englishGirl) : random(indianGirl);
+}
+else{
+let allFirst = [...indianBoy, ...indianGirl, ...englishBoy, ...englishGirl];
+first = random(allFirst);
+}
+
+// 🔥 TYPE LOGIC (NO WEIRD MIX)
+if(type === "indian"){
+last = random(indianLast);
+}
+else if(type === "english"){
+last = random(englishLast);
+}
+else{
+if(Math.random() > 0.5){
+last = random(indianLast);
 }else{
-name = pool[Math.floor(Math.random()*pool.length)];
+last = random(englishLast);
+}
 }
 
-result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
+name = first + " " + last;
+
+// 🔥 NO REPEAT
+if(unique){
+let attempts = 0;
+while(used.has(name) && attempts < 50){
+first = random([...indianBoy, ...indianGirl]);
+last = random(indianLast);
+name = first + " " + last;
+attempts++;
+}
+used.add(name);
 }
 
+result.innerHTML += `<div class="name-item" onclick="copyText('${name}')">${i+1}. ${name}</div>`;
+}
+
+}
+
+// 🔥 COPY
+function copyText(text){
+navigator.clipboard.writeText(text);
+alert("Copied: " + text);
 }
 
 </script>
