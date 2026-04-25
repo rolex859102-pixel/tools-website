@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Random Indian Name Generator</title>
+<title>Unlimited Real Name Generator (Pro)</title>
 
 <style>
 body{
@@ -16,14 +16,14 @@ margin:0;
 }
 
 .container{
-max-width:500px;
+max-width:520px;
 margin:auto;
 padding:30px 15px;
 }
 
 input,select,button{
 width:100%;
-max-width:350px;
+max-width:360px;
 padding:12px;
 margin:10px auto;
 border-radius:10px;
@@ -34,74 +34,42 @@ display:block;
 button{
 background:#22c55e;
 color:white;
+cursor:pointer;
 }
 
 .name-item{
 background:#1e293b;
-padding:8px;
-margin:5px 0;
+padding:10px;
+margin:6px 0;
 border-radius:6px;
 text-align:left;
+cursor:pointer;
 }
 
-/* 🔥 RELATED TOOLS FIX */
-.tools-row{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:10px;
-margin-top:15px;
-}
-
-.tools-row a{
-background:#1e293b;
-padding:10px 14px;
-border-radius:8px;
-text-decoration:none;
-color:white;
-font-size:14px;
-display:inline-block;
-}
-
-.tools-row a:hover{
+.name-item:hover{
 background:#22c55e;
 }
-
-footer{
-margin-top:40px;
-font-size:16px;
-}
-
-footer a{
-color:white;
-margin:0 8px;
-text-decoration:none;
-}
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-<p style="font-size:14px; opacity:0.8;">
-Explore all tools: Indian • Male • Female • Baby • Username • Unique Names
-</p>
+<h1>🚀 Unlimited Real Name Generator</h1>
+<p><strong>Indian • English • Full Name • No Repeat</strong></p>
 
-<h1>🇮🇳 Random Indian Name Generator</h1>
+<input type="number" id="count" value="50" min="1" max="1000">
 
-<p><strong>Generate Unlimited Indian Names • Free Tool</strong></p>
-
-<input type="number" id="count" value="20" min="1" max="400">
+<select id="style">
+<option value="indian">Indian</option>
+<option value="english">English</option>
+<option value="mix">Mixed</option>
+</select>
 
 <label>
 <input type="checkbox" id="unique" checked> No Repeat
 </label>
-
-<p style="font-size:13px;opacity:0.7;">
-⚠️ Unique names are limited to available list
-</p>
 
 <button onclick="generate()">Generate Names</button>
 
@@ -109,93 +77,77 @@ Explore all tools: Indian • Male • Female • Baby • Username • Unique N
 
 </div>
 
-<!-- SEO CONTENT -->
-<div class="container">
-
-<h2>About This Tool</h2>
-<p>This random Indian name generator helps you generate unlimited Indian names instantly.</p>
-
-<h2>How to Use</h2>
-<p>Select gender, enter number and click generate.</p>
-
-<h2>Features</h2>
-<ul style="text-align:left; max-width:300px; margin:auto;">
-<li>Unlimited names</li>
-<li>Male & female filter</li>
-<li>No repeat option</li>
-<li>Fast & free</li>
-</ul>
-
-<!-- 🔥 RELATED TOOLS -->
-<h3>🔥 Related Name Tools</h3>
-
-<div class="tools-row">
-<a href="random-indian-name-generator.html">Indian Name Generator</a>
-<a href="male-name-generator.html">Male Name Generator</a>
-<a href="female-name-generator.html">Female Name Generator</a>
-<a href="baby-name-generator.html">Baby Name Generator</a>
-<a href="username-name-generator.html">Username Generator</a>
-<a href="unique-name-generator.html">Unique Name Generator</a>
-</div>
-
-</div>
-
-<footer>
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a> |
-<a href="privacy-policy.html">Privacy Policy</a> |
-<a href="disclaimer.html">Disclaimer</a>
-</footer>
-
 <script>
 
+// 🔥 FIRST NAMES
+const indianFirst = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Rahul","Krishna","Shivam","Aman","Nikhil","Yash","Aryan","Ravi","Vikas","Raj","Amit","Akash","Karan","Mohit"];
+const englishFirst = ["James","John","Michael","David","Robert","Daniel","Matthew","Joseph","Thomas","William"];
 
-// 🔥 Shuffle function (Fisher-Yates)
-function shuffle(array){
-for(let i = array.length - 1; i > 0; i--){
-let j = Math.floor(Math.random() * (i + 1));
-[array[i], array[j]] = [array[j], array[i]];
-}
-return array;
+// 🔥 MIDDLE NAMES
+const middle = ["Kumar","Raj","Dev","Singh","Prasad","Ali","Khan","Das","Paul","James"];
+
+// 🔥 LAST NAMES
+const indianLast = ["Sharma","Verma","Gupta","Yadav","Singh","Patel","Khan","Das","Reddy","Nair"];
+const englishLast = ["Smith","Johnson","Brown","Taylor","Anderson","Thomas","Jackson","White","Harris","Martin"];
+
+function random(arr){
+return arr[Math.floor(Math.random()*arr.length)];
 }
 
 function generate(){
 
 let count = parseInt(document.getElementById("count").value);
+let style = document.getElementById("style").value;
 let unique = document.getElementById("unique").checked;
 
 let result = document.getElementById("result");
 result.innerHTML = "";
 
-// 👉 copy array (important)
-let pool = [...names];
+let used = new Set();
 
-// 🔥 shuffle once
-pool = shuffle(pool);
-
-// 🔥 LIMIT FIX
-if(unique){
-if(count > pool.length){
-alert("Only " + pool.length + " unique names available");
-count = pool.length;
-}
-
-// 👉 direct slice (NO repeat possible)
-pool = pool.slice(0, count);
-}else{
-// repeat allowed
 for(let i=0;i<count;i++){
-let name = pool[Math.floor(Math.random()*pool.length)];
-result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
-}
-return;
+
+let first, last, mid;
+
+// 🔥 STYLE LOGIC
+if(style === "indian"){
+first = random(indianFirst);
+last = random(indianLast);
+}else if(style === "english"){
+first = random(englishFirst);
+last = random(englishLast);
+}else{
+first = Math.random() > 0.5 ? random(indianFirst) : random(englishFirst);
+last = Math.random() > 0.5 ? random(indianLast) : random(englishLast);
 }
 
-// 👉 print unique
-pool.forEach((name,index)=>{
-result.innerHTML += `<div class="name-item">${index+1}. ${name}</div>`;
-});
+// optional middle
+mid = Math.random() > 0.5 ? random(middle) : "";
 
+let fullName = mid ? `${first} ${mid} ${last}` : `${first} ${last}`;
+
+// 🔥 UNIQUE CHECK
+if(unique){
+let attempts = 0;
+while(used.has(fullName) && attempts < 50){
+first = random(indianFirst);
+last = random(indianLast);
+mid = Math.random() > 0.5 ? random(middle) : "";
+fullName = mid ? `${first} ${mid} ${last}` : `${first} ${last}`;
+attempts++;
+}
+used.add(fullName);
+}
+
+result.innerHTML += `<div class="name-item" onclick="copyText('${fullName}')">${i+1}. ${fullName}</div>`;
+}
+
+}
+
+// 🔥 COPY FUNCTION
+function copyText(text){
+navigator.clipboard.writeText(text);
+alert("Copied: " + text);
 }
 
 </script>
