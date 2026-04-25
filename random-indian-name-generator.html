@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Unlimited Real Name Generator (Pro)</title>
+<title>Real Name Generator (Indian & English)</title>
 
 <style>
 body{
@@ -56,15 +56,15 @@ background:#22c55e;
 
 <div class="container">
 
-<h1>🚀 Unlimited Real Name Generator</h1>
-<p><strong>Indian • English • Full Name • No Repeat</strong></p>
+<h1>🚀 Real Name Generator</h1>
+<p><strong>Indian • English • Mixed • 100% Realistic</strong></p>
 
-<input type="number" id="count" value="50" min="1" max="1000">
+<input type="number" id="count" value="30" min="1" max="1000">
 
 <select id="style">
 <option value="indian">Indian</option>
 <option value="english">English</option>
-<option value="mix">Mixed</option>
+<option value="mixed">Mixed</option>
 </select>
 
 <label>
@@ -79,19 +79,61 @@ background:#22c55e;
 
 <script>
 
-// 🔥 FIRST NAMES
-const indianFirst = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Rahul","Krishna","Shivam","Aman","Nikhil","Yash","Aryan","Ravi","Vikas","Raj","Amit","Akash","Karan","Mohit"];
-const englishFirst = ["James","John","Michael","David","Robert","Daniel","Matthew","Joseph","Thomas","William"];
+// 🔥 INDIAN CATEGORIES
 
-// 🔥 MIDDLE NAMES
-const middle = ["Kumar","Raj","Dev","Singh","Prasad","Ali","Khan","Das","Paul","James"];
+const hinduFirst = ["Aarav","Vivaan","Aryan","Rohan","Aditya","Arjun","Kunal","Rahul"];
+const hinduLast = ["Sharma","Verma","Gupta","Yadav","Patel","Mishra"];
 
-// 🔥 LAST NAMES
-const indianLast = ["Sharma","Verma","Gupta","Yadav","Singh","Patel","Khan","Das","Reddy","Nair"];
-const englishLast = ["Smith","Johnson","Brown","Taylor","Anderson","Thomas","Jackson","White","Harris","Martin"];
+const muslimFirst = ["Ayaan","Imran","Faizan","Rehan","Zaid","Armaan"];
+const muslimMiddle = ["Ali","Ahmed"];
+const muslimLast = ["Khan","Sheikh"];
+
+const southFirst = ["Arjun","Karthik","Ravi","Vijay","Surya"];
+const southLast = ["Reddy","Nair","Iyer"];
+
+// 🔥 ENGLISH
+const englishFirst = ["James","John","Michael","David","Robert","Daniel","Matthew"];
+const englishLast = ["Smith","Johnson","Brown","Taylor","Anderson","White"];
 
 function random(arr){
 return arr[Math.floor(Math.random()*arr.length)];
+}
+
+// 🔥 INDIAN NAME
+function generateIndian(){
+
+let type = Math.random();
+let name;
+
+// Hindu
+if(type < 0.5){
+let first = random(hinduFirst);
+let last = random(hinduLast);
+let mid = Math.random() > 0.5 ? random(["Kumar","Raj"]) : "";
+name = mid ? `${first} ${mid} ${last}` : `${first} ${last}`;
+}
+
+// Muslim
+else if(type < 0.8){
+let first = random(muslimFirst);
+let mid = random(muslimMiddle);
+let last = random(muslimLast);
+name = `${first} ${mid} ${last}`;
+}
+
+// South
+else{
+let first = random(southFirst);
+let last = random(southLast);
+name = `${first} ${last}`;
+}
+
+return name;
+}
+
+// 🔥 ENGLISH NAME
+function generateEnglish(){
+return random(englishFirst) + " " + random(englishLast);
 }
 
 function generate(){
@@ -107,44 +149,38 @@ let used = new Set();
 
 for(let i=0;i<count;i++){
 
-let first, last, mid;
+let name;
 
-// 🔥 STYLE LOGIC
+// 🔥 STYLE FIX
 if(style === "indian"){
-first = random(indianFirst);
-last = random(indianLast);
-}else if(style === "english"){
-first = random(englishFirst);
-last = random(englishLast);
-}else{
-first = Math.random() > 0.5 ? random(indianFirst) : random(englishFirst);
-last = Math.random() > 0.5 ? random(indianLast) : random(englishLast);
+name = generateIndian();
+}
+else if(style === "english"){
+name = generateEnglish();
+}
+else{
+// MIXED (NO WRONG MIX)
+name = Math.random() > 0.5 ? generateIndian() : generateEnglish();
 }
 
-// optional middle
-mid = Math.random() > 0.5 ? random(middle) : "";
-
-let fullName = mid ? `${first} ${mid} ${last}` : `${first} ${last}`;
-
-// 🔥 UNIQUE CHECK
+// 🔥 UNIQUE FIX
 if(unique){
 let attempts = 0;
-while(used.has(fullName) && attempts < 50){
-first = random(indianFirst);
-last = random(indianLast);
-mid = Math.random() > 0.5 ? random(middle) : "";
-fullName = mid ? `${first} ${mid} ${last}` : `${first} ${last}`;
+while(used.has(name) && attempts < 50){
+name = style === "indian" ? generateIndian() :
+       style === "english" ? generateEnglish() :
+       (Math.random() > 0.5 ? generateIndian() : generateEnglish());
 attempts++;
 }
-used.add(fullName);
+used.add(name);
 }
 
-result.innerHTML += `<div class="name-item" onclick="copyText('${fullName}')">${i+1}. ${fullName}</div>`;
+result.innerHTML += `<div class="name-item" onclick="copyText('${name}')">${i+1}. ${name}</div>`;
 }
 
 }
 
-// 🔥 COPY FUNCTION
+// 🔥 COPY
 function copyText(text){
 navigator.clipboard.writeText(text);
 alert("Copied: " + text);
