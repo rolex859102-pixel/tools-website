@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Indian Male Name Generator</title>
+<title>Male Name Generator (Unlimited No Repeat)</title>
 
 <style>
 body{
@@ -16,14 +16,14 @@ margin:0;
 }
 
 .container{
-max-width:500px;
+max-width:520px;
 margin:auto;
 padding:30px 15px;
 }
 
-input,button{
+input,select,button{
 width:100%;
-max-width:350px;
+max-width:360px;
 padding:12px;
 margin:10px auto;
 border-radius:10px;
@@ -32,17 +32,22 @@ display:block;
 }
 
 button{
-background:#22c55e;
+background:#3b82f6;
 color:white;
 cursor:pointer;
 }
 
 .name-item{
 background:#1e293b;
-padding:8px;
-margin:5px 0;
+padding:10px;
+margin:6px 0;
 border-radius:6px;
 text-align:left;
+cursor:pointer;
+}
+
+.name-item:hover{
+background:#3b82f6;
 }
 </style>
 
@@ -52,14 +57,15 @@ text-align:left;
 
 <div class="container">
 
-<h1>🇮🇳 Indian Male Name Generator</h1>
-<p><strong>100% Real Names • No Fake Names</strong></p>
+<h1>👨 Male Name Generator</h1>
+<p><strong>Unlimited • Real Names • No Repeat</strong></p>
 
-<p style="font-size:13px;opacity:0.7;">
-Max unique names available: 400
-</p>
+<input type="number" id="count" value="50" min="1" max="1000">
 
-<input type="number" id="count" value="20" min="1" max="400">
+<select id="type">
+<option value="indian">Indian</option>
+<option value="english">English</option>
+</select>
 
 <label>
 <input type="checkbox" id="unique" checked> No Repeat
@@ -73,71 +79,61 @@ Max unique names available: 400
 
 <script>
 
-// 🔥 100% REAL INDIAN MALE NAMES (~400)
-const names = [
-"Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Kunal","Rahul","Krishna","Shivam",
-"Aman","Nikhil","Siddharth","Yash","Harsh","Aryan","Manish","Deepak","Ravi","Vikas",
-"Raj","Amit","Sunil","Akash","Varun","Karan","Mohit","Suresh","Ramesh","Naresh",
-"Vijay","Ajay","Anil","Pankaj","Rakesh","Mukesh","Dinesh","Sanjay","Gaurav","Tarun",
-"Sachin","Pranav","Lakshya","Dev","Om","Ishaan","Kartik","Dhruv","Atharv","Parth",
-"Shrey","Tejas","Nitin","Vivek","Abhishek","Ankit","Rohit","Tushar","Hemant",
-"Arnav","Ayaan","Reyansh","Vihaan","Shaurya","Lakshit","Devansh","Ayush","Shubham",
-"Harshit","Samar","Rajat","Chirag","Yuvraj","Keshav","Madhav","Gopal","Rudra",
-"Suraj","Bhavesh","Lokesh","Mahesh","Ganesh","Rajesh","Umesh","Tilak","Kishan",
-"Manoj","Vinod","Ashok","Balram","Chandan","Dilip","Eshan","Farhan","Girish","Himanshu",
-"Inder","Jatin","Kamal","Lalit","Mohan","Naveen","Ojas","Pradeep","Qadir","Rituraj",
-"Sameer","Tanmay","Uday","Vimal","Wasim","Yogesh","Zubair",
-"Aadesh","Akhil","Amar","Anand","Anirudh","Arpit","Ashish","Atul","Avinash","Bharat",
-"Bhaskar","Chetan","Darshan","Devendra","Dharam","Eklavya","Faisal","Gagan","Gautam",
-"Harendra","Hitesh","Iqbal","Jagdish","Jaidev","Jeevan","Kailash","Kartikeya","Keshav",
-"Lakhan","Lokendra","Madan","Mahavir","Manav","Mayank","Mehul","Mukund","Nakul","Narayan",
-"Niraj","Nitesh","Padmanabh","Prakash","Prithvi","Raghav","Rajiv","Ranjit","Rishabh",
-"Ritesh","Sachindra","Sahil","Sandeep","Satyam","Shankar","Shashank","Shivendra",
-"Shivraj","Shravan","Somesh","Subhash","Sudarshan","Sujit","Suman","Surendra","Swapnil",
-"Tapan","Tarakesh","Upendra","Vaibhav","Vansh","Varad","Vedant","Vikrant",
-"Vinay","Virat","Vishal","Vishnu","Yashwant","Yuvansh","Zaid",
-"Aarush","Advait","Ainesh","Akshay","Ameya","Ansh","Anshul","Anup","Anurag","Arvind",
-"Ashwin","Ayansh","Brijesh","Chiranjiv","Darsh","Devraj","Dharmendra","Divyansh",
-"Eshwar","Gokul","Govind","Harish","Hemraj","Hrithik","Ilesh","Irfan","Jagat",
-"Jaspreet","Jayant","Jitendra","Kalpesh","Ketan","Kripal","Kuber","Lavesh",
-"Manvendra","Mitesh","Naman","Neeraj","Nishant","Omkar","Piyush","Pranit",
-"Rachit","Ravindra","Rohitash","Sagar","Saket","Samarth","Shivansh","Shlok","Shreyansh",
-"Soham","Sourabh","Sridhar","Sushant","Tanish","Teerth","Utkarsh","Vardhan","Vasu",
-"Ved","Vignesh","Viren","Yatin","Yug"
-];
+// 🔥 FIRST NAMES
+const indianFirst = ["Aarav","Vivaan","Aditya","Arjun","Kabir","Rohan","Rahul","Krishna","Shivam","Aman","Nikhil","Yash","Aryan","Ravi","Vikas","Raj","Amit","Akash","Karan","Mohit"];
+const englishFirst = ["James","John","Michael","David","Robert","Daniel","Matthew","Joseph"];
+
+// 🔥 LAST NAMES
+const indianLast = ["Sharma","Verma","Gupta","Yadav","Patel","Singh","Khan","Das","Reddy","Nair"];
+const englishLast = ["Smith","Johnson","Brown","Taylor","Anderson","White","Martin"];
+
+function random(arr){
+return arr[Math.floor(Math.random()*arr.length)];
+}
 
 function generate(){
 
 let count = parseInt(document.getElementById("count").value);
+let type = document.getElementById("type").value;
 let unique = document.getElementById("unique").checked;
 
 let result = document.getElementById("result");
 result.innerHTML = "";
 
-// 🔥 LIMIT CONTROL
-if(unique && count > names.length){
-alert("Only " + names.length + " unique names available");
-count = names.length;
-}
-
 let used = new Set();
 
-for(let i=0; i<count; i++){
+for(let i=0;i<count;i++){
 
 let name;
 
-if(unique){
-do{
-name = names[Math.floor(Math.random()*names.length)];
-} while(used.has(name));
-used.add(name);
+// 🔥 TYPE LOGIC
+if(type === "indian"){
+name = random(indianFirst) + " " + random(indianLast);
 }else{
-name = names[Math.floor(Math.random()*names.length)];
+name = random(englishFirst) + " " + random(englishLast);
 }
 
-result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
+// 🔥 NO REPEAT
+if(unique){
+let attempts = 0;
+while(used.has(name) && attempts < 50){
+name = type === "indian"
+? random(indianFirst) + " " + random(indianLast)
+: random(englishFirst) + " " + random(englishLast);
+attempts++;
+}
+used.add(name);
 }
 
+result.innerHTML += `<div class="name-item" onclick="copyText('${name}')">${i+1}. ${name}</div>`;
+}
+
+}
+
+// 🔥 COPY
+function copyText(text){
+navigator.clipboard.writeText(text);
+alert("Copied: " + text);
 }
 
 </script>
