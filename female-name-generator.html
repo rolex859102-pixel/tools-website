@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Indian Female Name Generator</title>
+<title>Female Name Generator (Unlimited No Repeat)</title>
 
 <style>
 body{
@@ -16,14 +16,14 @@ margin:0;
 }
 
 .container{
-max-width:500px;
+max-width:520px;
 margin:auto;
 padding:30px 15px;
 }
 
-input,button{
+input,select,button{
 width:100%;
-max-width:350px;
+max-width:360px;
 padding:12px;
 margin:10px auto;
 border-radius:10px;
@@ -39,26 +39,33 @@ cursor:pointer;
 
 .name-item{
 background:#1e293b;
-padding:8px;
-margin:5px 0;
+padding:10px;
+margin:6px 0;
 border-radius:6px;
 text-align:left;
+cursor:pointer;
+}
+
+.name-item:hover{
+background:#ec4899;
 }
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>👩 Indian Female Name Generator</h1>
-<p><strong>100% Real Names • No Fake Names</strong></p>
+<h1>👩 Female Name Generator</h1>
+<p><strong>Unlimited • Real Names • No Repeat</strong></p>
 
-<p style="font-size:13px;opacity:0.7;">
-Max unique names available: 300+
-</p>
+<input type="number" id="count" value="50" min="1" max="1000">
 
-<input type="number" id="count" value="20" min="1" max="300">
+<select id="type">
+<option value="indian">Indian</option>
+<option value="english">English</option>
+</select>
 
 <label>
 <input type="checkbox" id="unique" checked> No Repeat
@@ -72,66 +79,62 @@ Max unique names available: 300+
 
 <script>
 
-// 🔥 REAL INDIAN FEMALE NAMES (~300)
-const names = [
-"Aaradhya","Aanya","Aarohi","Ananya","Anika","Aditi","Aisha","Akanksha","Alisha","Amrita",
-"Anjali","Ankita","Anushka","Arpita","Arti","Ashwini","Avni","Bhavna","Chandni","Charu",
-"Deepika","Deepti","Divya","Ekta","Esha","Falguni","Garima","Gauri","Geeta","Hema",
-"Himani","Isha","Ishita","Jaya","Juhi","Kajal","Kalpana","Kamini","Karishma","Kavita",
-"Kiran","Komal","Krishna","Kritika","Kusum","Lata","Madhuri","Mahima","Malti","Manisha",
-"Meena","Megha","Minal","Monika","Naina","Namrata","Neetu","Neha","Nidhi","Nikita",
-"Nisha","Pallavi","Pooja","Poonam","Pratibha","Preeti","Priya","Rachna","Radha","Radhika",
-"Rajni","Rani","Reema","Rekha","Renu","Richa","Ritu","Riya","Roshni","Sakshi",
-"Sangeeta","Sanjana","Sarika","Seema","Shalini","Sharda","Sharmila","Sheetal","Shikha",
-"Shilpa","Shivani","Shraddha","Shreya","Shweta","Simran","Smita","Sneha","Sonia",
-"Sujata","Suman","Sunita","Supriya","Swati","Tanisha","Tanu","Trisha","Urmila","Vaishali",
-"Vandana","Varsha","Vidya","Vinita","Yamini","Yashika","Zoya",
-"Aarushi","Aishwarya","Akriti","Amisha","Anamika","Anuja","Anuradha","Aparna","Archana",
-"Aruna","Asmita","Babita","Bela","Bharti","Bhumika","Bindu","Chhavi","Chitra","Damini",
-"Darshana","Devika","Diksha","Dipti","Durga","Eshwari","Ganga","Gayatri","Gitanjali",
-"Gunjan","Hansika","Harshita","Indu","Ira","Ishwari","Jahnavi","Janvi","Jaspreet",
-"Jayashree","Jyoti","Kalyani","Kanchan","Kanta","Karuna","Kavya","Khushboo","Kirti",
-"Kumari","Laxmi","Leela","Madhavi","Mala","Mamta","Mandira","Manju","Meenakshi",
-"Menka","Mithila","Mohini","Mridula","Nandini","Neelam","Neerja","Nirmala","Padma",
-"Parul","Pavitra","Payal","Pragya","Prerna","Priti","Purnima","Pushpa","Rajeshwari",
-"Raksha","Ranjana","Rashmi","Ratna","Renuka","Reshma","Rupali","Sadhana","Sangeeta",
-"Saroj","Savita","Shanta","Shashi","Sheela","Shobha","Shreelata","Shruti","Sita",
-"Sonal","Suhani","Sulekha","Surbhi","Surekha","Susmita","Tara","Tulsi","Usha","Veena",
-"Vibha","Vidhi","Vijaya","Vimla","Yogita"
-];
+// 🔥 FEMALE FIRST NAMES
+const indianFirst = ["Aaradhya","Ananya","Aditi","Anushka","Pooja","Priya","Riya","Sneha","Simran","Neha","Kavita","Shreya","Shivani","Swati","Tanisha","Trisha","Isha","Kajal","Radhika","Sonia"];
+
+const englishFirst = ["Emily","Sophia","Olivia","Emma","Ava","Isabella","Mia","Charlotte","Amelia","Harper"];
+
+// 🔥 LAST NAMES (REAL)
+const indianLast = ["Sharma","Verma","Gupta","Yadav","Patel","Singh","Khan","Das","Reddy","Nair"];
+const englishLast = ["Smith","Johnson","Brown","Taylor","Anderson","White","Martin"];
+
+function random(arr){
+return arr[Math.floor(Math.random()*arr.length)];
+}
 
 function generate(){
 
 let count = parseInt(document.getElementById("count").value);
+let type = document.getElementById("type").value;
 let unique = document.getElementById("unique").checked;
 
 let result = document.getElementById("result");
 result.innerHTML = "";
 
-// 🔥 LIMIT
-if(unique && count > names.length){
-alert("Only " + names.length + " unique names available");
-count = names.length;
-}
-
 let used = new Set();
 
-for(let i=0; i<count; i++){
+for(let i=0;i<count;i++){
 
 let name;
 
-if(unique){
-do{
-name = names[Math.floor(Math.random()*names.length)];
-} while(used.has(name));
-used.add(name);
+// 🔥 TYPE LOGIC
+if(type === "indian"){
+name = random(indianFirst) + " " + random(indianLast);
 }else{
-name = names[Math.floor(Math.random()*names.length)];
+name = random(englishFirst) + " " + random(englishLast);
 }
 
-result.innerHTML += `<div class="name-item">${i+1}. ${name}</div>`;
+// 🔥 NO REPEAT
+if(unique){
+let attempts = 0;
+while(used.has(name) && attempts < 50){
+name = type === "indian"
+? random(indianFirst) + " " + random(indianLast)
+: random(englishFirst) + " " + random(englishLast);
+attempts++;
+}
+used.add(name);
 }
 
+result.innerHTML += `<div class="name-item" onclick="copyText('${name}')">${i+1}. ${name}</div>`;
+}
+
+}
+
+// 🔥 COPY
+function copyText(text){
+navigator.clipboard.writeText(text);
+alert("Copied: " + text);
 }
 
 </script>
