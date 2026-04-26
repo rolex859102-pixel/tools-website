@@ -5,67 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Compress Image to 100KB Online Free</title>
-<meta name="description" content="Compress image to 100KB online free for forms, exams, and uploads.">
+<meta name="description" content="Compress image to 100KB online free. Resize JPG, PNG images instantly.">
 
 <style>
 body{background:#020617;color:white;font-family:Arial;text-align:center;margin:0;}
-.container{max-width:500px;margin:auto;padding:30px 15px;}
+.container{max-width:600px;margin:auto;padding:30px 15px;}
 input,button{width:100%;max-width:350px;padding:12px;margin:10px auto;border-radius:10px;border:none;display:block;}
-button{background:#22c55e;color:white;}
-footer a{color:white;margin:0 8px;text-decoration:none;}
+button{background:#22c55e;color:white;cursor:pointer;}
+#preview{margin-top:20px;}
+.seo-content{max-width:800px;margin:50px auto;text-align:left;color:#cbd5f5;padding:0 15px;}
+.seo-content h2,.seo-content h3{color:white;}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-
 <h1>Compress Image to 100KB</h1>
-
-<p><strong>100% Free • Compress Image to 100KB Instantly • No Signup Required</strong></p>
+<p><strong>Resize JPG, PNG to 100KB Instantly</strong></p>
 
 <input type="file" id="upload">
-<button onclick="compress()">Compress</button>
+<button onclick="compress(100)">Compress</button>
 
-<div id="result"></div>
-
+<div id="preview"></div>
 </div>
 
-<footer>
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a> |
-<a href="privacy-policy.html">Privacy Policy</a> |
-<a href="disclaimer.html">Disclaimer</a>
-</footer>
+<div class="seo-content">
+<h2>Compress Image to 100KB Online</h2>
+<p>This tool helps you compress images to 100KB quickly and easily.</p>
+
+<h3>How to Use?</h3>
+<p>Upload → Compress → Download.</p>
+
+<h3>Features</h3>
+<p>✔ Free ✔ Fast ✔ No upload ✔ Secure</p>
+
+<h3>Related Tools</h3>
+<p>
+<a href="compress-image-to-50kb.html">Compress Image to 50KB</a><br>
+<a href="image-resizer.html">Image Resizer</a>
+</p>
+</div>
 
 <script>
-function compress(){
+function compress(targetKB){
 let file=document.getElementById("upload").files[0];
+if(!file){alert("Upload image");return;}
+
 let reader=new FileReader();
 reader.onload=function(e){
 let img=new Image();
 img.src=e.target.result;
+
 img.onload=function(){
 let canvas=document.createElement("canvas");
 let ctx=canvas.getContext("2d");
+
 canvas.width=img.width;
 canvas.height=img.height;
+
 ctx.drawImage(img,0,0);
 
-let q=0.9;
-function reduce(){
-let data=canvas.toDataURL("image/jpeg",q);
+let quality=0.9;
+
+function loop(){
+let data=canvas.toDataURL("image/jpeg",quality);
 let size=(data.length*3/4)/1024;
-if(size>100 && q>0.1){
-q-=0.05;
-reduce();
+
+if(size>targetKB && quality>0.1){
+quality-=0.05;
+loop();
 }else{
-result.innerHTML=`<p>${Math.round(size)} KB</p><img src="${data}" width="200"><br><a href="${data}" download><button>Download</button></a>`;
+document.getElementById("preview").innerHTML=
+`<p>${size.toFixed(2)} KB</p>
+<img src="${data}" style="max-width:100%"><br>
+<a href="${data}" download="100kb.jpg"><button>Download</button></a>`;
 }
 }
-reduce();
-};
-};
+loop();
+}
+}
 reader.readAsDataURL(file);
 }
 </script>
