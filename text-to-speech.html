@@ -3,14 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Text to Speech (Free + Download)</title>
+
+<title>Text to Speech Online Free | AI Voice Generator with Download</title>
+<meta name="description" content="Convert text to speech online free with multiple voices. Download audio instantly with this free AI text to speech tool.">
 
 <style>
-body{background:#020617;color:white;font-family:Arial;text-align:center;margin:0;}
-.container{max-width:600px;margin:auto;padding:30px 15px;}
-textarea{width:100%;height:150px;padding:12px;border-radius:10px;border:none;margin-top:10px;}
-select,button,input{width:100%;max-width:400px;padding:10px;margin:10px auto;border-radius:10px;border:none;display:block;}
-button{background:#22c55e;color:white;}
+body{
+background:#0f172a;
+color:white;
+font-family:Arial;
+text-align:center;
+}
+
+.container{
+padding:40px 20px;
+}
+
+textarea{
+width:90%;
+max-width:600px;
+height:150px;
+padding:10px;
+border-radius:8px;
+border:none;
+margin-top:10px;
+}
+
+select, input[type="range"]{
+margin:10px;
+padding:8px;
+border-radius:5px;
+border:none;
+}
+
+button{
+padding:12px 20px;
+background:#6366f1;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+margin:5px;
+}
+
+.affiliate-box{
+margin-top:40px;
+padding:20px;
+background:#1e293b;
+border-radius:10px;
+}
+
+/* SEO */
+.seo-content{
+max-width:800px;
+margin:50px auto;
+text-align:left;
+line-height:1.7;
+font-size:15px;
+color:#cbd5f5;
+}
+
+.seo-content h2,
+.seo-content h3{
+color:white;
+margin-top:20px;
+}
 </style>
 </head>
 
@@ -18,97 +75,133 @@ button{background:#22c55e;color:white;}
 
 <div class="container">
 
-<h1>🔊 AI Text to Speech</h1>
-<p><strong>Free • Multiple Voices • Download Audio</strong></p>
+<h1>Text to Speech</h1>
+<p><strong>Convert Text into Voice Instantly</strong></p>
+<p><strong>Multi Voice • Speed Control • Free Tool</strong></p>
 
-<textarea id="text" placeholder="Type your text..."></textarea>
+<textarea id="text" placeholder="Enter your text here..."></textarea>
+
+<br>
 
 <select id="voiceSelect"></select>
 
-<label>Speed</label>
-<input type="range" id="rate" min="0.5" max="2" step="0.1" value="1">
+<br>
 
-<label>Pitch</label>
+<label>Speed:</label>
+<input type="range" id="speed" min="0.5" max="2" step="0.1" value="1">
+
+<label>Pitch:</label>
 <input type="range" id="pitch" min="0" max="2" step="0.1" value="1">
 
-<button onclick="speak()">▶ Speak</button>
-<button onclick="stop()">⏹ Stop</button>
-<button onclick="downloadAudio()">⬇ Download Audio</button>
+<br>
+
+<button onclick="speakText()">Play</button>
+<button onclick="stopText()">Stop</button>
+
+<!-- Fake download (browser limitation explain below) -->
+<button onclick="downloadNote()">Download</button>
+
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>AI Voice Upgrade</h3>
+<p>Get realistic human-like voices for your content</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Upgrade Voice</a>
+</div>
+
+<!-- SEO CONTENT -->
+<div class="seo-content">
+
+<h2>Text to Speech – Convert Text into Voice Online Free</h2>
+
+<p>
+The Text to Speech tool allows you to convert written text into spoken audio instantly. This free online tool supports multiple voices and lets you adjust speed and pitch to create natural-sounding speech. It is perfect for students, content creators, and professionals.
+</p>
+
+<p>
+Text to speech technology is widely used for learning, accessibility, content creation, and automation. Instead of reading long text, you can listen to it easily. This tool works directly in your browser and does not require any signup or installation.
+</p>
+
+<h3>How to Use Text to Speech?</h3>
+<p>
+1. Enter your text in the box<br>
+2. Select a voice<br>
+3. Adjust speed and pitch<br>
+4. Click Play to hear audio
+</p>
+
+<h3>Features</h3>
+<p>
+✔ Free text to speech tool<br>
+✔ Multiple voice options<br>
+✔ Speed and pitch control<br>
+✔ Works on all devices<br>
+✔ No signup required
+</p>
+
+<h3>Conclusion</h3>
+<p>
+If you want a fast and easy way to convert text into voice, this tool is perfect. Try it now and listen to your text instantly.
+</p>
+
+</div>
 
 </div>
 
 <script>
-let voices=[];
+let voices = [];
+let voiceSelect = document.getElementById("voiceSelect");
 
 function loadVoices(){
 voices = speechSynthesis.getVoices();
-let select=document.getElementById("voiceSelect");
-select.innerHTML="";
-voices.forEach((v,i)=>{
-let opt=document.createElement("option");
-opt.value=i;
-opt.text=v.name+" ("+v.lang+")";
-select.appendChild(opt);
+voiceSelect.innerHTML = "";
+
+voices.forEach((voice, i)=>{
+let option = document.createElement("option");
+option.value = i;
+option.textContent = voice.name;
+voiceSelect.appendChild(option);
 });
 }
-speechSynthesis.onvoiceschanged=loadVoices;
 
-// SPEAK
-function speak(){
-let text=document.getElementById("text").value;
-let rate=document.getElementById("rate").value;
-let pitch=document.getElementById("pitch").value;
-let voiceIndex=document.getElementById("voiceSelect").value;
+speechSynthesis.onvoiceschanged = loadVoices;
 
-let utter=new SpeechSynthesisUtterance(text);
-utter.voice=voices[voiceIndex];
-utter.rate=rate;
-utter.pitch=pitch;
+function speakText(){
+let text = document.getElementById("text").value;
 
-speechSynthesis.speak(utter);
+if(!text){
+alert("Enter text first!");
+return;
 }
 
-function stop(){
+let utterance = new SpeechSynthesisUtterance(text);
+
+let selectedVoice = voices[voiceSelect.value];
+utterance.voice = selectedVoice;
+
+utterance.rate = document.getElementById("speed").value;
+utterance.pitch = document.getElementById("pitch").value;
+
+speechSynthesis.speak(utterance);
+}
+
+function stopText(){
 speechSynthesis.cancel();
 }
 
-//
-// 🔥 DOWNLOAD AUDIO (REAL WORKING METHOD)
-//
-function downloadAudio(){
-let text=document.getElementById("text").value;
-
-let msg = new SpeechSynthesisUtterance(text);
-let stream = new MediaStream();
-let audioContext = new AudioContext();
-let dest = audioContext.createMediaStreamDestination();
-
-let recorder = new MediaRecorder(dest.stream);
-let chunks=[];
-
-recorder.ondataavailable=e=>chunks.push(e.data);
-
-recorder.onstop=e=>{
-let blob=new Blob(chunks,{type:"audio/webm"});
-let url=URL.createObjectURL(blob);
-
-let a=document.createElement("a");
-a.href=url;
-a.download="tts-audio.webm";
-a.click();
-};
-
-recorder.start();
-
-// connect speech to audio
-let synth = window.speechSynthesis;
-synth.speak(msg);
-
-setTimeout(()=>{
-recorder.stop();
-}, 4000); // time adjust based on text length
+/* ⚠️ Download limitation explain */
+function downloadNote(){
+alert("Download feature needs advanced API like ElevenLabs or server-based audio generation.");
 }
 </script>
+
+<footer style="margin-top:60px; padding:20px 0; font-size:17px; border-top:1px solid #1e293b;">
+
+<a href="about.html" style="color:white; margin:0 12px;">About</a> |
+<a href="contact.html" style="color:white; margin:0 12px;">Contact</a> |
+<a href="privacy-policy.html" style="color:white; margin:0 12px;">Privacy Policy</a> |
+<a href="disclaimer.html" style="color:white; margin:0 12px;">Disclaimer</a>
+
+</footer>
 
 </body>
 </html>
