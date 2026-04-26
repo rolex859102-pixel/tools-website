@@ -1,119 +1,208 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Percentage Calculator</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
+<title>Percentage Calculator Online Free | Calculate Percentage Easily</title>
+<meta name="description" content="Calculate percentage easily with this free online percentage calculator. Find percentage, increase, decrease instantly.">
+
 <style>
-body {
-    background:#020617;
-    color:white;
-    font-family:Arial;
-    text-align:center;
-    margin:0;
+body{
+background:#0f172a;
+color:white;
+font-family:Arial;
+text-align:center;
 }
 
-/* 🔥 MAIN FIX */
-.container {
-    max-width:500px;
-    width:100%;
-    margin:auto;
-    padding:30px 15px;
-    box-sizing:border-box;
+.container{
+padding:40px 20px;
 }
 
-/* 🔥 INPUT + BUTTON FIX */
-input, textarea, button {
-    width:100%;
-    max-width:350px;
-    padding:12px;
-    margin:10px auto;
-    border-radius:10px;
-    border:none;
-    display:block;
-    box-sizing:border-box;
+input{
+padding:10px;
+margin:8px;
+border-radius:6px;
+border:none;
+width:120px;
 }
 
-button {
-    background:#22c55e;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
+button{
+padding:12px 20px;
+background:#22c55e;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+margin:5px;
 }
 
-/* 🔥 RESULT */
-#result {
-    margin-top:20px;
-    font-size:18px;
+#result{
+margin-top:20px;
+font-size:18px;
 }
 
-/* 🔥 FOOTER */
-footer {
-    margin-top:40px;
-    font-size:17px;
+/* Affiliate */
+.affiliate-box{
+margin-top:40px;
+padding:20px;
+background:#1e293b;
+border-radius:10px;
 }
 
-footer a {
-    color:white;
-    margin:0 8px;
-    text-decoration:none;
+/* SEO */
+.seo-content{
+max-width:800px;
+margin:50px auto;
+text-align:left;
+line-height:1.7;
+font-size:15px;
+color:#cbd5f5;
 }
 
-footer a:hover {
-    color:#60a5fa;
+.seo-content h2,
+.seo-content h3{
+color:white;
+margin-top:20px;
 }
 
-/* 🔥 MOBILE PERFECT FIX */
-@media (max-width:600px) {
-    .container {
-        padding:25px 12px;
-    }
-
-    h1 {
-        font-size:22px;
-    }
-
-    input, textarea, button {
-        max-width:100%;
-        width:100%;
-    }
+.seo-content a{
+color:#38bdf8;
+text-decoration:none;
 }
 </style>
-
 </head>
 
 <body>
 
-<h1>📊 Percentage Calculator</h1>
-<p><strong>100% Free • Calculate Percentage Instantly • Accurate Results</strong></p>
-<input type="number" id="num1" placeholder="Enter number">
-<input type="number" id="num2" placeholder="Enter percentage">
+<div class="container">
+
+<h1>Percentage Calculator</h1>
+<p><strong>Calculate Percentage, Increase & Decrease Instantly</strong></p>
+<p><strong>100% Free • Fast • Easy to Use</strong></p>
 
 <br>
 
-<button onclick="calc()">Calculate</button>
+<!-- TYPE 1 -->
+<h3>Find X% of Y</h3>
+<input type="number" id="percent" placeholder="%">
+<input type="number" id="number" placeholder="Number">
+<br>
+<button onclick="calcPercent()">Calculate</button>
 
-<h2 id="result"></h2>
+<!-- TYPE 2 -->
+<h3>Percentage Increase / Decrease</h3>
+<input type="number" id="old" placeholder="Old Value">
+<input type="number" id="new" placeholder="New Value">
+<br>
+<button onclick="calcChange()">Calculate</button>
+
+<div id="result"></div>
+
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Finance & Calculation Tools</h3>
+<p>Use smart tools for better calculations</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium Tools</a>
+</div>
+
+<!-- SEO CONTENT -->
+<div class="seo-content">
+
+<h2>Percentage Calculator – Calculate Percentage Online Free</h2>
+
+<p>
+The Percentage Calculator is a simple and useful online tool that helps you calculate percentages quickly and accurately. Whether you want to find a percentage of a number, calculate percentage increase or decrease, or solve basic percentage problems, this free tool makes everything easy.
+</p>
+
+<p>
+Percentages are used in many daily activities such as shopping discounts, exam results, finance calculations, business analysis, and more. Instead of calculating manually, you can use this tool to get instant and accurate results without any effort.
+</p>
+
+<h3>How to Use the Percentage Calculator?</h3>
+<p>
+1. Enter the percentage value and number to find percentage<br>
+2. Or enter old and new values to calculate increase or decrease<br>
+3. Click the Calculate button<br>
+4. View your result instantly
+</p>
+
+<h3>Features of This Tool</h3>
+<p>
+✔ 100% Free to use<br>
+✔ Instant results<br>
+✔ Supports multiple calculations<br>
+✔ Easy to use interface<br>
+✔ Works on all devices<br>
+✔ No signup required
+</p>
+
+<h3>Why Use This Tool?</h3>
+<p>
+Manual percentage calculations can be confusing and time-consuming. This tool simplifies the process and provides accurate results instantly. It is especially useful for students, business owners, and anyone dealing with numbers.
+</p>
+
+<h3>Common Uses</h3>
+<p>
+- Calculate discounts while shopping<br>
+- Check exam percentages<br>
+- Analyze profit and loss<br>
+- Compare data values
+</p>
+
+<h3>Related Tools</h3>
+<p>
+<a href="age-calculator.html">Age Calculator</a><br>
+<a href="emi-calculator.html">EMI Calculator</a><br>
+<a href="word-counter.html">Word Counter</a>
+</p>
+
+<h3>Conclusion</h3>
+<p>
+If you need a fast and accurate way to calculate percentages, this Percentage Calculator is the perfect solution. It is simple, free, and works instantly. Try it now for quick calculations.
+</p>
+
+</div>
+
+</div>
 
 <script>
-function calc(){
-    let n1 = document.getElementById("num1").value;
-    let n2 = document.getElementById("num2").value;
+function calcPercent(){
+let p = document.getElementById("percent").value;
+let n = document.getElementById("number").value;
 
-    let res = (n1 * n2) / 100;
+if(p==="" || n===""){
+alert("Enter values!");
+return;
+}
 
-    document.getElementById("result").innerHTML = "Result: " + res;
+let result = (p/100)*n;
+document.getElementById("result").innerText = p + "% of " + n + " = " + result;
+}
+
+function calcChange(){
+let old = document.getElementById("old").value;
+let n = document.getElementById("new").value;
+
+if(old==="" || n===""){
+alert("Enter values!");
+return;
+}
+
+let change = ((n - old) / old) * 100;
+
+document.getElementById("result").innerText = "Change = " + change.toFixed(2) + "%";
 }
 </script>
 
 <footer style="margin-top:60px; padding:20px 0; font-size:17px; border-top:1px solid #1e293b;">
 
-<a href="about.html" style="color:white; margin:0 12px; text-decoration:none;">About</a> |
-<a href="contact.html" style="color:white; margin:0 12px; text-decoration:none;">Contact</a> |
-<a href="privacy-policy.html" style="color:white; margin:0 12px; text-decoration:none;">Privacy Policy</a> |
-<a href="disclaimer.html" style="color:white; margin:0 12px; text-decoration:none;">Disclaimer</a>
+<a href="about.html" style="color:white; margin:0 12px;">About</a> |
+<a href="contact.html" style="color:white; margin:0 12px;">Contact</a> |
+<a href="privacy-policy.html" style="color:white; margin:0 12px;">Privacy Policy</a> |
+<a href="disclaimer.html" style="color:white; margin:0 12px;">Disclaimer</a>
 
 </footer>
-    
+
 </body>
 </html>
