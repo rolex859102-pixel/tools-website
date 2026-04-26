@@ -4,44 +4,56 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Image Resizer Online Free | Resize Image Without Losing Quality</title>
-<meta name="description" content="Resize images online for free. Change image width and height without losing quality. Fast and easy image resizer tool.">
+<title>Image Resizer Online Free | Compress Image to KB Size</title>
+<meta name="description" content="Resize and compress image to specific KB size like 50KB, 100KB, 200KB online free.">
 
 <style>
-body {
-    background:#0f172a;
-    color:white;
-    font-family:Arial;
-    text-align:center;
+body{
+background:#020617;
+color:white;
+font-family:Arial;
+text-align:center;
+margin:0;
 }
 
-.container {
-    padding:40px 20px;
+.container{
+max-width:600px;
+margin:auto;
+padding:30px 15px;
 }
 
-input, button {
-    padding:10px;
-    margin:10px;
-    border-radius:5px;
-    border:none;
+input, select, button{
+width:100%;
+max-width:350px;
+padding:12px;
+margin:10px auto;
+border-radius:10px;
+border:none;
+display:block;
 }
 
-button {
-    background:#22c55e;
-    color:white;
-    cursor:pointer;
+button{
+background:#22c55e;
+color:white;
+cursor:pointer;
 }
 
-canvas {
-    margin-top:20px;
-    max-width:100%;
+#preview{
+margin-top:20px;
 }
 
-.affiliate-box {
-    margin-top:40px;
-    padding:20px;
-    background:#1e293b;
-    border-radius:10px;
+.seo-content{
+max-width:800px;
+margin:50px auto;
+text-align:left;
+line-height:1.7;
+font-size:15px;
+color:#cbd5f5;
+padding:0 15px;
+}
+
+.seo-content h2, .seo-content h3{
+color:white;
 }
 </style>
 </head>
@@ -50,98 +62,128 @@ canvas {
 
 <div class="container">
 
-<h1>Image Resizer Tool</h1>
-<p><strong>Resize images online free without losing quality.</strong></p>
-<p><strong>100% Free • Resize Images Instantly • No Signup Required</strong></p>
-    
-<input type="file" id="upload" accept="image/*"><br>
+<h1>🖼 Image Resizer (KB)</h1>
+<p><strong>Compress Image to 50KB, 100KB, 200KB Instantly</strong></p>
 
-<input type="number" id="width" placeholder="Width">
-<input type="number" id="height" placeholder="Height"><br>
+<input type="file" id="upload" accept="image/*">
 
-<button onclick="resizeImage()">Resize Image</button>
+<select id="targetSize">
+<option value="50">50 KB</option>
+<option value="100">100 KB</option>
+<option value="200">200 KB</option>
+<option value="300">300 KB</option>
+</select>
 
-<br>
+<button onclick="compressImage()">Compress Image</button>
 
-<a id="downloadBtn" style="display:none;" download="resized-image.jpg">
-<button>Download Image</button>
-</a>
-
-<canvas id="canvas"></canvas>
-
-<!-- Affiliate -->
-<div class="affiliate-box">
-<h3>Best Editing Tool</h3>
-<p>Upgrade your image editing experience</p>
-<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium Tool</a>
-</div>
-
-<!-- SEO CONTENT -->
-<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.6;">
-
-<h2>Free Image Resizer Online</h2>
-<p>Resize your images quickly without losing quality. Perfect for social media and websites.</p>
-
-<h2>How to Resize Image?</h2>
-<ul>
-<li>Upload image</li>
-<li>Enter width and height</li>
-<li>Click resize</li>
-<li>Download image</li>
-</ul>
-
-<h2>Features</h2>
-<ul>
-<li>No quality loss</li>
-<li>Fast processing</li>
-<li>Mobile friendly</li>
-</ul>
+<div id="preview"></div>
 
 </div>
 
+<!-- SEO -->
+<div class="seo-content">
+
+<h2>Image Resizer – Compress Image to Specific KB Size</h2>
+
+<p>
+This Image Resizer tool allows you to compress and resize images to a specific file size such as 50KB, 100KB, or 200KB. It is useful for uploading images to websites, forms, or exams where file size limits are required.
+</p>
+
+<p>
+The tool works directly in your browser and does not upload your image to any server, ensuring full privacy and security. It is fast, free, and easy to use.
+</p>
+
+<h3>How to Use?</h3>
+<p>
+1. Upload your image<br>
+2. Select target size (KB)<br>
+3. Click compress<br>
+4. Download your resized image
+</p>
+
+<h3>Features</h3>
+<p>
+✔ Compress to exact KB size<br>
+✔ Fast processing<br>
+✔ No upload required (safe)<br>
+✔ Works on mobile and desktop<br>
+✔ Free forever
+</p>
+
+<h3>Related Tools</h3>
+<p>
+<a href="qr-code-generator.html">QR Code Generator</a><br>
+<a href="word-counter.html">Word Counter</a><br>
+<a href="password-generator.html">Password Generator</a>
+</p>
+
 </div>
+
+<footer style="margin-top:60px; padding:20px; border-top:1px solid #1e293b;">
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy-policy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
 
 <script>
-function resizeImage() {
-    const file = document.getElementById('upload').files[0];
-    const width = document.getElementById('width').value;
-    const height = document.getElementById('height').value;
+function compressImage(){
+let file = document.getElementById("upload").files[0];
+let targetKB = document.getElementById("targetSize").value;
 
-    if (!file || !width || !height) {
-        alert("Please upload image and enter width & height");
-        return;
-    }
+if(!file){
+alert("Upload image first!");
+return;
+}
 
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
+let reader = new FileReader();
+reader.onload = function(e){
+let img = new Image();
+img.src = e.target.result;
 
-    reader.onload = function(event) {
-        const img = new Image();
-        img.src = event.target.result;
+img.onload = function(){
 
-        img.onload = function() {
-            const canvas = document.getElementById('canvas');
-            const ctx = canvas.getContext('2d');
+let canvas = document.createElement("canvas");
+let ctx = canvas.getContext("2d");
 
-            canvas.width = width;
-            canvas.height = height;
+canvas.width = img.width;
+canvas.height = img.height;
 
-            ctx.drawImage(img, 0, 0, width, height);
+ctx.drawImage(img, 0, 0);
 
-            const downloadBtn = document.getElementById('downloadBtn');
-            downloadBtn.href = canvas.toDataURL();
-            downloadBtn.style.display = "inline-block";
-        }
-    }
+let quality = 0.9;
+
+function tryCompress(){
+let dataUrl = canvas.toDataURL("image/jpeg", quality);
+let sizeKB = (dataUrl.length * 3/4) / 1024;
+
+if(sizeKB > targetKB && quality > 0.1){
+quality -= 0.05;
+tryCompress();
+}else{
+showResult(dataUrl, sizeKB);
+}
+}
+
+tryCompress();
+}
+}
+
+reader.readAsDataURL(file);
+}
+
+function showResult(dataUrl, sizeKB){
+let preview = document.getElementById("preview");
+
+preview.innerHTML = `
+<p>Final Size: ${sizeKB.toFixed(2)} KB</p>
+<img src="${dataUrl}" style="max-width:100%;border-radius:10px;"><br>
+<a href="${dataUrl}" download="compressed.jpg">
+<button>Download Image</button>
+</a>
+`;
 }
 </script>
-<footer style="margin-top:60px; padding:20px 0; font-size:17px; border-top:1px solid #1e293b;">
 
-<a href="about.html" style="color:white; margin:0 12px; text-decoration:none;">About</a> |
-<a href="contact.html" style="color:white; margin:0 12px; text-decoration:none;">Contact</a> |
-<a href="privacy-policy.html" style="color:white; margin:0 12px; text-decoration:none;">Privacy Policy</a> |
-<a href="disclaimer.html" style="color:white; margin:0 12px; text-decoration:none;">Disclaimer</a>
-
-</footer>
 </body>
 </html>
