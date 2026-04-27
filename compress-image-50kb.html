@@ -4,50 +4,126 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compress Image to 50KB Online Free (No Quality Loss)</title>
-<meta name="description" content="Compress image to 50KB online free without losing quality. Fast and easy tool for forms and uploads.">
+<title>Compress Image to 50KB Online Free</title>
+<meta name="description" content="Compress image to 50KB online free. Resize JPG, PNG images instantly.">
 
 <style>
-body {
-    background:#020617;
-    color:white;
-    font-family:Arial;
-    text-align:center;
-    margin:0;
+body{
+background:#020617;
+color:white;
+font-family:Arial;
+text-align:center;
+margin:0;
 }
 
-.container { padding:40px; }
-
-input, button {
-    padding:12px;
-    margin:10px;
-    border-radius:10px;
-    border:none;
+/* CONTAINER */
+.container{
+max-width:600px;
+margin:auto;
+padding:40px 15px;
 }
 
-button {
-    background:#ff4d4d;
-    color:white;
-    cursor:pointer;
+/* TITLE */
+h1{
+font-size:28px;
+margin-bottom:10px;
 }
 
-img { max-width:250px; margin-top:20px; }
-
-/* 🔥 BUTTON STYLE */
-.tool-btn {
-    display:inline-block;
-    margin:8px;
-    padding:10px 18px;
-    background:#1e293b;
-    color:white;
-    text-decoration:none;
-    border-radius:10px;
-    font-size:14px;
-    transition:0.3s;
+/* SUBTEXT */
+.subtext{
+color:#cbd5f5;
+margin-bottom:20px;
 }
 
-.tool-btn:hover {
-    background:#ff4d4d;
+/* FILE INPUT (CUSTOM LOOK) */
+input[type="file"]{
+display:none;
+}
+
+.file-label{
+display:inline-block;
+background:#1e293b;
+padding:12px 20px;
+border-radius:8px;
+cursor:pointer;
+margin-bottom:10px;
+}
+
+/* BUTTON */
+button{
+width:100%;
+max-width:350px;
+padding:14px;
+margin:15px auto;
+border-radius:10px;
+border:none;
+background:#22c55e;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#16a34a;
+}
+
+/* PREVIEW */
+#preview{
+margin-top:20px;
+}
+
+/* SEO */
+.seo-content{
+max-width:800px;
+margin:60px auto;
+text-align:left;
+color:#cbd5f5;
+padding:0 15px;
+line-height:1.7;
+}
+
+.seo-content h2,
+.seo-content h3{
+color:white;
+}
+
+/* RELATED TOOLS */
+.related-tools{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:15px;
+}
+
+.related-tools a{
+background:#1e293b;
+color:#22c55e;
+padding:10px 14px;
+border-radius:8px;
+text-decoration:none;
+font-size:14px;
+}
+
+.related-tools a:hover{
+background:#334155;
+color:#4ade80;
+}
+
+/* FOOTER */
+footer{
+margin-top:50px;
+padding:20px;
+border-top:1px solid #1e293b;
+}
+
+footer a{
+color:white;
+margin:0 10px;
+text-decoration:none;
+}
+
+footer a:hover{
+color:#60a5fa;
 }
 </style>
 </head>
@@ -57,87 +133,100 @@ img { max-width:250px; margin-top:20px; }
 <div class="container">
 
 <h1>Compress Image to 50KB</h1>
-<p><strong>Reduce image size to 50KB online free instantly.</strong></p>
-<p><strong>100% Free • Compress Image to 50KB Instantly • No Signup Required</strong></p>
-    
-<input type="file" id="upload"><br>
-<button onclick="compress()">Compress</button>
+<p class="subtext">Reduce image size to 50KB instantly • 100% Free • No Signup</p>
 
-<div id="result"></div>
-    
+<label class="file-label">
+Choose Image
+<input type="file" id="upload">
+</label>
+
+<button onclick="compress()">Compress Image</button>
+
+<div id="preview"></div>
+
+</div>
+
+<!-- SEO -->
 <div class="seo-content">
+
 <h2>Compress Image to 50KB Online</h2>
 <p>This tool helps you compress image to 50KB easily for forms, exams, and uploads.</p>
 
 <h3>How to Use?</h3>
-<p>Upload image → Click compress → Download instantly.</p>
+<p>Upload → Click compress → Download instantly.</p>
 
 <h3>Features</h3>
 <p>✔ Free ✔ Fast ✔ No upload ✔ Mobile friendly</p>
-    
-<!-- 🔥 RELATED TOOLS -->
-<h3 style="margin-top:40px;">🔥 Related Tools</h3>
 
-<div style="margin-top:20px;">
-<a href="compress-image-20kb.html" class="tool-btn">Compress Image 20KB</a>
-<a href="resize-image-100kb.html" class="tool-btn">Resize Image 100KB</a>
-<a href="png-to-jpg.html" class="tool-btn">PNG to JPG Converter</a>
+<h3>🔥 Related Tools</h3>
+
+<div class="related-tools">
+<a href="compress-image-to-20kb.html">Compress Image 20KB</a>
+<a href="compress-image-to-100kb.html">Resize Image 100KB</a>
+<a href="png-to-jpg.html">PNG to JPG Converter</a>
 </div>
 
 </div>
+
+<footer>
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy-policy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
 
 <script>
-function compress() {
-    let file = document.getElementById("upload").files[0];
-    if (!file) return alert("Upload image!");
+function compress(){
+let file=document.getElementById("upload").files[0];
 
-    let reader = new FileReader();
-    reader.onload = function(e) {
-        let img = new Image();
-        img.src = e.target.result;
+if(!file){
+alert("Upload image first!");
+return;
+}
 
-        img.onload = function() {
-            let canvas = document.createElement("canvas");
-            let ctx = canvas.getContext("2d");
+let reader=new FileReader();
 
-            canvas.width = img.width;
-            canvas.height = img.height;
+reader.onload=function(e){
+let img=new Image();
+img.src=e.target.result;
 
-            ctx.drawImage(img, 0, 0);
+img.onload=function(){
+let canvas=document.createElement("canvas");
+let ctx=canvas.getContext("2d");
 
-            let quality = 0.9;
+canvas.width=img.width;
+canvas.height=img.height;
 
-            function reduce() {
-                let data = canvas.toDataURL("image/jpeg", quality);
-                let size = (data.length * 3/4) / 1024;
+ctx.drawImage(img,0,0);
 
-                if (size > 50 && quality > 0.1) {
-                    quality -= 0.05;
-                    reduce();
-                } else {
-                    document.getElementById("result").innerHTML = `
-                        <p>Size: ${Math.round(size)} KB</p>
-                        <img src="${data}">
-                        <br>
-                        <a href="${data}" download="compressed.jpg">
-                        <button>Download</button></a>
-                    `;
-                }
-            }
+let quality=0.9;
 
-            reduce();
-        };
-    };
-    reader.readAsDataURL(file);
+function loop(){
+let data=canvas.toDataURL("image/jpeg",quality);
+let size=(data.length*3/4)/1024;
+
+if(size>50 && quality>0.1){
+quality-=0.05;
+loop();
+}else{
+document.getElementById("preview").innerHTML=
+`
+<p><strong>Final Size:</strong> ${size.toFixed(2)} KB</p>
+<img src="${data}" style="max-width:100%;border-radius:10px;"><br><br>
+<a href="${data}" download="compressed-50kb.jpg">
+<button>Download Image</button>
+</a>
+`;
+}
+}
+
+loop();
+}
+}
+
+reader.readAsDataURL(file);
 }
 </script>
-<footer style="margin-top:60px; padding:20px 0; font-size:17px; border-top:1px solid #1e293b;">
 
-<a href="about.html" style="color:white; margin:0 12px; text-decoration:none;">About</a> |
-<a href="contact.html" style="color:white; margin:0 12px; text-decoration:none;">Contact</a> |
-<a href="privacy-policy.html" style="color:white; margin:0 12px; text-decoration:none;">Privacy Policy</a> |
-<a href="disclaimer.html" style="color:white; margin:0 12px; text-decoration:none;">Disclaimer</a>
-
-</footer>
 </body>
 </html>
