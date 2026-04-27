@@ -3,74 +3,37 @@
 
 <url>
 <loc>https://tools-website-roan.vercel.app/</loc>
+<priority>1.0</priority>
 </url>
 
 <url>
-<loc>https://tools-website-roan.vercel.app/compress-image-50kb.html</loc>
+<loc>https://tools-website-roan.vercel.app/compress-image-to-20kb.html</loc>
+<priority>0.9</priority>
 </url>
 
 <url>
-<loc>https://tools-website-roan.vercel.app/compress-image-20kb.html</loc>
+<loc>https://tools-website-roan.vercel.app/compress-image-to-50kb.html</loc>
+<priority>0.9</priority>
 </url>
 
 <url>
-<loc>https://tools-website-roan.vercel.app/resize-image-100kb.html</loc>
+<loc>https://tools-website-roan.vercel.app/compress-image-to-100kb.html</loc>
+<priority>0.9</priority>
 </url>
 
 <url>
-<loc>https://tools-website-roan.vercel.app/png-to-jpg.html</loc>
+<loc>https://tools-website-roan.vercel.app/image-resizer.html</loc>
+<priority>0.8</priority>
 </url>
 
 <url>
-<loc>https://tools-website-roan.vercel.app/jpg-to-png.html</loc>
+<loc>https://tools-website-roan.vercel.app/percentage-calculator.html</loc>
+<priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://tools-website-roan.vercel.app/jpg-to-pdf.html</loc>
-</url>
-
-<url>
-<loc>https://tools-website-roan.vercel.app/pdf-to-word.html</loc>
-</url>
-
-<url>
-<loc>https://tools-website-roan.vercel.app/pdf-to-jpg.html</loc>
-</url>
-
-<url>
-<loc>https://tools-website-roan.vercel.app/compress-pdf-100kb.html</loc>
-</url>
-
-<url>
-<loc>https://tools-website-roan.vercel.app/instagram-reels-downloader.html</loc>
-</url>
-
-<url>
-<loc>https://tools-website-roan.vercel.app/instagram-photo-downloader.html</loc>
-</url>
-
-<url>
-<loc>https://tools-website-roan.vercel.app/youtube-video-downloader.html</loc>
-</url>
-
-<url>
-<loc>https://tools-website-roan.vercel.app/facebook-reels-downloader.html</loc>
-</url>
-
-<url>
-<loc>https://tools-website-roan.vercel.app/about.html</loc>
-</url>
-
-<url>
-<loc>https://tools-website-roan.vercel.app/contact.html</loc>
-</url>
-
-<url>
-<loc>https://tools-website-roan.vercel.app/privacy-policy.html</loc>
-</url>
-
-<url>
-<loc>https://tools-website-roan.vercel.app/disclaimer.html</loc>
+<loc>https://tools-website-roan.vercel.app/age-calculator.html</loc>
+<priority>0.7</priority>
 </url>
 
 </urlset>
