@@ -8,22 +8,105 @@
 <meta name="description" content="Compress image to 100KB online free. Resize JPG, PNG images instantly.">
 
 <style>
-body{background:#020617;color:white;font-family:Arial;text-align:center;margin:0;}
-.container{max-width:600px;margin:auto;padding:30px 15px;}
-input,button{width:100%;max-width:350px;padding:12px;margin:10px auto;border-radius:10px;border:none;display:block;}
-button{background:#22c55e;color:white;cursor:pointer;}
-#preview{margin-top:20px;}
-.seo-content{max-width:800px;margin:50px auto;text-align:left;color:#cbd5f5;padding:0 15px;}
-.seo-content h2,.seo-content h3{color:white;}
-.seo-content a {
-    background:#1e293b;
-    padding:8px 12px;
-    border-radius:6px;
-    color:#22c55e;
+body{
+background:#020617;
+color:white;
+font-family:Arial;
+text-align:center;
+margin:0;
 }
 
-.seo-content a:hover {
-    color:#4ade80;
+/* CONTAINER */
+.container{
+max-width:600px;
+margin:auto;
+padding:30px 15px;
+}
+
+/* INPUT */
+input,button{
+width:100%;
+max-width:350px;
+padding:12px;
+margin:10px auto;
+border-radius:10px;
+border:none;
+display:block;
+}
+
+input{
+background:#1e293b;
+color:white;
+}
+
+button{
+background:#22c55e;
+color:white;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#16a34a;
+}
+
+/* PREVIEW */
+#preview{
+margin-top:20px;
+}
+
+/* SEO */
+.seo-content{
+max-width:800px;
+margin:50px auto;
+text-align:left;
+line-height:1.7;
+font-size:15px;
+color:#cbd5f5;
+padding:0 15px;
+}
+
+.seo-content h2,
+.seo-content h3{
+color:white;
+}
+
+/* 🔥 RELATED TOOLS FIX */
+.related-tools{
+margin-top:10px;
+}
+
+.related-tools a{
+display:inline-block;
+background:#1e293b;
+color:#22c55e;
+padding:8px 14px;
+margin:6px 6px 0 0;
+border-radius:8px;
+text-decoration:none;
+font-size:14px;
+}
+
+.related-tools a:hover{
+background:#334155;
+color:#4ade80;
+}
+
+/* FOOTER */
+footer{
+margin-top:50px;
+padding:20px;
+border-top:1px solid #1e293b;
+}
+
+footer a{
+color:white;
+text-decoration:none;
+margin:0 10px;
+}
+
+footer a:hover{
+color:#60a5fa;
 }
 </style>
 </head>
@@ -31,38 +114,59 @@ button{background:#22c55e;color:white;cursor:pointer;}
 <body>
 
 <div class="container">
+
 <h1>Compress Image to 100KB</h1>
 <p><strong>Resize JPG, PNG to 100KB Instantly</strong></p>
 
 <input type="file" id="upload">
-<button onclick="compress(100)">Compress</button>
+<button onclick="compress()">Compress</button>
 
 <div id="preview"></div>
+
 </div>
 
+<!-- SEO CONTENT -->
 <div class="seo-content">
+
 <h2>Compress Image to 100KB Online</h2>
-<p>This tool helps you compress images to 100KB quickly and easily.</p>
+
+<p>
+This tool helps you compress images to 100KB quickly and easily. It is useful for online forms, job applications, and websites where file size limits are required.
+</p>
 
 <h3>How to Use?</h3>
-<p>Upload → Compress → Download.</p>
+<p>Upload → Click Compress → Download instantly.</p>
 
 <h3>Features</h3>
-<p>✔ Free ✔ Fast ✔ No upload ✔ Secure</p>
+<p>✔ Free ✔ Fast ✔ No upload ✔ Secure ✔ Mobile friendly</p>
 
 <h3>Related Tools</h3>
-<p>
-<a href="compress-image-to-50kb.html">Compress Image to 50KB</a><br>
+
+<div class="related-tools">
+<a href="compress-image-to-50kb.html">Compress Image to 50KB</a>
 <a href="image-resizer.html">Image Resizer</a>
-</p>
 </div>
 
+</div>
+
+<footer>
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy-policy.html">Privacy Policy</a> |
+<a href="disclaimer.html">Disclaimer</a>
+</footer>
+
 <script>
-function compress(targetKB){
+function compress(){
 let file=document.getElementById("upload").files[0];
-if(!file){alert("Upload image");return;}
+
+if(!file){
+alert("Upload image first!");
+return;
+}
 
 let reader=new FileReader();
+
 reader.onload=function(e){
 let img=new Image();
 img.src=e.target.result;
@@ -82,19 +186,25 @@ function loop(){
 let data=canvas.toDataURL("image/jpeg",quality);
 let size=(data.length*3/4)/1024;
 
-if(size>targetKB && quality>0.1){
+if(size>100 && quality>0.1){
 quality-=0.05;
 loop();
 }else{
 document.getElementById("preview").innerHTML=
-`<p>${size.toFixed(2)} KB</p>
-<img src="${data}" style="max-width:100%"><br>
-<a href="${data}" download="100kb.jpg"><button>Download</button></a>`;
+`
+<p><strong>Final Size:</strong> ${size.toFixed(2)} KB</p>
+<img src="${data}" style="max-width:100%;border-radius:10px;"><br><br>
+<a href="${data}" download="compressed-100kb.jpg">
+<button>Download Image</button>
+</a>
+`;
 }
 }
+
 loop();
 }
 }
+
 reader.readAsDataURL(file);
 }
 </script>
