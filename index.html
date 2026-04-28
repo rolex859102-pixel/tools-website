@@ -314,24 +314,32 @@ No tools found 😢
 <script>
 const searchInput = document.querySelector(".search");
 const tools = document.querySelectorAll(".tool");
+const suggestionBox = document.getElementById("suggestions");
 
 searchInput.addEventListener("keyup", function() {
 
 let filter = searchInput.value.toLowerCase();
 let visible = 0;
+let suggestions = "";
 
 tools.forEach(function(tool) {
 
 let text = tool.textContent.toLowerCase();
+let link = tool.getAttribute("href");
 
 if (text.includes(filter)) {
 tool.style.display = "inline-block";
 visible++;
 
 // 🔥 highlight
-let originalText = tool.textContent;
+let original = tool.textContent;
 let regex = new RegExp(`(${filter})`, "gi");
-tool.innerHTML = originalText.replace(regex, "<span style='color:#22c55e'>$1</span>");
+tool.innerHTML = original.replace(regex, "<span style='color:#22c55e'>$1</span>");
+
+// 🔥 suggestions
+if(filter !== "" && suggestions.split("<a").length < 6){
+suggestions += `<a href="${link}" style="display:block;padding:10px;color:white;text-decoration:none;border-bottom:1px solid #334155;">${original}</a>`;
+}
 
 } else {
 tool.style.display = "none";
@@ -339,8 +347,14 @@ tool.style.display = "none";
 
 });
 
-// 🔥 reset highlight when empty
-if(filter === ""){
+// 🔥 suggestion box show/hide
+if(filter !== ""){
+suggestionBox.style.display = "block";
+suggestionBox.innerHTML = suggestions || "<div style='padding:10px;'>No result</div>";
+}else{
+suggestionBox.style.display = "none";
+
+// reset
 tools.forEach(function(tool){
 tool.innerHTML = tool.textContent;
 tool.style.display = "inline-block";
@@ -348,7 +362,6 @@ tool.style.display = "inline-block";
 }
 
 });
-    document.getElementById("noResult").style.display = visible === 0 ? "block" : "none";
 </script>
 
 </body>
