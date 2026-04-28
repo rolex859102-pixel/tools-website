@@ -16,12 +16,24 @@ body {
     margin:0;
     text-align:center;
 }
+    body {
+    background: linear-gradient(180deg,#020617,#020617,#0f172a);
+    color:white;
+    font-family: 'Segoe UI', Arial;
+    margin:0;
+    text-align:center;
+}
 
 header {
     background:#0f172a;
     padding:20px;
 }
 
+    header {
+    background: radial-gradient(circle at top, #0f172a, #020617);
+    padding:30px 20px;
+}
+    
 .search {
     padding:10px;
     width:60%;
@@ -80,6 +92,55 @@ footer {
     h1 {font-size:22px;}
     .tool {font-size:13px;}
 }
+
+    .tool {
+    display:inline-block;
+    margin:10px;
+    padding:14px 20px;
+    background:linear-gradient(145deg,#1e293b,#0f172a);
+    color:white;
+    text-decoration:none;
+    border-radius:12px;
+    font-size:14px;
+    transition:0.3s;
+    box-shadow:0 0 0 transparent;
+}
+
+.tool:hover {
+    transform:translateY(-6px) scale(1.05);
+    box-shadow:0 10px 25px rgba(0,0,0,0.6);
+    color:#22c55e;
+}
+    .tools-row, .home-tools {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+    .section h2 {
+    margin-bottom:10px;
+    font-size:20px;
+}
+
+.section .tool {
+    border:1px solid #334155;
+}
+    .search {
+    padding:14px;
+    width:60%;
+    max-width:400px;
+    border-radius:25px;
+    border:none;
+    margin-top:15px;
+    outline:none;
+    font-size:14px;
+}
+    nav{
+position:sticky;
+top:0;
+z-index:1000;
+backdrop-filter:blur(10px);
+}
+    
 </style>
 
 </head>
