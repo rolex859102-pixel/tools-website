@@ -4,194 +4,186 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Free Online Tools - Image, PDF, Calculator</title>
-<meta name="description" content="Free online tools for image compression, PDF, calculators and more. Fast and easy tools.">
+<title>Text to Speech Online Free | Multi Voice AI Reader</title>
 
 <style>
 body{
 background:#020617;
 color:white;
 font-family:Arial;
-margin:0;
-}
-
-/* 🔥 NAVBAR */
-nav{
-background:#020617;
-padding:12px 20px;
-border-bottom:1px solid #1e293b;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
-}
-
-.logo{
-font-size:20px;
-font-weight:bold;
-color:#22c55e;
-}
-
-.menu{
-display:flex;
-gap:15px;
-}
-
-.menu a{
-color:white;
-text-decoration:none;
-font-size:14px;
-padding:6px 8px;
-border-radius:5px;
-}
-
-.menu a:hover{
-background:#1e293b;
-color:#22c55e;
-}
-
-/* 🔍 SEARCH */
-.search-box{
 text-align:center;
-margin:30px 15px;
 }
 
-.search-box input{
-width:90%;
-max-width:400px;
+.container{
+padding:40px 20px;
+max-width:800px;
+margin:auto;
+}
+
+/* TEXTAREA */
+textarea{
+width:100%;
+height:160px;
 padding:12px;
 border-radius:10px;
 border:none;
-}
-
-/* 🧩 TOOLS GRID */
-.tools{
-display:grid;
-grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
-gap:15px;
-padding:20px;
-}
-
-.card{
-background:#1e293b;
-padding:20px;
-border-radius:10px;
-text-align:center;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
-background:#334155;
-}
-
-.card a{
-color:white;
-text-decoration:none;
-font-size:15px;
-}
-
-/* FOOTER */
-footer{
-text-align:center;
-padding:20px;
-border-top:1px solid #1e293b;
-margin-top:30px;
-}
-
-footer a{
-color:white;
-text-decoration:none;
-margin:0 10px;
-}
-
-footer a:hover{
-color:#60a5fa;
-}
-
-/* MOBILE */
-@media(max-width:600px){
-.menu{
-width:100%;
-justify-content:center;
 margin-top:10px;
-flex-wrap:wrap;
+font-size:14px;
 }
+
+/* CONTROLS */
+.controls{
+margin-top:15px;
+}
+
+select, input[type=range]{
+margin:8px;
+padding:6px;
+border-radius:6px;
+}
+
+/* BUTTONS */
+.btn{
+padding:12px 18px;
+margin:6px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+color:white;
+}
+
+.play{background:#22c55e;}
+.pause{background:#f59e0b;}
+.stop{background:#ef4444;}
+.copy{background:#3b82f6;}
+
+/* INFO */
+.info{
+margin-top:10px;
+font-size:13px;
+opacity:0.8;
+}
+
+/* AFFILIATE */
+.affiliate-box{
+margin-top:40px;
+padding:20px;
+background:#1e293b;
+border-radius:12px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🔥 NAVBAR -->
-<nav>
-<div class="logo">⚡ ToolsHub</div>
-<div class="menu">
-<a href="index.html">Home</a>
-<a href="image-resizer.html">Image</a>
-<a href="compress-image-to-50kb.html">Compress</a>
-<a href="percentage-calculator.html">Calculator</a>
-<a href="contact.html">Contact</a>
-</div>
-</nav>
+<div class="container">
 
-<!-- 🔍 SEARCH -->
-<div class="search-box">
-<input type="text" placeholder="Search tools...">
-</div>
+<h1>🔊 Text to Speech</h1>
+<p>Convert text into natural voice instantly</p>
 
-<!-- 🧩 TOOLS -->
-<div class="tools">
+<textarea id="text" placeholder="Type or paste your text..."></textarea>
 
-<div class="card">
-<a href="compress-image-to-20kb.html">Compress Image 20KB</a>
+<div class="controls">
+
+<select id="voiceSelect"></select>
+
+<br>
+
+<label>Speed</label>
+<input type="range" id="speed" min="0.5" max="2" step="0.1" value="1">
+
+<label>Pitch</label>
+<input type="range" id="pitch" min="0" max="2" step="0.1" value="1">
+
 </div>
 
-<div class="card">
-<a href="compress-image-to-50kb.html">Compress Image 50KB</a>
+<!-- BUTTONS -->
+<div>
+<button class="btn play" onclick="playText()">▶ Play</button>
+<button class="btn pause" onclick="pauseText()">⏸ Pause</button>
+<button class="btn stop" onclick="stopText()">⏹ Stop</button>
+<button class="btn copy" onclick="copyText()">📋 Copy</button>
 </div>
 
-<div class="card">
-<a href="compress-image-to-100kb.html">Compress Image 100KB</a>
-</div>
+<div class="info" id="status">Status: Idle</div>
 
-<div class="card">
-<a href="image-resizer.html">Image Resizer</a>
-</div>
-
-<div class="card">
-<a href="percentage-calculator.html">Percentage Calculator</a>
-</div>
-
-<div class="card">
-<a href="age-calculator.html">Age Calculator</a>
-</div>
-
-<div class="card">
-<a href="qr-code-generator.html">QR Code Generator</a>
-</div>
-
-<div class="card">
-<a href="password-generator.html">Password Generator</a>
-</div>
-
-<div class="card">
-<a href="word-counter.html">Word Counter</a>
-</div>
-
-<div class="card">
-<a href="text-to-speech.html">Text to Speech</a>
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Upgrade to Real AI Voice</h3>
+<p>Get human-like voice & download audio</p>
+<a href="YOUR_AFFILIATE_LINK" style="color:#38bdf8;">Try Premium Voice</a>
 </div>
 
 </div>
 
-<!-- FOOTER -->
-<footer>
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a> |
-<a href="privacy-policy.html">Privacy Policy</a> |
-<a href="disclaimer.html">Disclaimer</a>
-</footer>
+<script>
+let voices = [];
+let utterance = new SpeechSynthesisUtterance();
+let isPaused = false;
+
+function loadVoices(){
+voices = speechSynthesis.getVoices();
+let select = document.getElementById("voiceSelect");
+select.innerHTML = "";
+
+voices.forEach((voice, i)=>{
+let option = document.createElement("option");
+option.value = i;
+option.textContent = voice.name + " (" + voice.lang + ")";
+select.appendChild(option);
+});
+}
+
+speechSynthesis.onvoiceschanged = loadVoices;
+
+/* PLAY */
+function playText(){
+let text = document.getElementById("text").value;
+
+if(!text){
+alert("Enter text first!");
+return;
+}
+
+if(isPaused){
+speechSynthesis.resume();
+isPaused = false;
+document.getElementById("status").innerText = "Status: Playing";
+return;
+}
+
+utterance = new SpeechSynthesisUtterance(text);
+
+let selectedVoice = voices[document.getElementById("voiceSelect").value];
+utterance.voice = selectedVoice;
+
+utterance.rate = document.getElementById("speed").value;
+utterance.pitch = document.getElementById("pitch").value;
+
+speechSynthesis.speak(utterance);
+document.getElementById("status").innerText = "Status: Playing";
+}
+
+/* PAUSE */
+function pauseText(){
+speechSynthesis.pause();
+isPaused = true;
+document.getElementById("status").innerText = "Status: Paused";
+}
+
+/* STOP */
+function stopText(){
+speechSynthesis.cancel();
+document.getElementById("status").innerText = "Status: Stopped";
+}
+
+/* COPY */
+function copyText(){
+let text = document.getElementById("text").value;
+navigator.clipboard.writeText(text);
+alert("Copied!");
+}
+</script>
 
 </body>
 </html>
