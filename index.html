@@ -17,46 +17,13 @@ body {
     text-align:center;
 }
 
-/* 🔥 NAVBAR */
-nav{
-background:#020617;
-padding:12px 20px;
-border-bottom:1px solid #1e293b;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
-}
-.logo{
-font-size:20px;
-font-weight:bold;
-color:#22c55e;
-}
-.menu{
-display:flex;
-gap:15px;
-}
-.menu a{
-color:white;
-text-decoration:none;
-font-size:14px;
-padding:6px 8px;
-border-radius:5px;
-}
-.menu a:hover{
-background:#1e293b;
-color:#22c55e;
-}
-
-/* HEADER */
 header {
     background:#0f172a;
     padding:20px;
 }
 
-/* SEARCH */
 .search {
-    padding:12px;
+    padding:10px;
     width:60%;
     max-width:400px;
     border-radius:10px;
@@ -64,41 +31,25 @@ header {
     margin-top:15px;
 }
 
-/* 🔍 DROPDOWN */
-#suggestions{
-background:#1e293b;
-max-width:400px;
-margin:5px auto;
-border-radius:10px;
-display:none;
-text-align:left;
-overflow:hidden;
-}
-
-/* SECTIONS */
 .section {
     margin-top:40px;
 }
 
-/* 🔥 PREMIUM TOOL CARDS */
 .tool {
     display:inline-block;
     margin:8px;
-    padding:12px 18px;
+    padding:10px 15px;
     background:#1e293b;
     color:white;
     text-decoration:none;
-    border-radius:10px;
+    border-radius:8px;
     font-size:14px;
-    transition:0.3s;
-}
-.tool:hover {
-    background:#334155;
-    transform:translateY(-3px);
-    color:#22c55e;
 }
 
-/* AFFILIATE */
+.tool:hover {
+    background:#ff4d4d;
+}
+
 .affiliate-box {
     background:#1e293b;
     padding:20px;
@@ -107,6 +58,7 @@ overflow:hidden;
     max-width:600px;
     border-radius:12px;
 }
+
 .affiliate-btn {
     display:inline-block;
     margin-top:15px;
@@ -118,20 +70,15 @@ overflow:hidden;
     font-weight:bold;
 }
 
-/* FOOTER */
 footer {
     margin-top:50px;
     padding:20px;
     background:#0f172a;
-    text-align:center;
 }
-footer a{
-color:white;
-margin:0 10px;
-text-decoration:none;
-}
-footer a:hover{
-color:#60a5fa;
+
+@media (max-width:600px){
+    h1 {font-size:22px;}
+    .tool {font-size:13px;}
 }
 </style>
 
@@ -139,86 +86,252 @@ color:#60a5fa;
 
 <body>
 
-<!-- 🔥 NAVBAR -->
-<nav>
-<div class="logo">⚡ ToolsHub</div>
-<div class="menu">
-<a href="index.html">Home</a>
-<a href="image-resizer.html">Image</a>
-<a href="compress-image-50kb.html">Compress</a>
-<a href="percentage-calculator.html">Calculator</a>
-<a href="contact.html">Contact</a>
-</div>
-</nav>
-
 <header>
-
+    
 <h1>100+ Free Online Tools for Daily Use</h1>
 <p>Fast, Free & Easy Tools</p>
 
 <input type="text" class="search" placeholder="Search tools...">
-
-<!-- 🔥 SEARCH DROPDOWN -->
-<div id="suggestions"></div>
-
-<!-- 🔥 TRENDING -->
-<div class="section">
-<h2>🔥 Trending Tools</h2>
-<a class="tool" href="compress-image-50kb.html">🔥 Compress Image 50KB</a>
-<a class="tool" href="compress-image-20kb.html">🔥 Compress Image 20KB</a>
-<a class="tool" href="compress-image-100kb.html">🔥 Compress Image 100KB</a>
-<a class="tool" href="image-resizer.html">🔥 Image Resizer</a>
-<a class="tool" href="jpg-to-pdf.html">🔥 JPG to PDF</a>
-</div>
-
+<div id="suggestions" style="
+background:#1e293b;
+max-width:400px;
+margin:5px auto;
+border-radius:10px;
+display:none;
+text-align:left;
+overflow:hidden;
+"></div>
 <div class="home-tools">
 
-<!-- 🔥 ORIGINAL TOOLS SAFE -->
-<!-- (tumhara pura old tools list same rakha gaya hai) -->
+<!-- 🔥 YAHAN SAB TOOL LINKS DAALO -->
 
-<!-- 👉 SAME AS YOUR CODE (no deletion) -->
-
+<a class="tool" href="ai-text-summarizer.html">🔥 AI Text Summarizer</a>
+<a class="tool" href="youtube-video-downloader.html">🔥 YouTube Video Downloader</a>
+<a class="tool" href="instagram-reels-downloader.html">🔥 Instagram Reels Downloader</a>
+<a class="tool" href="instagram-photo-downloader.html">🔥 Instagram Photo Downloader</a>
+<a class="tool" href="compress-image-50kb.html">🔥 Compress Image to 50KB</a>
+<a class="tool" href="facebook-reels-downloader.html">🔥 Facebook Reels Downloader</a>
+<a class="tool" href="sip-calculator.html">🔥 SIP Calculator</a>
+<a class="tool" href="emi-calculator.html">🔥 EMI Calculator</a>
+<a class="tool" href="png-to-jpg.html">🔥 PNG to JPG</a>
+<a class="tool" href="jpg-to-png.html">🔥 JPG to PNG</a>
+<a class="tool" href="resize-image-100kb.html">🔥 Resize Image to 100KB</a>
+<a class="tool" href="compress-image-20kb.html">🔥 Compress Image to 20KB</a>
+<a class="tool" href="qr-code-generator.html">🔥 QR Code Generator</a>
+<a class="tool" href="text-to-speech.html">🔥 Text to Speech</a>
+<a class="tool" href="age-calculator.html" class="tool">Age Calculator</a>
 </div>
 
 </header>
 
-<!-- 🔥 AFFILIATE (SAFE) -->
+<!-- 🔥 AFFILIATE -->
 <div class="affiliate-box">
 <h2>🔥 Best Laptop Deal (Limited Offer)</h2>
 <p>Check best laptop under ₹50,000 with latest features</p>
 <a href="https://amzn.in/d/0bX59mc8" target="_blank" class="affiliate-btn">💻 Buy Now on Amazon</a>
 </div>
 
-<!-- ⚠️ (BAKI TUMHARA POORA OLD CODE SAME HI RAHEGA) -->
+<!-- 💰 FINANCE -->
+<div class="section">
 
-<!-- 🔍 SEARCH SCRIPT UPGRADE -->
+<div class="affiliate-box">
+<h2>💳 Credit Card Offers</h2>
+<p>Get best cashback & rewards credit cards</p>
+<a href="https://bitli.in/T0q2Paf" target="_blank" class="affiliate-btn">💳 Apply Now</a>
+</div>
+
+<div class="section">
+<h2>💰 Finance Tools</h2>
+
+<div class="tools-row">
+<a class="tool" href="loan-calculator.html">Loan Calculator</a>
+<a class="tool" href="emi-calculator.html">EMI Calculator</a>
+<a class="tool" href="gst-calculator.html">GST Calculator</a>
+<a class="tool" href="percentage-calculator.html">Percentage Calculator</a>
+<a class="tool" href="sip-calculator.html">SIP Calculator</a>
+</div>
+</div>
+
+<!-- 📄 PDF TOOLS -->
+<div class="section">
+<h2>📄 PDF Tools</h2>
+<a class="tool" href="pdf-to-word.html">🔥 PDF to Word Converter</a>
+<a class="tool" href="pdf-to-jpg.html">🔥 PDF to JPG Converter</a>
+<a class="tool" href="jpg-to-pdf.html">🔥 JPG to PDF</a>
+<a class="tool" href="pdf-to-jpg.html">🔥 PDF to JPG</a>   
+</div>
+
+<div class="section">
+<h2>🖼 Image Tools</h2>
+
+<div class="tools-row">
+<a class="tool" href="compress-image-50kb.html">Compress Image to 50KB</a>
+<a class="tool" href="compress-image-100kb.html">Compress Image to 100KB</a>
+<a class="tool" href="compress-image-20kb.html">Compress Image to 20KB</a>
+<a class="tool" href="resize-image-100kb.html">Resize Image to 100KB</a>
+<a class="tool" href="png-to-jpg.html">PNG to JPG</a>
+<a class="tool" href="jpg-to-png.html">JPG to PNG</a>
+<a class="tool" href="image-compressor.html">Image Compressor</a>
+<a class="tool" href="image-resizer.html">Image Resizer</a>
+</div>
+</div>
+
+<div class="section">
+<h2>🎬 Video Downloader Tools</h2>
+
+<div class="tools-row">
+<a class="tool" href="youtube-video-downloader.html">YouTube Video Downloader</a>
+<a class="tool" href="instagram-reels-downloader.html">Instagram Reels Downloader</a>
+<a class="tool" href="facebook-reels-downloader.html">Facebook Reels Downloader</a>
+<a class="tool" href="instagram-photo-downloader.html">Instagram Photo Downloader</a>
+</div>
+</div>
+    
+  <!-- 🔥 MOST USED -->
+<div class="section">
+<h2>🔥 Most Used Tools</h2>
+
+<div>
+<a class="tool" href="compress-image-50kb.html">Compress Image to 50KB</a>
+<a class="tool" href="compress-image-100kb.html">Compress Image to 100KB</a>
+<a class="tool" href="resize-image-100kb.html">Resize Image to 100KB</a>
+<a class="tool" href="jpg-to-pdf.html">JPG to PDF</a>
+<a class="tool" href="png-to-jpg.html">PNG to JPG</a>
+</div>
+
+</div>
+    
+<div class="section">
+<h2>📄 Form & Passport Tools</h2>
+
+<div class="tools-row">
+<a class="tool" href="compress-image-for-form.html">Compress Image for Form</a>
+<a class="tool" href="resize-image-for-form.html">Resize Image for Form</a>
+<a class="tool" href="compress-image-for-passport.html">Compress Image for Passport</a>
+<a class="tool" href="resize-image-for-passport.html">Resize Image for Passport</a>
+</div>
+</div>
+    
+<div class="section">
+<h2>📝 Exam Tools</h2>
+
+<div class="tools-row">
+<a class="tool" href="compress-image-for-exam.html">Compress Image for Exam</a>
+<a class="tool" href="resize-image-for-exam.html">Resize Image for Exam</a>
+</div>
+</div>
+
+   <div class="section">
+<h2>🌐 General Tools</h2>
+
+<div class="tools-row">
+<a class="tool" href="compress-image-online.html">Free Image Compressor</a>
+</div>
+
+</div>
+
+<!-- 📝 TEXT -->
+<div class="section">
+<h2>📝 Text Tools</h2>
+
+<div class="tools-row">
+<a class="tool" href="word-counter.html">Word Counter</a>
+<a class="tool" href="character-counter.html">Character Counter</a>
+<a class="tool" href="uppercase-converter.html">Uppercase Converter</a>
+</div>
+</div>
+
+<!-- 💻 DEV -->
+<div class="section">
+<h2>💻 Developer Tools</h2>
+
+<div class="tools-row">
+<a class="tool" href="json-formatter.html">JSON Formatter</a>
+<a class="tool" href="html-minifier.html">HTML Minifier</a>
+</div>
+</div>
+ 
+<!-- 🧰 UTILITY -->
+<div class="section">
+<h2>🧰 Utility Tools</h2>
+
+<div class="tools-row">
+<a class="tool" href="password-generator.html">Password Generator</a>
+<a class="tool" href="age-calculator.html">Age Calculator</a>
+<a class="tool" href="qr-code-generator.html">QR Code Generator</a>
+<a class="tool" href="text-to-speech.html">Text to Speech</a>
+<a class="tool" href="random-name-generator.html">Random Name Generator</a>
+<a class="tool" href="color-palette-generator.html">Color Palette Generator</a>
+<a class="tool" href="password-generator.html">Password Generator</a>
+<a class="tool" href="ai-text-summarizer.html">🤖 AI Text Summarizer</a>
+</div>
+</div>
+
+    <div class="section">
+<h2>🎲 Name Generator Tools</h2>
+
+<div class="tools-row">
+<a class="tool" href="random-indian-name-generator.html">Indian Name Generator</a>
+<a class="tool" href="male-name-generator.html">Male Name Generator</a>
+<a class="tool" href="female-name-generator.html">Female Name Generator</a>
+<a class="tool" href="baby-name-generator.html">Baby Name Generator</a>
+<a class="tool" href="username-name-generator.html">Username Generator</a>
+<a class="tool" href="unique-name-generator.html">Unique Name Generator</a>
+</div>
+
+</div>
+    
+<div class="affiliate-box">
+<h2>🔥 Today’s Best Deal</h2>
+<a href="https://amzn.in/d/0bX59mc8" target="_blank" class="affiliate-btn">🛒 Shop Now</a>
+    
+</div>
+    
+<div class="section">
+<h2>📘 Guides</h2>
+
+<div class="tools-row">
+<a class="tool" href="compress-image-50kb-guide.html">Compress Image to 50KB</a>
+<a class="tool" href="instagram-reels-download-guide.html">Download Instagram Reels</a>
+<a class="tool" href="jpg-to-pdf-guide.html">JPG to PDF Guide</a>
+<a class="tool" href="png-to-jpg-guide.html">PNG to JPG Guide</a>
+<a class="tool" href="resize-image-guide.html">Resize Image Guide</a>
+</div>
+</div>
+ <p id="noResult" style="display:none; margin-top:20px; color:#94a3b8;">
+No tools found 😢
+</p>   
+<footer style="margin-top:60px; padding:25px 0; font-size:17px; border-top:1px solid #1e293b; background:#020617;">
+
+<a href="about.html" style="color:white; margin:0 15px; text-decoration:none;">About</a> |
+<a href="contact.html" style="color:white; margin:0 15px; text-decoration:none;">Contact</a> |
+<a href="privacy-policy.html" style="color:white; margin:0 15px; text-decoration:none;">Privacy Policy</a> |
+<a href="disclaimer.html" style="color:white; margin:0 15px; text-decoration:none;">Disclaimer</a>
+
+</footer>
+
+<!-- 🔍 SEARCH SCRIPT -->
 <script>
 const searchInput = document.querySelector(".search");
 const tools = document.querySelectorAll(".tool");
-const suggestionBox = document.getElementById("suggestions");
 
 searchInput.addEventListener("keyup", function() {
 
 let filter = searchInput.value.toLowerCase();
-let suggestions = "";
+let visible = 0;
 
 tools.forEach(function(tool) {
 
 let text = tool.textContent.toLowerCase();
-let link = tool.getAttribute("href");
 
 if (text.includes(filter)) {
 tool.style.display = "inline-block";
+visible++;
 
-// highlight
-let original = tool.textContent;
+// 🔥 highlight
+let originalText = tool.textContent;
 let regex = new RegExp(`(${filter})`, "gi");
-tool.innerHTML = original.replace(regex, "<span style='color:#22c55e'>$1</span>");
-
-// suggestions
-if(filter !== "" && suggestions.split("<a").length < 6){
-suggestions += `<a href="${link}" style="display:block;padding:10px;color:white;text-decoration:none;border-bottom:1px solid #334155;">${original}</a>`;
-}
+tool.innerHTML = originalText.replace(regex, "<span style='color:#22c55e'>$1</span>");
 
 } else {
 tool.style.display = "none";
@@ -226,14 +339,8 @@ tool.style.display = "none";
 
 });
 
-// dropdown
-if(filter !== ""){
-suggestionBox.style.display = "block";
-suggestionBox.innerHTML = suggestions || "<div style='padding:10px;'>No result</div>";
-}else{
-suggestionBox.style.display = "none";
-
-// reset
+// 🔥 reset highlight when empty
+if(filter === ""){
 tools.forEach(function(tool){
 tool.innerHTML = tool.textContent;
 tool.style.display = "inline-block";
@@ -241,6 +348,7 @@ tool.style.display = "inline-block";
 }
 
 });
+    document.getElementById("noResult").style.display = visible === 0 ? "block" : "none";
 </script>
 
 </body>
