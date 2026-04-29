@@ -140,7 +140,32 @@ top:0;
 z-index:1000;
 backdrop-filter:blur(10px);
 }
-    
+  .filters{
+margin-top:15px;
+}
+
+.filters button{
+margin:5px;
+padding:8px 14px;
+border:none;
+border-radius:20px;
+background:#1e293b;
+color:white;
+cursor:pointer;
+}
+
+.filters button:hover{
+background:#22c55e;
+}
+    .badge{
+background:#22c55e;
+color:black;
+padding:2px 6px;
+font-size:10px;
+border-radius:5px;
+margin-left:5px;
+font-weight:bold;
+}
 </style>
 
 </head>
@@ -153,6 +178,14 @@ backdrop-filter:blur(10px);
 <p>Fast, Free & Easy Tools</p>
 
 <input type="text" class="search" placeholder="Search tools...">
+<div class="filters">
+<button onclick="filterTools('all')">All</button>
+<button onclick="filterTools('image')">Image</button>
+<button onclick="filterTools('pdf')">PDF</button>
+<button onclick="filterTools('finance')">Finance</button>
+<button onclick="filterTools('text')">Text</button>
+<button onclick="filterTools('dev')">Developer</button>
+</div>
 <div id="suggestions" style="
 background:#1e293b;
 max-width:400px;
@@ -170,14 +203,20 @@ overflow:hidden;
 <a class="tool" href="youtube-video-downloader.html">🔥 YouTube Video Downloader</a>
 <a class="tool" href="instagram-reels-downloader.html">🔥 Instagram Reels Downloader</a>
 <a class="tool" href="instagram-photo-downloader.html">🔥 Instagram Photo Downloader</a>
-<a class="tool" href="compress-image-50kb.html">🔥 Compress Image to 50KB</a>
+<a class="tool popular" href="compress-image-50kb.html">
+🔥 Compress Image 50KB <span class="badge">POPULAR</span>
+</a>
 <a class="tool" href="facebook-reels-downloader.html">🔥 Facebook Reels Downloader</a>
 <a class="tool" href="sip-calculator.html">🔥 SIP Calculator</a>
 <a class="tool" href="emi-calculator.html">🔥 EMI Calculator</a>
 <a class="tool" href="png-to-jpg.html">🔥 PNG to JPG</a>
 <a class="tool" href="jpg-to-png.html">🔥 JPG to PNG</a>
-<a class="tool" href="resize-image-100kb.html">🔥 Resize Image to 100KB</a>
-<a class="tool" href="compress-image-20kb.html">🔥 Compress Image to 20KB</a>
+<a class="tool popular" href="compress-image-100kb.html">
+🔥 Compress Image 100KB <span class="badge">POPULAR</span>
+</a>
+<a class="tool popular" href="compress-image-20kb.html">
+🔥 Compress Image 20KB <span class="badge">POPULAR</span>
+</a>
 <a class="tool" href="qr-code-generator.html">🔥 QR Code Generator</a>
 <a class="tool" href="text-to-speech.html">🔥 Text to Speech</a>
 <a class="tool" href="age-calculator.html" class="tool">Age Calculator</a>
@@ -218,7 +257,9 @@ overflow:hidden;
 <h2>📄 PDF Tools</h2>
 <a class="tool" href="pdf-to-word.html">🔥 PDF to Word Converter</a>
 <a class="tool" href="pdf-to-jpg.html">🔥 PDF to JPG Converter</a>
-<a class="tool" href="jpg-to-pdf.html">🔥 JPG to PDF</a>
+<a class="tool popular" href="jpg-to-pdf.html">
+📄 JPG to PDF <span class="badge">POPULAR</span>
+</a>
 <a class="tool" href="pdf-to-jpg.html">🔥 PDF to JPG</a>   
 </div>
 
@@ -226,12 +267,24 @@ overflow:hidden;
 <h2>🖼 Image Tools</h2>
 
 <div class="tools-row">
-<a class="tool" href="compress-image-50kb.html">Compress Image to 50KB</a>
-<a class="tool" href="compress-image-100kb.html">Compress Image to 100KB</a>
-<a class="tool" href="compress-image-20kb.html">Compress Image to 20KB</a>
+<a class="tool popular" href="compress-image-50kb.html">
+🔥 Compress Image 50KB <span class="badge">POPULAR</span>
+</a>
+<a class="tool popular" href="compress-image-100kb.html">
+🔥 Compress Image 100KB <span class="badge">POPULAR</span>
+</a>
+<a class="tool popular" href="compress-image-20kb.html">
+🔥 Compress Image 20KB <span class="badge">POPULAR</span>
+</a>
 <a class="tool" href="resize-image-100kb.html">Resize Image to 100KB</a>
+<a class="tool popular" href="image-resizer.html">
+🖼 Image Resizer <span class="badge">POPULAR</span>
+</a>
 <a class="tool" href="png-to-jpg.html">PNG to JPG</a>
 <a class="tool" href="jpg-to-png.html">JPG to PNG</a>
+<a class="tool popular" href="jpg-to-pdf.html">
+📄 JPG to PDF <span class="badge">POPULAR</span>
+</a>
 <a class="tool" href="image-compressor.html">Image Compressor</a>
 <a class="tool" href="image-resizer.html">Image Resizer</a>
 </div>
@@ -253,10 +306,19 @@ overflow:hidden;
 <h2>🔥 Most Used Tools</h2>
 
 <div>
-<a class="tool" href="compress-image-50kb.html">Compress Image to 50KB</a>
-<a class="tool" href="compress-image-100kb.html">Compress Image to 100KB</a>
+<a class="tool popular" href="compress-image-50kb.html">
+🔥 Compress Image 50KB <span class="badge">POPULAR</span>
+</a>
+<a class="tool popular" href="compress-image-100kb.html">
+🔥 Compress Image 100KB <span class="badge">POPULAR</span>
+</a>
 <a class="tool" href="resize-image-100kb.html">Resize Image to 100KB</a>
-<a class="tool" href="jpg-to-pdf.html">JPG to PDF</a>
+<a class="tool popular" href="image-resizer.html">
+🖼 Image Resizer <span class="badge">POPULAR</span>
+</a>
+<a class="tool popular" href="jpg-to-pdf.html">
+📄 JPG to PDF <span class="badge">POPULAR</span>
+</a>
 <a class="tool" href="png-to-jpg.html">PNG to JPG</a>
 </div>
 
@@ -373,57 +435,26 @@ No tools found 😢
 
 <!-- 🔍 SEARCH SCRIPT -->
 <script>
-const searchInput = document.querySelector(".search");
-const tools = document.querySelectorAll(".tool");
-const suggestionBox = document.getElementById("suggestions");
+function filterTools(category){
 
-searchInput.addEventListener("keyup", function() {
+let tools = document.querySelectorAll(".tool");
 
-let filter = searchInput.value.toLowerCase();
-let visible = 0;
-let suggestions = "";
+tools.forEach(function(tool){
 
-tools.forEach(function(tool) {
-
-let text = tool.textContent.toLowerCase();
-let link = tool.getAttribute("href");
-
-if (text.includes(filter)) {
+if(category === "all"){
 tool.style.display = "inline-block";
-visible++;
-
-// 🔥 highlight
-let original = tool.textContent;
-let regex = new RegExp(`(${filter})`, "gi");
-tool.innerHTML = original.replace(regex, "<span style='color:#22c55e'>$1</span>");
-
-// 🔥 suggestions
-if(filter !== "" && suggestions.split("<a").length < 6){
-suggestions += `<a href="${link}" style="display:block;padding:10px;color:white;text-decoration:none;border-bottom:1px solid #334155;">${original}</a>`;
 }
-
-} else {
+else if(tool.getAttribute("data-cat") === category){
+tool.style.display = "inline-block";
+}
+else{
 tool.style.display = "none";
 }
 
 });
 
-// 🔥 suggestion box show/hide
-if(filter !== ""){
-suggestionBox.style.display = "block";
-suggestionBox.innerHTML = suggestions || "<div style='padding:10px;'>No result</div>";
-}else{
-suggestionBox.style.display = "none";
-
-// reset
-tools.forEach(function(tool){
-tool.innerHTML = tool.textContent;
-tool.style.display = "inline-block";
-});
 }
-
-});
 </script>
-
+    
 </body>
 </html>
