@@ -166,6 +166,9 @@ border-radius:5px;
 margin-left:5px;
 font-weight:bold;
 }
+    #suggestions div:hover{
+background:#334155;
+}
 </style>
 
 </head>
@@ -464,6 +467,60 @@ document.getElementById("noResult").style.display = visible === 0 ? "block" : "n
 // 🔍 SEARCH EVENT
 searchInput.addEventListener("keyup", applyFilters);
 </script>
-    
+
+<script>
+const suggestionsBox = document.getElementById("suggestions");
+
+// 🔍 SEARCH + SUGGESTIONS
+searchInput.addEventListener("keyup", function(){
+
+let filter = searchInput.value.toLowerCase();
+suggestionsBox.innerHTML = "";
+
+if(filter === ""){
+suggestionsBox.style.display = "none";
+applyFilters();
+return;
+}
+
+let count = 0;
+
+tools.forEach(function(tool){
+
+let text = tool.textContent.trim();
+
+if(text.toLowerCase().includes(filter) && count < 6){
+
+let item = document.createElement("div");
+item.style.padding = "10px";
+item.style.cursor = "pointer";
+item.style.borderBottom = "1px solid #334155";
+item.innerText = text;
+
+// 👉 CLICK = OPEN TOOL
+item.onclick = function(){
+window.location.href = tool.getAttribute("href");
+};
+
+suggestionsBox.appendChild(item);
+count++;
+}
+
+});
+
+suggestionsBox.style.display = count > 0 ? "block" : "none";
+
+// 🔥 Apply filter also
+applyFilters();
+
+});
+
+// ❌ CLICK OUTSIDE = CLOSE
+document.addEventListener("click", function(e){
+if(!e.target.classList.contains("search")){
+suggestionsBox.style.display = "none";
+}
+});
+</script>
 </body>
 </html>
