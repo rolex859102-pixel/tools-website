@@ -224,6 +224,24 @@ background:#334155;
   background:#22c55e;
   color:black;
 }
+    #suggestions{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+max-width:400px;
+background:rgba(30,41,59,0.9);
+backdrop-filter:blur(12px);
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+z-index:999;
+}
+    .tools-row{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:10px;
+}
 </style>
 
 </head>
@@ -236,7 +254,9 @@ background:#334155;
 <p>Fast, Free & Easy Tools</p>
 
 <input type="text" class="search" placeholder="Search tools...">
-
+<p style="color:#94a3b8; font-size:14px;">
+⚡ Try popular tools: Image Compressor • JPG to PDF • Resize Image
+</p>
 <div class="filters">
 <button onclick="filterTools('all')">All</button>
 <button onclick="filterTools('image')">Image</button>
