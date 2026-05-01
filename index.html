@@ -424,25 +424,40 @@ No tools found 😢
 
 <!-- 🔍 SEARCH SCRIPT -->
 <script>
-function filterTools(category){
+const searchInput = document.querySelector(".search");
+const tools = document.querySelectorAll(".tool");
+let activeCategory = "all";
 
-let tools = document.querySelectorAll(".tool");
+// 🔥 CATEGORY FILTER
+function filterTools(category){
+activeCategory = category;
+applyFilters();
+}
+
+// 🔥 SEARCH + FILTER COMBINED
+function applyFilters(){
+let filter = searchInput.value.toLowerCase();
 
 tools.forEach(function(tool){
 
-if(category === "all"){
+let text = tool.textContent.toLowerCase();
+let category = tool.getAttribute("data-cat");
+
+let matchSearch = text.includes(filter);
+let matchCategory = (activeCategory === "all" || category === activeCategory);
+
+if(matchSearch && matchCategory){
 tool.style.display = "inline-block";
-}
-else if(tool.getAttribute("data-cat") === category){
-tool.style.display = "inline-block";
-}
-else{
+}else{
 tool.style.display = "none";
 }
 
 });
 
 }
+
+// 🔍 SEARCH EVENT
+searchInput.addEventListener("keyup", applyFilters);
 </script>
     
 </body>
