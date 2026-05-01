@@ -455,7 +455,7 @@ let lowerText = text.toLowerCase();
 let category = tool.getAttribute("data-cat");
 
 // 🔍 MATCH
-let matchSearch = lowerText.includes(filter);
+let matchSearch = lowerText.startsWith(filter) || lowerText.includes(" " + filter);
 let matchCategory = (activeCategory === "all" || category === activeCategory || category === null);
 
 // 🔥 SHOW / HIDE TOOL
