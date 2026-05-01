@@ -169,6 +169,61 @@ font-weight:bold;
     #suggestions div:hover{
 background:#334155;
 }
+    /* 🔥 Banner */
+.trending-banner{
+  max-width:600px;
+  margin:20px auto;
+  background:#1e293b;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.slide{
+  display:none;
+  padding:15px;
+  color:white;
+  text-decoration:none;
+  font-size:16px;
+}
+
+.slide.active{
+  display:block;
+  animation:fade 0.5s;
+}
+
+@keyframes fade{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+/* 🔥 Carousel */
+.trending-section{
+  margin-top:30px;
+}
+
+.trending-row{
+  display:flex;
+  overflow-x:auto;
+  gap:10px;
+  padding:10px;
+  scroll-behavior:smooth;
+}
+
+.trend-card{
+  min-width:150px;
+  padding:12px;
+  background:#1e293b;
+  border-radius:10px;
+  color:white;
+  text-decoration:none;
+  flex-shrink:0;
+  transition:0.3s;
+}
+
+.trend-card:hover{
+  background:#22c55e;
+  color:black;
+}
 </style>
 
 </head>
@@ -181,6 +236,7 @@ background:#334155;
 <p>Fast, Free & Easy Tools</p>
 
 <input type="text" class="search" placeholder="Search tools...">
+
 <div class="filters">
 <button onclick="filterTools('all')">All</button>
 <button onclick="filterTools('image')">Image</button>
@@ -188,6 +244,29 @@ background:#334155;
 <button onclick="filterTools('finance')">Finance</button>
 <button onclick="filterTools('text')">Text</button>
 <button onclick="filterTools('dev')">Developer</button>
+</div> <!-- ❗ YAHAN CLOSE KARO -->
+
+<!-- 🔥 TRENDING BANNER -->
+<div class="trending-banner">
+  <div class="slides">
+    <a href="compress-image-50kb.html" class="slide active">🔥 Compress Image 50KB</a>
+    <a href="jpg-to-pdf.html" class="slide">📄 JPG to PDF Converter</a>
+    <a href="image-resizer.html" class="slide">🖼 Image Resizer Tool</a>
+    <a href="text-to-speech.html" class="slide">🔊 Text to Speech</a>
+  </div>
+</div>
+
+<!-- 🔥 TRENDING CAROUSEL -->
+<div class="trending-section">
+  <h2>🔥 Trending Tools</h2>
+  <div class="trending-row" id="trendingRow">
+    <a class="trend-card" href="compress-image-50kb.html">Compress 50KB</a>
+    <a class="trend-card" href="compress-image-100kb.html">Compress 100KB</a>
+    <a class="trend-card" href="jpg-to-pdf.html">JPG to PDF</a>
+    <a class="trend-card" href="image-resizer.html">Image Resizer</a>
+    <a class="trend-card" href="png-to-jpg.html">PNG to JPG</a>
+    <a class="trend-card" href="text-to-speech.html">Text to Speech</a>
+  </div>
 </div>
 <div id="suggestions" style="
 background:#1e293b;
@@ -425,92 +504,148 @@ No tools found 😢
 
 </footer>
 <script>
+document.addEventListener("DOMContentLoaded", function(){
+
+// ================= 🔍 SMART SEARCH =================
 const searchInput = document.querySelector(".search");
 const tools = document.querySelectorAll(".tool");
 const suggestionsBox = document.getElementById("suggestions");
 
 let activeCategory = "all";
 
-// 🔥 CATEGORY FILTER
 function filterTools(category){
-activeCategory = category;
-applyAll();
+  activeCategory = category;
+  applyAll();
 }
 
-// 🔥 MAIN FUNCTION (SEARCH + FILTER + SUGGESTION)
+function fuzzyMatch(text, query){
+  let ti = 0, qi = 0;
+  while(ti < text.length && qi < query.length){
+    if(text[ti] === query[qi]) qi++;
+    ti++;
+  }
+  return qi === query.length;
+}
+
 function applyAll(){
 
-let filter = searchInput.value.toLowerCase();
-let visible = 0;
+  let filter = searchInput.value.toLowerCase();
+  let visible = 0;
 
-// 🔁 RESET SUGGESTIONS
-suggestionsBox.innerHTML = "";
-let seen = new Set();
-let count = 0;
+  if(suggestionsBox) suggestionsBox.innerHTML = "";
 
-tools.forEach(function(tool){
+  let results = [];
 
-let text = tool.textContent.trim();
-let lowerText = text.toLowerCase();
-let category = tool.getAttribute("data-cat");
+  tools.forEach(function(tool){
 
-// 🔍 MATCH
-let matchSearch = lowerText.startsWith(filter);
-let matchCategory = (activeCategory === "all" || category === activeCategory || category === null);
+    let text = tool.textContent.trim();
+    let lower = text.toLowerCase();
+    let category = tool.getAttribute("data-cat");
 
-// 🔥 SHOW / HIDE TOOL
-if(matchSearch && matchCategory){
-tool.style.display = "inline-block";
-visible++;
-}else{
-tool.style.display = "none";
+    let matchCategory = (activeCategory === "all" || category === activeCategory || category === null);
+
+    let score = 0;
+
+    if(filter === "") score = 1;
+    else if(lower.startsWith(filter)) score = 100;
+    else if(lower.includes(filter)) score = 50;
+    else if(fuzzyMatch(lower, filter)) score = 20;
+
+    if(score > 0 && matchCategory){
+      results.push({tool, text, score});
+    }
+
+  });
+
+  results.sort((a,b) => b.score - a.score);
+
+  results.forEach(item => {
+    item.tool.style.display = "inline-block";
+    visible++;
+  });
+
+  tools.forEach(tool => {
+    if(!results.find(r => r.tool === tool)){
+      tool.style.display = "none";
+    }
+  });
+
+  let noResult = document.getElementById("noResult");
+  if(noResult){
+    noResult.style.display = visible === 0 ? "block" : "none";
+  }
+
+  // 🔥 suggestions
+  if(suggestionsBox){
+    let count = 0;
+    let seen = new Set();
+
+    results.forEach(item => {
+      if(filter !== "" && count < 6 && !seen.has(item.text)){
+        seen.add(item.text);
+
+        let div = document.createElement("div");
+        div.style.padding = "10px";
+        div.style.cursor = "pointer";
+        div.style.borderBottom = "1px solid #334155";
+
+        div.innerHTML = item.text.replace(
+          new RegExp(filter, "gi"),
+          m => `<b style="color:#22c55e">${m}</b>`
+        );
+
+        div.onclick = () => {
+          window.location.href = item.tool.getAttribute("href");
+        };
+
+        suggestionsBox.appendChild(div);
+        count++;
+      }
+    });
+
+    suggestionsBox.style.display = (filter !== "" && count > 0) ? "block" : "none";
+  }
 }
 
-// 🔥 SUGGESTION (UNIQUE + LIMIT)
-if(filter !== "" && matchSearch && !seen.has(text) && count < 6){
-
-seen.add(text);
-
-let item = document.createElement("div");
-item.style.padding = "10px";
-item.style.cursor = "pointer";
-item.style.borderBottom = "1px solid #334155";
-
-// 🔥 highlight
-item.innerHTML = text.replace(
-new RegExp(filter, "gi"),
-(m) => `<b style="color:#22c55e">${m}</b>`
-);
-
-// 👉 CLICK
-item.onclick = function(){
-window.location.href = tool.getAttribute("href");
-};
-
-suggestionsBox.appendChild(item);
-count++;
+if(searchInput){
+  searchInput.addEventListener("keyup", applyAll);
 }
 
+// close dropdown
+document.addEventListener("click", function(e){
+  if(suggestionsBox && !e.target.classList.contains("search")){
+    suggestionsBox.style.display = "none";
+  }
 });
 
-// ❗ NO RESULT
-document.getElementById("noResult").style.display = visible === 0 ? "block" : "none";
+// ================= 🔥 SLIDER =================
+let slides = document.querySelectorAll(".slide");
 
-// 👇 SHOW / HIDE SUGGESTION BOX
-suggestionsBox.style.display = (filter !== "" && count > 0) ? "block" : "none";
+if(slides.length > 0){
+  let index = 0;
 
+  setInterval(()=>{
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+  }, 2500);
 }
 
-// 🔍 SINGLE EVENT
-searchInput.addEventListener("keyup", applyAll);
+// ================= 🔥 CAROUSEL =================
+let row = document.getElementById("trendingRow");
 
-// ❌ CLICK OUTSIDE CLOSE
-document.addEventListener("click", function(e){
-if(!e.target.classList.contains("search")){
-suggestionsBox.style.display = "none";
+if(row){
+  setInterval(()=>{
+    row.scrollBy({left:160, behavior:'smooth'});
+
+    if(row.scrollLeft + row.clientWidth >= row.scrollWidth){
+      row.scrollTo({left:0, behavior:'smooth'});
+    }
+
+  }, 2000);
 }
+
 });
 </script>
-
 </body>
 </html>
