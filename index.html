@@ -437,6 +437,7 @@ applyFilters();
 // 🔥 SEARCH + FILTER COMBINED
 function applyFilters(){
 let filter = searchInput.value.toLowerCase();
+let visible = 0;
 
 tools.forEach(function(tool){
 
@@ -444,15 +445,19 @@ let text = tool.textContent.toLowerCase();
 let category = tool.getAttribute("data-cat");
 
 let matchSearch = text.includes(filter);
-let matchCategory = (activeCategory === "all" || category === activeCategory);
+let matchCategory = (activeCategory === "all" || category === activeCategory || category === null);
 
 if(matchSearch && matchCategory){
 tool.style.display = "inline-block";
+visible++;
 }else{
 tool.style.display = "none";
 }
 
 });
+
+// ❗ No result message
+document.getElementById("noResult").style.display = visible === 0 ? "block" : "none";
 
 }
 
