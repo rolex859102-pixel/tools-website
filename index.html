@@ -424,32 +424,41 @@ No tools found 😢
 <a href="disclaimer.html" style="color:white; margin:0 15px; text-decoration:none;">Disclaimer</a>
 
 </footer>
-
-<!-- 🔍 SEARCH SCRIPT -->
 <script>
 const searchInput = document.querySelector(".search");
 const tools = document.querySelectorAll(".tool");
+const suggestionsBox = document.getElementById("suggestions");
+
 let activeCategory = "all";
 
 // 🔥 CATEGORY FILTER
 function filterTools(category){
 activeCategory = category;
-applyFilters();
+applyAll();
 }
 
-// 🔥 SEARCH + FILTER COMBINED
-function applyFilters(){
+// 🔥 MAIN FUNCTION (SEARCH + FILTER + SUGGESTION)
+function applyAll(){
+
 let filter = searchInput.value.toLowerCase();
 let visible = 0;
 
+// 🔁 RESET SUGGESTIONS
+suggestionsBox.innerHTML = "";
+let seen = new Set();
+let count = 0;
+
 tools.forEach(function(tool){
 
-let text = tool.textContent.toLowerCase();
+let text = tool.textContent.trim();
+let lowerText = text.toLowerCase();
 let category = tool.getAttribute("data-cat");
 
-let matchSearch = text.includes(filter);
+// 🔍 MATCH
+let matchSearch = lowerText.includes(filter);
 let matchCategory = (activeCategory === "all" || category === activeCategory || category === null);
 
+// 🔥 SHOW / HIDE TOOL
 if(matchSearch && matchCategory){
 tool.style.display = "inline-block";
 visible++;
@@ -457,47 +466,23 @@ visible++;
 tool.style.display = "none";
 }
 
-});
+// 🔥 SUGGESTION (UNIQUE + LIMIT)
+if(filter !== "" && matchSearch && !seen.has(text) && count < 6){
 
-// ❗ No result message
-document.getElementById("noResult").style.display = visible === 0 ? "block" : "none";
-
-}
-
-// 🔍 SEARCH EVENT
-searchInput.addEventListener("keyup", applyFilters);
-</script>
-
-<script>
-const suggestionsBox = document.getElementById("suggestions");
-
-// 🔍 SEARCH + SUGGESTIONS
-searchInput.addEventListener("keyup", function(){
-
-let filter = searchInput.value.toLowerCase();
-suggestionsBox.innerHTML = "";
-
-if(filter === ""){
-suggestionsBox.style.display = "none";
-applyFilters();
-return;
-}
-
-let count = 0;
-
-tools.forEach(function(tool){
-
-let text = tool.textContent.trim();
-
-if(text.toLowerCase().includes(filter) && count < 6){
+seen.add(text);
 
 let item = document.createElement("div");
 item.style.padding = "10px";
 item.style.cursor = "pointer";
 item.style.borderBottom = "1px solid #334155";
-item.innerText = text;
 
-// 👉 CLICK = OPEN TOOL
+// 🔥 highlight
+item.innerHTML = text.replace(
+new RegExp(filter, "gi"),
+(m) => `<b style="color:#22c55e">${m}</b>`
+);
+
+// 👉 CLICK
 item.onclick = function(){
 window.location.href = tool.getAttribute("href");
 };
@@ -508,19 +493,24 @@ count++;
 
 });
 
-suggestionsBox.style.display = count > 0 ? "block" : "none";
+// ❗ NO RESULT
+document.getElementById("noResult").style.display = visible === 0 ? "block" : "none";
 
-// 🔥 Apply filter also
-applyFilters();
+// 👇 SHOW / HIDE SUGGESTION BOX
+suggestionsBox.style.display = (filter !== "" && count > 0) ? "block" : "none";
 
-});
+}
 
-// ❌ CLICK OUTSIDE = CLOSE
+// 🔍 SINGLE EVENT
+searchInput.addEventListener("keyup", applyAll);
+
+// ❌ CLICK OUTSIDE CLOSE
 document.addEventListener("click", function(e){
 if(!e.target.classList.contains("search")){
 suggestionsBox.style.display = "none";
 }
 });
 </script>
+
 </body>
 </html>
