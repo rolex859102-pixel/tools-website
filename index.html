@@ -505,7 +505,12 @@ overflow:hidden;
 </div>
  <p id="noResult" style="display:none; margin-top:20px; color:#94a3b8;">
 No tools found 😢
-</p>   
+</p>
+    
+<div id="loader" style="display:none; margin:20px; color:#94a3b8;">
+Loading more tools...
+</div>
+    
 <footer style="margin-top:60px; padding:25px 0; font-size:17px; border-top:1px solid #1e293b; background:#020617;">
 
 <a href="about.html" style="color:white; margin:0 15px; text-decoration:none;">About</a> |
@@ -642,18 +647,51 @@ if(slides.length > 0){
   }, 2500);
 }
 
-// ================= 🔥 CAROUSEL =================
+// ================= 🚀 INFINITE LOAD =================
+let allTools = Array.from(document.querySelectorAll(".tool"));
+let visibleCount = 30;
+
+function showTools(){
+  allTools.forEach((tool, index)=>{
+    tool.style.display = index < visibleCount ? "inline-block" : "none";
+  });
+}
+
+// initial load
+showTools();
+
+// scroll load
+window.addEventListener("scroll", ()=>{
+  if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 100){
+
+    let loader = document.getElementById("loader");
+    if(loader) loader.style.display = "block";
+
+    setTimeout(()=>{
+      visibleCount += 20;
+      showTools();
+
+      if(loader) loader.style.display = "none";
+    }, 500);
+
+  }
+});
+
+// ================= 🔥 TRENDING AUTO SCROLL (REPLACED) =================
 let row = document.getElementById("trendingRow");
 
 if(row){
-  setInterval(()=>{
-    row.scrollBy({left:160, behavior:'smooth'});
+  let scrollAmount = 0;
 
-    if(row.scrollLeft + row.clientWidth >= row.scrollWidth){
-      row.scrollTo({left:0, behavior:'smooth'});
+  setInterval(()=>{
+    scrollAmount += 1;
+    row.scrollLeft = scrollAmount;
+
+    if(scrollAmount >= row.scrollWidth - row.clientWidth){
+      scrollAmount = 0;
     }
 
-  }, 2000);
+  }, 30);
 }
 
 });
