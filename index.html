@@ -145,17 +145,20 @@ nav{
 
 /* ===== SEARCH DROPDOWN ===== */
 #suggestions{
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    width:90%;
-    max-width:400px;
-    background:rgba(30,41,59,0.9);
-    backdrop-filter:blur(12px);
-    border-radius:12px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.6);
-    z-index:999;
-    overflow:hidden;
+  position: absolute;
+  top: 60px;   /* search ke niche */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+
+  background: rgba(30,41,59,0.95);
+  backdrop-filter: blur(12px);
+
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+
+  z-index: 9999;  /* sabse upar */
 }
 
 #suggestions div{
@@ -164,17 +167,13 @@ nav{
     border-bottom:1px solid #334155;
 }
 
-#suggestions div:hover{
-    background:#334155;
+#suggestions div{
+  transition: 0.2s;
 }
 
-/* ===== 🔥 TRENDING BANNER ===== */
-.trending-banner{
-    max-width:600px;
-    margin:20px auto;
-    background:#1e293b;
-    border-radius:12px;
-    overflow:hidden;
+#suggestions div:hover{
+  background:#334155;
+  padding-left:15px;
 }
 
 .slide{
@@ -233,7 +232,11 @@ nav{
     h1 {font-size:22px;}
     .tool {font-size:13px;}
 }
-
+.search-container{
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
 </style>
 </head>
 
@@ -244,7 +247,10 @@ nav{
 <h1>100+ Free Online Tools for Daily Use</h1>
 <p>Fast, Free & Easy Tools</p>
 
-<input type="text" class="search" placeholder="Search tools...">
+<div class="search-container">
+  <input type="text" class="search" placeholder="Search tools...">
+  <div id="suggestions"></div>
+</div>
 <p style="color:#94a3b8; font-size:14px;">
 ⚡ Try popular tools: Image Compressor • JPG to PDF • Resize Image
 </p>
