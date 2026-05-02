@@ -519,7 +519,7 @@ Loading more tools...
 <a href="disclaimer.html" style="color:white; margin:0 15px; text-decoration:none;">Disclaimer</a>
 
 </footer>
-<script>
+ <script>
 document.addEventListener("DOMContentLoaded", function(){
 
 // ================= 🔍 SMART SEARCH =================
@@ -647,20 +647,28 @@ if(slides.length > 0){
   }, 2500);
 }
 
-// ================= 🚀 INFINITE LOAD =================
+    // ================= 🚀 INFINITE LOAD =================
 let allTools = Array.from(document.querySelectorAll(".tool"));
-let visibleCount = 30;
+let visibleCount = 30;   // starting tools
 
 function showTools(){
-  allTools.forEach((tool, index)=>{
-    tool.style.display = index < visibleCount ? "inline-block" : "none";
+  let visible = 0;
+
+  allTools.forEach((tool)=>{
+    if(tool.style.display !== "none"){   // 🔥 only visible tools count
+      if(visible < visibleCount){
+        tool.style.display = "inline-block";
+        visible++;
+      }else{
+        tool.style.display = "none";
+      }
+    }
   });
 }
 
-// initial load
 showTools();
 
-// scroll load
+// 🔥 SCROLL LOAD
 window.addEventListener("scroll", ()=>{
   if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 100){
 
@@ -676,9 +684,8 @@ window.addEventListener("scroll", ()=>{
 
   }
 });
-
-// ================= 🔥 TRENDING AUTO SCROLL (REPLACED) =================
-let row = document.getElementById("trendingRow");
+    // ================= 🔥 AUTO SCROLL TRENDING =================
+    let row = document.getElementById("trendingRow");
 
 if(row){
   let scrollAmount = 0;
@@ -691,7 +698,7 @@ if(row){
       scrollAmount = 0;
     }
 
-  }, 30);
+  }, 30);  // slow smooth scroll
 }
 
 });
