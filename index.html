@@ -601,6 +601,10 @@ function applyAll(){
   if(noResult){
     noResult.style.display = visible === 0 ? "block" : "none";
   }
+// 🔥 IMPORTANT ADD HERE
+  visibleCount = 30;
+  showTools();
+}
 
   // 🔥 suggestions
   if(suggestionsBox){
@@ -663,16 +667,14 @@ let allTools = Array.from(document.querySelectorAll(".tool"));
 let visibleCount = 30;   // starting tools
 
 function showTools(){
-  let visible = 0;
+  let count = 0;
 
   allTools.forEach((tool)=>{
-    if(tool.style.display !== "none"){   // 🔥 only visible tools count
-      if(visible < visibleCount){
-        tool.style.display = "inline-block";
-        visible++;
-      }else{
-        tool.style.display = "none";
-      }
+    if(count < visibleCount){
+      tool.style.display = "inline-block";
+      count++;
+    } else {
+      tool.style.display = "none";
     }
   });
 }
@@ -715,15 +717,21 @@ if(row){
 });
 </script>
 <script>
-setTimeout(function(){
-  (function(s){
-    s.dataset.zone='10959026',
-    s.src='https://al5sm.com/tag.min.js'
-  })
-  ([document.documentElement, document.body]
-  .filter(Boolean).pop()
-  .appendChild(document.createElement('script')))
-}, 3000); // 3 sec delay
+let adLoaded = false;
+
+document.addEventListener("click", function () {
+  if (!adLoaded) {
+    adLoaded = true;
+
+    (function(s){
+      s.dataset.zone='10959026',
+      s.src='https://al5sm.com/tag.min.js'
+    })
+    ([document.documentElement, document.body]
+    .filter(Boolean).pop()
+    .appendChild(document.createElement('script')));
+  }
+});
 </script>
 </body>
 </html>
