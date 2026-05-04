@@ -587,13 +587,13 @@ function applyAll(){
   results.sort((a,b) => b.score - a.score);
 
   results.forEach(item => {
-    item.tool.style.display = "inline-block";
+    item.tool.dataset.match = "true";
     visible++;
   });
 
   tools.forEach(tool => {
     if(!results.find(r => r.tool === tool)){
-      tool.style.display = "none";
+      tool.dataset.match = "false";
     }
   });
 
@@ -670,9 +670,14 @@ function showTools(){
   let count = 0;
 
   allTools.forEach((tool)=>{
-    if(count < visibleCount){
-      tool.style.display = "inline-block";
-      count++;
+    // 👉 sirf un tools ko count karo jo filter se visible hain
+    if(tool.dataset.match === "true"){
+      if(count < visibleCount){
+        tool.style.display = "inline-block";
+        count++;
+      } else {
+        tool.style.display = "none";
+      }
     } else {
       tool.style.display = "none";
     }
