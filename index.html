@@ -536,7 +536,23 @@ No tools found 😢
 </footer>
 <!-- 👇 TUMHARA SCRIPT START -->
 <script>
+function filterTools(category){
 
+  const tools = document.querySelectorAll(".tool");
+
+  tools.forEach(tool=>{
+    let cat = tool.getAttribute("data-cat");
+
+    if(category === "all" || cat === category){
+      tool.style.display = "inline-block";
+      tool.dataset.match = "true";
+    } else {
+      tool.style.display = "none";
+      tool.dataset.match = "false";
+    }
+  });
+
+}
 // ================= 🧠 GLOBAL VARIABLES =================
 let visibleCount = 30;
 
