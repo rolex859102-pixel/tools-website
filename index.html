@@ -547,16 +547,19 @@ function applyAll(){
   let filter = searchInput.value.toLowerCase();
 
   tools.forEach(function(tool){
+
     let text = tool.textContent.toLowerCase();
 
-    if(text.includes(filter)){
+    // 🔥 STARTS WITH LOGIC
+    if(filter === "" || text.startsWith(filter)){
       tool.dataset.match = "true";
     } else {
       tool.dataset.match = "false";
     }
+
   });
 
-  showSuggestions(filter); // 🔥 suggestions
+  showSuggestions(filter);
 
   visibleCount = 30;
   showTools();
@@ -600,7 +603,7 @@ function filterTools(category){
   showTools();
 }
 
-// ================= 🔥 SEARCH SUGGESTIONS =================
+// ================= 🔥 SUGGESTIONS =================
 function showSuggestions(filter){
 
   if(!suggestionsBox) return;
@@ -615,12 +618,14 @@ function showSuggestions(filter){
   let count = 0;
 
   tools.forEach(tool => {
-    let text = tool.textContent.trim();
 
-    if(text.toLowerCase().includes(filter) && count < 6){
+    let text = tool.textContent.trim().toLowerCase();
+
+    // 🔥 STARTS WITH LOGIC
+    if(text.startsWith(filter) && count < 6){
 
       let div = document.createElement("div");
-      div.innerText = text;
+      div.innerText = tool.textContent;
 
       div.onclick = () => {
         window.location.href = tool.getAttribute("href");
@@ -639,7 +644,7 @@ if(searchInput){
   searchInput.addEventListener("keyup", applyAll);
 }
 
-// close suggestion on click outside
+// close dropdown
 document.addEventListener("click", function(e){
   if(suggestionsBox && !e.target.classList.contains("search")){
     suggestionsBox.style.display = "none";
