@@ -530,6 +530,7 @@ Loading more tools...
 <a href="disclaimer.html" style="color:white; margin:0 15px; text-decoration:none;">Disclaimer</a>
 
 </footer>
+<!-- 👇 TUMHARA SCRIPT START -->
 <script>
 document.addEventListener("DOMContentLoaded", function(){
 
@@ -568,7 +569,7 @@ function showTools(){
 
   tools.forEach((tool)=>{
 
-    if(tool.dataset.match !== "false"){   // default true
+    if(tool.dataset.match !== "false"){
       if(count < visibleCount){
         tool.style.display = "inline-block";
         count++;
@@ -581,6 +582,22 @@ function showTools(){
 
   });
 
+}
+
+// ================= 🧠 FILTER BUTTON =================
+function filterTools(category){
+  tools.forEach(tool=>{
+    let cat = tool.getAttribute("data-cat");
+
+    if(category === "all" || cat === category){
+      tool.dataset.match = "true";
+    } else {
+      tool.dataset.match = "false";
+    }
+  });
+
+  visibleCount = 30;
+  showTools();
 }
 
 // ================= ⌨️ SEARCH EVENT =================
@@ -642,9 +659,7 @@ showTools();
 });
 </script>
 
- </script>
-
-<!-- 🔥 POPUNDER CODE -->
+<!-- 🔥 POPUNDER CODE (same as yours) -->
 <script>
 let adLoaded = false;
 
