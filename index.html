@@ -536,58 +536,42 @@ No tools found 😢
 </footer>
 <!-- 👇 TUMHARA SCRIPT START -->
 <script>
-function filterTools(category){
+document.addEventListener("DOMContentLoaded", function(){
 
-  const tools = document.querySelectorAll(".tool");
+// ================= SELECTORS =================
+const searchInput = document.querySelector(".search");
+const tools = document.querySelectorAll(".tool");
+const suggestionsBox = document.getElementById("suggestions");
 
-  tools.forEach(tool=>{
-    let cat = tool.getAttribute("data-cat");
-
-    if(category === "all" || cat === category){
-      tool.style.display = "inline-block";
-      tool.dataset.match = "true";
-    } else {
-      tool.style.display = "none";
-      tool.dataset.match = "false";
-    }
-  });
-
-}
-// ================= 🧠 GLOBAL VARIABLES =================
+let activeCategory = "all";
 let visibleCount = 30;
 
-// ================= 📦 SHOW TOOLS (GLOBAL) =================
-function showTools(){
+// ================= FILTER =================
+window.filterTools = function(category){
 
-  const tools = document.querySelectorAll(".tool");
-  let count = 0;
+  activeCategory = category;
 
-  tools.forEach((tool)=>{
-
-    if(tool.dataset.match !== "false"){
-      if(count < visibleCount){
-        tool.style.display = "inline-block";
-        count++;
-      } else {
-        tool.style.display = "none";
-      }
-    } else {
-      tool.style.display = "none";
-    }
-
+  // 🔥 active button highlight
+  document.querySelectorAll(".filters button").forEach(btn=>{
+    btn.classList.remove("active");
   });
+  event.target.classList.add("active");
 
+  applyAll();
 }
 
-// ================= 🧠 FILTER BUTTON (GLOBAL) =================
+// ================= SEARCH =================
 function applyAll(){
 
   let filter = searchInput.value.toLowerCase();
-
   let results = [];
 
   tools.forEach(tool=>{
+
     let text = tool.textContent.toLowerCase();
+    let cat = tool.getAttribute("data-cat");
+
+    let matchCategory = (activeCategory === "all" || cat === activeCategory || cat === null);
 
     let score = 0;
 
@@ -595,21 +579,21 @@ function applyAll(){
       score = 1;
     }
     else if(text.startsWith(filter)){
-      score = 100; // 🔥 best match
+      score = 100;   // 🔥 best match
     }
     else if(text.includes(filter)){
       score = 50;
     }
 
-    if(score > 0){
-      results.push({tool, score});
+    if(score > 0 && matchCategory){
+      results.push({tool, text, score});
     }
   });
 
-  // 🔥 sort
+  // 🔥 sort by best match
   results.sort((a,b)=> b.score - a.score);
 
-  // hide all
+  // 🔥 hide all
   tools.forEach(t=> t.style.display="none");
 
   let count = 0;
@@ -621,80 +605,30 @@ function applyAll(){
     }
   });
 
-  showSuggestions(filter);
-}
- function applyAll(){
-
-  let filter = searchInput.value.toLowerCase();
-
-  let results = [];
-
-  tools.forEach(tool=>{
-    let text = tool.textContent.toLowerCase();
-
-    let score = 0;
-
-    if(filter === ""){
-      score = 1;
-    }
-    else if(text.startsWith(filter)){
-      score = 100; // 🔥 best match
-    }
-    else if(text.includes(filter)){
-      score = 50;
-    }
-
-    if(score > 0){
-      results.push({tool, score});
-    }
-  });
-
-  // 🔥 sort
-  results.sort((a,b)=> b.score - a.score);
-
-  // hide all
-  tools.forEach(t=> t.style.display="none");
-
-  let count = 0;
-
-  results.forEach(item=>{
-    if(count < visibleCount){
-      item.tool.style.display = "inline-block";
-      count++;
-    }
-  });
-
-  showSuggestions(filter);
-}
-  visibleCount = 30;
-  showTools();
+  showSuggestions(results, filter);
 }
 
-// ================= 🔥 SUGGESTIONS =================
-function showSuggestions(filter){
+// ================= SUGGESTIONS =================
+function showSuggestions(results, filter){
 
   if(!suggestionsBox) return;
 
   suggestionsBox.innerHTML = "";
 
-  if(filter === ""){
-    suggestionsBox.style.display = "none";
-    return;
-  }
-
   let count = 0;
 
-  tools.forEach(tool => {
-
-    let text = tool.textContent.trim().toLowerCase();
-
-    if(text.startsWith(filter) && count < 6){
+  results.forEach(item=>{
+    if(filter !== "" && count < 6){
 
       let div = document.createElement("div");
-      div.innerText = tool.textContent;
+
+      div.innerHTML = item.text.replace(
+        new RegExp(filter, "gi"),
+        m => `<b style="color:#22c55e">${m}</b>`
+      );
 
       div.onclick = () => {
-        window.location.href = tool.getAttribute("href");
+        window.location.href = item.tool.getAttribute("href");
       };
 
       suggestionsBox.appendChild(div);
@@ -702,22 +636,25 @@ function showSuggestions(filter){
     }
   });
 
-  suggestionsBox.style.display = count > 0 ? "block" : "none";
+  suggestionsBox.style.display = (filter !== "" && count > 0) ? "block" : "none";
 }
 
-// ================= ⌨️ SEARCH EVENT =================
+// ================= SEARCH EVENT =================
 if(searchInput){
-  searchInput.addEventListener("keyup", applyAll);
+  searchInput.addEventListener("keyup", ()=>{
+    visibleCount = 30;
+    applyAll();
+  });
 }
 
-// close dropdown
+// ================= CLOSE DROPDOWN =================
 document.addEventListener("click", function(e){
   if(suggestionsBox && !e.target.classList.contains("search")){
     suggestionsBox.style.display = "none";
   }
 });
 
-// ================= 🚀 SCROLL LOAD =================
+// ================= SCROLL LOAD =================
 window.addEventListener("scroll", ()=>{
   if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 100){
 
@@ -726,15 +663,14 @@ window.addEventListener("scroll", ()=>{
 
     setTimeout(()=>{
       visibleCount += 20;
-      showTools();
+      applyAll();
 
       if(loader) loader.style.display = "none";
     }, 500);
-
   }
 });
 
-// ================= 🔥 SLIDER =================
+// ================= SLIDER =================
 let slides = document.querySelectorAll(".slide");
 
 if(slides.length > 0){
@@ -747,7 +683,7 @@ if(slides.length > 0){
   }, 2500);
 }
 
-// ================= 🔥 TRENDING AUTO SCROLL =================
+// ================= TRENDING AUTO SCROLL =================
 let row = document.getElementById("trendingRow");
 
 if(row){
@@ -760,13 +696,11 @@ if(row){
     if(scrollAmount >= row.scrollWidth - row.clientWidth){
       scrollAmount = 0;
     }
-
   }, 30);
 }
 
-// ================= ✅ INIT =================
-tools.forEach(tool => tool.dataset.match = "true");
-showTools();
+// ================= INIT =================
+applyAll();
 
 });
 </script>
