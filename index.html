@@ -547,7 +547,6 @@ function applyAll(){
   let filter = searchInput.value.toLowerCase();
 
   tools.forEach(function(tool){
-
     let text = tool.textContent.toLowerCase();
 
     if(text.includes(filter)){
@@ -555,8 +554,9 @@ function applyAll(){
     } else {
       tool.dataset.match = "false";
     }
-
   });
+
+  showSuggestions(filter); // 🔥 suggestions
 
   visibleCount = 30;
   showTools();
@@ -584,7 +584,7 @@ function showTools(){
 
 }
 
-// ================= 🧠 FILTER BUTTON =================
+// ================= 🧠 FILTER =================
 function filterTools(category){
   tools.forEach(tool=>{
     let cat = tool.getAttribute("data-cat");
@@ -600,10 +600,51 @@ function filterTools(category){
   showTools();
 }
 
+// ================= 🔥 SEARCH SUGGESTIONS =================
+function showSuggestions(filter){
+
+  if(!suggestionsBox) return;
+
+  suggestionsBox.innerHTML = "";
+
+  if(filter === ""){
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  let count = 0;
+
+  tools.forEach(tool => {
+    let text = tool.textContent.trim();
+
+    if(text.toLowerCase().includes(filter) && count < 6){
+
+      let div = document.createElement("div");
+      div.innerText = text;
+
+      div.onclick = () => {
+        window.location.href = tool.getAttribute("href");
+      };
+
+      suggestionsBox.appendChild(div);
+      count++;
+    }
+  });
+
+  suggestionsBox.style.display = count > 0 ? "block" : "none";
+}
+
 // ================= ⌨️ SEARCH EVENT =================
 if(searchInput){
   searchInput.addEventListener("keyup", applyAll);
 }
+
+// close suggestion on click outside
+document.addEventListener("click", function(e){
+  if(suggestionsBox && !e.target.classList.contains("search")){
+    suggestionsBox.style.display = "none";
+  }
+});
 
 // ================= 🚀 SCROLL LOAD =================
 window.addEventListener("scroll", ()=>{
@@ -658,9 +699,8 @@ showTools();
 
 });
 </script>
-
-<!-- 🔥 POPUNDER CODE (same as yours) -->
-<script>
+ 
+ <script>
 let adLoaded = false;
 
 document.addEventListener("click", function () {
