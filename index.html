@@ -9,7 +9,7 @@
  
  <!-- 🔥 MONETAG VERIFY -->
 <meta name="monetag" content="033a78a3c32e9457b8c6d9c94100b5cf">
- 
+ <link rel="preconnect" href="https://al5sm.com">
 <meta name="description" content="Use 100+ free online tools like image compressor, word counter, JSON formatter, EMI calculator and more. Fast, secure and easy tools for daily use.">
 
 <style>
@@ -249,6 +249,10 @@ nav{
   display:none;
   text-align:left;
   overflow:hidden;
+}
+ .filters button.active{
+  background:#22c55e;
+  color:black;
 }
 </style>
 </head>
@@ -518,8 +522,8 @@ nav{
 No tools found 😢
 </p>
     
-<div id="loader" style="display:none; margin:20px; color:#94a3b8;">
-Loading more tools...
+<div style="position:fixed;bottom:0;width:100%;background:#111;padding:10px;z-index:999;">
+  <script src="YOUR_MONETAG_CODE"></script>
 </div>
     
 <footer style="margin-top:60px; padding:25px 0; font-size:17px; border-top:1px solid #1e293b; background:#020617;">
@@ -560,51 +564,92 @@ function showTools(){
 }
 
 // ================= 🧠 FILTER BUTTON (GLOBAL) =================
-function filterTools(category){
-
-  const tools = document.querySelectorAll(".tool");
-
-  tools.forEach(tool=>{
-    let cat = tool.getAttribute("data-cat");
-
-    if(category === "all" || cat === category){
-      tool.dataset.match = "true";
-    } else {
-      tool.dataset.match = "false";
-    }
-  });
-
-  visibleCount = 30;
-  showTools();
-}
-
-// ================= 🚀 MAIN SCRIPT =================
-document.addEventListener("DOMContentLoaded", function(){
-
-const searchInput = document.querySelector(".search");
-const tools = document.querySelectorAll(".tool");
-const suggestionsBox = document.getElementById("suggestions");
-
-// ================= 🔍 SEARCH =================
 function applyAll(){
 
   let filter = searchInput.value.toLowerCase();
 
-  tools.forEach(function(tool){
+  let results = [];
 
+  tools.forEach(tool=>{
     let text = tool.textContent.toLowerCase();
 
-    // 🔥 STARTS WITH LOGIC
-    if(filter === "" || text.startsWith(filter)){
-      tool.dataset.match = "true";
-    } else {
-      tool.dataset.match = "false";
+    let score = 0;
+
+    if(filter === ""){
+      score = 1;
+    }
+    else if(text.startsWith(filter)){
+      score = 100; // 🔥 best match
+    }
+    else if(text.includes(filter)){
+      score = 50;
     }
 
+    if(score > 0){
+      results.push({tool, score});
+    }
+  });
+
+  // 🔥 sort
+  results.sort((a,b)=> b.score - a.score);
+
+  // hide all
+  tools.forEach(t=> t.style.display="none");
+
+  let count = 0;
+
+  results.forEach(item=>{
+    if(count < visibleCount){
+      item.tool.style.display = "inline-block";
+      count++;
+    }
   });
 
   showSuggestions(filter);
+}
+ function applyAll(){
 
+  let filter = searchInput.value.toLowerCase();
+
+  let results = [];
+
+  tools.forEach(tool=>{
+    let text = tool.textContent.toLowerCase();
+
+    let score = 0;
+
+    if(filter === ""){
+      score = 1;
+    }
+    else if(text.startsWith(filter)){
+      score = 100; // 🔥 best match
+    }
+    else if(text.includes(filter)){
+      score = 50;
+    }
+
+    if(score > 0){
+      results.push({tool, score});
+    }
+  });
+
+  // 🔥 sort
+  results.sort((a,b)=> b.score - a.score);
+
+  // hide all
+  tools.forEach(t=> t.style.display="none");
+
+  let count = 0;
+
+  results.forEach(item=>{
+    if(count < visibleCount){
+      item.tool.style.display = "inline-block";
+      count++;
+    }
+  });
+
+  showSuggestions(filter);
+}
   visibleCount = 30;
   showTools();
 }
