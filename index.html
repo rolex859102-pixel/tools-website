@@ -532,14 +532,58 @@ Loading more tools...
 </footer>
 <!-- 👇 TUMHARA SCRIPT START -->
 <script>
+
+// ================= 🧠 GLOBAL VARIABLES =================
+let visibleCount = 30;
+
+// ================= 📦 SHOW TOOLS (GLOBAL) =================
+function showTools(){
+
+  const tools = document.querySelectorAll(".tool");
+  let count = 0;
+
+  tools.forEach((tool)=>{
+
+    if(tool.dataset.match !== "false"){
+      if(count < visibleCount){
+        tool.style.display = "inline-block";
+        count++;
+      } else {
+        tool.style.display = "none";
+      }
+    } else {
+      tool.style.display = "none";
+    }
+
+  });
+
+}
+
+// ================= 🧠 FILTER BUTTON (GLOBAL) =================
+function filterTools(category){
+
+  const tools = document.querySelectorAll(".tool");
+
+  tools.forEach(tool=>{
+    let cat = tool.getAttribute("data-cat");
+
+    if(category === "all" || cat === category){
+      tool.dataset.match = "true";
+    } else {
+      tool.dataset.match = "false";
+    }
+  });
+
+  visibleCount = 30;
+  showTools();
+}
+
+// ================= 🚀 MAIN SCRIPT =================
 document.addEventListener("DOMContentLoaded", function(){
 
-// ================= 🔧 SELECTORS =================
 const searchInput = document.querySelector(".search");
 const tools = document.querySelectorAll(".tool");
 const suggestionsBox = document.getElementById("suggestions");
-
-let visibleCount = 30;
 
 // ================= 🔍 SEARCH =================
 function applyAll(){
@@ -565,44 +609,6 @@ function applyAll(){
   showTools();
 }
 
-// ================= 📦 SHOW TOOLS =================
-function showTools(){
-
-  let count = 0;
-
-  tools.forEach((tool)=>{
-
-    if(tool.dataset.match !== "false"){
-      if(count < visibleCount){
-        tool.style.display = "inline-block";
-        count++;
-      } else {
-        tool.style.display = "none";
-      }
-    } else {
-      tool.style.display = "none";
-    }
-
-  });
-
-}
-
-// ================= 🧠 FILTER =================
-function filterTools(category){
-  tools.forEach(tool=>{
-    let cat = tool.getAttribute("data-cat");
-
-    if(category === "all" || cat === category){
-      tool.dataset.match = "true";
-    } else {
-      tool.dataset.match = "false";
-    }
-  });
-
-  visibleCount = 30;
-  showTools();
-}
-
 // ================= 🔥 SUGGESTIONS =================
 function showSuggestions(filter){
 
@@ -621,7 +627,6 @@ function showSuggestions(filter){
 
     let text = tool.textContent.trim().toLowerCase();
 
-    // 🔥 STARTS WITH LOGIC
     if(text.startsWith(filter) && count < 6){
 
       let div = document.createElement("div");
