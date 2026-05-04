@@ -629,12 +629,16 @@ function showSuggestions(results, filter){
   let count = 0;
 
   results.forEach(item=>{
-    if(filter !== "" && count < 6){
+
+    let text = item.text.toLowerCase();
+
+    // 🔥 ONLY start match
+    if(filter !== "" && text.startsWith(filter) && count < 6){
 
       let div = document.createElement("div");
 
       div.innerHTML = item.text.replace(
-        new RegExp(filter, "gi"),
+        new RegExp("^" + filter, "i"),
         m => `<b style="color:#22c55e">${m}</b>`
       );
 
@@ -645,6 +649,7 @@ function showSuggestions(results, filter){
       suggestionsBox.appendChild(div);
       count++;
     }
+
   });
 
   suggestionsBox.style.display = (filter !== "" && count > 0) ? "block" : "none";
