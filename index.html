@@ -563,12 +563,13 @@ window.filterTools = function(category){
 // ================= SEARCH =================
 function applyAll(){
 
-  let filter = searchInput.value.toLowerCase();
+  let filter = searchInput.value.toLowerCase().trim();
   let results = [];
 
   tools.forEach(tool=>{
 
-    let text = tool.textContent.toLowerCase();
+    let text = tool.textContent.toLowerCase().trim();
+    let words = text.split(" ");
     let cat = tool.getAttribute("data-cat");
 
     let matchCategory = (activeCategory === "all" || cat === activeCategory || cat === null);
@@ -578,23 +579,33 @@ function applyAll(){
     if(filter === ""){
       score = 1;
     }
+
+    // 🔥 1. Starts with (BEST)
     else if(text.startsWith(filter)){
-      score = 100;   // 🔥 best match
+      score = 100;
     }
+
+    // 🔥 2. Word starts (Loan Calculator → "cal")
+    else if(words.some(word => word.startsWith(filter))){
+      score = 80;
+    }
+
+    // 🔥 3. Includes (LOW priority)
     else if(text.includes(filter)){
-      score = 50;
+      score = 30;
     }
 
     if(score > 0 && matchCategory){
       results.push({tool, text, score});
     }
+
   });
 
-  // 🔥 sort by best match
+  // 🔥 sort by score
   results.sort((a,b)=> b.score - a.score);
 
-  // 🔥 hide all
-  tools.forEach(t=> t.style.display="none");
+  // hide all
+  tools.forEach(t=> t.style.display = "none");
 
   let count = 0;
 
