@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Image to JPG / PNG Converter Free Online</title>
+
+<style>
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container{
+    margin-top:50px;
+}
+
+input{
+    margin:20px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+select{
+    padding:10px;
+    border-radius:8px;
+    margin:10px;
+}
+
+img{
+    margin-top:20px;
+    max-width:300px;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🖼 Image to JPG / PNG Converter</h1>
+
+<input type="file" id="upload" accept="image/*"><br>
+
+<select id="format">
+<option value="image/jpeg">Convert to JPG</option>
+<option value="image/png">Convert to PNG</option>
+</select><br>
+
+<button onclick="convert()">Convert & Download</button>
+
+<br>
+<canvas id="canvas" style="display:none;"></canvas>
+
+<img id="preview">
+
+</div>
+
+<script>
+function convert(){
+
+  let file = document.getElementById("upload").files[0];
+  let format = document.getElementById("format").value;
+
+  if(!file){
+    alert("Please select image");
+    return;
+  }
+
+  let reader = new FileReader();
+
+  reader.onload = function(e){
+
+    let img = new Image();
+
+    img.onload = function(){
+
+      let canvas = document.getElementById("canvas");
+      let ctx = canvas.getContext("2d");
+
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      ctx.drawImage(img,0,0);
+
+      let url = canvas.toDataURL(format);
+
+      // preview
+      document.getElementById("preview").src = url;
+
+      // download
+      let a = document.createElement("a");
+      a.href = url;
+      a.download = "converted-image";
+      a.click();
+
+    }
+
+    img.src = e.target.result;
+
+  }
+
+  reader.readAsDataURL(file);
+
+}
+</script>
+
+</body>
+</html>
