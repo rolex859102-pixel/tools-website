@@ -148,23 +148,26 @@ nav{
 }
 
 /* ===== SEARCH DROPDOWN ===== */
-#suggestions{
+ #suggestions{
   position: absolute;
-  top: 60px;   /* search ke niche */
+  top: 60px;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
   max-width: 400px;
 
-  background: rgba(30,41,59,0.95);
-  backdrop-filter: blur(12px);
+  background:#1e293b;
+  border-radius:10px;
+  margin:5px auto;
 
-  border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  z-index: 9999;
 
-  z-index: 9999;  /* sabse upar */
+  display:none;
+  text-align:left;
+  overflow:hidden;
 }
-
+ 
 #suggestions div{
     padding:10px;
     cursor:pointer;
@@ -241,15 +244,7 @@ nav{
   display: inline-block;
   width: 100%;
 }
- #suggestions{
-  background:#1e293b;
-  max-width:400px;
-  margin:5px auto;
-  border-radius:10px;
-  display:none;
-  text-align:left;
-  overflow:hidden;
-}
+
  .filters button.active{
   background:#22c55e;
   color:black;
@@ -263,15 +258,31 @@ nav{
     
 <h1>100+ Free Online Tools for Daily Use</h1>
 <p>Fast, Free & Easy Tools</p>
-
+ 
+<!-- 🔥 TOP AD -->
+<div class="ad-box">
+🔥 Recommended
+<script>
+(function(s){
+  s.dataset.zone='10968042',
+  s.src='https://nap5k.com/tag.min.js'
+})
+([document.documentElement, document.body]
+.filter(Boolean).pop()
+.appendChild(document.createElement('script')));
+</script>
+</div>
+ 
 <div class="search-container">
- <input type="text" class="search">
+<input type="text" class="search">
 <div id="suggestions"></div>
+ 
 </div>
 <p style="color:#94a3b8; font-size:14px;">
 ⚡ Try popular tools: Image Compressor • JPG to PDF • Resize Image
 </p>
 <div class="filters">
+<button onclick="filterTools('video', event)">Video</button>
 <button onclick="filterTools('all')">All</button>
 <button onclick="filterTools('image')">Image</button>
 <button onclick="filterTools('pdf')">PDF</button>
@@ -303,10 +314,23 @@ nav{
   </div>
 </div>
 
-<div class="home-tools">
+ <!-- 🔥 MID AD -->
+<div class="ad-box">
+🔥 Try This Tool (Recommended)
+<script>
+(function(s){
+  s.dataset.zone='10968192',
+  s.src='https://nap5k.com/tag.min.js'
+})
+([document.documentElement, document.body]
+.filter(Boolean).pop()
+.appendChild(document.createElement('script')));
+</script>
+</div>
 
 <!-- 🔥 YAHAN SAB TOOL LINKS DAALO -->
-
+<div class="home-tools">
+ 
 <a class="tool" href="ai-text-summarizer.html">🔥 AI Text Summarizer</a>
 <a class="tool" href="youtube-video-downloader.html">🔥 YouTube Video Downloader</a>
 <a class="tool" href="instagram-reels-downloader.html">🔥 Instagram Reels Downloader</a>
@@ -335,14 +359,14 @@ nav{
 
 <!-- 💰 FINANCE -->
 <div class="section">
-
+ 
 <div class="affiliate-box">
 <h2>💳 Credit Card Offers</h2>
 <p>Get best cashback & rewards credit cards</p>
 <a href="https://bitli.in/T0q2Paf" target="_blank" class="affiliate-btn">💳 Apply Now</a>
 </div>
 
-<div class="section">
+
 <h2>💰 Finance Tools</h2>
 
 <div class="tools-row">
@@ -394,7 +418,7 @@ nav{
 <h2>🎬 Video Downloader Tools</h2>
 
 <div class="tools-row">
-<a class="tool" href="youtube-video-downloader.html">YouTube Video Downloader</a>
+<a class="tool" data-cat="video" href="youtube-video-downloader.html">
 <a class="tool" href="instagram-reels-downloader.html">Instagram Reels Downloader</a>
 <a class="tool" href="facebook-reels-downloader.html">Facebook Reels Downloader</a>
 <a class="tool" href="instagram-photo-downloader.html">Instagram Photo Downloader</a>
@@ -482,7 +506,6 @@ nav{
 <a class="tool" data-cat="utility" href="text-to-speech.html">Text to Speech</a>
 <a class="tool" data-cat="utility" href="random-name-generator.html">Random Name Generator</a>
 <a class="tool" data-cat="utility" href="color-palette-generator.html">Color Palette Generator</a>
-<a class="tool" data-cat="utility" href="password-generator.html">Password Generator</a>
 <a class="tool" data-cat="utility" href="ai-text-summarizer.html">🤖 AI Text Summarizer</a>
 </div>
 </div>
@@ -522,9 +545,6 @@ nav{
 No tools found 😢
 </p>
     
-<div style="position:fixed;bottom:0;width:100%;background:#111;padding:10px;z-index:999;">
-  <script src="YOUR_MONETAG_CODE"></script>
-</div>
     
 <footer style="margin-top:60px; padding:25px 0; font-size:17px; border-top:1px solid #1e293b; background:#020617;">
 
@@ -547,19 +567,19 @@ let activeCategory = "all";
 let visibleCount = 30;
 
 // ================= FILTER =================
-window.filterTools = function(category){
+window.filterTools = function(category, e){
 
   activeCategory = category;
 
-  // 🔥 active button highlight
   document.querySelectorAll(".filters button").forEach(btn=>{
     btn.classList.remove("active");
   });
-  event.target.classList.add("active");
+
+  if(e) e.target.classList.add("active");
 
   applyAll();
 }
-
+ 
 // ================= SEARCH =================
 function applyAll(){
 
@@ -721,17 +741,6 @@ applyAll();
 });
 </script>
 
- <!-- 🔥 IN-PAGE PUSH AD -->
-<script>
-(function(s){
-  s.dataset.zone='10968042',
-  s.src='https://nap5k.com/tag.min.js'
-})
-([document.documentElement, document.body]
-.filter(Boolean).pop()
-.appendChild(document.createElement('script')));
-</script>
-
 <!-- 🔥 POPUNDER CODE DISABLED -->
 <!--
 <script>
@@ -752,5 +761,29 @@ document.addEventListener("click", function () {
 });
 </script>
 -->
+ <!-- 🔥 STICKY BOTTOM AD -->
+<div style="position:fixed;bottom:0;width:100%;background:#111;padding:10px;z-index:999;">
+<script>
+(function(s){
+  s.dataset.zone='10959026',
+  s.src='https://nap5k.com/tag.min.js'
+})
+([document.documentElement, document.body]
+.filter(Boolean).pop()
+.appendChild(document.createElement('script')));
+</script>
+</div>
+
+<!-- 🔥 VIGNETTE AD -->
+<script>
+(function(s){
+  s.dataset.zone='10972235',
+  s.src='https://nap5k.com/tag.min.js'
+})
+([document.documentElement, document.body]
+.filter(Boolean).pop()
+.appendChild(document.createElement('script')));
+</script>
+
 </body>
 </html>
