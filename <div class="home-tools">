@@ -4,14 +4,18 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta property="og:title" content="100+ Free Online Tools">
+<meta property="og:description" content="Free image, PDF, finance and developer tools">
+<meta property="og:type" content="website">
+<meta property="og:image" content="thumbnail.jpg">
+ 
 <title>100+ Free Online Tools - Image Compressor, Word Counter, JSON Formatter & More</title>
  
  <!-- 🔥 MONETAG VERIFY -->
 <meta name="monetag" content="033a78a3c32e9457b8c6d9c94100b5cf">
  <link rel="preconnect" href="https://al5sm.com">
 <meta name="description" content="Use 100+ free online tools like image compressor, word counter, JSON formatter, EMI calculator and more. Fast, secure and easy tools for daily use.">
-
+<meta name="robots" content="index, follow">
 <style>
 
 /* ===== BODY ===== */
@@ -182,6 +186,10 @@ nav{
   background:#334155;
   padding-left:15px;
 }
+ #suggestions{
+  max-height:250px;
+  overflow-y:auto;
+}
 
 .slide{
     display:none;
@@ -209,10 +217,14 @@ nav{
 /* ✅ FIXED CENTER ALIGN */
 .trending-row{
     display:flex;
-    flex-wrap:wrap;
-    justify-content:center;   /* 🔥 CENTER FIX */
+    overflow-x:auto;
+    white-space:nowrap;
     gap:12px;
     padding:10px;
+    scroll-behavior:smooth;
+}
+ .trending-row::-webkit-scrollbar{
+   display:none;
 }
 
 /* ✅ SAME HOVER AS TOOL */
@@ -274,7 +286,7 @@ nav{
 </div>
  
 <div class="search-container">
-<input type="text" class="search">
+<input type="text" class="search" placeholder="Search tools...">
 <div id="suggestions"></div>
  
 </div>
@@ -283,7 +295,7 @@ nav{
 </p>
 <div class="filters">
 <button onclick="filterTools('video', event)">Video</button>
-<button onclick="filterTools('all')">All</button>
+<button type="button" onclick="filterTools('all')">All</button>
 <button onclick="filterTools('image')">Image</button>
 <button onclick="filterTools('pdf')">PDF</button>
 <button onclick="filterTools('finance')">Finance</button>
@@ -330,22 +342,17 @@ nav{
 
 <!-- 🔥 YAHAN SAB TOOL LINKS DAALO -->
 <div class="home-tools">
- 
+
 <a class="tool" href="ai-text-summarizer.html">🔥 AI Text Summarizer</a>
+
 <a class="tool" href="youtube-video-downloader.html">🔥 YouTube Video Downloader</a>
-<a class="tool" href="instagram-reels-downloader.html">🔥 Instagram Reels Downloader</a>
-<a class="tool" href="instagram-photo-downloader.html">🔥 Instagram Photo Downloader</a>
+
 <a class="tool" data-cat="image" href="compress-image-50kb.html">Compress Image to 50KB</a>
-<a class="tool" href="facebook-reels-downloader.html">🔥 Facebook Reels Downloader</a>
-<a class="tool" href="sip-calculator.html">🔥 SIP Calculator</a>
-<a class="tool" href="emi-calculator.html">🔥 EMI Calculator</a>
-<a class="tool" data-cat="image" href="png-to-jpg.html">PNG to JPG</a>
-<a class="tool" data-cat="image" href="jpg-to-png.html">JPG to PNG</a>
-<a class="tool" data-cat="image" href="compress-image-100kb.html">Compress Image to 100KB</a>
-<a class="tool" data-cat="image" href="compress-image-20kb.html">Compress Image to 20KB</a>
-<a class="tool" href="qr-code-generator.html">🔥 QR Code Generator</a>
+
 <a class="tool" href="text-to-speech.html">🔥 Text to Speech</a>
-<a class="tool" href="age-calculator.html">Age Calculator</a>
+
+<a class="tool" href="emi-calculator.html">🔥 EMI Calculator</a>
+
 </div>
 
 </header>
@@ -384,11 +391,7 @@ nav{
 <a class="tool" data-cat="pdf" href="pdf-to-word.html">PDF to Word Converter</a>
 <a class="tool" data-cat="pdf" href="pdf-to-jpg.html">PDF to JPG</a>
 <a class="tool popular" data-cat="pdf" href="jpg-to-pdf.html">
-📄 JPG to PDF <span class="badge">POPULAR</span>
-</a>
-<a class="tool" href="pdf-to-jpg.html">🔥 PDF to JPG</a> 
 <a class="tool" data-cat="image" href="png-to-jpg.html">PNG to JPG</a>
-<a class="tool" data-cat="image" href="jpg-to-png.html">JPG to PNG</a>
 </div>
 
 <div class="section">
@@ -405,7 +408,6 @@ nav{
 🖼 Image Resizer <span class="badge">POPULAR</span>
 </a>
 <a class="tool" data-cat="image" href="png-to-jpg.html">PNG to JPG</a>
-<a class="tool" data-cat="image" href="jpg-to-png.html">JPG to PNG</a>
 <a class="tool popular" href="jpg-to-pdf.html">
 📄 JPG to PDF <span class="badge">POPULAR</span>
 </a>
@@ -418,29 +420,28 @@ nav{
 <h2>🎬 Video Downloader Tools</h2>
 
 <div class="tools-row">
-<a class="tool" data-cat="video" href="youtube-video-downloader.html">
-<a class="tool" href="instagram-reels-downloader.html">Instagram Reels Downloader</a>
-<a class="tool" href="facebook-reels-downloader.html">Facebook Reels Downloader</a>
-<a class="tool" href="instagram-photo-downloader.html">Instagram Photo Downloader</a>
+<a class="tool" data-cat="video" href="youtube-video-downloader.html">YouTube Video Downloader</a>
+
+<a class="tool" data-cat="video" href="instagram-reels-downloader.html">Instagram Reels Downloader</a>
+
+<a class="tool" data-cat="video" href="facebook-reels-downloader.html">Facebook Reels Downloader</a>
+
+<a class="tool" data-cat="video" href="instagram-photo-downloader.html">Instagram Photo Downloader</a>
 </div>
-</div>
-    
+ </div>  <!-- ✅ YE NAYA ADD KARO -->
+ 
   <!-- 🔥 MOST USED -->
 <div class="section">
 <h2>🔥 Most Used Tools</h2>
 
 <div>
-<a class="tool" data-cat="image" href="compress-image-50kb.html">Compress Image to 50KB</a>
-<a class="tool" data-cat="image" href="compress-image-100kb.html">Compress Image to 100KB</a>
-<a class="tool" href="resize-image-100kb.html">Resize Image to 100KB</a>
-<a class="tool popular" data-cat="image" href="image-resizer.html">
-🖼 Image Resizer <span class="badge">POPULAR</span>
-</a>
-<a class="tool popular" data-cat="pdf" href="jpg-to-pdf.html">
-📄 JPG to PDF <span class="badge">POPULAR</span>
-</a>
-<a class="tool" href="png-to-jpg.html">PNG to JPG</a>
-<a class="tool" data-cat="image" href="jpg-to-png.html">JPG to PNG</a>
+<a class="tool" href="compress-image-50kb.html">Compress Image to 50KB</a>
+
+<a class="tool" href="image-resizer.html">Image Resizer</a>
+
+<a class="tool" href="jpg-to-pdf.html">JPG to PDF</a>
+
+<a class="tool" href="text-to-speech.html">Text to Speech</a>
 </div>
 
 </div>
@@ -545,7 +546,7 @@ nav{
 No tools found 😢
 </p>
     
-    
+ <div style="height:80px;"></div> 
 <footer style="margin-top:60px; padding:25px 0; font-size:17px; border-top:1px solid #1e293b; background:#020617;">
 
 <a href="about.html" style="color:white; margin:0 15px; text-decoration:none;">About</a> |
@@ -694,18 +695,13 @@ document.addEventListener("click", function(e){
 window.addEventListener("scroll", ()=>{
   if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 100){
 
-    let loader = document.getElementById("loader");
-    if(loader) loader.style.display = "block";
-
     setTimeout(()=>{
       visibleCount += 20;
       applyAll();
-
-      if(loader) loader.style.display = "none";
     }, 500);
+
   }
 });
-
 // ================= SLIDER =================
 let slides = document.querySelectorAll(".slide");
 
