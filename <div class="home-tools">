@@ -390,7 +390,6 @@ nav{
 <h2>📄 PDF Tools</h2>
 <a class="tool" data-cat="pdf" href="pdf-to-word.html">PDF to Word Converter</a>
 <a class="tool" data-cat="pdf" href="pdf-to-jpg.html">PDF to JPG</a>
-<a class="tool popular" data-cat="pdf" href="jpg-to-pdf.html">
 <a class="tool" data-cat="image" href="png-to-jpg.html">PNG to JPG</a>
 </div>
 
