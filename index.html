@@ -8,7 +8,6 @@
 <meta property="og:description" content="Free image, PDF, finance and developer tools">
 <meta property="og:type" content="website">
 <meta property="og:image" content="thumbnail.jpg">
- 
 <title>100+ Free Online Tools - Image Compressor, Word Counter, JSON Formatter & More</title>
  
  <!-- 🔥 MONETAG VERIFY -->
@@ -294,13 +293,13 @@ nav{
 ⚡ Try popular tools: Image Compressor • JPG to PDF • Resize Image
 </p>
 <div class="filters">
-<button onclick="filterTools('video', event)">Video</button>
 <button type="button" onclick="filterTools('all')">All</button>
-<button onclick="filterTools('image')">Image</button>
-<button onclick="filterTools('pdf')">PDF</button>
-<button onclick="filterTools('finance')">Finance</button>
-<button onclick="filterTools('text')">Text</button>
-<button onclick="filterTools('dev')">Developer</button>
+<button onclick="filterTools('video', event)">Video</button>
+<button onclick="filterTools('image', event)">Image</button>
+<button onclick="filterTools('pdf', event)">PDF</button>
+<button onclick="filterTools('finance', event)">Finance</button>
+<button onclick="filterTools('text', event)">Text</button>
+<button onclick="filterTools('dev', event)">Developer</button>
 </div> <!-- ❗ YAHAN CLOSE KARO -->
 
 <!-- 🔥 TRENDING BANNER -->
@@ -434,13 +433,12 @@ nav{
 <h2>🔥 Most Used Tools</h2>
 
 <div>
-<a class="tool" href="compress-image-50kb.html">Compress Image to 50KB</a>
 
 <a class="tool" href="image-resizer.html">Image Resizer</a>
 
 <a class="tool" href="jpg-to-pdf.html">JPG to PDF</a>
 
-<a class="tool" href="text-to-speech.html">Text to Speech</a>
+<a class="tool" href="emi-calculator.html">EMI Calculator</a>
 </div>
 
 </div>
@@ -628,7 +626,7 @@ function applyAll(){
   tools.forEach(t=> t.style.display = "none");
 
   let count = 0;
-
+const noResult = document.getElementById("noResult");
   results.forEach(item=>{
     if(count < visibleCount){
       item.tool.style.display = "inline-block";
