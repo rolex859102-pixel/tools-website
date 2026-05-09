@@ -36,6 +36,7 @@ header {
 header,
 .section,
 footer,
+ 
 .affiliate-box {
     width: 95%;
     max-width: 1400px;
@@ -78,7 +79,11 @@ footer,
     box-shadow:0 0 0 transparent;
     border:1px solid #334155;
 }
-
+ 
+.tool{
+    min-width:220px;
+}
+ 
 .tool:hover {
     transform:translateY(-6px) scale(1.05);
     box-shadow:0 10px 25px rgba(0,0,0,0.6);
@@ -148,8 +153,18 @@ footer,
 /* ===== FOOTER ===== */
 footer {
     margin-top:50px;
-    padding:20px;
-    background:#0f172a;
+    padding:25px;
+    background:transparent;
+    border-top:1px solid #1e293b;
+}
+ footer a{
+    color:white;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+footer a:hover{
+    color:#22c55e;
 }
 
 /* ===== NAV ===== */
@@ -336,7 +351,10 @@ nav{
 
  <!-- 🔥 MID AD -->
 <div class="ad-box">
-🔥 Try This Tool (Recommended)
+<h3 style="margin-bottom:15px;color:#facc15;">
+🔥 Recommended Tools
+</h3>
+ 
 <script>
 (function(s){
   s.dataset.zone='10968192',
