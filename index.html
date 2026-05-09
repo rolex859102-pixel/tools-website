@@ -24,6 +24,7 @@ body {
     font-family: 'Segoe UI', Arial;
     margin:0;
     text-align:center;
+    overflow-x:hidden;
 }
 
 /* ===== HEADER ===== */
@@ -31,7 +32,16 @@ header {
     background: radial-gradient(circle at top, #0f172a, #020617);
     padding:30px 20px;
 }
-
+ 
+header,
+.section,
+footer,
+.affiliate-box {
+    width: 95%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
 /* ===== SEARCH ===== */
 .search {
     padding:14px;
@@ -58,12 +68,12 @@ header {
 .tool {
     display:inline-block;
     margin:10px;
-    padding:14px 20px;
+    padding:16px 24px;
     background:linear-gradient(145deg,#1e293b,#0f172a);
     color:white;
     text-decoration:none;
     border-radius:12px;
-    font-size:14px;
+    font-size:15px;
     transition:0.3s;
     box-shadow:0 0 0 transparent;
     border:1px solid #334155;
@@ -216,11 +226,10 @@ nav{
 /* ✅ FIXED CENTER ALIGN */
 .trending-row{
     display:flex;
-    overflow-x:auto;
-    white-space:nowrap;
+    justify-content:center;
+    flex-wrap:wrap;
     gap:12px;
     padding:10px;
-    scroll-behavior:smooth;
 }
  .trending-row::-webkit-scrollbar{
    display:none;
