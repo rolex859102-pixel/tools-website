@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Image to PDF Converter Online Free</title>
+
+<meta name="description"
+content="Convert image to PDF online free. JPG to PDF and PNG to PDF converter.">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input{
+    margin-top:20px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#downloadBtn{
+    display:none;
+    margin-top:20px;
+    padding:12px 20px;
+    background:#3b82f6;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    display:inline-block;
+}
+
+.preview{
+    margin-top:20px;
+    max-width:100%;
+    border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Image to PDF Converter</h1>
+
+<p>
+Convert JPG and PNG images to PDF online free.
+</p>
+
+<input type="file"
+id="imageInput"
+accept="image/*">
+
+<br>
+
+<img id="preview"
+class="preview"
+style="display:none;">
+
+<br>
+
+<button onclick="convertToPDF()">
+Convert to PDF
+</button>
+
+<br>
+
+<a id="downloadBtn">
+Download PDF
+</a>
+
+</div>
+
+<script>
+
+const imageInput =
+document.getElementById("imageInput");
+
+const preview =
+document.getElementById("preview");
+
+let imageData = "";
+
+imageInput.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(file){
+
+        const reader =
+        new FileReader();
+
+        reader.onload = function(e){
+
+            imageData = e.target.result;
+
+            preview.src = imageData;
+
+            preview.style.display =
+            "block";
+
+        };
+
+        reader.readAsDataURL(file);
+
+    }
+
+});
+
+async function convertToPDF(){
+
+    if(!imageData){
+
+        alert("Please upload image");
+
+        return;
+
+    }
+
+    const { jsPDF } = window.jspdf;
+
+    const pdf = new jsPDF();
+
+    const img = new Image();
+
+    img.src = imageData;
+
+    img.onload = function(){
+
+        const pdfWidth =
+        pdf.internal.pageSize.getWidth();
+
+        const pdfHeight =
+        (img.height * pdfWidth)
+/ img.width;
+
+        pdf.addImage(
+            imageData,
+            "JPEG",
+            0,
+            0,
+            pdfWidth,
+            pdfHeight
+        );
+
+        const pdfBlob =
+        pdf.output("blob");
+
+        const url =
+        URL.createObjectURL(pdfBlob);
+
+        const downloadBtn =
+        document.getElementById("downloadBtn");
+
+        downloadBtn.href = url;
+
+        downloadBtn.download =
+        "image-to-pdf.pdf";
+
+        downloadBtn.style.display =
+        "inline-block";
+
+    };
+
+}
+
+</script>
+
+</body>
+</html>
