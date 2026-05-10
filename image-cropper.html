@@ -1,140 +1,249 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Image Cropper</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Image Cropper Tool Free Online</title>
+
+<meta name="description"
+content="Crop images online free. Easy image cropper tool for JPG, PNG and WEBP images.">
+
+<meta name="robots" content="index, follow">
 
 <style>
 
 body{
-font-family:Arial;
-text-align:center;
-background:#f4f4f4;
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    margin:0;
+    padding:20px;
 }
 
 .container{
-width:80%;
-margin:auto;
-margin-top:40px;
+    max-width:800px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+p{
+    color:#94a3b8;
 }
 
 input{
-margin:8px;
-padding:8px;
-width:100px;
-}
-
-img{
-margin-top:20px;
-max-width:300px;
-}
-
-button{
-padding:10px 20px;
-margin-top:15px;
-background:#e91e63;
-color:white;
-border:none;
-cursor:pointer;
+    margin-top:20px;
 }
 
 canvas{
-display:none;
+    max-width:100%;
+    margin-top:20px;
+    border:2px solid #334155;
+    border-radius:10px;
+    cursor:crosshair;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.download-btn{
+    display:none;
+    margin-top:20px;
+    text-decoration:none;
+    background:#3b82f6;
+    color:white;
+    padding:12px 20px;
+    border-radius:10px;
+    display:inline-block;
+}
+
+footer{
+    margin-top:40px;
+    color:#94a3b8;
 }
 
 </style>
 
-<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>Image Cropper</h1>
+<h1>Image Cropper Tool</h1>
 
-<input type="file" id="imageInput" accept="image/*">
+<p>Crop JPG, PNG and WEBP images online for free.</p>
 
-<br>
-
-<input type="number" id="x" placeholder="X">
-<input type="number" id="y" placeholder="Y">
-<input type="number" id="width" placeholder="Width">
-<input type="number" id="height" placeholder="Height">
+<input type="file" id="fileInput" accept="image/*">
 
 <br>
-
-<button onclick="cropImage()">Crop Image</button>
-
-<br>
-
-<img id="preview">
-
-<br>
-
-<a id="downloadLink" style="display:none;">Download Cropped Image</a>
 
 <canvas id="canvas"></canvas>
 
+<br>
+
+<button onclick="cropImage()">
+Crop Image
+</button>
+
+<br>
+
+<a id="downloadBtn" class="download-btn">
+Download Cropped Image
+</a>
+
 </div>
+
+<footer>
+© 2026 Free Online Tools
+</footer>
 
 <script>
 
-function cropImage(){
+const fileInput = document.getElementById("fileInput");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-let file=document.getElementById("imageInput").files[0];
+let img = new Image();
 
-let x=parseInt(document.getElementById("x").value);
-let y=parseInt(document.getElementById("y").value);
-let width=parseInt(document.getElementById("width").value);
-let height=parseInt(document.getElementById("height").value);
+let startX,startY,endX,endY;
+let dragging = false;
 
-if(!file || isNaN(x) || isNaN(y) || isNaN(width) || isNaN(height)){
-alert("Please fill all fields correctly");
-return;
+fileInput.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        img.onload = function(){
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.drawImage(img,0,0);
+
+        }
+
+        img.src = e.target.result;
+
+    }
+
+    reader.readAsDataURL(file);
+
+});
+
+canvas.addEventListener("mousedown", function(e){
+
+    startX = e.offsetX;
+    startY = e.offsetY;
+
+    dragging = true;
+
+});
+
+canvas.addEventListener("mouseup", function(e){
+
+    endX = e.offsetX;
+    endY = e.offsetY;
+
+    dragging = false;
+
+    drawSelection();
+
+});
+
+function drawSelection(){
+
+    ctx.drawImage(img,0,0);
+
+    ctx.strokeStyle = "#22c55e";
+    ctx.lineWidth = 3;
+
+    ctx.strokeRect(
+        startX,
+        startY,
+        endX - startX,
+        endY - startY
+    );
+
 }
 
-let img=new Image();
-let reader=new FileReader();
+function cropImage(){
 
-reader.onload=function(e){
-img.src=e.target.result;
-};
+    let width = endX - startX;
+    let height = endY - startY;
 
-img.onload=function(){
+    if(width <= 0 || height <= 0){
+        alert("Please select crop area");
+        return;
+    }
 
-let canvas=document.getElementById("canvas");
-let ctx=canvas.getContext("2d");
+    let tempCanvas = document.createElement("canvas");
+    let tempCtx = tempCanvas.getContext("2d");
 
-canvas.width=width;
-canvas.height=height;
+    tempCanvas.width = width;
+    tempCanvas.height = height;
 
-ctx.drawImage(img,x,y,width,height,0,0,width,height);
+    tempCtx.drawImage(
+        img,
+        startX,
+        startY,
+        width,
+        height,
+        0,
+        0,
+        width,
+        height
+    );
 
-let cropped=canvas.toDataURL("image/jpeg",0.9);
+    let croppedUrl = tempCanvas.toDataURL("image/png");
 
-document.getElementById("preview").src=cropped;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
-// download
-let link=document.getElementById("downloadLink");
-link.href=cropped;
-link.download="cropped.jpg";
-link.style.display="inline-block";
-link.innerText="Download Image";
+    let croppedImg = new Image();
 
-};
+    croppedImg.onload = function(){
 
-reader.readAsDataURL(file);
+        canvas.width = croppedImg.width;
+        canvas.height = croppedImg.height;
+
+        ctx.drawImage(croppedImg,0,0);
+
+    }
+
+    croppedImg.src = croppedUrl;
+
+    let downloadBtn = document.getElementById("downloadBtn");
+
+    downloadBtn.href = croppedUrl;
+    downloadBtn.download = "cropped-image.png";
+
+    downloadBtn.style.display = "inline-block";
 
 }
 
 </script>
-
-<footer style="text-align:center;padding:20px;background:#020617;margin-top:40px;">
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a> |
-<a href="privacy.html">Privacy Policy</a> |
-<a href="disclaimer.html">Disclaimer</a>
-</footer>
 
 </body>
 </html>
