@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Passport Size Photo Maker Online Free</title>
+
+<meta name="description"
+content="Create passport size photos online free. Resize photo for passport, visa, forms and exams.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input{
+    margin-top:20px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+canvas{
+    margin-top:20px;
+    max-width:100%;
+    border-radius:10px;
+    background:white;
+}
+
+#downloadBtn{
+    display:none;
+    margin-top:20px;
+    padding:12px 20px;
+    background:#3b82f6;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    display:inline-block;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Passport Size Photo Maker</h1>
+
+<p>
+Create passport size photos online free.
+</p>
+
+<input type="file" id="imageInput" accept="image/*">
+
+<br>
+
+<button onclick="createPassportPhoto()">
+Create Passport Photo
+</button>
+
+<br>
+
+<canvas id="canvas"></canvas>
+
+<br>
+
+<a id="downloadBtn">
+Download Passport Photo
+</a>
+
+</div>
+
+<script>
+
+function createPassportPhoto(){
+
+    const input =
+    document.getElementById("imageInput");
+
+    if(!input.files.length){
+        alert("Please upload image");
+        return;
+    }
+
+    const file = input.files[0];
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        const img = new Image();
+
+        img.onload = function(){
+
+            const canvas =
+            document.getElementById("canvas");
+
+            const ctx =
+            canvas.getContext("2d");
+
+            // Passport size ratio
+            canvas.width = 413;
+            canvas.height = 531;
+
+            ctx.fillStyle = "white";
+            ctx.fillRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+            ctx.drawImage(
+                img,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+            const downloadBtn =
+            document.getElementById("downloadBtn");
+
+            downloadBtn.href =
+            canvas.toDataURL("image/jpeg");
+
+            downloadBtn.download =
+            "passport-photo.jpg";
+
+            downloadBtn.style.display =
+            "inline-block";
+
+        };
+
+        img.src = e.target.result;
+
+    };
+
+    reader.readAsDataURL(file);
+
+}
+
+</script>
+
+</body>
+</html>
