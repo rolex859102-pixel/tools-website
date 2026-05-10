@@ -1,0 +1,121 @@
+<body>
+
+<div class="container">
+
+<h1>HEIC to JPG Converter</h1>
+
+<p>Convert HEIC images to JPG online for free.</p>
+
+<input type="file" id="fileInput" accept=".heic">
+
+<br>
+
+<button onclick="convertHEIC()">
+Convert to JPG
+</button>
+
+<br><br>
+
+<img id="preview" style="max-width:100%; display:none; border-radius:12px;">
+
+<br>
+
+<a id="downloadBtn"
+style="
+display:none;
+padding:12px 20px;
+background:#22c55e;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+display:inline-block;
+margin-top:20px;
+">
+Download JPG
+</a>
+
+</div>
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+input{
+    margin-top:20px;
+}
+
+</style>
+
+<script>
+
+async function convertHEIC(){
+
+    const input = document.getElementById("fileInput");
+
+    if(!input.files.length){
+        alert("Please upload HEIC image");
+        return;
+    }
+
+    const file = input.files[0];
+
+    try{
+
+        const jpgBlob = await heic2any({
+            blob:file,
+            toType:"image/jpeg",
+            quality:0.9
+        });
+
+        const url = URL.createObjectURL(jpgBlob);
+
+        const preview = document.getElementById("preview");
+
+        preview.src = url;
+        preview.style.display = "block";
+
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        downloadBtn.href = url;
+        downloadBtn.download = "converted.jpg";
+
+        downloadBtn.style.display = "inline-block";
+
+    }
+
+    catch(error){
+
+        alert("Conversion failed");
+
+    }
+
+}
+
+</script>
+
+</body>
