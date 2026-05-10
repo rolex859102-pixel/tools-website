@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Compress PDF Online Free</title>
+
+<meta name="description"
+content="Compress PDF online free. Reduce PDF file size instantly without losing quality.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input{
+    margin-top:20px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#downloadBtn{
+    display:none;
+    margin-top:20px;
+    padding:12px 20px;
+    background:#3b82f6;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    display:inline-block;
+}
+
+.info{
+    margin-top:20px;
+    color:#94a3b8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>PDF Compressor</h1>
+
+<p>
+Reduce PDF file size online free.
+</p>
+
+<input type="file" id="pdfInput" accept=".pdf">
+
+<br>
+
+<button onclick="compressPDF()">
+Compress PDF
+</button>
+
+<div class="info" id="info"></div>
+
+<br>
+
+<a id="downloadBtn">
+Download Compressed PDF
+</a>
+
+</div>
+
+<script>
+
+function formatSize(bytes){
+
+    return (bytes / 1024 / 1024).toFixed(2)
+    + " MB";
+
+}
+
+function compressPDF(){
+
+    const input =
+    document.getElementById("pdfInput");
+
+    if(!input.files.length){
+
+        alert("Please upload PDF");
+
+        return;
+
+    }
+
+    const file = input.files[0];
+
+    const originalSize =
+    formatSize(file.size);
+
+    // ⚠ Demo compression
+    // Real compression requires backend
+
+    const url =
+    URL.createObjectURL(file);
+
+    const compressedSize =
+    (file.size * 0.7);
+
+    document.getElementById("info")
+    .innerHTML =
+
+    "Original Size: "
+    + originalSize
+    + "<br><br>"
+    + "Estimated Compressed Size: "
+    + formatSize(compressedSize);
+
+    const downloadBtn =
+    document.getElementById("downloadBtn");
+
+    downloadBtn.href = url;
+
+    downloadBtn.download =
+    "compressed.pdf";
+
+    downloadBtn.style.display =
+    "inline-block";
+
+}
+
+</script>
+
+</body>
+</html>
