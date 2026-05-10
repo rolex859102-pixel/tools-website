@@ -1,136 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Background Remover Online Free | Remove Image Background</title>
-<meta name="description" content="Remove image background online free. Fast and easy background remover tool without software.">
+<title>Background Remover Online Free</title>
+
+<meta name="description"
+content="Remove image background online free. Create transparent PNG images instantly.">
+
+<script src="https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/dist/browser.js"></script>
 
 <style>
-body {
-    background:#0f172a;
+
+body{
+    background:#020617;
     color:white;
     font-family:Arial;
     text-align:center;
+    padding:20px;
 }
 
-.container {
-    padding:40px 20px;
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
 }
 
-input {
-    padding:12px;
-    border-radius:5px;
-    border:none;
-}
-
-button {
-    padding:12px 20px;
-    background:#22c55e;
-    color:white;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-.preview {
+input{
     margin-top:20px;
 }
 
-.preview img {
-    max-width:300px;
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
     border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.affiliate-box {
-    margin-top:40px;
-    padding:20px;
-    background:#1e293b;
-    border-radius:10px;
+img{
+    margin-top:20px;
+    max-width:100%;
+    border-radius:12px;
+    background:white;
 }
+
+#downloadBtn{
+    display:none;
+    margin-top:20px;
+    padding:12px 20px;
+    background:#3b82f6;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    display:inline-block;
+}
+
+.loader{
+    display:none;
+    margin-top:20px;
+    color:#22c55e;
+    font-weight:bold;
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>Background Remover Tool</h1>
-<p><strong>Remove image background online free instantly.</strong></p>
+<h1>Background Remover</h1>
 
-<input type="file" id="upload" accept="image/*"><br>
+<p>
+Remove image background online free.
+</p>
 
-<button onclick="removeBg()">Remove Background</button>
+<input type="file" id="imageInput" accept="image/*">
 
-<div id="result"></div>
+<br>
 
-<!-- Affiliate -->
-<div class="affiliate-box">
-<h3>Advanced Background Remover</h3>
-<p>Get HD background removal with AI</p>
-<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium Tool</a>
+<button onclick="removeBG()">
+Remove Background
+</button>
+
+<div class="loader" id="loader">
+Processing Image...
 </div>
 
-<!-- SEO CONTENT -->
-<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;line-height:1.6;">
+<br>
 
-<h2>Free Background Remover Online</h2>
-<p>Remove image background easily without any software. Perfect for photos, products and social media.</p>
+<img id="resultImage" style="display:none;">
 
-<h2>How to Remove Background?</h2>
-<ul>
-<li>Upload image</li>
-<li>Click remove background</li>
-<li>Download processed image</li>
-</ul>
+<br>
 
-<h2>Features</h2>
-<ul>
-<li>Fast processing</li>
-<li>Easy to use</li>
-<li>Mobile friendly</li>
-</ul>
-
-</div>
+<a id="downloadBtn">
+Download PNG
+</a>
 
 </div>
 
 <script>
-function removeBg() {
-    const file = document.getElementById('upload').files[0];
 
-    if (!file) {
-        alert("Upload image first!");
+async function removeBG(){
+
+    const input =
+    document.getElementById("imageInput");
+
+    if(!input.files.length){
+        alert("Please upload image");
         return;
     }
 
-    // Step 1: Show preview
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
+    const loader =
+    document.getElementById("loader");
 
-    reader.onload = function(e) {
+    loader.style.display = "block";
 
-        document.getElementById("result").innerHTML = `
-            <h3>Processing image...</h3>
-            <p>Removing background using AI...</p>
-            <img src="${e.target.result}">
-        `;
+    const file = input.files[0];
 
-        // Step 2: Fake processing
-        setTimeout(() => {
-            document.getElementById("result").innerHTML += `
-                <p>⚡ Background removed successfully!</p>
-                <button onclick="redirect()">Download HD Image</button>
-            `;
-        }, 2000);
+    try{
+
+        const blob =
+        await removeBackground(file);
+
+        const url =
+        URL.createObjectURL(blob);
+
+        const resultImage =
+        document.getElementById("resultImage");
+
+        resultImage.src = url;
+
+        resultImage.style.display =
+        "block";
+
+        const downloadBtn =
+        document.getElementById("downloadBtn");
+
+        downloadBtn.href = url;
+
+        downloadBtn.download =
+        "background-removed.png";
+
+        downloadBtn.style.display =
+        "inline-block";
+
     }
+
+    catch(error){
+
+        alert("Background removal failed");
+
+    }
+
+    loader.style.display = "none";
+
 }
 
-function redirect() {
-    window.open("https://www.remove.bg/", "_blank");
-}
 </script>
 
 </body>
