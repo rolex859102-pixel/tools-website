@@ -36,7 +36,6 @@ header {
 header,
 .section,
 footer,
- 
 .affiliate-box {
     width: 95%;
     max-width: 1400px;
@@ -66,22 +65,26 @@ footer,
 }
 
 /* ===== TOOL CARDS ===== */
-.tool {
+ .tool {
     display:inline-block;
     margin:10px;
     padding:16px 24px;
+    min-width:220px;
+
     background:linear-gradient(145deg,#1e293b,#0f172a);
     color:white;
     text-decoration:none;
-    border-radius:12px;
-    font-size:15px;
-    transition:0.3s;
-    box-shadow:0 0 0 transparent;
+
     border:1px solid #334155;
-}
- 
-.tool{
-    min-width:220px;
+    border-radius:14px;
+
+    font-size:15px;
+
+    transition:all 0.25s ease;
+
+    box-shadow:0 0 0 transparent;
+
+    backdrop-filter:blur(8px);
 }
  
 .tool:hover {
@@ -271,9 +274,19 @@ nav{
 
 /* ===== MOBILE ===== */
 @media (max-width:600px){
-    h1 {font-size:22px;}
-    .tool {font-size:13px;}
+
+    h1{
+       font-size:22px;
+    }
+
+    .tool{
+       font-size:13px;
+       min-width:140px;
+       padding:12px 16px;
+    }
+
 }
+ 
 .search-container{
   position: relative;
   display: inline-block;
@@ -284,6 +297,12 @@ nav{
   background:#22c55e;
   color:black;
 }
+ .section h2{
+   font-size:24px;
+   margin-bottom:20px;
+   color:#f8fafc;
+}
+ 
 </style>
 </head>
 
