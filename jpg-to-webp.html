@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JPG to WEBP Converter Free Online</title>
+
+<meta name="description"
+content="Convert JPG to WEBP online free. Fast and easy JPG to WEBP image converter tool.">
+
+<meta name="robots" content="index, follow">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+p{
+    color:#94a3b8;
+}
+
+.upload-box{
+    border:2px dashed #334155;
+    padding:40px 20px;
+    margin-top:20px;
+    border-radius:12px;
+}
+
+input{
+    margin-top:15px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:15px;
+}
+
+img{
+    max-width:100%;
+    margin-top:20px;
+    border-radius:10px;
+}
+
+.download-btn{
+    display:none;
+    margin-top:20px;
+    text-decoration:none;
+    background:#3b82f6;
+    color:white;
+    padding:12px 20px;
+    border-radius:10px;
+    display:inline-block;
+}
+
+footer{
+    margin-top:40px;
+    color:#94a3b8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>JPG to WEBP Converter</h1>
+
+<p>Convert JPG images to WEBP online for free.</p>
+
+<div class="upload-box">
+
+<input type="file" id="fileInput" accept="image/jpeg,image/jpg">
+
+<br>
+
+<button onclick="convertImage()">
+Convert to WEBP
+</button>
+
+</div>
+
+<img id="preview" style="display:none;">
+
+<br>
+
+<a id="downloadBtn" class="download-btn">
+Download WEBP
+</a>
+
+</div>
+
+<footer>
+© 2026 Free Online Tools
+</footer>
+
+<script>
+
+function convertImage(){
+
+    let fileInput = document.getElementById("fileInput");
+    let file = fileInput.files[0];
+
+    if(!file){
+        alert("Please upload JPG image");
+        return;
+    }
+
+    let reader = new FileReader();
+
+    reader.onload = function(e){
+
+        let img = new Image();
+
+        img.onload = function(){
+
+            let canvas = document.createElement("canvas");
+            let ctx = canvas.getContext("2d");
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.drawImage(img,0,0);
+
+            let webpUrl = canvas.toDataURL("image/webp",0.95);
+
+            let preview = document.getElementById("preview");
+            preview.src = webpUrl;
+            preview.style.display = "block";
+
+            let downloadBtn = document.getElementById("downloadBtn");
+
+            downloadBtn.href = webpUrl;
+            downloadBtn.download = "converted-image.webp";
+            downloadBtn.style.display = "inline-block";
+
+        }
+
+        img.src = e.target.result;
+
+    }
+
+    reader.readAsDataURL(file);
+
+}
+
+</script>
+
+</body>
+</html>
