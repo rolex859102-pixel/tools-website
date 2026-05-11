@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Free Resume Builder Online | Create Professional Resume</title>
+<meta name="description" content="Create professional resume online free. Easy resume builder with download option. No signup required.">
+
+<style>
+body {
+    background:#0f172a;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container {
+    padding:30px;
+}
+
+input, textarea {
+    display:block;
+    margin:10px auto;
+    padding:10px;
+    width:80%;
+    border-radius:5px;
+    border:none;
+}
+
+button {
+    padding:12px 20px;
+    background:#22c55e;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+#resume {
+    background:white;
+    color:black;
+    padding:20px;
+    margin-top:30px;
+    text-align:left;
+    display:none;
+}
+
+.affiliate-box {
+    margin-top:40px;
+    padding:20px;
+    background:#1e293b;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Resume Builder</h1>
+<p><strong>Create professional resume online free instantly.</strong></p>
+
+<input type="text" id="name" placeholder="Full Name">
+<input type="text" id="email" placeholder="Email">
+<input type="text" id="phone" placeholder="Phone">
+<textarea id="skills" placeholder="Skills"></textarea>
+<textarea id="experience" placeholder="Work Experience"></textarea>
+<textarea id="education" placeholder="Education"></textarea>
+
+<button onclick="generateResume()">Generate Resume</button>
+
+<div id="resume"></div>
+
+<button id="downloadBtn" style="display:none;" onclick="downloadResume()">Download Resume</button>
+
+<!-- Affiliate -->
+<div class="affiliate-box">
+<h3>Premium Resume Templates</h3>
+<p>Get ATS-friendly resume templates</p>
+<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
+</div>
+
+<!-- SEO -->
+<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
+<h2>Free Resume Builder Online</h2>
+<p>Create job-winning resumes easily without any design skills.</p>
+</div>
+
+</div>
+
+<script>
+function generateResume() {
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let skills = document.getElementById("skills").value;
+    let experience = document.getElementById("experience").value;
+    let education = document.getElementById("education").value;
+
+    if (!name || !email) {
+        alert("Please fill required fields!");
+        return;
+    }
+
+    let resumeHTML = `
+        <h2>${name}</h2>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Phone:</b> ${phone}</p>
+
+        <h3>Skills</h3>
+        <p>${skills}</p>
+
+        <h3>Experience</h3>
+        <p>${experience}</p>
+
+        <h3>Education</h3>
+        <p>${education}</p>
+    `;
+
+    let resumeDiv = document.getElementById("resume");
+    resumeDiv.innerHTML = resumeHTML;
+    resumeDiv.style.display = "block";
+
+    document.getElementById("downloadBtn").style.display = "inline-block";
+}
+
+function downloadResume() {
+    let content = document.getElementById("resume").innerHTML;
+
+    let blob = new Blob([content], { type: "text/html" });
+    let link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+    link.download = "resume.html";
+    link.click();
+}
+</script>
+
+</body>
+</html>
