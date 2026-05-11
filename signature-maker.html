@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Signature Maker Online Free</title>
+
+<meta name="description"
+content="Create digital signature online free. Draw and download signature instantly.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+canvas{
+    background:white;
+    border-radius:10px;
+    margin-top:20px;
+    cursor:crosshair;
+    width:100%;
+    max-width:600px;
+    height:250px;
+}
+
+button{
+    margin:10px;
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.clear-btn{
+    background:#ef4444;
+    color:white;
+}
+
+.download-btn{
+    background:#22c55e;
+    color:black;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Signature Maker</h1>
+
+<p>
+Draw your digital signature and download instantly.
+</p>
+
+<canvas id="signaturePad"></canvas>
+
+<br>
+
+<button class="clear-btn"
+onclick="clearPad()">
+Clear
+</button>
+
+<button class="download-btn"
+onclick="downloadSignature()">
+Download Signature
+</button>
+
+</div>
+
+<script>
+
+const canvas =
+document.getElementById("signaturePad");
+
+const ctx =
+canvas.getContext("2d");
+
+canvas.width = 600;
+canvas.height = 250;
+
+let drawing = false;
+
+canvas.addEventListener("mousedown", start);
+canvas.addEventListener("mouseup", stop);
+canvas.addEventListener("mousemove", draw);
+
+canvas.addEventListener("touchstart", startTouch);
+canvas.addEventListener("touchend", stop);
+canvas.addEventListener("touchmove", drawTouch);
+
+function start(e){
+
+    drawing = true;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        e.offsetX,
+        e.offsetY
+    );
+
+}
+
+function stop(){
+
+    drawing = false;
+
+}
+
+function draw(e){
+
+    if(!drawing) return;
+
+    ctx.lineWidth = 2;
+
+    ctx.lineCap = "round";
+
+    ctx.strokeStyle = "black";
+
+    ctx.lineTo(
+        e.offsetX,
+        e.offsetY
+    );
+
+    ctx.stroke();
+
+}
+
+function startTouch(e){
+
+    e.preventDefault();
+
+    drawing = true;
+
+    const rect =
+    canvas.getBoundingClientRect();
+
+    const touch =
+    e.touches[0];
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        touch.clientX - rect.left,
+        touch.clientY - rect.top
+    );
+
+}
+
+function drawTouch(e){
+
+    e.preventDefault();
+
+    if(!drawing) return;
+
+    const rect =
+    canvas.getBoundingClientRect();
+
+    const touch =
+    e.touches[0];
+
+    ctx.lineWidth = 2;
+
+    ctx.lineCap = "round";
+
+    ctx.strokeStyle = "black";
+
+    ctx.lineTo(
+        touch.clientX - rect.left,
+        touch.clientY - rect.top
+    );
+
+    ctx.stroke();
+
+}
+
+function clearPad(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+}
+
+function downloadSignature(){
+
+    const link =
+    document.createElement("a");
+
+    link.download =
+    "signature.png";
+
+    link.href =
+    canvas.toDataURL();
+
+    link.click();
+
+}
+
+</script>
+
+</body>
+</html>
