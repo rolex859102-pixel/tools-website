@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Split PDF Online Free</title>
+
+<meta name="description"
+content="Split PDF online free. Extract pages from PDF instantly.">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input{
+    margin-top:20px;
+    padding:10px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#downloadBtn{
+    display:none;
+    margin-top:20px;
+    padding:12px 20px;
+    background:#3b82f6;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    display:inline-block;
+}
+
+.info{
+    margin-top:20px;
+    color:#94a3b8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Split PDF Tool</h1>
+
+<p>
+Extract pages from PDF online free.
+</p>
+
+<input type="file"
+id="pdfInput"
+accept=".pdf">
+
+<br>
+
+<input type="number"
+id="pageNumber"
+placeholder="Enter page number">
+
+<br>
+
+<button onclick="splitPDF()">
+Split PDF
+</button>
+
+<div class="info" id="info"></div>
+
+<br>
+
+<a id="downloadBtn">
+Download Split PDF
+</a>
+
+</div>
+
+<script>
+
+async function splitPDF(){
+
+    const fileInput =
+    document.getElementById("pdfInput");
+
+    const pageNumber =
+    parseInt(
+        document.getElementById("pageNumber").value
+    );
+
+    if(!fileInput.files.length){
+
+        alert("Please upload PDF");
+
+        return;
+
+    }
+
+    if(!pageNumber || pageNumber < 1){
+
+        alert("Enter valid page number");
+
+        return;
+
+    }
+
+    const file =
+    fileInput.files[0];
+
+    const arrayBuffer =
+    await file.arrayBuffer();
+
+    const pdfDoc =
+    await PDFLib.PDFDocument.load(arrayBuffer);
+
+    const totalPages =
+    pdfDoc.getPageCount();
+
+    if(pageNumber > totalPages){
+
+        alert(
+            "PDF has only "
+            + totalPages
+            + " pages"
+        );
+
+        return;
+
+    }
+
+    const newPdf =
+    await PDFLib.PDFDocument.create();
+
+    const [copiedPage] =
+    await newPdf.copyPages(
+        pdfDoc,
+        [pageNumber - 1]
+    );
+
+    newPdf.addPage(copiedPage);
+
+    const pdfBytes =
+    await newPdf.save();
+
+    const blob =
+    new Blob(
+        [pdfBytes],
+        {type:"application/pdf"}
+    );
+
+    const url =
+    URL.createObjectURL(blob);
+
+    document.getElementById("info")
+    .innerHTML =
+    "Page "
+    + pageNumber
+    + " extracted successfully";
+
+    const downloadBtn =
+    document.getElementById("downloadBtn");
+
+    downloadBtn.href = url;
+
+    downloadBtn.download =
+    "split-pdf-page.pdf";
+
+    downloadBtn.style.display =
+    "inline-block";
+
+}
+
+</script>
+
+</body>
+</html>
