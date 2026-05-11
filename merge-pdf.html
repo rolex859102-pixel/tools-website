@@ -3,14 +3,15 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Merge PDF Online Free</title>
 
 <meta name="description"
-content="Merge multiple PDF files online free. Fast and secure PDF merger tool.">
+content="Merge PDF files online free. Combine multiple PDFs into one PDF instantly.">
 
-<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 
 <style>
 
@@ -56,6 +57,11 @@ button{
     display:inline-block;
 }
 
+.info{
+    margin-top:20px;
+    color:#94a3b8;
+}
+
 </style>
 
 </head>
@@ -66,15 +72,22 @@ button{
 
 <h1>Merge PDF Tool</h1>
 
-<p>Combine multiple PDF files into one PDF online.</p>
+<p>
+Combine multiple PDF files into one PDF.
+</p>
 
-<input type="file" id="pdfInput" multiple accept=".pdf">
+<input type="file"
+id="pdfInput"
+accept=".pdf"
+multiple>
 
 <br>
 
 <button onclick="mergePDFs()">
 Merge PDFs
 </button>
+
+<div class="info" id="info"></div>
 
 <br>
 
@@ -88,49 +101,70 @@ Download Merged PDF
 
 async function mergePDFs(){
 
-    const input = document.getElementById("pdfInput");
+    const input =
+    document.getElementById("pdfInput");
 
     if(input.files.length < 2){
-        alert("Please select at least 2 PDF files");
+
+        alert("Upload at least 2 PDFs");
+
         return;
+
     }
 
-    const mergedPdf = await PDFLib.PDFDocument.create();
+    const mergedPdf =
+    await PDFLib.PDFDocument.create();
 
     for(const file of input.files){
 
-        const bytes = await file.arrayBuffer();
+        const arrayBuffer =
+        await file.arrayBuffer();
 
-        const pdf = await PDFLib.PDFDocument.load(bytes);
+        const pdf =
+        await PDFLib.PDFDocument.load(
+            arrayBuffer
+        );
 
-        const copiedPages = await mergedPdf.copyPages(
+        const copiedPages =
+        await mergedPdf.copyPages(
             pdf,
             pdf.getPageIndices()
         );
 
         copiedPages.forEach(page=>{
+
             mergedPdf.addPage(page);
+
         });
 
     }
 
-    const mergedBytes = await mergedPdf.save();
+    const mergedBytes =
+    await mergedPdf.save();
 
-    const blob = new Blob(
+    const blob =
+    new Blob(
         [mergedBytes],
         {type:"application/pdf"}
     );
 
-    const url = URL.createObjectURL(blob);
+    const url =
+    URL.createObjectURL(blob);
+
+    document.getElementById("info")
+    .innerHTML =
+    "PDFs merged successfully";
 
     const downloadBtn =
     document.getElementById("downloadBtn");
 
     downloadBtn.href = url;
 
-    downloadBtn.download = "merged.pdf";
+    downloadBtn.download =
+    "merged-pdf.pdf";
 
-    downloadBtn.style.display = "inline-block";
+    downloadBtn.style.display =
+    "inline-block";
 
 }
 
