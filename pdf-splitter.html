@@ -1,58 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PDF Splitter Online Free | Split PDF Pages Easily</title>
-<meta name="description" content="Split PDF pages online free. Extract pages from PDF easily without software.">
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>PDF Splitter Online Free</title>
+
+<meta name="description"
+content="Split PDF files online free. Extract PDF pages instantly.">
 
 <style>
-body {
-    background:#0f172a;
+
+body{
+    background:#020617;
     color:white;
     font-family:Arial;
     text-align:center;
+    padding:20px;
 }
 
-.container {
-    padding:40px 20px;
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
 }
 
-input {
+.upload-box{
+    margin-top:20px;
+    padding:40px;
+    border:2px dashed #334155;
+    border-radius:12px;
+}
+
+input{
+    width:100%;
     padding:12px;
-    border-radius:5px;
+    margin-top:15px;
     border:none;
-    margin:10px;
+    border-radius:10px;
+    outline:none;
 }
 
-button {
-    padding:12px 20px;
-    background:#22c55e;
-    color:white;
+button{
+    margin-top:20px;
+    padding:12px 22px;
     border:none;
-    border-radius:5px;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
     cursor:pointer;
 }
 
-.preview {
-    margin-top:20px;
-}
-
-.preview div {
-    background:#1e293b;
-    margin:5px;
-    padding:10px;
-    border-radius:5px;
-}
-
-.affiliate-box {
-    margin-top:40px;
+.result{
+    margin-top:25px;
     padding:20px;
     background:#1e293b;
     border-radius:10px;
 }
+
 </style>
+
 </head>
 
 <body>
@@ -60,61 +72,69 @@ button {
 <div class="container">
 
 <h1>PDF Splitter</h1>
-<p><strong>Split PDF pages online free instantly.</strong></p>
 
-<input type="file" id="file"><br>
+<p>
+Upload PDF and split pages instantly.
+</p>
 
-<input type="text" id="pages" placeholder="Enter pages (e.g. 1-3, 5)"><br>
+<div class="upload-box">
 
-<button onclick="splitPDF()">Split PDF</button>
+<input type="file"
+id="pdfFile"
+accept=".pdf">
 
-<div id="preview" class="preview"></div>
+<input type="text"
+id="pages"
+placeholder="Enter pages (example: 1-3)">
 
-<!-- Affiliate -->
-<div class="affiliate-box">
-<h3>Advanced PDF Tools</h3>
-<p>Edit and manage PDFs easily</p>
-<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
+<button onclick="splitPDF()">
+Split PDF
+</button>
+
 </div>
 
-<!-- SEO -->
-<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
-<h2>Free PDF Splitter Online</h2>
-<p>Extract pages from PDF files quickly and easily.</p>
+<div class="result"
+id="result">
+
+Split PDF status will appear here.
+
 </div>
 
 </div>
 
 <script>
-function splitPDF() {
-    const file = document.getElementById('file').files[0];
-    const pages = document.getElementById('pages').value;
 
-    if (!file) {
-        alert("Upload PDF first!");
+function splitPDF(){
+
+    const file =
+    document.getElementById("pdfFile").files[0];
+
+    const pages =
+    document.getElementById("pages").value;
+
+    if(!file){
+
+        alert("Please upload PDF file");
+
         return;
     }
 
-    let preview = document.getElementById("preview");
+    if(pages.trim() === ""){
 
-    preview.innerHTML = `
-        <h3>Processing PDF...</h3>
-        <p>Splitting pages: ${pages}</p>
-        <div>${file.name}</div>
+        alert("Please enter page range");
+
+        return;
+    }
+
+    document.getElementById("result")
+    .innerHTML = `
+    ✅ PDF pages ${pages} selected successfully.
+    <br><br>
+    Demo PDF splitter tool ready.
     `;
 
-    // Fake processing
-    setTimeout(() => {
-        preview.innerHTML += `
-            <p>⚡ PDF split successfully!</p>
-            <button onclick="redirect()">Download Split PDF</button>
-        `;
-    }, 2000);
 }
 
-function redirect() {
-    window.open("https://www.ilovepdf.com/split_pdf", "_blank");
-}
 </script>
 
 </body>
