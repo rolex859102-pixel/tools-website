@@ -1,52 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Unit Converter Online Free | Convert Length, Weight, Temperature</title>
-<meta name="description" content="Convert units online free. Length, weight, temperature converter tool. Fast and easy.">
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Unit Converter Online Free</title>
+
+<meta name="description"
+content="Convert units online free. Length, weight and measurement converter tool.">
 
 <style>
-body {
-    background:#0f172a;
+
+body{
+    background:#020617;
     color:white;
     font-family:Arial;
     text-align:center;
+    padding:20px;
 }
 
-.container {
-    padding:40px 20px;
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
 }
 
-select, input {
-    padding:10px;
-    margin:10px;
-    border-radius:5px;
+input, select{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
     border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
 }
 
-button {
-    padding:12px 20px;
+button{
+    margin-top:20px;
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
     background:#22c55e;
-    color:white;
-    border:none;
-    border-radius:5px;
+    color:black;
+    font-weight:bold;
     cursor:pointer;
 }
 
-#result {
-    margin-top:20px;
-    font-size:18px;
-}
-
-.affiliate-box {
-    margin-top:40px;
+.result{
+    margin-top:25px;
     padding:20px;
     background:#1e293b;
     border-radius:10px;
+    font-size:22px;
+    font-weight:bold;
 }
+
 </style>
+
 </head>
 
 <body>
@@ -54,96 +68,104 @@ button {
 <div class="container">
 
 <h1>Unit Converter</h1>
-<p><strong>Convert units online free instantly.</strong></p>
 
-<select id="type">
-<option value="length">Length</option>
-<option value="weight">Weight</option>
-<option value="temperature">Temperature</option>
-</select><br>
+<p>
+Convert length units instantly online.
+</p>
 
-<input type="number" id="inputValue" placeholder="Enter value">
+<input type="number"
+id="value"
+placeholder="Enter value">
 
-<select id="from"></select>
-<select id="to"></select><br>
+<select id="conversion">
 
-<button onclick="convert()">Convert</button>
+<option value="cm-inch">
+CM to Inch
+</option>
 
-<div id="result"></div>
+<option value="inch-cm">
+Inch to CM
+</option>
 
-<!-- Affiliate -->
-<div class="affiliate-box">
-<h3>Engineering Tools</h3>
-<p>Advanced calculators for professionals</p>
-<a href="YOUR_AFFILIATE_LINK" target="_blank">Try Premium</a>
-</div>
+<option value="kg-pound">
+KG to Pound
+</option>
 
-<!-- SEO -->
-<div style="max-width:800px;margin:40px auto;text-align:left;color:#cbd5f5;">
-<h2>Free Unit Converter</h2>
-<p>Convert length, weight and temperature easily using this tool.</p>
+<option value="pound-kg">
+Pound to KG
+</option>
+
+<option value="meter-feet">
+Meter to Feet
+</option>
+
+<option value="feet-meter">
+Feet to Meter
+</option>
+
+</select>
+
+<button onclick="convertUnit()">
+Convert
+</button>
+
+<div class="result"
+id="result">
+
+Result will appear here.
+
 </div>
 
 </div>
 
 <script>
-const units = {
-    length: ["meter", "kilometer", "mile"],
-    weight: ["kg", "gram", "pound"],
-    temperature: ["celsius", "fahrenheit"]
-};
 
-function updateUnits() {
-    let type = document.getElementById("type").value;
-    let from = document.getElementById("from");
-    let to = document.getElementById("to");
+function convertUnit(){
 
-    from.innerHTML = "";
-    to.innerHTML = "";
+    const value =
+    parseFloat(document.getElementById("value").value);
 
-    units[type].forEach(unit => {
-        from.innerHTML += `<option>${unit}</option>`;
-        to.innerHTML += `<option>${unit}</option>`;
-    });
-}
+    const type =
+    document.getElementById("conversion").value;
 
-document.getElementById("type").addEventListener("change", updateUnits);
-window.onload = updateUnits;
+    if(isNaN(value)){
 
-function convert() {
-    let type = document.getElementById("type").value;
-    let val = parseFloat(document.getElementById("inputValue").value);
-    let from = document.getElementById("from").value;
-    let to = document.getElementById("to").value;
+        alert("Please enter value");
 
-    if (isNaN(val)) {
-        alert("Enter value!");
         return;
     }
 
-    let result = val;
+    let result = "";
 
-    if (type === "length") {
-        if (from === "meter" && to === "kilometer") result = val / 1000;
-        else if (from === "kilometer" && to === "meter") result = val * 1000;
-        else if (from === "meter" && to === "mile") result = val * 0.000621;
-        else if (from === "mile" && to === "meter") result = val / 0.000621;
+    if(type === "cm-inch"){
+        result = (value / 2.54).toFixed(2) + " Inch";
     }
 
-    if (type === "weight") {
-        if (from === "kg" && to === "gram") result = val * 1000;
-        else if (from === "gram" && to === "kg") result = val / 1000;
-        else if (from === "kg" && to === "pound") result = val * 2.20462;
-        else if (from === "pound" && to === "kg") result = val / 2.20462;
+    else if(type === "inch-cm"){
+        result = (value * 2.54).toFixed(2) + " CM";
     }
 
-    if (type === "temperature") {
-        if (from === "celsius" && to === "fahrenheit") result = (val * 9/5) + 32;
-        else if (from === "fahrenheit" && to === "celsius") result = (val - 32) * 5/9;
+    else if(type === "kg-pound"){
+        result = (value * 2.20462).toFixed(2) + " Pound";
     }
 
-    document.getElementById("result").innerText = "Result: " + result;
+    else if(type === "pound-kg"){
+        result = (value / 2.20462).toFixed(2) + " KG";
+    }
+
+    else if(type === "meter-feet"){
+        result = (value * 3.28084).toFixed(2) + " Feet";
+    }
+
+    else if(type === "feet-meter"){
+        result = (value / 3.28084).toFixed(2) + " Meter";
+    }
+
+    document.getElementById("result")
+    .innerHTML = result;
+
 }
+
 </script>
 
 </body>
