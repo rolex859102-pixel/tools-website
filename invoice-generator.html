@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Invoice Generator Online Free</title>
+
+<meta name="description"
+content="Create professional invoices online free. Simple bill and invoice maker tool.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input, textarea{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.invoice-preview{
+    margin-top:30px;
+    background:white;
+    color:black;
+    padding:30px;
+    border-radius:10px;
+    text-align:left;
+}
+
+.invoice-preview h2{
+    margin-bottom:10px;
+}
+
+.invoice-preview hr{
+    margin:20px 0;
+}
+
+.total{
+    font-size:22px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Invoice Generator</h1>
+
+<p>Create invoices online free.</p>
+
+<input type="text"
+id="business"
+placeholder="Business Name">
+
+<input type="text"
+id="client"
+placeholder="Client Name">
+
+<input type="text"
+id="item"
+placeholder="Service / Product">
+
+<input type="number"
+id="amount"
+placeholder="Amount">
+
+<textarea id="notes"
+placeholder="Notes"></textarea>
+
+<button onclick="generateInvoice()">
+Generate Invoice
+</button>
+
+<div class="invoice-preview"
+id="invoicePreview">
+
+<h2>Invoice Preview</h2>
+
+<p>
+Fill details and click generate.
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function generateInvoice(){
+
+    const business =
+    document.getElementById("business").value;
+
+    const client =
+    document.getElementById("client").value;
+
+    const item =
+    document.getElementById("item").value;
+
+    const amount =
+    document.getElementById("amount").value;
+
+    const notes =
+    document.getElementById("notes").value;
+
+    document.getElementById("invoicePreview")
+    .innerHTML = `
+
+    <h2>${business}</h2>
+
+    <p>
+    Client: ${client}
+    </p>
+
+    <hr>
+
+    <h3>Item / Service</h3>
+
+    <p>${item}</p>
+
+    <h3>Amount</h3>
+
+    <p>₹ ${amount}</p>
+
+    <div class="total">
+    Total: ₹ ${amount}
+    </div>
+
+    <hr>
+
+    <p>${notes}</p>
+
+    `;
+
+}
+
+</script>
+
+</body>
+</html>
