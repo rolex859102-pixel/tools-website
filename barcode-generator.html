@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Barcode Generator Online Free</title>
+
+<meta name="description"
+content="Generate barcodes online free instantly using barcode generator tool.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.barcode-box{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+.bar{
+    display:inline-block;
+    width:4px;
+    margin-right:1px;
+    background:black;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Barcode Generator</h1>
+
+<p>
+Generate barcode instantly online free.
+</p>
+
+<input type="text"
+id="barcodeText"
+placeholder="Enter barcode text">
+
+<button onclick="generateBarcode()">
+Generate Barcode
+</button>
+
+<div class="barcode-box"
+id="barcodeBox">
+
+Barcode preview will appear here.
+
+</div>
+
+</div>
+
+<script>
+
+function generateBarcode(){
+
+    const text =
+    document.getElementById("barcodeText").value;
+
+    if(text.trim() === ""){
+
+        alert("Please enter barcode text");
+
+        return;
+    }
+
+    let bars = "";
+
+    for(let i=0; i<80; i++){
+
+        let height =
+        Math.floor(Math.random()*80)+40;
+
+        bars += `
+        <div class="bar"
+        style="height:${height}px"></div>
+        `;
+    }
+
+    document.getElementById("barcodeBox")
+    .innerHTML = `
+    <div>${bars}</div>
+    <p style="color:black;margin-top:15px;">
+    ${text}
+    </p>
+    `;
+
+}
+
+</script>
+
+</body>
+</html>
