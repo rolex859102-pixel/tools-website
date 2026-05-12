@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>PDF Merger Online Free</title>
+
+<meta name="description"
+content="Merge multiple PDF files online free. Combine PDF documents instantly.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+.upload-box{
+    margin-top:20px;
+    padding:40px;
+    border:2px dashed #334155;
+    border-radius:12px;
+}
+
+input{
+    margin-top:20px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.result{
+    margin-top:25px;
+    padding:20px;
+    background:#1e293b;
+    border-radius:10px;
+}
+
+.file-list{
+    margin-top:20px;
+    text-align:left;
+}
+
+.file-item{
+    padding:10px;
+    margin-top:10px;
+    background:#1e293b;
+    border-radius:8px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>PDF Merger</h1>
+
+<p>
+Upload multiple PDF files and merge them instantly.
+</p>
+
+<div class="upload-box">
+
+<input type="file"
+id="pdfFiles"
+accept=".pdf"
+multiple>
+
+<br>
+
+<button onclick="mergePDFs()">
+Merge PDFs
+</button>
+
+</div>
+
+<div class="file-list"
+id="fileList"></div>
+
+<div class="result"
+id="result">
+
+Merged PDF status will appear here.
+
+</div>
+
+</div>
+
+<script>
+
+const pdfInput =
+document.getElementById("pdfFiles");
+
+pdfInput.addEventListener("change", ()=>{
+
+    const files =
+    pdfInput.files;
+
+    let html = "";
+
+    for(let i=0; i<files.length; i++){
+
+        html += `
+        <div class="file-item">
+        📄 ${files[i].name}
+        </div>
+        `;
+    }
+
+    document.getElementById("fileList")
+    .innerHTML = html;
+
+});
+
+function mergePDFs(){
+
+    const files =
+    pdfInput.files;
+
+    if(files.length < 2){
+
+        alert("Please upload at least 2 PDF files");
+
+        return;
+    }
+
+    document.getElementById("result")
+    .innerHTML = `
+    ✅ ${files.length} PDF files ready to merge.
+    <br><br>
+    Demo PDF merger tool ready.
+    `;
+
+}
+
+</script>
+
+</body>
+</html>
