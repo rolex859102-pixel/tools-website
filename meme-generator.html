@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Meme Generator Online Free</title>
+
+<meta name="description"
+content="Create funny memes online free. Add top and bottom text to images instantly.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+canvas{
+    margin-top:25px;
+    width:100%;
+    max-width:700px;
+    background:white;
+    border-radius:10px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Meme Generator</h1>
+
+<p>
+Upload image and create memes instantly.
+</p>
+
+<input type="file"
+id="imageInput"
+accept="image/*">
+
+<input type="text"
+id="topText"
+placeholder="Top Text">
+
+<input type="text"
+id="bottomText"
+placeholder="Bottom Text">
+
+<button onclick="generateMeme()">
+Generate Meme
+</button>
+
+<br>
+
+<canvas id="memeCanvas"></canvas>
+
+<br>
+
+<button onclick="downloadMeme()">
+Download Meme
+</button>
+
+</div>
+
+<script>
+
+const canvas =
+document.getElementById("memeCanvas");
+
+const ctx =
+canvas.getContext("2d");
+
+let image =
+new Image();
+
+document.getElementById("imageInput")
+.addEventListener("change", function(e){
+
+    const file =
+    e.target.files[0];
+
+    const reader =
+    new FileReader();
+
+    reader.onload = function(event){
+
+        image.onload = function(){
+
+            canvas.width =
+            image.width;
+
+            canvas.height =
+            image.height;
+
+            ctx.drawImage(
+                image,
+                0,
+                0
+            );
+
+        }
+
+        image.src =
+        event.target.result;
+
+    }
+
+    reader.readAsDataURL(file);
+
+});
+
+function generateMeme(){
+
+    ctx.drawImage(
+        image,
+        0,
+        0
+    );
+
+    const topText =
+    document.getElementById("topText").value;
+
+    const bottomText =
+    document.getElementById("bottomText").value;
+
+    ctx.font =
+    "bold 40px Arial";
+
+    ctx.fillStyle =
+    "white";
+
+    ctx.strokeStyle =
+    "black";
+
+    ctx.lineWidth =
+    3;
+
+    ctx.textAlign =
+    "center";
+
+    ctx.fillText(
+        topText,
+        canvas.width/2,
+        50
+    );
+
+    ctx.strokeText(
+        topText,
+        canvas.width/2,
+        50
+    );
+
+    ctx.fillText(
+        bottomText,
+        canvas.width/2,
+        canvas.height - 30
+    );
+
+    ctx.strokeText(
+        bottomText,
+        canvas.width/2,
+        canvas.height - 30
+    );
+
+}
+
+function downloadMeme(){
+
+    const link =
+    document.createElement("a");
+
+    link.download =
+    "meme.png";
+
+    link.href =
+    canvas.toDataURL();
+
+    link.click();
+
+}
+
+</script>
+
+</body>
+</html>
