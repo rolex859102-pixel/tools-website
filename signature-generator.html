@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Signature Generator Online Free</title>
+
+<meta name="description"
+content="Create stylish digital signatures online free instantly.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.signature-box{
+    margin-top:30px;
+    background:white;
+    color:black;
+    padding:30px;
+    border-radius:12px;
+    min-height:120px;
+}
+
+.signature{
+    font-size:42px;
+    margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Signature Generator</h1>
+
+<p>
+Create stylish signatures instantly online.
+</p>
+
+<input type="text"
+id="name"
+placeholder="Enter your name">
+
+<select id="fontStyle">
+
+<option value="cursive">
+Cursive
+</option>
+
+<option value="serif">
+Serif
+</option>
+
+<option value="monospace">
+Monospace
+</option>
+
+<option value="fantasy">
+Fantasy
+</option>
+
+</select>
+
+<button onclick="generateSignature()">
+Generate Signature
+</button>
+
+<div class="signature-box"
+id="signatureBox">
+
+Your signature will appear here.
+
+</div>
+
+</div>
+
+<script>
+
+function generateSignature(){
+
+    const name =
+    document.getElementById("name").value;
+
+    const font =
+    document.getElementById("fontStyle").value;
+
+    if(name.trim() === ""){
+
+        alert("Please enter your name");
+
+        return;
+    }
+
+    document.getElementById("signatureBox")
+    .innerHTML = `
+
+    <div class="signature"
+    style="font-family:${font}">
+    ${name}
+    </div>
+
+    `;
+
+}
+
+</script>
+
+</body>
+</html>
