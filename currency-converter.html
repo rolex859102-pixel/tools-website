@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Currency Converter Online Free</title>
+
+<meta name="description"
+content="Convert currencies online free. USD, INR, EUR and more currency converter tool.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.result{
+    margin-top:25px;
+    padding:20px;
+    background:#1e293b;
+    border-radius:10px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Currency Converter</h1>
+
+<p>
+Convert currencies instantly online.
+</p>
+
+<input type="number"
+id="amount"
+placeholder="Enter amount">
+
+<select id="currency">
+
+<option value="usd-inr">
+USD to INR
+</option>
+
+<option value="inr-usd">
+INR to USD
+</option>
+
+<option value="eur-usd">
+EUR to USD
+</option>
+
+<option value="usd-eur">
+USD to EUR
+</option>
+
+<option value="gbp-inr">
+GBP to INR
+</option>
+
+<option value="inr-gbp">
+INR to GBP
+</option>
+
+</select>
+
+<button onclick="convertCurrency()">
+Convert
+</button>
+
+<div class="result"
+id="result">
+
+Converted value will appear here.
+
+</div>
+
+</div>
+
+<script>
+
+function convertCurrency(){
+
+    const amount =
+    parseFloat(document.getElementById("amount").value);
+
+    const type =
+    document.getElementById("currency").value;
+
+    if(isNaN(amount)){
+
+        alert("Please enter amount");
+
+        return;
+    }
+
+    let result = "";
+
+    // Demo exchange rates
+
+    if(type === "usd-inr"){
+        result = (amount * 87).toFixed(2) + " INR";
+    }
+
+    else if(type === "inr-usd"){
+        result = (amount / 87).toFixed(2) + " USD";
+    }
+
+    else if(type === "eur-usd"){
+        result = (amount * 1.08).toFixed(2) + " USD";
+    }
+
+    else if(type === "usd-eur"){
+        result = (amount / 1.08).toFixed(2) + " EUR";
+    }
+
+    else if(type === "gbp-inr"){
+        result = (amount * 116).toFixed(2) + " INR";
+    }
+
+    else if(type === "inr-gbp"){
+        result = (amount / 116).toFixed(2) + " GBP";
+    }
+
+    document.getElementById("result")
+    .innerHTML = result;
+
+}
+
+</script>
+
+</body>
+</html>
