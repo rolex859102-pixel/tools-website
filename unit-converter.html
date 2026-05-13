@@ -9,7 +9,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Unit Converter Online Free</title>
 
 <meta name="description"
-content="Convert units online free. Length, weight and measurement converter tool.">
+content="Convert units online free instantly using unit converter tool.">
 
 <style>
 
@@ -31,17 +31,17 @@ body{
 
 input, select{
     width:100%;
-    padding:12px;
+    padding:14px;
     margin-top:15px;
     border:none;
     border-radius:10px;
     outline:none;
-    font-size:15px;
+    font-size:16px;
 }
 
 button{
     margin-top:20px;
-    padding:12px 22px;
+    padding:12px 24px;
     border:none;
     border-radius:10px;
     background:#22c55e;
@@ -52,10 +52,10 @@ button{
 
 .result{
     margin-top:25px;
-    padding:20px;
     background:#1e293b;
+    padding:20px;
     border-radius:10px;
-    font-size:22px;
+    font-size:24px;
     font-weight:bold;
 }
 
@@ -70,7 +70,7 @@ button{
 <h1>Unit Converter</h1>
 
 <p>
-Convert length units instantly online.
+Convert units instantly online.
 </p>
 
 <input type="number"
@@ -95,12 +95,12 @@ KG to Pound
 Pound to KG
 </option>
 
-<option value="meter-feet">
-Meter to Feet
+<option value="km-mile">
+KM to Mile
 </option>
 
-<option value="feet-meter">
-Feet to Meter
+<option value="mile-km">
+Mile to KM
 </option>
 
 </select>
@@ -112,7 +112,7 @@ Convert
 <div class="result"
 id="result">
 
-Result will appear here.
+Converted result will appear here.
 
 </div>
 
@@ -125,7 +125,7 @@ function convertUnit(){
     const value =
     parseFloat(document.getElementById("value").value);
 
-    const type =
+    const conversion =
     document.getElementById("conversion").value;
 
     if(isNaN(value)){
@@ -137,28 +137,34 @@ function convertUnit(){
 
     let result = "";
 
-    if(type === "cm-inch"){
+    if(conversion === "cm-inch"){
+
         result = (value / 2.54).toFixed(2) + " Inch";
     }
 
-    else if(type === "inch-cm"){
+    else if(conversion === "inch-cm"){
+
         result = (value * 2.54).toFixed(2) + " CM";
     }
 
-    else if(type === "kg-pound"){
+    else if(conversion === "kg-pound"){
+
         result = (value * 2.20462).toFixed(2) + " Pound";
     }
 
-    else if(type === "pound-kg"){
+    else if(conversion === "pound-kg"){
+
         result = (value / 2.20462).toFixed(2) + " KG";
     }
 
-    else if(type === "meter-feet"){
-        result = (value * 3.28084).toFixed(2) + " Feet";
+    else if(conversion === "km-mile"){
+
+        result = (value * 0.621371).toFixed(2) + " Mile";
     }
 
-    else if(type === "feet-meter"){
-        result = (value / 3.28084).toFixed(2) + " Meter";
+    else if(conversion === "mile-km"){
+
+        result = (value / 0.621371).toFixed(2) + " KM";
     }
 
     document.getElementById("result")
