@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>AI Image Generator Online Free</title>
+
+<meta name="description"
+content="Generate AI images online free instantly using AI image generator tool.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.image-box{
+    margin-top:30px;
+}
+
+.image-box img{
+    width:100%;
+    border-radius:14px;
+}
+
+.loading{
+    margin-top:20px;
+    font-size:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Image Generator</h1>
+
+<p>
+Generate AI images instantly.
+</p>
+
+<input type="text"
+id="prompt"
+placeholder="Enter image prompt">
+
+<button onclick="generateImage()">
+Generate Image
+</button>
+
+<div class="loading"
+id="loading"></div>
+
+<div class="image-box">
+
+<img
+id="resultImage"
+src="https://picsum.photos/800/500"
+alt="AI Generated Image">
+
+</div>
+
+</div>
+
+<script>
+
+function generateImage(){
+
+    const prompt =
+    document.getElementById("prompt").value;
+
+    if(prompt.trim() === ""){
+
+        alert("Please enter prompt");
+
+        return;
+    }
+
+    document.getElementById("loading")
+    .innerHTML = "⏳ Generating AI Image...";
+
+    setTimeout(()=>{
+
+        document.getElementById("resultImage")
+        .src =
+        "https://picsum.photos/800/500?random=" +
+        new Date().getTime();
+
+        document.getElementById("loading")
+        .innerHTML = "✅ Image Generated";
+
+    }, 2000);
+
+}
+
+</script>
+
+</body>
+</html>
