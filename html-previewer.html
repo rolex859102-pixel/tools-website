@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>HTML Previewer Online</title>
+
+<meta name="description"
+content="Run and preview HTML code online free instantly.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+textarea{
+    width:100%;
+    height:250px;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    resize:none;
+    font-size:15px;
+    margin-top:20px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+iframe{
+    width:100%;
+    height:350px;
+    margin-top:30px;
+    border:none;
+    border-radius:12px;
+    background:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>HTML Previewer</h1>
+
+<p>
+Run and preview HTML code instantly.
+</p>
+
+<textarea
+id="htmlCode"
+placeholder="<h1>Hello World</h1>"></textarea>
+
+<button onclick="runHTML()">
+Run HTML
+</button>
+
+<iframe id="preview"></iframe>
+
+</div>
+
+<script>
+
+function runHTML(){
+
+    const code =
+    document.getElementById("htmlCode").value;
+
+    const iframe =
+    document.getElementById("preview");
+
+    iframe.srcdoc = code;
+
+}
+
+</script>
+
+</body>
+</html>
