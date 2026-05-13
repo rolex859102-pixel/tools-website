@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Expense Tracker Online Free</title>
+
+<meta name="description"
+content="Track daily expenses online free using expense tracker tool.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.list{
+    margin-top:30px;
+    text-align:left;
+}
+
+.item{
+    background:#1e293b;
+    padding:14px;
+    margin-top:10px;
+    border-radius:10px;
+}
+
+.total{
+    margin-top:25px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Expense Tracker</h1>
+
+<p>
+Track your daily expenses easily.
+</p>
+
+<input type="text"
+id="title"
+placeholder="Expense Name">
+
+<input type="number"
+id="amount"
+placeholder="Amount">
+
+<button onclick="addExpense()">
+Add Expense
+</button>
+
+<div class="list"
+id="expenseList"></div>
+
+<div class="total"
+id="totalAmount">
+
+Total: ₹0
+
+</div>
+
+</div>
+
+<script>
+
+let total = 0;
+
+function addExpense(){
+
+    const title =
+    document.getElementById("title").value;
+
+    const amount =
+    parseFloat(document.getElementById("amount").value);
+
+    if(title.trim() === "" || isNaN(amount)){
+
+        alert("Please enter valid details");
+
+        return;
+    }
+
+    total += amount;
+
+    const item =
+    document.createElement("div");
+
+    item.className = "item";
+
+    item.innerHTML = `
+    ${title} - ₹${amount}
+    `;
+
+    document.getElementById("expenseList")
+    .appendChild(item);
+
+    document.getElementById("totalAmount")
+    .innerHTML = `
+    Total: ₹${total}
+    `;
+
+    document.getElementById("title").value = "";
+    document.getElementById("amount").value = "";
+
+}
+
+</script>
+
+</body>
+</html>
