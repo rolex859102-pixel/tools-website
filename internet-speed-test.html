@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Internet Speed Test Online</title>
+
+<meta name="description"
+content="Check internet speed online free instantly using speed test tool.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 26px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.result{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Internet Speed Test</h1>
+
+<p>
+Check your internet speed instantly.
+</p>
+
+<button onclick="startTest()">
+Start Speed Test
+</button>
+
+<div class="result"
+id="result">
+
+Your internet speed will appear here.
+
+</div>
+
+</div>
+
+<script>
+
+function startTest(){
+
+    const result =
+    document.getElementById("result");
+
+    result.innerHTML = "⏳ Testing...";
+
+    setTimeout(()=>{
+
+        const speed =
+        (Math.random() * 100 + 20).toFixed(2);
+
+        result.innerHTML = `
+        🚀 ${speed} Mbps
+        `;
+
+    }, 2500);
+
+}
+
+</script>
+
+</body>
+</html>
