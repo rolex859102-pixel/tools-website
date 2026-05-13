@@ -9,7 +9,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Meme Generator Online Free</title>
 
 <meta name="description"
-content="Create funny memes online free. Add top and bottom text to images instantly.">
+content="Create funny memes online free instantly using meme generator tool.">
 
 <style>
 
@@ -31,31 +31,53 @@ body{
 
 input{
     width:100%;
-    padding:12px;
-    margin-top:12px;
+    padding:14px;
+    margin-top:15px;
     border:none;
     border-radius:10px;
     outline:none;
-    font-size:15px;
-}
-
-canvas{
-    margin-top:25px;
-    width:100%;
-    max-width:700px;
-    background:white;
-    border-radius:10px;
+    font-size:16px;
 }
 
 button{
     margin-top:20px;
-    padding:12px 22px;
+    padding:12px 24px;
     border:none;
     border-radius:10px;
     background:#22c55e;
     color:black;
     font-weight:bold;
     cursor:pointer;
+}
+
+.meme-box{
+    position:relative;
+    margin-top:30px;
+}
+
+.meme-box img{
+    width:100%;
+    border-radius:12px;
+}
+
+.top-text,
+.bottom-text{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    color:white;
+    font-size:32px;
+    font-weight:bold;
+    text-shadow:2px 2px 5px black;
+    width:90%;
+}
+
+.top-text{
+    top:20px;
+}
+
+.bottom-text{
+    bottom:20px;
 }
 
 </style>
@@ -69,12 +91,8 @@ button{
 <h1>Meme Generator</h1>
 
 <p>
-Upload image and create memes instantly.
+Create funny memes instantly.
 </p>
-
-<input type="file"
-id="imageInput"
-accept="image/*">
 
 <input type="text"
 id="topText"
@@ -88,132 +106,32 @@ placeholder="Bottom Text">
 Generate Meme
 </button>
 
-<br>
+<div class="meme-box">
 
-<canvas id="memeCanvas"></canvas>
+<img src="https://i.imgflip.com/1bij.jpg"
+id="memeImage">
 
-<br>
+<div class="top-text"
+id="topOutput"></div>
 
-<button onclick="downloadMeme()">
-Download Meme
-</button>
+<div class="bottom-text"
+id="bottomOutput"></div>
+
+</div>
 
 </div>
 
 <script>
 
-const canvas =
-document.getElementById("memeCanvas");
-
-const ctx =
-canvas.getContext("2d");
-
-let image =
-new Image();
-
-document.getElementById("imageInput")
-.addEventListener("change", function(e){
-
-    const file =
-    e.target.files[0];
-
-    const reader =
-    new FileReader();
-
-    reader.onload = function(event){
-
-        image.onload = function(){
-
-            canvas.width =
-            image.width;
-
-            canvas.height =
-            image.height;
-
-            ctx.drawImage(
-                image,
-                0,
-                0
-            );
-
-        }
-
-        image.src =
-        event.target.result;
-
-    }
-
-    reader.readAsDataURL(file);
-
-});
-
 function generateMeme(){
 
-    ctx.drawImage(
-        image,
-        0,
-        0
-    );
-
-    const topText =
+    document.getElementById("topOutput")
+    .innerHTML =
     document.getElementById("topText").value;
 
-    const bottomText =
+    document.getElementById("bottomOutput")
+    .innerHTML =
     document.getElementById("bottomText").value;
-
-    ctx.font =
-    "bold 40px Arial";
-
-    ctx.fillStyle =
-    "white";
-
-    ctx.strokeStyle =
-    "black";
-
-    ctx.lineWidth =
-    3;
-
-    ctx.textAlign =
-    "center";
-
-    ctx.fillText(
-        topText,
-        canvas.width/2,
-        50
-    );
-
-    ctx.strokeText(
-        topText,
-        canvas.width/2,
-        50
-    );
-
-    ctx.fillText(
-        bottomText,
-        canvas.width/2,
-        canvas.height - 30
-    );
-
-    ctx.strokeText(
-        bottomText,
-        canvas.width/2,
-        canvas.height - 30
-    );
-
-}
-
-function downloadMeme(){
-
-    const link =
-    document.createElement("a");
-
-    link.download =
-    "meme.png";
-
-    link.href =
-    canvas.toDataURL();
-
-    link.click();
 
 }
 
