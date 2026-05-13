@@ -17,12 +17,12 @@ body{
     background:#020617;
     color:white;
     font-family:Arial;
-    text-align:center;
     padding:20px;
+    text-align:center;
 }
 
 .container{
-    max-width:700px;
+    max-width:750px;
     margin:auto;
     background:#0f172a;
     padding:30px;
@@ -31,17 +31,17 @@ body{
 
 input{
     width:100%;
-    padding:12px;
+    padding:14px;
     margin-top:15px;
     border:none;
     border-radius:10px;
     outline:none;
-    font-size:15px;
+    font-size:16px;
 }
 
 button{
     margin-top:20px;
-    padding:12px 22px;
+    padding:12px 24px;
     border:none;
     border-radius:10px;
     background:#22c55e;
@@ -53,15 +53,13 @@ button{
 .barcode-box{
     margin-top:30px;
     background:white;
-    padding:20px;
-    border-radius:10px;
+    padding:25px;
+    border-radius:12px;
 }
 
-.bar{
-    display:inline-block;
-    width:4px;
-    margin-right:1px;
-    background:black;
+svg{
+    width:100%;
+    max-width:500px;
 }
 
 </style>
@@ -75,7 +73,7 @@ button{
 <h1>Barcode Generator</h1>
 
 <p>
-Generate barcode instantly online free.
+Generate barcode instantly online.
 </p>
 
 <input type="text"
@@ -86,14 +84,15 @@ placeholder="Enter barcode text">
 Generate Barcode
 </button>
 
-<div class="barcode-box"
-id="barcodeBox">
+<div class="barcode-box">
 
-Barcode preview will appear here.
+<svg id="barcode"></svg>
+
+</div>
 
 </div>
 
-</div>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 
 <script>
 
@@ -104,31 +103,18 @@ function generateBarcode(){
 
     if(text.trim() === ""){
 
-        alert("Please enter barcode text");
+        alert("Please enter text");
 
         return;
     }
 
-    let bars = "";
-
-    for(let i=0; i<80; i++){
-
-        let height =
-        Math.floor(Math.random()*80)+40;
-
-        bars += `
-        <div class="bar"
-        style="height:${height}px"></div>
-        `;
-    }
-
-    document.getElementById("barcodeBox")
-    .innerHTML = `
-    <div>${bars}</div>
-    <p style="color:black;margin-top:15px;">
-    ${text}
-    </p>
-    `;
+    JsBarcode("#barcode", text, {
+        format: "CODE128",
+        lineColor: "#000",
+        width: 2,
+        height: 100,
+        displayValue: true
+    });
 
 }
 
