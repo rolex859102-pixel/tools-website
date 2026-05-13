@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Online Notes App Free</title>
+
+<meta name="description"
+content="Write and save notes online free instantly using notes app.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+textarea{
+    width:100%;
+    height:300px;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    outline:none;
+    resize:none;
+    font-size:16px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.message{
+    margin-top:20px;
+    font-size:18px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Online Notes App</h1>
+
+<p>
+Write and save notes instantly.
+</p>
+
+<textarea
+id="notes"
+placeholder="Write your notes here..."></textarea>
+
+<button onclick="saveNotes()">
+Save Notes
+</button>
+
+<div class="message"
+id="message"></div>
+
+</div>
+
+<script>
+
+window.onload = function(){
+
+    const savedNotes =
+    localStorage.getItem("notesData");
+
+    if(savedNotes){
+
+        document.getElementById("notes").value =
+        savedNotes;
+    }
+
+}
+
+function saveNotes(){
+
+    const notes =
+    document.getElementById("notes").value;
+
+    localStorage.setItem("notesData", notes);
+
+    document.getElementById("message")
+    .innerHTML = "✅ Notes Saved Successfully";
+
+}
+
+</script>
+
+</body>
+</html>
