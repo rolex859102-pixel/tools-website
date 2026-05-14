@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>XML Formatter Online</title>
+
+<meta name="description"
+content="Format and beautify XML online free instantly.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:950px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+textarea{
+    width:100%;
+    height:220px;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    resize:none;
+    font-size:15px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    margin-right:10px;
+}
+
+.result{
+    margin-top:30px;
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    text-align:left;
+    white-space:pre-wrap;
+    overflow:auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>XML Formatter</h1>
+
+<p>
+Beautify and format XML instantly.
+</p>
+
+<textarea
+id="xmlInput"
+placeholder="<note><title>Hello</title></note>"></textarea>
+
+<button onclick="formatXML()">
+Format XML
+</button>
+
+<button onclick="copyXML()">
+Copy
+</button>
+
+<div class="result"
+id="result">
+
+Formatted XML will appear here.
+
+</div>
+
+</div>
+
+<script>
+
+function formatXML(){
+
+    let xml =
+    document.getElementById("xmlInput").value;
+
+    if(xml.trim() === ""){
+
+        alert("Please enter XML");
+
+        return;
+    }
+
+    try{
+
+        let formatted = "";
+        let indent = 0;
+
+        xml = xml.replace(/(>)(<)(\/*)/g, "$1\n$2$3");
+
+        xml.split("\n").forEach(node => {
+
+            let padding = "";
+
+            if(node.match(/^<\/\w/)){
+                indent--;
+            }
+
+            for(let i = 0; i < indent; i++){
+                padding += "  ";
+            }
+
+            formatted += padding + node + "\n";
+
+            if(node.match(/^<\w([^>]*[^\/])?>.*$/)){
+                indent++;
+            }
+
+        });
+
+        document.getElementById("result")
+        .innerText = formatted;
+
+    }
+
+    catch(error){
+
+        document.getElementById("result")
+        .innerText =
+        "Invalid XML";
+
+    }
+
+}
+
+function copyXML(){
+
+    const text =
+    document.getElementById("result")
+    .innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("XML copied");
+
+}
+
+</script>
+
+</body>
+</html>
