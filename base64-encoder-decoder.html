@@ -1,49 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Base64 Encoder Decoder</title>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Base64 Encoder Decoder Online</title>
+
+<meta name="description"
+content="Encode and decode Base64 online free instantly.">
 
 <style>
 
 body{
-font-family:Arial;
-text-align:center;
-background:#f4f4f4;
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
 }
 
 .container{
-width:75%;
-margin:auto;
-margin-top:40px;
+    max-width:900px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
 }
 
 textarea{
-width:100%;
-height:150px;
-padding:10px;
-font-size:16px;
+    width:100%;
+    height:220px;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    resize:none;
+    font-size:15px;
 }
 
 button{
-padding:10px 20px;
-margin:10px;
-background:#673ab7;
-color:white;
-border:none;
-cursor:pointer;
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    margin-right:10px;
 }
 
-#result{
-margin-top:20px;
-background:white;
-padding:15px;
-font-size:18px;
-word-wrap:break-word;
+.result{
+    margin-top:30px;
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    text-align:left;
+    white-space:pre-wrap;
+    word-break:break-word;
 }
 
 </style>
 
-<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -52,53 +73,76 @@ word-wrap:break-word;
 
 <h1>Base64 Encoder / Decoder</h1>
 
-<textarea id="inputText" placeholder="Enter text or Base64"></textarea>
+<p>
+Encode and decode Base64 instantly.
+</p>
 
-<br>
+<textarea
+id="inputText"
+placeholder="Enter text here..."></textarea>
 
-<button onclick="encodeBase64()">Encode</button>
-<button onclick="decodeBase64()">Decode</button>
+<button onclick="encodeText()">
+Encode
+</button>
 
-<div id="result"></div>
+<button onclick="decodeText()">
+Decode
+</button>
+
+<div class="result"
+id="result">
+
+Result will appear here.
+
+</div>
 
 </div>
 
 <script>
 
-function encodeBase64(){
+function encodeText(){
 
-let text=document.getElementById("inputText").value;
+    const text =
+    document.getElementById("inputText").value;
 
-let encoded=btoa(text);
+    try{
 
-document.getElementById("result").innerText=encoded;
+        const encoded =
+        btoa(text);
 
-/* auto input change */
-document.getElementById("inputText").value=encoded;
+        document.getElementById("result")
+        .innerText = encoded;
 
-}
+    }
 
-function decodeBase64(){
+    catch(error){
 
-let text=document.getElementById("inputText").value;
+        alert("Invalid text");
 
-try{
-
-let decoded=atob(text);
-
-document.getElementById("result").innerText=decoded;
-
-/* auto input change */
-
-document.getElementById("inputText").value=decoded;
+    }
 
 }
 
-catch{
+function decodeText(){
 
-document.getElementById("result").innerText="Invalid Base64";
+    const text =
+    document.getElementById("inputText").value;
 
-}
+    try{
+
+        const decoded =
+        atob(text);
+
+        document.getElementById("result")
+        .innerText = decoded;
+
+    }
+
+    catch(error){
+
+        alert("Invalid Base64");
+
+    }
 
 }
 
