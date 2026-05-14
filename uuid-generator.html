@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>UUID Generator Online</title>
+
+<meta name="description"
+content="Generate random UUID online free instantly.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.result{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    font-size:22px;
+    word-break:break-all;
+}
+
+.copy-btn{
+    margin-top:15px;
+    background:#38bdf8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>UUID Generator</h1>
+
+<p>
+Generate random UUID instantly.
+</p>
+
+<button onclick="generateUUID()">
+Generate UUID
+</button>
+
+<div class="result"
+id="result">
+
+Your UUID will appear here.
+
+</div>
+
+<button class="copy-btn"
+onclick="copyUUID()">
+Copy UUID
+</button>
+
+</div>
+
+<script>
+
+function generateUUID(){
+
+    const uuid =
+    crypto.randomUUID();
+
+    document.getElementById("result")
+    .innerText = uuid;
+
+}
+
+function copyUUID(){
+
+    const text =
+    document.getElementById("result")
+    .innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("UUID copied");
+
+}
+
+</script>
+
+</body>
+</html>
