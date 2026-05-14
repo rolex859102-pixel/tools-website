@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>JSON Compare Tool</title>
+
+<meta name="description"
+content="Compare JSON online free instantly using JSON compare tool.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+.textareas{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+textarea{
+    flex:1;
+    min-width:300px;
+    height:260px;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    resize:none;
+    font-size:15px;
+}
+
+button{
+    margin-top:25px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.result{
+    margin-top:30px;
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    text-align:left;
+    white-space:pre-wrap;
+    overflow:auto;
+}
+
+.same{
+    color:#22c55e;
+    font-weight:bold;
+}
+
+.diff{
+    color:#ef4444;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>JSON Compare Tool</h1>
+
+<p>
+Compare two JSON objects instantly.
+</p>
+
+<div class="textareas">
+
+<textarea
+id="json1"
+placeholder='{"name":"John"}'></textarea>
+
+<textarea
+id="json2"
+placeholder='{"name":"Alex"}'></textarea>
+
+</div>
+
+<button onclick="compareJSON()">
+Compare JSON
+</button>
+
+<div class="result"
+id="result">
+
+Comparison result will appear here.
+
+</div>
+
+</div>
+
+<script>
+
+function compareJSON(){
+
+    const json1 =
+    document.getElementById("json1").value;
+
+    const json2 =
+    document.getElementById("json2").value;
+
+    if(json1.trim() === "" || json2.trim() === ""){
+
+        alert("Please enter both JSON");
+
+        return;
+    }
+
+    try{
+
+        const obj1 =
+        JSON.stringify(JSON.parse(json1), null, 2);
+
+        const obj2 =
+        JSON.stringify(JSON.parse(json2), null, 2);
+
+        if(obj1 === obj2){
+
+            document.getElementById("result")
+            .innerHTML =
+            "<span class='same'>✅ JSON is identical</span>";
+
+        }
+
+        else{
+
+            document.getElementById("result")
+            .innerHTML =
+            "<span class='diff'>❌ JSON is different</span>\n\n" +
+            "JSON 1:\n" + obj1 +
+            "\n\nJSON 2:\n" + obj2;
+
+        }
+
+    }
+
+    catch(error){
+
+        document.getElementById("result")
+        .innerHTML =
+        "Invalid JSON";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
