@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Color Picker Tool Online</title>
+
+<meta name="description"
+content="Pick colors online free instantly using color picker tool.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input[type="color"]{
+    width:180px;
+    height:180px;
+    border:none;
+    background:none;
+    cursor:pointer;
+    margin-top:20px;
+}
+
+.color-box{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+}
+
+.code{
+    margin-top:15px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Color Picker Tool</h1>
+
+<p>
+Pick HEX and RGB colors instantly.
+</p>
+
+<input type="color"
+id="colorPicker"
+value="#22c55e"
+oninput="updateColor()">
+
+<div class="color-box"
+id="colorBox">
+
+<div class="code"
+id="hexCode">
+HEX: #22c55e
+</div>
+
+<div class="code"
+id="rgbCode">
+RGB: rgb(34, 197, 94)
+</div>
+
+<button onclick="copyHEX()">
+Copy HEX
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function updateColor(){
+
+    const color =
+    document.getElementById("colorPicker").value;
+
+    document.getElementById("colorBox")
+    .style.background = color;
+
+    document.getElementById("hexCode")
+    .innerHTML = "HEX: " + color;
+
+    const r =
+    parseInt(color.substr(1,2),16);
+
+    const g =
+    parseInt(color.substr(3,2),16);
+
+    const b =
+    parseInt(color.substr(5,2),16);
+
+    document.getElementById("rgbCode")
+    .innerHTML =
+    `RGB: rgb(${r}, ${g}, ${b})`;
+
+}
+
+function copyHEX(){
+
+    const hex =
+    document.getElementById("hexCode")
+    .innerText.replace("HEX: ","");
+
+    navigator.clipboard.writeText(hex);
+
+    alert("HEX copied");
+
+}
+
+</script>
+
+</body>
+</html>
