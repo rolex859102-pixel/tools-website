@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Regex Tester Online</title>
+
+<meta name="description"
+content="Test regular expressions online free instantly.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:950px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+textarea{
+    height:220px;
+    resize:none;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.result{
+    margin-top:30px;
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    text-align:left;
+    white-space:pre-wrap;
+    overflow:auto;
+}
+
+.match{
+    color:#22c55e;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Regex Tester</h1>
+
+<p>
+Test regular expressions instantly.
+</p>
+
+<input
+type="text"
+id="regexInput"
+placeholder="Enter regex pattern">
+
+<textarea
+id="testText"
+placeholder="Enter test text here..."></textarea>
+
+<button onclick="testRegex()">
+Test Regex
+</button>
+
+<div class="result"
+id="result">
+
+Regex result will appear here.
+
+</div>
+
+</div>
+
+<script>
+
+function testRegex(){
+
+    const pattern =
+    document.getElementById("regexInput").value;
+
+    const text =
+    document.getElementById("testText").value;
+
+    if(pattern.trim() === ""){
+
+        alert("Please enter regex pattern");
+
+        return;
+    }
+
+    try{
+
+        const regex =
+        new RegExp(pattern, "g");
+
+        const matches =
+        text.match(regex);
+
+        if(matches){
+
+            document.getElementById("result")
+            .innerHTML =
+            "<span class='match'>Matches Found:</span>\n\n" +
+            matches.join("\n");
+
+        }
+
+        else{
+
+            document.getElementById("result")
+            .innerText =
+            "No matches found.";
+
+        }
+
+    }
+
+    catch(error){
+
+        document.getElementById("result")
+        .innerText =
+        "Invalid Regex Pattern";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
