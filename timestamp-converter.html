@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Timestamp Converter Online</title>
+
+<meta name="description"
+content="Convert Unix timestamp online free instantly.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    margin-right:10px;
+}
+
+.result{
+    margin-top:30px;
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    text-align:left;
+    white-space:pre-wrap;
+    overflow:auto;
+    font-size:18px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Timestamp Converter</h1>
+
+<p>
+Convert Unix timestamps instantly.
+</p>
+
+<input
+type="text"
+id="timestampInput"
+placeholder="Enter Unix Timestamp">
+
+<button onclick="convertTimestamp()">
+Convert Timestamp
+</button>
+
+<button onclick="getCurrentTimestamp()">
+Current Timestamp
+</button>
+
+<div class="result"
+id="result">
+
+Converted date will appear here.
+
+</div>
+
+</div>
+
+<script>
+
+function convertTimestamp(){
+
+    const timestamp =
+    document.getElementById("timestampInput").value;
+
+    if(timestamp.trim() === ""){
+
+        alert("Please enter timestamp");
+
+        return;
+    }
+
+    try{
+
+        const date =
+        new Date(timestamp * 1000);
+
+        document.getElementById("result")
+        .innerHTML =
+        "📅 " + date.toString();
+
+    }
+
+    catch(error){
+
+        document.getElementById("result")
+        .innerHTML =
+        "Invalid Timestamp";
+
+    }
+
+}
+
+function getCurrentTimestamp(){
+
+    const current =
+    Math.floor(Date.now() / 1000);
+
+    document.getElementById("timestampInput")
+    .value = current;
+
+    document.getElementById("result")
+    .innerHTML =
+    "🕒 Current Timestamp: " + current;
+
+}
+
+</script>
+
+</body>
+</html>
