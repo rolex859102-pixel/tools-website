@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Markdown Editor Online</title>
+
+<meta name="description"
+content="Write and preview Markdown online free instantly.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1,p{
+    text-align:center;
+}
+
+.editor{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+textarea{
+    flex:1;
+    min-width:300px;
+    height:450px;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    resize:none;
+    font-size:15px;
+}
+
+.preview{
+    flex:1;
+    min-width:300px;
+    background:white;
+    color:black;
+    padding:20px;
+    border-radius:10px;
+    min-height:450px;
+    overflow:auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Markdown Editor</h1>
+
+<p>
+Write and preview Markdown instantly.
+</p>
+
+<div class="editor">
+
+<textarea
+id="markdownInput"
+placeholder="# Hello World"></textarea>
+
+<div class="preview"
+id="preview">
+
+Markdown preview will appear here.
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const input =
+document.getElementById("markdownInput");
+
+input.addEventListener("input", updatePreview);
+
+function updatePreview(){
+
+    let text = input.value;
+
+    text = text
+    .replace(/^# (.*$)/gim, "<h1>$1</h1>")
+    .replace(/^## (.*$)/gim, "<h2>$1</h2>")
+    .replace(/^### (.*$)/gim, "<h3>$1</h3>")
+    .replace(/\*\*(.*)\*\*/gim, "<b>$1</b>")
+    .replace(/\*(.*)\*/gim, "<i>$1</i>")
+    .replace(/\n$/gim, "<br>");
+
+    document.getElementById("preview")
+    .innerHTML = text;
+
+}
+
+</script>
+
+</body>
+</html>
