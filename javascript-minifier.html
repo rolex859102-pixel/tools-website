@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>JavaScript Minifier</title>
+
+<meta name="description"
+content="Minify and compress JavaScript code instantly online free.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    text-align:center;
+}
+
+textarea{
+    width:100%;
+    height:220px;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+    resize:none;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+button{
+    flex:1;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.minify{
+    background:#3b82f6;
+    color:white;
+}
+
+.copy{
+    background:#22c55e;
+    color:white;
+}
+
+.stats{
+    margin-top:20px;
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    line-height:1.8;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+    text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>JavaScript Minifier</h1>
+
+<p style="text-align:center;">
+Compress JavaScript code instantly.
+</p>
+
+<textarea
+id="input"
+placeholder="Paste JavaScript code here..."></textarea>
+
+<div class="buttons">
+
+<button class="minify"
+onclick="minifyJS()">
+Minify JavaScript
+</button>
+
+<button class="copy"
+onclick="copyJS()">
+Copy Output
+</button>
+
+</div>
+
+<textarea
+id="output"
+placeholder="Minified JavaScript will appear here..."></textarea>
+
+<div class="stats"
+id="stats">
+Compression statistics will appear here...
+</div>
+
+<div class="note">
+Useful for website performance & SEO optimization.
+</div>
+
+</div>
+
+<script>
+
+function minifyJS(){
+
+    let js =
+    document.getElementById("input").value;
+
+    let originalSize =
+    js.length;
+
+    let minified =
+    js
+
+    .replace(/\/\/.*$/gm,'')
+
+    .replace(/\/\*[\s\S]*?\*\//g,'')
+
+    .replace(/\s+/g,' ')
+
+    .replace(/\s*([{}();,:+\-=<>])\s*/g,'$1')
+
+    .trim();
+
+    let minifiedSize =
+    minified.length;
+
+    let saved =
+    originalSize - minifiedSize;
+
+    document.getElementById("output")
+    .value = minified;
+
+    document.getElementById("stats")
+    .innerHTML =
+
+    "Original Size: " +
+    originalSize + " characters<br>" +
+
+    "Minified Size: " +
+    minifiedSize + " characters<br>" +
+
+    "Saved: " +
+    saved + " characters";
+
+}
+
+function copyJS(){
+
+    const output =
+    document.getElementById("output");
+
+    output.select();
+
+    document.execCommand("copy");
+
+    alert("Minified JavaScript copied!");
+
+}
+
+</script>
+
+</body>
+</html>
