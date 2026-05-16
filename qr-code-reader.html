@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>QR Code Reader</title>
+
+<meta name="description"
+content="Scan and read QR codes online from images instantly.">
+
+<script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:750px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+input{
+    margin-top:20px;
+    padding:12px;
+    background:#1e293b;
+    color:white;
+    border:none;
+    border-radius:10px;
+    width:100%;
+}
+
+canvas{
+    margin-top:20px;
+    max-width:100%;
+    border-radius:10px;
+}
+
+.result{
+    margin-top:25px;
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    word-break:break-word;
+    font-size:18px;
+}
+
+.copy{
+    margin-top:20px;
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>QR Code Reader</h1>
+
+<p>
+Upload QR image to scan instantly.
+</p>
+
+<input
+type="file"
+id="fileInput"
+accept="image/*">
+
+<canvas id="canvas"></canvas>
+
+<div class="result"
+id="result">
+QR result will appear here...
+</div>
+
+<button class="copy"
+onclick="copyResult()">
+Copy Result
+</button>
+
+</div>
+
+<script>
+
+const fileInput =
+document.getElementById("fileInput");
+
+const canvas =
+document.getElementById("canvas");
+
+const ctx =
+canvas.getContext("2d");
+
+fileInput.addEventListener("change", function(){
+
+    const file = fileInput.files[0];
+
+    if(!file) return;
+
+    const img = new Image();
+
+    img.onload = function(){
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        ctx.drawImage(img,0,0);
+
+        const imageData =
+        ctx.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        const code =
+        jsQR(
+            imageData.data,
+            imageData.width,
+            imageData.height
+        );
+
+        if(code){
+
+            document.getElementById("result")
+            .innerText = code.data;
+
+        }
+
+        else{
+
+            document.getElementById("result")
+            .innerText =
+            "No QR code detected.";
+
+        }
+
+    };
+
+    img.src =
+    URL.createObjectURL(file);
+
+});
+
+function copyResult(){
+
+    const text =
+    document.getElementById("result").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Result copied!");
+
+}
+
+</script>
+
+</body>
+</html>
