@@ -6,10 +6,10 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>SQL Formatter Online</title>
+<title>SQL Formatter</title>
 
 <meta name="description"
-content="Format SQL queries online free instantly.">
+content="Format and beautify SQL queries instantly online free.">
 
 <style>
 
@@ -18,15 +18,18 @@ body{
     color:white;
     font-family:Arial;
     padding:20px;
-    text-align:center;
 }
 
 .container{
-    max-width:950px;
+    max-width:900px;
     margin:auto;
     background:#0f172a;
     padding:30px;
     border-radius:14px;
+}
+
+h1{
+    text-align:center;
 }
 
 textarea{
@@ -37,29 +40,41 @@ textarea{
     border:none;
     border-radius:10px;
     outline:none;
-    resize:none;
     font-size:15px;
+    resize:none;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:wrap;
 }
 
 button{
-    margin-top:20px;
-    padding:12px 24px;
+    flex:1;
+    padding:14px;
     border:none;
     border-radius:10px;
-    background:#22c55e;
-    color:black;
-    font-weight:bold;
+    font-size:16px;
     cursor:pointer;
+    font-weight:bold;
 }
 
-.result{
-    margin-top:30px;
-    background:#1e293b;
-    padding:20px;
-    border-radius:12px;
-    text-align:left;
-    white-space:pre-wrap;
-    overflow:auto;
+.format{
+    background:#3b82f6;
+    color:white;
+}
+
+.copy{
+    background:#22c55e;
+    color:white;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+    text-align:center;
 }
 
 </style>
@@ -72,23 +87,34 @@ button{
 
 <h1>SQL Formatter</h1>
 
-<p>
-Beautify and format SQL queries instantly.
+<p style="text-align:center;">
+Beautify SQL queries instantly.
 </p>
 
 <textarea
-id="sqlInput"
-placeholder="SELECT * FROM users WHERE age > 20"></textarea>
+id="input"
+placeholder="Paste SQL query here..."></textarea>
 
-<button onclick="formatSQL()">
+<div class="buttons">
+
+<button class="format"
+onclick="formatSQL()">
 Format SQL
 </button>
 
-<div class="result"
-id="result">
+<button class="copy"
+onclick="copySQL()">
+Copy Output
+</button>
 
-Formatted SQL will appear here.
+</div>
 
+<textarea
+id="output"
+placeholder="Formatted SQL will appear here..."></textarea>
+
+<div class="note">
+Useful for developers, debugging & database projects.
 </div>
 
 </div>
@@ -98,44 +124,55 @@ Formatted SQL will appear here.
 function formatSQL(){
 
     let sql =
-    document.getElementById("sqlInput").value;
-
-    if(sql.trim() === ""){
-
-        alert("Please enter SQL query");
-
-        return;
-    }
+    document.getElementById("input").value;
 
     const keywords = [
-        "SELECT",
-        "FROM",
-        "WHERE",
-        "ORDER BY",
-        "GROUP BY",
-        "INSERT INTO",
-        "VALUES",
-        "UPDATE",
-        "SET",
-        "DELETE",
-        "INNER JOIN",
-        "LEFT JOIN",
-        "RIGHT JOIN",
-        "LIMIT"
+    "SELECT",
+    "FROM",
+    "WHERE",
+    "ORDER BY",
+    "GROUP BY",
+    "HAVING",
+    "INSERT INTO",
+    "VALUES",
+    "UPDATE",
+    "SET",
+    "DELETE",
+    "INNER JOIN",
+    "LEFT JOIN",
+    "RIGHT JOIN",
+    "LIMIT"
     ];
 
     keywords.forEach(keyword => {
 
         const regex =
-        new RegExp(keyword, "gi");
+        new RegExp(keyword,"gi");
 
         sql =
-        sql.replace(regex, "\n" + keyword);
+        sql.replace(regex,"\n" + keyword);
 
     });
 
-    document.getElementById("result")
-    .innerText = sql.trim();
+    sql =
+    sql.replace(/\n+/g,"\n")
+    .trim();
+
+    document.getElementById("output")
+    .value = sql;
+
+}
+
+function copySQL(){
+
+    const output =
+    document.getElementById("output");
+
+    output.select();
+
+    document.execCommand("copy");
+
+    alert("Formatted SQL copied!");
 
 }
 
