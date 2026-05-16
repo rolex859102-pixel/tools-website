@@ -1,47 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Keyword Density Checker</title>
 
+<meta name="description"
+content="Check keyword density and frequency instantly online free.">
+
 <style>
+
 body{
-font-family:Arial;
-text-align:center;
-background:#f4f4f4;
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
 }
 
 .container{
-width:75%;
-margin:auto;
-margin-top:40px;
+    max-width:900px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    text-align:center;
 }
 
 textarea{
-width:100%;
-height:200px;
-padding:10px;
-font-size:16px;
+    width:100%;
+    height:250px;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+    resize:none;
 }
 
 button{
-padding:10px 20px;
-background:#4CAF50;
-color:white;
-border:none;
-margin-top:10px;
-cursor:pointer;
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    background:#3b82f6;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-#result{
-margin-top:20px;
-background:white;
-padding:15px;
-text-align:left;
-font-size:18px;
+.results{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th, td{
+    padding:12px;
+    border-bottom:1px solid #334155;
+    text-align:left;
+}
+
+th{
+    background:#334155;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+    text-align:center;
 }
 
 </style>
-<link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
@@ -50,13 +96,26 @@ font-size:18px;
 
 <h1>Keyword Density Checker</h1>
 
-<textarea id="textInput" placeholder="Paste your article or text"></textarea>
+<p style="text-align:center;">
+Analyze keyword frequency & density instantly.
+</p>
 
-<br>
+<textarea
+id="text"
+placeholder="Paste your article or content here..."></textarea>
 
-<button onclick="checkDensity()">Check Density</button>
+<button onclick="checkDensity()">
+Check Keyword Density
+</button>
 
-<div id="result"></div>
+<div class="results"
+id="results">
+Results will appear here...
+</div>
+
+<div class="note">
+Useful for SEO optimization & content analysis.
+</div>
 
 </div>
 
@@ -64,33 +123,64 @@ font-size:18px;
 
 function checkDensity(){
 
-let text=document.getElementById("textInput").value.toLowerCase();
+    let text =
+    document.getElementById("text")
+    .value
+    .toLowerCase();
 
-let words=text.match(/\b\w+\b/g);
+    text =
+    text.replace(/[^a-z0-9\s]/g,'');
 
-let totalWords=words.length;
+    let words =
+    text.split(/\s+/)
+    .filter(word => word.length > 2);
 
-let frequency={};
+    let totalWords =
+    words.length;
 
-words.forEach(function(word){
+    let frequency = {};
 
-frequency[word]=(frequency[word]||0)+1;
+    words.forEach(word => {
 
-});
+        frequency[word] =
+        (frequency[word] || 0) + 1;
 
-let result="Total Words: "+totalWords+"<br><br>";
+    });
 
-for(let word in frequency){
+    let sorted =
+    Object.entries(frequency)
+    .sort((a,b)=>b[1]-a[1]);
 
-let count=frequency[word];
+    let html =
 
-let density=((count/totalWords)*100).toFixed(2);
+`<table>
 
-result+=word+" : "+count+" times ("+density+"%)<br>";
+<tr>
+<th>Keyword</th>
+<th>Count</th>
+<th>Density</th>
+</tr>`;
 
-}
+    sorted.slice(0,20).forEach(item => {
 
-document.getElementById("result").innerHTML=result;
+        let density =
+        ((item[1]/totalWords)*100)
+        .toFixed(2);
+
+        html +=
+
+`<tr>
+<td>${item[0]}</td>
+<td>${item[1]}</td>
+<td>${density}%</td>
+</tr>`;
+
+    });
+
+    html += `</table>`;
+
+    document.getElementById("results")
+    .innerHTML = html;
 
 }
 
