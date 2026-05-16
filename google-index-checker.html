@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Google Index Checker</title>
+
+<meta name="description"
+content="Check Google indexing status instantly online free.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+    text-align:center;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    background:#3b82f6;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.result{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    line-height:2;
+    font-size:18px;
+    word-break:break-word;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+}
+
+a{
+    color:#38bdf8;
+    text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Google Index Checker</h1>
+
+<p>
+Check if your page is indexed on Google.
+</p>
+
+<input
+type="url"
+id="url"
+placeholder="Enter website URL">
+
+<button onclick="checkIndex()">
+Check Index Status
+</button>
+
+<div class="result"
+id="result">
+Index status will appear here...
+</div>
+
+<div class="note">
+This tool performs a Google site search.
+</div>
+
+</div>
+
+<script>
+
+function checkIndex(){
+
+    let url =
+    document.getElementById("url").value;
+
+    if(url.trim() === ""){
+
+        alert("Please enter URL");
+        return;
+
+    }
+
+    let cleanUrl =
+    url.replace(/^https?:\/\//,'');
+
+    let searchUrl =
+    "https://www.google.com/search?q=site:" +
+    cleanUrl;
+
+    document.getElementById("result")
+    .innerHTML =
+
+    "Click below to check indexing status on Google:<br><br>" +
+
+    '<a href="' + searchUrl +
+    '" target="_blank">' +
+
+    searchUrl +
+
+    '</a>';
+
+}
+
+</script>
+
+</body>
+</html>
