@@ -1,51 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Robots.txt Generator</title>
+
+<meta name="description"
+content="Generate robots.txt file instantly online free.">
 
 <style>
 
 body{
-font-family:Arial;
-text-align:center;
-background:#f4f4f4;
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
 }
 
 .container{
-width:70%;
-margin:auto;
-margin-top:40px;
+    max-width:850px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
 }
 
-input{
-width:100%;
-padding:10px;
-margin-top:10px;
-font-size:16px;
+h1{
+    text-align:center;
+}
+
+input, textarea{
+    width:100%;
+    padding:14px;
+    margin-top:18px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+textarea{
+    height:220px;
+    resize:none;
 }
 
 button{
-padding:10px 20px;
-background:#3f51b5;
-color:white;
-border:none;
-margin-top:15px;
-cursor:pointer;
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-#result{
-margin-top:20px;
-background:white;
-padding:15px;
-text-align:left;
-font-family:monospace;
-font-size:18px;
-white-space:pre-wrap;
+.generate{
+    background:#3b82f6;
+    color:white;
+}
+
+.copy{
+    background:#22c55e;
+    color:white;
+    margin-left:10px;
+}
+
+.output{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    white-space:pre-wrap;
+    word-break:break-word;
+    text-align:left;
+    font-size:15px;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+    text-align:center;
 }
 
 </style>
 
-<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -54,15 +95,42 @@ white-space:pre-wrap;
 
 <h1>Robots.txt Generator</h1>
 
-<input id="disallow" placeholder="Disallow Path (example: /admin/)">
+<p style="text-align:center;">
+Generate robots.txt file for SEO optimization.
+</p>
 
-<input id="sitemap" placeholder="Sitemap URL (example: https://example.com/sitemap.xml)">
+<input
+type="text"
+id="agent"
+placeholder="User-agent (Example: *)">
 
-<br>
+<textarea
+id="disallow"
+placeholder="Disallow paths (one per line)"></textarea>
 
-<button onclick="generateRobots()">Generate</button>
+<input
+type="url"
+id="sitemap"
+placeholder="Sitemap URL">
 
-<div id="result"></div>
+<button class="generate"
+onclick="generateRobots()">
+Generate Robots.txt
+</button>
+
+<button class="copy"
+onclick="copyRobots()">
+Copy File
+</button>
+
+<div class="output"
+id="output">
+Generated robots.txt will appear here...
+</div>
+
+<div class="note">
+Useful for search engine crawling & SEO control.
+</div>
 
 </div>
 
@@ -70,16 +138,41 @@ white-space:pre-wrap;
 
 function generateRobots(){
 
-let disallow=document.getElementById("disallow").value;
+    const agent =
+    document.getElementById("agent").value || "*";
 
-let sitemap=document.getElementById("sitemap").value;
+    const disallow =
+    document.getElementById("disallow")
+    .value
+    .split("\n")
+    .filter(path => path.trim() !== "")
+    .map(path => "Disallow: " + path)
+    .join("\n");
 
-let robots=
-"User-agent: *\n"+
-"Disallow: "+disallow+"\n\n"+
-"Sitemap: "+sitemap;
+    const sitemap =
+    document.getElementById("sitemap").value;
 
-document.getElementById("result").innerText=robots;
+    const robots =
+
+`User-agent: ${agent}
+
+${disallow}
+
+Sitemap: ${sitemap}`;
+
+    document.getElementById("output")
+    .innerText = robots;
+
+}
+
+function copyRobots(){
+
+    const text =
+    document.getElementById("output").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("robots.txt copied!");
 
 }
 
