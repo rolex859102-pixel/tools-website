@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Open Graph Generator</title>
+
+<meta name="description"
+content="Generate Open Graph meta tags instantly online free.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    text-align:center;
+}
+
+input, textarea{
+    width:100%;
+    padding:14px;
+    margin-top:18px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+textarea{
+    height:120px;
+    resize:none;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.generate{
+    background:#3b82f6;
+    color:white;
+}
+
+.copy{
+    background:#22c55e;
+    color:white;
+    margin-left:10px;
+}
+
+.output{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    white-space:pre-wrap;
+    word-break:break-word;
+    text-align:left;
+    font-size:15px;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+    text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Open Graph Generator</h1>
+
+<p style="text-align:center;">
+Generate Facebook & social sharing meta tags.
+</p>
+
+<input
+type="text"
+id="title"
+placeholder="Website Title">
+
+<textarea
+id="description"
+placeholder="Website Description"></textarea>
+
+<input
+type="url"
+id="url"
+placeholder="Website URL">
+
+<input
+type="url"
+id="image"
+placeholder="Preview Image URL">
+
+<button class="generate"
+onclick="generateOG()">
+Generate OG Tags
+</button>
+
+<button class="copy"
+onclick="copyOG()">
+Copy Tags
+</button>
+
+<div class="output"
+id="output">
+Generated Open Graph tags will appear here...
+</div>
+
+<div class="note">
+Useful for Facebook, WhatsApp & social previews.
+</div>
+
+</div>
+
+<script>
+
+function generateOG(){
+
+    const title =
+    document.getElementById("title").value;
+
+    const description =
+    document.getElementById("description").value;
+
+    const url =
+    document.getElementById("url").value;
+
+    const image =
+    document.getElementById("image").value;
+
+    const tags =
+
+`<meta property="og:title"
+content="${title}">
+
+<meta property="og:description"
+content="${description}">
+
+<meta property="og:url"
+content="${url}">
+
+<meta property="og:image"
+content="${image}">
+
+<meta property="og:type"
+content="website">
+
+<meta property="og:site_name"
+content="${title}">
+
+<meta name="twitter:card"
+content="summary_large_image">
+
+<meta name="twitter:title"
+content="${title}">
+
+<meta name="twitter:description"
+content="${description}">
+
+<meta name="twitter:image"
+content="${image}">`;
+
+    document.getElementById("output")
+    .innerText = tags;
+
+}
+
+function copyOG(){
+
+    const text =
+    document.getElementById("output").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("OG tags copied!");
+
+}
+
+</script>
+
+</body>
+</html>
