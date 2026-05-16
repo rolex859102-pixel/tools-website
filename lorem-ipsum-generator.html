@@ -1,47 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Lorem Ipsum Generator</title>
+
+<meta name="description"
+content="Generate lorem ipsum placeholder text instantly online free.">
 
 <style>
 
 body{
-font-family: Arial;
-text-align:center;
-background:#f4f4f4;
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
 }
 
 .container{
-width:70%;
-margin:auto;
-margin-top:50px;
+    max-width:800px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    text-align:center;
+}
+
+.controls{
+    margin-top:25px;
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
 }
 
 input{
-padding:10px;
-font-size:16px;
-width:120px;
-margin-top:10px;
+    flex:1;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
 }
 
 button{
-padding:10px 20px;
-background:#007BFF;
-color:white;
-border:none;
-cursor:pointer;
-margin-top:15px;
+    padding:14px 22px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
 }
 
-#result{
-margin-top:20px;
-font-size:18px;
-white-space:pre-wrap;
+.generate{
+    background:#3b82f6;
+    color:white;
+}
+
+.copy{
+    background:#22c55e;
+    color:white;
+}
+
+.output{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    line-height:1.8;
+    font-size:17px;
 }
 
 </style>
-<link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
@@ -50,35 +86,78 @@ white-space:pre-wrap;
 
 <h1>Lorem Ipsum Generator</h1>
 
-<input type="number" id="para" placeholder="Paragraphs">
+<p style="text-align:center;">
+Generate placeholder text instantly.
+</p>
 
-<br>
+<div class="controls">
 
-<button onclick="generateLorem()">Generate</button>
+<input
+type="number"
+id="count"
+placeholder="Number of paragraphs"
+value="3"
+min="1"
+max="50">
 
-<div id="result"></div>
+<button class="generate"
+onclick="generateLorem()">
+Generate
+</button>
+
+<button class="copy"
+onclick="copyText()">
+Copy
+</button>
+
+</div>
+
+<div class="output"
+id="output">
+Generated text will appear here...
+</div>
 
 </div>
 
 <script>
 
+const loremText =
+
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
+
 function generateLorem(){
 
-let count=document.getElementById("para").value;
+    let count =
+    document.getElementById("count").value;
 
-let text="Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    let output = "";
 
-let output="";
+    for(let i=0;i<count;i++){
 
-for(let i=0;i<count;i++){
+        output +=
+        "<p>" +
+        loremText.repeat(5) +
+        "</p>";
 
-output+=text+"\n\n";
+    }
+
+    document.getElementById("output")
+    .innerHTML = output;
 
 }
 
-document.getElementById("result").innerText=output;
+function copyText(){
+
+    const text =
+    document.getElementById("output").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Text copied!");
 
 }
+
+generateLorem();
 
 </script>
 
