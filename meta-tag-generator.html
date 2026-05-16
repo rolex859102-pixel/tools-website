@@ -1,51 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Meta Tag Generator</title>
+
+<meta name="description"
+content="Generate SEO meta tags instantly online free.">
 
 <style>
 
 body{
-font-family:Arial;
-text-align:center;
-background:#f4f4f4;
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
 }
 
 .container{
-width:75%;
-margin:auto;
-margin-top:40px;
+    max-width:850px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    text-align:center;
 }
 
 input, textarea{
-width:100%;
-padding:10px;
-margin-top:10px;
-font-size:16px;
+    width:100%;
+    padding:14px;
+    margin-top:18px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+textarea{
+    height:120px;
+    resize:none;
 }
 
 button{
-padding:10px 20px;
-background:#009688;
-color:white;
-border:none;
-margin-top:15px;
-cursor:pointer;
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-#result{
-margin-top:20px;
-background:white;
-padding:15px;
-text-align:left;
-font-family:monospace;
-font-size:18px;
-white-space:pre-wrap;
+.generate{
+    background:#3b82f6;
+    color:white;
+}
+
+.copy{
+    background:#22c55e;
+    color:white;
+    margin-left:10px;
+}
+
+.output{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    white-space:pre-wrap;
+    word-break:break-word;
+    text-align:left;
+    font-size:15px;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+    text-align:center;
 }
 
 </style>
 
-<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -54,36 +95,124 @@ white-space:pre-wrap;
 
 <h1>Meta Tag Generator</h1>
 
-<input id="title" placeholder="Website Title">
+<p style="text-align:center;">
+Generate SEO meta tags for your website.
+</p>
 
-<textarea id="description" placeholder="Meta Description"></textarea>
+<input
+type="text"
+id="title"
+placeholder="Website Title">
 
-<input id="keywords" placeholder="Keywords (comma separated)">
+<textarea
+id="description"
+placeholder="Website Description"></textarea>
 
-<br>
+<input
+type="text"
+id="keywords"
+placeholder="Keywords (comma separated)">
 
-<button onclick="generateMeta()">Generate Meta Tags</button>
+<input
+type="url"
+id="url"
+placeholder="Website URL">
 
-<div id="result"></div>
+<input
+type="url"
+id="image"
+placeholder="Preview Image URL">
+
+<button class="generate"
+onclick="generateTags()">
+Generate Meta Tags
+</button>
+
+<button class="copy"
+onclick="copyTags()">
+Copy Tags
+</button>
+
+<div class="output"
+id="output">
+Generated meta tags will appear here...
+</div>
+
+<div class="note">
+Useful for SEO, Open Graph & social sharing.
+</div>
 
 </div>
 
 <script>
 
-function generateMeta(){
+function generateTags(){
 
-let title=document.getElementById("title").value;
+    const title =
+    document.getElementById("title").value;
 
-let description=document.getElementById("description").value;
+    const description =
+    document.getElementById("description").value;
 
-let keywords=document.getElementById("keywords").value;
+    const keywords =
+    document.getElementById("keywords").value;
 
-let metaTags =
-"<title>"+title+"</title>\n"+
-'<meta name="description" content="'+description+'">\n'+
-'<meta name="keywords" content="'+keywords+'">';
+    const url =
+    document.getElementById("url").value;
 
-document.getElementById("result").innerText=metaTags;
+    const image =
+    document.getElementById("image").value;
+
+    const tags =
+
+`<title>${title}</title>
+
+<meta name="description"
+content="${description}">
+
+<meta name="keywords"
+content="${keywords}">
+
+<meta property="og:title"
+content="${title}">
+
+<meta property="og:description"
+content="${description}">
+
+<meta property="og:url"
+content="${url}">
+
+<meta property="og:image"
+content="${image}">
+
+<meta property="og:type"
+content="website">
+
+<meta name="twitter:card"
+content="summary_large_image">
+
+<meta name="twitter:title"
+content="${title}">
+
+<meta name="twitter:description"
+content="${description}">
+
+<meta name="twitter:image"
+content="${image}">`;
+
+    document.getElementById("output")
+    .innerText = tags;
+
+}
+
+function copyTags(){
+
+    const text =
+    document.getElementById("output").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Meta tags copied!");
 
 }
 
