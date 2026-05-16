@@ -1,26 +1,185 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
-<title>Sitemap Generator</title>
-<link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="css/style.css">
+<title>Sitemap Generator</title>
+
+<meta name="description"
+content="Generate XML sitemap instantly online free.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    text-align:center;
+}
+
+input, textarea{
+    width:100%;
+    padding:14px;
+    margin-top:18px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+textarea{
+    height:220px;
+    resize:none;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.generate{
+    background:#3b82f6;
+    color:white;
+}
+
+.copy{
+    background:#22c55e;
+    color:white;
+    margin-left:10px;
+}
+
+.output{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    white-space:pre-wrap;
+    word-break:break-word;
+    text-align:left;
+    font-size:15px;
+    overflow:auto;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+    text-align:center;
+}
+
+</style>
+
 </head>
 
 <body>
 
+<div class="container">
+
 <h1>Sitemap Generator</h1>
 
-<textarea id="urls" placeholder="Enter URLs (one per line)"></textarea>
+<p style="text-align:center;">
+Generate XML sitemap for your website.
+</p>
 
-<br><br>
+<input
+type="url"
+id="website"
+placeholder="Website URL">
 
-<button onclick="generateSitemap()">Generate Sitemap</button>
+<textarea
+id="pages"
+placeholder="Enter page URLs (one per line)"></textarea>
 
-<div id="result"></div>
+<button class="generate"
+onclick="generateSitemap()">
+Generate Sitemap
+</button>
 
-<script src="js/sitemap.js"></script>
+<button class="copy"
+onclick="copySitemap()">
+Copy Sitemap
+</button>
+
+<div class="output"
+id="output">
+Generated sitemap.xml will appear here...
+</div>
+
+<div class="note">
+Useful for SEO indexing & Google Search Console.
+</div>
+
+</div>
+
+<script>
+
+function generateSitemap(){
+
+    const website =
+    document.getElementById("website").value;
+
+    const pages =
+    document.getElementById("pages")
+    .value
+    .split("\n")
+    .filter(page => page.trim() !== "");
+
+    let sitemap =
+
+`<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+
+    pages.forEach(page => {
+
+        sitemap +=
+
+`
+<url>
+    <loc>${website}${page}</loc>
+</url>`;
+
+    });
+
+    sitemap +=
+`\n</urlset>`;
+
+    document.getElementById("output")
+    .innerText = sitemap;
+
+}
+
+function copySitemap(){
+
+    const text =
+    document.getElementById("output").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Sitemap copied!");
+
+}
+
+</script>
 
 </body>
 </html>
