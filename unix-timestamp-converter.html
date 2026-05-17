@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Unix Timestamp Converter</title>
+
+<meta name="description"
+content="Convert Unix timestamps instantly online free.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+    text-align:center;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+button{
+    flex:1;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.convert{
+    background:#3b82f6;
+    color:white;
+}
+
+.current{
+    background:#22c55e;
+    color:white;
+}
+
+.result{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    line-height:2;
+    font-size:18px;
+    word-break:break-word;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Unix Timestamp Converter</h1>
+
+<p>
+Convert Unix timestamps & dates instantly.
+</p>
+
+<input
+type="text"
+id="input"
+placeholder="Enter timestamp or date">
+
+<div class="buttons">
+
+<button class="convert"
+onclick="convertTime()">
+Convert
+</button>
+
+<button class="current"
+onclick="currentTimestamp()">
+Current Timestamp
+</button>
+
+</div>
+
+<div class="result"
+id="result">
+Conversion result will appear here...
+</div>
+
+<div class="note">
+Useful for APIs, databases & backend debugging.
+</div>
+
+</div>
+
+<script>
+
+function convertTime(){
+
+    const input =
+    document.getElementById("input").value;
+
+    const result =
+    document.getElementById("result");
+
+    if(input.trim() === ""){
+
+        result.innerHTML =
+        "Please enter timestamp or date.";
+
+        return;
+
+    }
+
+    if(!isNaN(input)){
+
+        let timestamp =
+        parseInt(input);
+
+        if(input.length === 10){
+
+            timestamp *= 1000;
+
+        }
+
+        const date =
+        new Date(timestamp);
+
+        result.innerHTML =
+
+        "📅 Date & Time:<br><br>" +
+
+        date.toString() +
+
+        "<br><br>" +
+
+        "🌍 UTC:<br><br>" +
+
+        date.toUTCString();
+
+    }
+
+    else{
+
+        const timestamp =
+        Math.floor(
+        new Date(input).getTime() / 1000
+        );
+
+        if(isNaN(timestamp)){
+
+            result.innerHTML =
+            "Invalid date format.";
+
+            return;
+
+        }
+
+        result.innerHTML =
+
+        "⏱ Unix Timestamp:<br><br>" +
+
+        timestamp;
+
+    }
+
+}
+
+function currentTimestamp(){
+
+    const now =
+    Math.floor(Date.now() / 1000);
+
+    document.getElementById("result")
+    .innerHTML =
+
+    "⏱ Current Unix Timestamp:<br><br>" +
+
+    now;
+
+}
+
+</script>
+
+</body>
+</html>
