@@ -21,7 +21,7 @@ body{
 }
 
 .container{
-    max-width:900px;
+    max-width:1000px;
     margin:auto;
     background:#0f172a;
     padding:30px;
@@ -34,14 +34,15 @@ h1{
 
 textarea{
     width:100%;
-    height:220px;
-    padding:15px;
+    height:240px;
     margin-top:20px;
+    padding:15px;
     border:none;
     border-radius:10px;
     outline:none;
-    font-size:15px;
     resize:none;
+    font-size:16px;
+    line-height:1.6;
 }
 
 .buttons{
@@ -71,10 +72,31 @@ button{
     color:white;
 }
 
+.clear{
+    background:#ef4444;
+    color:white;
+}
+
+.output{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    white-space:pre-wrap;
+    word-break:break-word;
+    overflow:auto;
+    line-height:1.8;
+}
+
+.keyword{
+    color:#38bdf8;
+    font-weight:bold;
+}
+
 .note{
     margin-top:20px;
-    color:#cbd5e1;
     text-align:center;
+    color:#cbd5e1;
 }
 
 </style>
@@ -88,11 +110,11 @@ button{
 <h1>SQL Formatter</h1>
 
 <p style="text-align:center;">
-Beautify SQL queries instantly.
+Format & beautify SQL queries instantly.
 </p>
 
 <textarea
-id="input"
+id="sql"
 placeholder="Paste SQL query here..."></textarea>
 
 <div class="buttons">
@@ -104,17 +126,23 @@ Format SQL
 
 <button class="copy"
 onclick="copySQL()">
-Copy Output
+Copy SQL
+</button>
+
+<button class="clear"
+onclick="clearSQL()">
+Clear
 </button>
 
 </div>
 
-<textarea
-id="output"
-placeholder="Formatted SQL will appear here..."></textarea>
+<div class="output"
+id="output">
+Formatted SQL will appear here...
+</div>
 
 <div class="note">
-Useful for developers, debugging & database projects.
+Useful for databases, debugging & backend development.
 </div>
 
 </div>
@@ -124,15 +152,29 @@ Useful for developers, debugging & database projects.
 function formatSQL(){
 
     let sql =
-    document.getElementById("input").value;
+    document.getElementById("sql").value;
+
+    const output =
+    document.getElementById("output");
+
+    if(sql.trim() === ""){
+
+        output.innerHTML =
+        "Please enter SQL query.";
+
+        return;
+
+    }
 
     const keywords = [
+
     "SELECT",
     "FROM",
     "WHERE",
+    "AND",
+    "OR",
     "ORDER BY",
     "GROUP BY",
-    "HAVING",
     "INSERT INTO",
     "VALUES",
     "UPDATE",
@@ -142,6 +184,7 @@ function formatSQL(){
     "LEFT JOIN",
     "RIGHT JOIN",
     "LIMIT"
+
     ];
 
     keywords.forEach(keyword => {
@@ -149,30 +192,40 @@ function formatSQL(){
         const regex =
         new RegExp(keyword,"gi");
 
-        sql =
-        sql.replace(regex,"\n" + keyword);
+        sql = sql.replace(regex,
+        `\n${keyword}`);
 
     });
 
-    sql =
-    sql.replace(/\n+/g,"\n")
-    .trim();
+    output.innerHTML =
 
-    document.getElementById("output")
-    .value = sql;
+    sql.replace(
+    /\b(SELECT|FROM|WHERE|AND|OR|ORDER BY|GROUP BY|INSERT INTO|VALUES|UPDATE|SET|DELETE|INNER JOIN|LEFT JOIN|RIGHT JOIN|LIMIT)\b/g,
+
+    '<span class="keyword">$1</span>'
+
+    );
 
 }
 
 function copySQL(){
 
-    const output =
-    document.getElementById("output");
+    const text =
+    document.getElementById("output").innerText;
 
-    output.select();
+    navigator.clipboard.writeText(text);
 
-    document.execCommand("copy");
+    alert("SQL copied!");
 
-    alert("Formatted SQL copied!");
+}
+
+function clearSQL(){
+
+    document.getElementById("sql").value = "";
+
+    document.getElementById("output")
+    .innerHTML =
+    "Formatted SQL will appear here...";
 
 }
 
