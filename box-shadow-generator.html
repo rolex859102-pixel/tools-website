@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Box Shadow Generator</title>
+
+<meta name="description"
+content="Generate CSS box shadows instantly online free.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:950px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+.preview-area{
+    margin-top:30px;
+    padding:50px;
+    background:#1e293b;
+    border-radius:14px;
+}
+
+.box{
+    width:220px;
+    height:220px;
+    margin:auto;
+    background:#3b82f6;
+    border-radius:20px;
+}
+
+.controls{
+    margin-top:35px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.control{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+}
+
+input[type="range"]{
+    width:100%;
+    margin-top:10px;
+}
+
+input[type="color"]{
+    margin-top:10px;
+    width:100%;
+    height:50px;
+    border:none;
+    background:none;
+}
+
+.output{
+    margin-top:30px;
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    word-break:break-word;
+    font-size:16px;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+}
+
+@media(max-width:700px){
+
+.controls{
+    grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Box Shadow Generator</h1>
+
+<p>
+Create beautiful CSS box shadows instantly.
+</p>
+
+<div class="preview-area">
+
+<div class="box"
+id="box"></div>
+
+</div>
+
+<div class="controls">
+
+<div class="control">
+
+<p>Horizontal Offset</p>
+
+<input
+type="range"
+id="x"
+min="-50"
+max="50"
+value="10"
+oninput="generateShadow()">
+
+</div>
+
+<div class="control">
+
+<p>Vertical Offset</p>
+
+<input
+type="range"
+id="y"
+min="-50"
+max="50"
+value="10"
+oninput="generateShadow()">
+
+</div>
+
+<div class="control">
+
+<p>Blur Radius</p>
+
+<input
+type="range"
+id="blur"
+min="0"
+max="100"
+value="25"
+oninput="generateShadow()">
+
+</div>
+
+<div class="control">
+
+<p>Shadow Color</p>
+
+<input
+type="color"
+id="color"
+value="#000000"
+oninput="generateShadow()">
+
+</div>
+
+</div>
+
+<div class="output"
+id="output">
+CSS code will appear here...
+</div>
+
+<button onclick="copyCSS()">
+Copy CSS
+</button>
+
+<div class="note">
+Useful for UI design, modern websites & web apps.
+</div>
+
+</div>
+
+<script>
+
+function generateShadow(){
+
+    const x =
+    document.getElementById("x").value;
+
+    const y =
+    document.getElementById("y").value;
+
+    const blur =
+    document.getElementById("blur").value;
+
+    const color =
+    document.getElementById("color").value;
+
+    const shadow =
+
+    `${x}px ${y}px ${blur}px ${color}`;
+
+    document.getElementById("box")
+    .style.boxShadow = shadow;
+
+    document.getElementById("output")
+    .innerText =
+
+    "box-shadow: " +
+    shadow + ";";
+
+}
+
+function copyCSS(){
+
+    const text =
+    document.getElementById("output").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("CSS copied!");
+
+}
+
+generateShadow();
+
+</script>
+
+</body>
+</html>
