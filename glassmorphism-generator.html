@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Glassmorphism Generator</title>
+
+<meta name="description"
+content="Generate glassmorphism CSS instantly online free.">
+
+<style>
+
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#3b82f6,#9333ea);
+    font-family:Arial;
+    color:white;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:1000px;
+    background:rgba(15,23,42,0.7);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+}
+
+h1{
+    text-align:center;
+}
+
+.preview-area{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:60px;
+}
+
+.glass-box{
+    width:300px;
+    height:200px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.3);
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+}
+
+.controls{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.control{
+    background:rgba(255,255,255,0.08);
+    padding:20px;
+    border-radius:14px;
+}
+
+input[type="range"]{
+    width:100%;
+    margin-top:10px;
+}
+
+.output{
+    margin-top:30px;
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    text-align:left;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.note{
+    margin-top:20px;
+    text-align:center;
+    color:#e2e8f0;
+}
+
+@media(max-width:700px){
+
+.controls{
+    grid-template-columns:1fr;
+}
+
+.glass-box{
+    width:100%;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Glassmorphism Generator</h1>
+
+<p style="text-align:center;">
+Create modern frosted glass UI effects instantly.
+</p>
+
+<div class="preview-area">
+
+<div class="glass-box"
+id="glassBox"></div>
+
+</div>
+
+<div class="controls">
+
+<div class="control">
+
+<p>Blur Strength</p>
+
+<input
+type="range"
+id="blur"
+min="0"
+max="40"
+value="10"
+oninput="generateGlass()">
+
+</div>
+
+<div class="control">
+
+<p>Transparency</p>
+
+<input
+type="range"
+id="opacity"
+min="0.05"
+max="0.5"
+step="0.01"
+value="0.15"
+oninput="generateGlass()">
+
+</div>
+
+<div class="control">
+
+<p>Border Radius</p>
+
+<input
+type="range"
+id="radius"
+min="0"
+max="50"
+value="20"
+oninput="generateGlass()">
+
+</div>
+
+<div class="control">
+
+<p>Border Opacity</p>
+
+<input
+type="range"
+id="border"
+min="0.1"
+max="1"
+step="0.05"
+value="0.3"
+oninput="generateGlass()">
+
+</div>
+
+</div>
+
+<div class="output"
+id="output">
+CSS code will appear here...
+</div>
+
+<button onclick="copyCSS()">
+Copy CSS
+</button>
+
+<div class="note">
+Useful for modern websites, apps & UI design.
+</div>
+
+</div>
+
+<script>
+
+function generateGlass(){
+
+    const blur =
+    document.getElementById("blur").value;
+
+    const opacity =
+    document.getElementById("opacity").value;
+
+    const radius =
+    document.getElementById("radius").value;
+
+    const border =
+    document.getElementById("border").value;
+
+    const box =
+    document.getElementById("glassBox");
+
+    box.style.backdropFilter =
+    `blur(${blur}px)`;
+
+    box.style.background =
+    `rgba(255,255,255,${opacity})`;
+
+    box.style.borderRadius =
+    `${radius}px`;
+
+    box.style.border =
+    `1px solid rgba(255,255,255,${border})`;
+
+    const css =
+
+`background: rgba(255,255,255,${opacity});
+backdrop-filter: blur(${blur}px);
+border-radius: ${radius}px;
+border: 1px solid rgba(255,255,255,${border});`;
+
+    document.getElementById("output")
+    .innerText = css;
+
+}
+
+function copyCSS(){
+
+    const text =
+    document.getElementById("output").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("CSS copied!");
+
+}
+
+generateGlass();
+
+</script>
+
+</body>
+</html>
