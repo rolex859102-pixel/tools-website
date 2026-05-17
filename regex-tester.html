@@ -6,10 +6,10 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Regex Tester Online</title>
+<title>Regex Tester</title>
 
 <meta name="description"
-content="Test regular expressions online free instantly.">
+content="Test regular expressions instantly online free.">
 
 <style>
 
@@ -18,26 +18,29 @@ body{
     color:white;
     font-family:Arial;
     padding:20px;
-    text-align:center;
 }
 
 .container{
-    max-width:950px;
+    max-width:1000px;
     margin:auto;
     background:#0f172a;
     padding:30px;
     border-radius:14px;
 }
 
-input,
-textarea{
+h1{
+    text-align:center;
+}
+
+textarea,
+input{
     width:100%;
     padding:15px;
     margin-top:20px;
     border:none;
     border-radius:10px;
     outline:none;
-    font-size:15px;
+    font-size:16px;
 }
 
 textarea{
@@ -47,28 +50,46 @@ textarea{
 
 button{
     margin-top:20px;
-    padding:12px 24px;
+    padding:14px 24px;
     border:none;
     border-radius:10px;
-    background:#22c55e;
-    color:black;
-    font-weight:bold;
+    background:#3b82f6;
+    color:white;
+    font-size:16px;
     cursor:pointer;
+    font-weight:bold;
 }
 
 .result{
     margin-top:30px;
     background:#1e293b;
-    padding:20px;
+    padding:25px;
     border-radius:12px;
-    text-align:left;
-    white-space:pre-wrap;
-    overflow:auto;
+    line-height:2;
+    word-break:break-word;
 }
 
 .match{
     color:#22c55e;
     font-weight:bold;
+}
+
+.nomatch{
+    color:#ef4444;
+    font-weight:bold;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+    text-align:center;
+}
+
+.highlight{
+    background:#22c55e;
+    color:black;
+    padding:2px 4px;
+    border-radius:4px;
 }
 
 </style>
@@ -81,18 +102,18 @@ button{
 
 <h1>Regex Tester</h1>
 
-<p>
+<p style="text-align:center;">
 Test regular expressions instantly.
 </p>
 
 <input
 type="text"
-id="regexInput"
-placeholder="Enter regex pattern">
+id="regex"
+placeholder="Enter regex pattern (example: \\d+)">
 
 <textarea
-id="testText"
-placeholder="Enter test text here..."></textarea>
+id="text"
+placeholder="Enter text to test regex..."></textarea>
 
 <button onclick="testRegex()">
 Test Regex
@@ -100,9 +121,11 @@ Test Regex
 
 <div class="result"
 id="result">
+Regex results will appear here...
+</div>
 
-Regex result will appear here.
-
+<div class="note">
+Useful for validation, APIs & debugging.
 </div>
 
 </div>
@@ -112,40 +135,62 @@ Regex result will appear here.
 function testRegex(){
 
     const pattern =
-    document.getElementById("regexInput").value;
+    document.getElementById("regex").value;
 
     const text =
-    document.getElementById("testText").value;
+    document.getElementById("text").value;
+
+    const result =
+    document.getElementById("result");
 
     if(pattern.trim() === ""){
 
-        alert("Please enter regex pattern");
+        result.innerHTML =
+        "Please enter regex pattern.";
 
         return;
+
     }
 
     try{
 
         const regex =
-        new RegExp(pattern, "g");
+        new RegExp(pattern,"g");
 
         const matches =
         text.match(regex);
 
         if(matches){
 
-            document.getElementById("result")
-            .innerHTML =
-            "<span class='match'>Matches Found:</span>\n\n" +
-            matches.join("\n");
+            let highlighted =
+            text.replace(regex,
+            match =>
+            `<span class="highlight">${match}</span>`);
+
+            result.innerHTML =
+
+            `<div class="match">
+            ✅ Match Found
+            </div>
+
+            <br>
+
+            Total Matches:
+            ${matches.length}
+
+            <br><br>
+
+            ${highlighted}`;
 
         }
 
         else{
 
-            document.getElementById("result")
-            .innerText =
-            "No matches found.";
+            result.innerHTML =
+
+            `<div class="nomatch">
+            ❌ No Match Found
+            </div>`;
 
         }
 
@@ -153,9 +198,8 @@ function testRegex(){
 
     catch(error){
 
-        document.getElementById("result")
-        .innerText =
-        "Invalid Regex Pattern";
+        result.innerHTML =
+        "Invalid Regex Pattern.";
 
     }
 
