@@ -6,10 +6,10 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>URL Encoder Decoder Online</title>
+<title>URL Encoder Decoder</title>
 
 <meta name="description"
-content="Encode and decode URLs online free instantly.">
+content="Encode and decode URLs instantly online free.">
 
 <style>
 
@@ -18,15 +18,18 @@ body{
     color:white;
     font-family:Arial;
     padding:20px;
-    text-align:center;
 }
 
 .container{
-    max-width:950px;
+    max-width:900px;
     margin:auto;
     background:#0f172a;
     padding:30px;
     border-radius:14px;
+}
+
+h1{
+    text-align:center;
 }
 
 textarea{
@@ -41,27 +44,42 @@ textarea{
     font-size:15px;
 }
 
-button{
+.buttons{
+    display:flex;
+    gap:15px;
     margin-top:20px;
-    padding:12px 24px;
-    border:none;
-    border-radius:10px;
-    background:#22c55e;
-    color:black;
-    font-weight:bold;
-    cursor:pointer;
-    margin-right:10px;
+    flex-wrap:wrap;
 }
 
-.result{
-    margin-top:30px;
-    background:#1e293b;
-    padding:20px;
-    border-radius:12px;
-    text-align:left;
-    white-space:pre-wrap;
-    overflow:auto;
-    word-break:break-word;
+button{
+    flex:1;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.encode{
+    background:#3b82f6;
+    color:white;
+}
+
+.decode{
+    background:#f59e0b;
+    color:white;
+}
+
+.copy{
+    background:#22c55e;
+    color:white;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+    text-align:center;
 }
 
 </style>
@@ -74,27 +92,39 @@ button{
 
 <h1>URL Encoder Decoder</h1>
 
-<p>
-Encode and decode URLs instantly.
+<p style="text-align:center;">
+Encode & decode URLs instantly.
 </p>
 
 <textarea
-id="urlInput"
-placeholder="Enter URL or text here..."></textarea>
+id="input"
+placeholder="Paste URL or text here..."></textarea>
 
-<button onclick="encodeURL()">
+<div class="buttons">
+
+<button class="encode"
+onclick="encodeURL()">
 Encode URL
 </button>
 
-<button onclick="decodeURL()">
+<button class="decode"
+onclick="decodeURL()">
 Decode URL
 </button>
 
-<div class="result"
-id="result">
+<button class="copy"
+onclick="copyOutput()">
+Copy Output
+</button>
 
-Result will appear here.
+</div>
 
+<textarea
+id="output"
+placeholder="Result will appear here..."></textarea>
+
+<div class="note">
+Useful for APIs, query strings & web development.
 </div>
 
 </div>
@@ -103,53 +133,52 @@ Result will appear here.
 
 function encodeURL(){
 
-    const text =
-    document.getElementById("urlInput").value;
+    let input =
+    document.getElementById("input").value;
 
-    if(text.trim() === ""){
+    let encoded =
+    encodeURIComponent(input);
 
-        alert("Please enter text");
-
-        return;
-    }
-
-    const encoded =
-    encodeURIComponent(text);
-
-    document.getElementById("result")
-    .innerText = encoded;
+    document.getElementById("output")
+    .value = encoded;
 
 }
 
 function decodeURL(){
 
-    const text =
-    document.getElementById("urlInput").value;
-
-    if(text.trim() === ""){
-
-        alert("Please enter encoded URL");
-
-        return;
-    }
+    let input =
+    document.getElementById("input").value;
 
     try{
 
-        const decoded =
-        decodeURIComponent(text);
+        let decoded =
+        decodeURIComponent(input);
 
-        document.getElementById("result")
-        .innerText = decoded;
+        document.getElementById("output")
+        .value = decoded;
+
+    }
+
+    catch{
+
+        document.getElementById("output")
+        .value =
+        "Invalid encoded URL";
 
     }
 
-    catch(error){
+}
 
-        document.getElementById("result")
-        .innerText =
-        "Invalid Encoded URL";
+function copyOutput(){
 
-    }
+    const output =
+    document.getElementById("output");
+
+    output.select();
+
+    document.execCommand("copy");
+
+    alert("Output copied!");
 
 }
 
