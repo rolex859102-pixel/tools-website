@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>CSS Animation Generator</title>
+
+<meta name="description"
+content="Generate CSS animations instantly online free.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+.preview-area{
+    margin-top:35px;
+    background:#1e293b;
+    border-radius:14px;
+    padding:70px;
+}
+
+.box{
+    width:120px;
+    height:120px;
+    background:#3b82f6;
+    border-radius:14px;
+    margin:auto;
+}
+
+.controls{
+    margin-top:35px;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:20px;
+}
+
+.control{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+}
+
+select,
+input{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+}
+
+.output{
+    margin-top:30px;
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    white-space:pre-wrap;
+    text-align:left;
+    word-break:break-word;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+}
+
+@media(max-width:850px){
+
+.controls{
+    grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>CSS Animation Generator</h1>
+
+<p>
+Create beautiful CSS animations instantly.
+</p>
+
+<div class="preview-area">
+
+<div class="box"
+id="box"></div>
+
+</div>
+
+<div class="controls">
+
+<div class="control">
+
+<p>Animation Type</p>
+
+<select
+id="animation"
+onchange="generateAnimation()">
+
+<option value="bounce">
+Bounce
+</option>
+
+<option value="rotate">
+Rotate
+</option>
+
+<option value="scale">
+Scale
+</option>
+
+<option value="fade">
+Fade
+</option>
+
+<option value="slide">
+Slide
+</option>
+
+</select>
+
+</div>
+
+<div class="control">
+
+<p>Duration (seconds)</p>
+
+<input
+type="number"
+id="duration"
+value="2"
+min="1"
+max="10"
+oninput="generateAnimation()">
+
+</div>
+
+<div class="control">
+
+<p>Iteration</p>
+
+<select
+id="iteration"
+onchange="generateAnimation()">
+
+<option value="infinite">
+Infinite
+</option>
+
+<option value="1">
+1
+</option>
+
+<option value="2">
+2
+</option>
+
+<option value="3">
+3
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="output"
+id="output">
+CSS code will appear here...
+</div>
+
+<button onclick="copyCSS()">
+Copy CSS
+</button>
+
+<div class="note">
+Useful for modern websites, UI effects & web apps.
+</div>
+
+</div>
+
+<script>
+
+function generateAnimation(){
+
+    const animation =
+    document.getElementById("animation").value;
+
+    const duration =
+    document.getElementById("duration").value;
+
+    const iteration =
+    document.getElementById("iteration").value;
+
+    const box =
+    document.getElementById("box");
+
+    let keyframes = "";
+
+    if(animation === "bounce"){
+
+        keyframes =
+
+`@keyframes bounce{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-50px);
+}
+}`;
+
+    }
+
+    else if(animation === "rotate"){
+
+        keyframes =
+
+`@keyframes rotate{
+from{
+transform:rotate(0deg);
+}
+to{
+transform:rotate(360deg);
+}
+}`;
+
+    }
+
+    else if(animation === "scale"){
+
+        keyframes =
+
+`@keyframes scale{
+0%,100%{
+transform:scale(1);
+}
+50%{
+transform:scale(1.5);
+}
+}`;
+
+    }
+
+    else if(animation === "fade"){
+
+        keyframes =
+
+`@keyframes fade{
+0%,100%{
+opacity:1;
+}
+50%{
+opacity:0.2;
+}
+}`;
+
+    }
+
+    else if(animation === "slide"){
+
+        keyframes =
+
+`@keyframes slide{
+0%{
+transform:translateX(-100px);
+}
+100%{
+transform:translateX(100px);
+}
+}`;
+
+    }
+
+    box.style.animation =
+    `${animation} ${duration}s ${iteration}`;
+
+    const css =
+
+`${keyframes}
+
+.box{
+animation:
+${animation} ${duration}s ${iteration};
+}`;
+
+    document.getElementById("output")
+    .innerText = css;
+
+}
+
+function copyCSS(){
+
+    const text =
+    document.getElementById("output").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("CSS copied!");
+
+}
+
+generateAnimation();
+
+</script>
+
+</body>
+</html>
