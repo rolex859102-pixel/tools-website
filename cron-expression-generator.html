@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Cron Expression Generator</title>
+
+<meta name="description"
+content="Generate cron expressions instantly online free.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    text-align:center;
+}
+
+.controls{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.control{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+}
+
+label{
+    display:block;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+select,
+input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+.output{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    word-break:break-word;
+    line-height:2;
+}
+
+.cron{
+    font-size:24px;
+    color:#22c55e;
+    font-weight:bold;
+}
+
+.description{
+    margin-top:15px;
+    color:#cbd5e1;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.note{
+    margin-top:20px;
+    text-align:center;
+    color:#cbd5e1;
+}
+
+@media(max-width:700px){
+
+.controls{
+    grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Cron Expression Generator</h1>
+
+<p style="text-align:center;">
+Generate cron expressions instantly.
+</p>
+
+<div class="controls">
+
+<div class="control">
+
+<label>Minute</label>
+
+<input
+type="number"
+id="minute"
+min="0"
+max="59"
+value="0"
+oninput="generateCron()">
+
+</div>
+
+<div class="control">
+
+<label>Hour</label>
+
+<input
+type="number"
+id="hour"
+min="0"
+max="23"
+value="0"
+oninput="generateCron()">
+
+</div>
+
+<div class="control">
+
+<label>Day of Month</label>
+
+<input
+type="text"
+id="day"
+value="*"
+oninput="generateCron()">
+
+</div>
+
+<div class="control">
+
+<label>Month</label>
+
+<input
+type="text"
+id="month"
+value="*"
+oninput="generateCron()">
+
+</div>
+
+<div class="control">
+
+<label>Day of Week</label>
+
+<input
+type="text"
+id="week"
+value="*"
+oninput="generateCron()">
+
+</div>
+
+</div>
+
+<div class="output">
+
+<div class="cron"
+id="cron">
+0 0 * * *
+</div>
+
+<div class="description"
+id="description">
+Runs every day at 12:00 AM
+</div>
+
+</div>
+
+<button onclick="copyCron()">
+Copy Cron Expression
+</button>
+
+<div class="note">
+Useful for automation, servers & DevOps tasks.
+</div>
+
+</div>
+
+<script>
+
+function generateCron(){
+
+    const minute =
+    document.getElementById("minute").value;
+
+    const hour =
+    document.getElementById("hour").value;
+
+    const day =
+    document.getElementById("day").value;
+
+    const month =
+    document.getElementById("month").value;
+
+    const week =
+    document.getElementById("week").value;
+
+    const cron =
+    `${minute} ${hour} ${day} ${month} ${week}`;
+
+    document.getElementById("cron")
+    .innerText = cron;
+
+    let description =
+
+    `Runs at ${hour}:${minute}`;
+
+    if(day === "*" &&
+    month === "*" &&
+    week === "*"){
+
+        description =
+        `Runs every day at ${hour}:${minute}`;
+
+    }
+
+    document.getElementById("description")
+    .innerText = description;
+
+}
+
+function copyCron(){
+
+    const cron =
+    document.getElementById("cron").innerText;
+
+    navigator.clipboard.writeText(cron);
+
+    alert("Cron expression copied!");
+
+}
+
+generateCron();
+
+</script>
+
+</body>
+</html>
