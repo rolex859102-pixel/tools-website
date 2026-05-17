@@ -6,10 +6,10 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Base64 Encoder Decoder Online</title>
+<title>Base64 Encoder Decoder</title>
 
 <meta name="description"
-content="Encode and decode Base64 online free instantly.">
+content="Encode and decode Base64 instantly online free.">
 
 <style>
 
@@ -18,49 +18,84 @@ body{
     color:white;
     font-family:Arial;
     padding:20px;
-    text-align:center;
 }
 
 .container{
-    max-width:900px;
+    max-width:1000px;
     margin:auto;
     background:#0f172a;
     padding:30px;
     border-radius:14px;
 }
 
+h1{
+    text-align:center;
+}
+
 textarea{
     width:100%;
     height:220px;
-    padding:15px;
     margin-top:20px;
+    padding:15px;
     border:none;
     border-radius:10px;
     outline:none;
     resize:none;
-    font-size:15px;
+    font-size:16px;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:wrap;
 }
 
 button{
-    margin-top:20px;
-    padding:12px 24px;
+    flex:1;
+    padding:14px;
     border:none;
     border-radius:10px;
-    background:#22c55e;
-    color:black;
-    font-weight:bold;
+    font-size:16px;
     cursor:pointer;
-    margin-right:10px;
+    font-weight:bold;
 }
 
-.result{
+.encode{
+    background:#3b82f6;
+    color:white;
+}
+
+.decode{
+    background:#22c55e;
+    color:white;
+}
+
+.copy{
+    background:#f59e0b;
+    color:white;
+}
+
+.clear{
+    background:#ef4444;
+    color:white;
+}
+
+.output{
     margin-top:30px;
     background:#1e293b;
-    padding:20px;
+    padding:25px;
     border-radius:12px;
-    text-align:left;
     white-space:pre-wrap;
     word-break:break-word;
+    line-height:1.8;
+    overflow:auto;
+}
+
+.note{
+    margin-top:20px;
+    text-align:center;
+    color:#cbd5e1;
 }
 
 </style>
@@ -71,78 +106,143 @@ button{
 
 <div class="container">
 
-<h1>Base64 Encoder / Decoder</h1>
+<h1>Base64 Encoder Decoder</h1>
 
-<p>
-Encode and decode Base64 instantly.
+<p style="text-align:center;">
+Encode & decode Base64 instantly.
 </p>
 
 <textarea
-id="inputText"
-placeholder="Enter text here..."></textarea>
+id="input"
+placeholder="Enter text or Base64 data here..."></textarea>
 
-<button onclick="encodeText()">
+<div class="buttons">
+
+<button class="encode"
+onclick="encodeBase64()">
 Encode
 </button>
 
-<button onclick="decodeText()">
+<button class="decode"
+onclick="decodeBase64()">
 Decode
 </button>
 
-<div class="result"
-id="result">
+<button class="copy"
+onclick="copyOutput()">
+Copy Output
+</button>
 
-Result will appear here.
+<button class="clear"
+onclick="clearAll()">
+Clear
+</button>
 
+</div>
+
+<div class="output"
+id="output">
+Result will appear here...
+</div>
+
+<div class="note">
+Useful for APIs, authentication & data conversion.
 </div>
 
 </div>
 
 <script>
 
-function encodeText(){
+function encodeBase64(){
 
-    const text =
-    document.getElementById("inputText").value;
+    const input =
+    document.getElementById("input").value;
+
+    const output =
+    document.getElementById("output");
+
+    if(input.trim() === ""){
+
+        output.innerHTML =
+        "Please enter text.";
+
+        return;
+
+    }
 
     try{
 
         const encoded =
-        btoa(text);
+        btoa(input);
 
-        document.getElementById("result")
-        .innerText = encoded;
+        output.innerText =
+        encoded;
 
     }
 
     catch(error){
 
-        alert("Invalid text");
+        output.innerText =
+        "Encoding failed.";
 
     }
 
 }
 
-function decodeText(){
+function decodeBase64(){
 
-    const text =
-    document.getElementById("inputText").value;
+    const input =
+    document.getElementById("input").value;
+
+    const output =
+    document.getElementById("output");
+
+    if(input.trim() === ""){
+
+        output.innerHTML =
+        "Please enter Base64 data.";
+
+        return;
+
+    }
 
     try{
 
         const decoded =
-        atob(text);
+        atob(input);
 
-        document.getElementById("result")
-        .innerText = decoded;
+        output.innerText =
+        decoded;
 
     }
 
     catch(error){
 
-        alert("Invalid Base64");
+        output.innerText =
+        "Invalid Base64 data.";
 
     }
+
+}
+
+function copyOutput(){
+
+    const text =
+    document.getElementById("output").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Copied!");
+
+}
+
+function clearAll(){
+
+    document.getElementById("input").value = "";
+
+    document.getElementById("output")
+    .innerText =
+    "Result will appear here...";
 
 }
 
