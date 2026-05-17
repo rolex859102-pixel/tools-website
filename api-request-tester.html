@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>API Request Tester</title>
+
+<meta name="description"
+content="Test REST APIs instantly online free.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    text-align:center;
+}
+
+.controls{
+    display:flex;
+    gap:15px;
+    margin-top:25px;
+    flex-wrap:wrap;
+}
+
+select,
+input,
+textarea{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+select{
+    max-width:150px;
+}
+
+textarea{
+    height:180px;
+    resize:none;
+    margin-top:20px;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    background:#3b82f6;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.response{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    overflow:auto;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+.status{
+    margin-top:20px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.note{
+    margin-top:20px;
+    text-align:center;
+    color:#cbd5e1;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>API Request Tester</h1>
+
+<p style="text-align:center;">
+Test REST APIs instantly.
+</p>
+
+<div class="controls">
+
+<select id="method">
+
+<option>GET</option>
+<option>POST</option>
+<option>PUT</option>
+<option>DELETE</option>
+
+</select>
+
+<input
+type="text"
+id="url"
+placeholder="Enter API URL">
+
+</div>
+
+<textarea
+id="body"
+placeholder="Enter JSON body (for POST/PUT)..."></textarea>
+
+<button onclick="sendRequest()">
+Send Request
+</button>
+
+<div class="status"
+id="status"></div>
+
+<div class="response"
+id="response">
+API response will appear here...
+</div>
+
+<div class="note">
+Useful for API testing, debugging & backend development.
+</div>
+
+</div>
+
+<script>
+
+async function sendRequest(){
+
+    const method =
+    document.getElementById("method").value;
+
+    const url =
+    document.getElementById("url").value;
+
+    const body =
+    document.getElementById("body").value;
+
+    const responseBox =
+    document.getElementById("response");
+
+    const statusBox =
+    document.getElementById("status");
+
+    responseBox.innerText =
+    "Loading...";
+
+    statusBox.innerText = "";
+
+    try{
+
+        const options = {
+            method: method,
+            headers: {
+                "Content-Type":
+                "application/json"
+            }
+        };
+
+        if(method !== "GET"
+        && body.trim() !== ""){
+
+            options.body = body;
+
+        }
+
+        const response =
+        await fetch(url, options);
+
+        const text =
+        await response.text();
+
+        statusBox.innerHTML =
+
+        "Status: " +
+        response.status;
+
+        try{
+
+            const json =
+            JSON.parse(text);
+
+            responseBox.innerText =
+            JSON.stringify(json,null,2);
+
+        }
+
+        catch{
+
+            responseBox.innerText =
+            text;
+
+        }
+
+    }
+
+    catch(error){
+
+        responseBox.innerText =
+        "Request failed.";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
