@@ -6,10 +6,10 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>UUID Generator Online</title>
+<title>UUID Generator</title>
 
 <meta name="description"
-content="Generate random UUID online free instantly.">
+content="Generate random UUIDs instantly online free.">
 
 <style>
 
@@ -22,36 +22,80 @@ body{
 }
 
 .container{
-    max-width:700px;
+    max-width:900px;
     margin:auto;
     background:#0f172a;
     padding:30px;
     border-radius:14px;
 }
 
-button{
-    margin-top:20px;
-    padding:12px 24px;
-    border:none;
-    border-radius:10px;
-    background:#22c55e;
-    color:black;
-    font-weight:bold;
-    cursor:pointer;
+.controls{
+    margin-top:30px;
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    flex-wrap:wrap;
 }
 
-.result{
-    margin-top:30px;
+.control{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    min-width:220px;
+}
+
+select,
+input{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.generate{
+    background:#3b82f6;
+    color:white;
+}
+
+.copy{
+    background:#22c55e;
+    color:white;
+}
+
+.output{
+    margin-top:35px;
     background:#1e293b;
     padding:25px;
     border-radius:12px;
-    font-size:22px;
-    word-break:break-all;
+    text-align:left;
+    word-break:break-word;
+    line-height:2;
+    font-size:18px;
 }
 
-.copy-btn{
-    margin-top:15px;
-    background:#38bdf8;
+.uuid{
+    background:#334155;
+    padding:12px;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
 }
 
 </style>
@@ -65,50 +109,119 @@ button{
 <h1>UUID Generator</h1>
 
 <p>
-Generate random UUID instantly.
+Generate random UUIDs instantly.
 </p>
 
-<button onclick="generateUUID()">
-Generate UUID
-</button>
+<div class="controls">
 
-<div class="result"
-id="result">
+<div class="control">
 
-Your UUID will appear here.
+<p>How Many UUIDs?</p>
+
+<input
+type="number"
+id="count"
+min="1"
+max="100"
+value="5">
 
 </div>
 
-<button class="copy-btn"
-onclick="copyUUID()">
-Copy UUID
+<div class="control">
+
+<p>UUID Version</p>
+
+<select id="version">
+
+<option value="v4">
+UUID v4
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<button class="generate"
+onclick="generateUUIDs()">
+Generate UUIDs
 </button>
+
+<button class="copy"
+onclick="copyUUIDs()">
+Copy All
+</button>
+
+<div class="output"
+id="output">
+Generated UUIDs will appear here...
+</div>
+
+<div class="note">
+Useful for APIs, databases & backend systems.
+</div>
 
 </div>
 
 <script>
 
-function generateUUID(){
+function uuidv4(){
 
-    const uuid =
-    crypto.randomUUID();
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+    .replace(/[xy]/g,function(c){
 
-    document.getElementById("result")
-    .innerText = uuid;
+        const r =
+        Math.random() * 16 | 0;
+
+        const v =
+        c === 'x'
+        ? r
+        : (r & 0x3 | 0x8);
+
+        return v.toString(16);
+
+    });
 
 }
 
-function copyUUID(){
+function generateUUIDs(){
 
-    const text =
-    document.getElementById("result")
+    const count =
+    parseInt(
+    document.getElementById("count").value
+    );
+
+    const output =
+    document.getElementById("output");
+
+    output.innerHTML = "";
+
+    for(let i=0;i<count;i++){
+
+        output.innerHTML +=
+
+        `<div class="uuid">
+        ${uuidv4()}
+        </div>`;
+
+    }
+
+}
+
+function copyUUIDs(){
+
+    const uuids =
+    document.getElementById("output")
     .innerText;
 
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(uuids);
 
-    alert("UUID copied");
+    alert("UUIDs copied!");
 
 }
+
+generateUUIDs();
 
 </script>
 
