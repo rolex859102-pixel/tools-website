@@ -6,10 +6,10 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Color Picker Tool Online</title>
+<title>Color Picker Tool</title>
 
 <meta name="description"
-content="Pick colors online free instantly using color picker tool.">
+content="Pick colors and get HEX RGB values instantly online free.">
 
 <style>
 
@@ -17,49 +17,59 @@ body{
     background:#020617;
     color:white;
     font-family:Arial;
-    text-align:center;
     padding:20px;
+    text-align:center;
 }
 
 .container{
-    max-width:700px;
+    max-width:750px;
     margin:auto;
     background:#0f172a;
     padding:30px;
     border-radius:14px;
 }
 
+.color-box{
+    width:100%;
+    height:220px;
+    border-radius:14px;
+    margin-top:25px;
+    border:4px solid #1e293b;
+}
+
 input[type="color"]{
-    width:180px;
-    height:180px;
+    margin-top:25px;
+    width:120px;
+    height:70px;
     border:none;
     background:none;
     cursor:pointer;
-    margin-top:20px;
 }
 
-.color-box{
-    margin-top:30px;
+.values{
+    margin-top:25px;
     background:#1e293b;
-    padding:25px;
+    padding:20px;
     border-radius:12px;
-}
-
-.code{
-    margin-top:15px;
+    line-height:2;
     font-size:20px;
-    font-weight:bold;
 }
 
 button{
     margin-top:20px;
-    padding:12px 22px;
+    padding:14px 24px;
     border:none;
     border-radius:10px;
     background:#22c55e;
-    color:black;
-    font-weight:bold;
+    color:white;
+    font-size:16px;
     cursor:pointer;
+    font-weight:bold;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
 }
 
 </style>
@@ -73,31 +83,35 @@ button{
 <h1>Color Picker Tool</h1>
 
 <p>
-Pick HEX and RGB colors instantly.
+Pick colors & get HEX / RGB codes instantly.
 </p>
 
-<input type="color"
-id="colorPicker"
-value="#22c55e"
+<div class="color-box"
+id="colorBox"></div>
+
+<input
+type="color"
+id="picker"
+value="#3b82f6"
 oninput="updateColor()">
 
-<div class="color-box"
-id="colorBox">
+<div class="values"
+id="values">
 
-<div class="code"
-id="hexCode">
-HEX: #22c55e
+HEX: #3b82f6
+
+<br>
+
+RGB: rgb(59,130,246)
+
 </div>
 
-<div class="code"
-id="rgbCode">
-RGB: rgb(34, 197, 94)
-</div>
-
-<button onclick="copyHEX()">
-Copy HEX
+<button onclick="copyColor()">
+Copy HEX Code
 </button>
 
+<div class="note">
+Useful for web design, UI/UX & graphic projects.
 </div>
 
 </div>
@@ -107,13 +121,10 @@ Copy HEX
 function updateColor(){
 
     const color =
-    document.getElementById("colorPicker").value;
+    document.getElementById("picker").value;
 
     document.getElementById("colorBox")
     .style.background = color;
-
-    document.getElementById("hexCode")
-    .innerHTML = "HEX: " + color;
 
     const r =
     parseInt(color.substr(1,2),16);
@@ -124,23 +135,30 @@ function updateColor(){
     const b =
     parseInt(color.substr(5,2),16);
 
-    document.getElementById("rgbCode")
+    document.getElementById("values")
     .innerHTML =
-    `RGB: rgb(${r}, ${g}, ${b})`;
+
+    "HEX: " + color +
+
+    "<br><br>" +
+
+    "RGB: rgb(" +
+    r + "," + g + "," + b + ")";
 
 }
 
-function copyHEX(){
+function copyColor(){
 
-    const hex =
-    document.getElementById("hexCode")
-    .innerText.replace("HEX: ","");
+    const color =
+    document.getElementById("picker").value;
 
-    navigator.clipboard.writeText(hex);
+    navigator.clipboard.writeText(color);
 
-    alert("HEX copied");
+    alert("HEX color copied!");
 
 }
+
+updateColor();
 
 </script>
 
