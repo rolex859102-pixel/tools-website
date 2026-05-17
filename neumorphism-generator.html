@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Neumorphism Generator</title>
+
+<meta name="description"
+content="Generate neumorphism CSS instantly online free.">
+
+<style>
+
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#dfe6e9;
+    font-family:Arial;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:1000px;
+    background:#dfe6e9;
+    padding:30px;
+    border-radius:20px;
+}
+
+h1{
+    text-align:center;
+    color:#2d3436;
+}
+
+p{
+    text-align:center;
+    color:#636e72;
+}
+
+.preview-area{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:60px;
+}
+
+.neo-box{
+    width:260px;
+    height:180px;
+    border-radius:25px;
+    background:#dfe6e9;
+    box-shadow:
+    10px 10px 20px #b8bec3,
+    -10px -10px 20px #ffffff;
+}
+
+.controls{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.control{
+    background:#ecf0f1;
+    padding:20px;
+    border-radius:14px;
+}
+
+input[type="range"]{
+    width:100%;
+    margin-top:10px;
+}
+
+.output{
+    margin-top:30px;
+    background:#ecf0f1;
+    padding:20px;
+    border-radius:12px;
+    text-align:left;
+    white-space:pre-wrap;
+    word-break:break-word;
+    color:#2d3436;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.note{
+    margin-top:20px;
+    text-align:center;
+    color:#636e72;
+}
+
+@media(max-width:700px){
+
+.controls{
+    grid-template-columns:1fr;
+}
+
+.neo-box{
+    width:100%;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Neumorphism Generator</h1>
+
+<p>
+Create soft UI neumorphism effects instantly.
+</p>
+
+<div class="preview-area">
+
+<div class="neo-box"
+id="neoBox"></div>
+
+</div>
+
+<div class="controls">
+
+<div class="control">
+
+<p>Horizontal Shadow</p>
+
+<input
+type="range"
+id="x"
+min="-50"
+max="50"
+value="10"
+oninput="generateNeo()">
+
+</div>
+
+<div class="control">
+
+<p>Vertical Shadow</p>
+
+<input
+type="range"
+id="y"
+min="-50"
+max="50"
+value="10"
+oninput="generateNeo()">
+
+</div>
+
+<div class="control">
+
+<p>Blur Radius</p>
+
+<input
+type="range"
+id="blur"
+min="0"
+max="60"
+value="20"
+oninput="generateNeo()">
+
+</div>
+
+<div class="control">
+
+<p>Border Radius</p>
+
+<input
+type="range"
+id="radius"
+min="0"
+max="50"
+value="25"
+oninput="generateNeo()">
+
+</div>
+
+</div>
+
+<div class="output"
+id="output">
+CSS code will appear here...
+</div>
+
+<button onclick="copyCSS()">
+Copy CSS
+</button>
+
+<div class="note">
+Useful for modern apps, dashboards & UI design.
+</div>
+
+</div>
+
+<script>
+
+function generateNeo(){
+
+    const x =
+    document.getElementById("x").value;
+
+    const y =
+    document.getElementById("y").value;
+
+    const blur =
+    document.getElementById("blur").value;
+
+    const radius =
+    document.getElementById("radius").value;
+
+    const box =
+    document.getElementById("neoBox");
+
+    const shadow =
+
+`${x}px ${y}px ${blur}px #b8bec3,
+-${x}px -${y}px ${blur}px #ffffff`;
+
+    box.style.boxShadow = shadow;
+
+    box.style.borderRadius =
+    `${radius}px`;
+
+    const css =
+
+`background: #dfe6e9;
+border-radius: ${radius}px;
+box-shadow:
+${shadow};`;
+
+    document.getElementById("output")
+    .innerText = css;
+
+}
+
+function copyCSS(){
+
+    const text =
+    document.getElementById("output").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("CSS copied!");
+
+}
+
+generateNeo();
+
+</script>
+
+</body>
+</html>
