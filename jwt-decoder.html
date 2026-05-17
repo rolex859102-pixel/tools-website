@@ -6,10 +6,10 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>JWT Decoder Online</title>
+<title>JWT Decoder</title>
 
 <meta name="description"
-content="Decode JWT token online free instantly.">
+content="Decode JWT tokens instantly online free.">
 
 <style>
 
@@ -18,15 +18,18 @@ body{
     color:white;
     font-family:Arial;
     padding:20px;
-    text-align:center;
 }
 
 .container{
-    max-width:950px;
+    max-width:1000px;
     margin:auto;
     background:#0f172a;
     padding:30px;
     border-radius:14px;
+}
+
+h1{
+    text-align:center;
 }
 
 textarea{
@@ -43,23 +46,42 @@ textarea{
 
 button{
     margin-top:20px;
-    padding:12px 24px;
+    padding:14px 24px;
     border:none;
     border-radius:10px;
-    background:#22c55e;
-    color:black;
-    font-weight:bold;
+    background:#3b82f6;
+    color:white;
+    font-size:16px;
     cursor:pointer;
+    font-weight:bold;
 }
 
-.result{
+.output{
     margin-top:30px;
     background:#1e293b;
-    padding:20px;
+    padding:25px;
     border-radius:12px;
     text-align:left;
-    white-space:pre-wrap;
     overflow:auto;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+.section{
+    margin-top:20px;
+}
+
+.section-title{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:10px;
+    color:#38bdf8;
+}
+
+.note{
+    margin-top:20px;
+    text-align:center;
+    color:#cbd5e1;
 }
 
 </style>
@@ -72,23 +94,25 @@ button{
 
 <h1>JWT Decoder</h1>
 
-<p>
-Decode JWT tokens instantly online.
+<p style="text-align:center;">
+Decode JWT tokens instantly.
 </p>
 
 <textarea
-id="jwtInput"
-placeholder="Paste JWT token here"></textarea>
+id="token"
+placeholder="Paste JWT token here..."></textarea>
 
 <button onclick="decodeJWT()">
 Decode JWT
 </button>
 
-<div class="result"
-id="result">
+<div class="output"
+id="output">
+Decoded JWT data will appear here...
+</div>
 
-Decoded JWT will appear here.
-
+<div class="note">
+Useful for APIs, authentication & backend debugging.
 </div>
 
 </div>
@@ -98,36 +122,72 @@ Decoded JWT will appear here.
 function decodeJWT(){
 
     const token =
-    document.getElementById("jwtInput").value.trim();
+    document.getElementById("token").value;
 
-    if(token === ""){
+    const output =
+    document.getElementById("output");
 
-        alert("Please enter JWT token");
+    if(token.trim() === ""){
+
+        output.innerHTML =
+        "Please enter JWT token.";
 
         return;
+
     }
 
     try{
 
+        const parts =
+        token.split(".");
+
+        if(parts.length !== 3){
+
+            output.innerHTML =
+            "Invalid JWT token.";
+
+            return;
+
+        }
+
+        const header =
+        JSON.parse(atob(parts[0]));
+
         const payload =
-        token.split('.')[1];
+        JSON.parse(atob(parts[1]));
 
-        const decoded =
-        JSON.parse(
-            atob(payload)
-        );
+        output.innerHTML =
 
-        document.getElementById("result")
-        .innerText =
-        JSON.stringify(decoded, null, 2);
+        `<div class="section">
+
+        <div class="section-title">
+        Header
+        </div>
+
+        <pre>
+${JSON.stringify(header,null,2)}
+        </pre>
+
+        </div>
+
+        <div class="section">
+
+        <div class="section-title">
+        Payload
+        </div>
+
+        <pre>
+${JSON.stringify(payload,null,2)}
+        </pre>
+
+        </div>`;
 
     }
 
     catch(error){
 
-        document.getElementById("result")
-        .innerText =
-        "Invalid JWT Token";
+        output.innerHTML =
+        "Invalid JWT token format.";
 
     }
 
