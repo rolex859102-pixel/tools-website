@@ -6,10 +6,12 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Markdown Editor Online</title>
+<title>Markdown Editor</title>
 
 <meta name="description"
-content="Write and preview Markdown online free instantly.">
+content="Write and preview Markdown online instantly free.">
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <style>
 
@@ -28,21 +30,20 @@ body{
     border-radius:14px;
 }
 
-h1,p{
+h1{
     text-align:center;
 }
 
 .editor{
-    display:flex;
+    display:grid;
+    grid-template-columns:1fr 1fr;
     gap:20px;
-    flex-wrap:wrap;
-    margin-top:30px;
+    margin-top:25px;
 }
 
 textarea{
-    flex:1;
-    min-width:300px;
-    height:450px;
+    width:100%;
+    height:500px;
     padding:15px;
     border:none;
     border-radius:10px;
@@ -52,14 +53,39 @@ textarea{
 }
 
 .preview{
-    flex:1;
-    min-width:300px;
     background:white;
     color:black;
     padding:20px;
     border-radius:10px;
-    min-height:450px;
     overflow:auto;
+    min-height:500px;
+    text-align:left;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.note{
+    margin-top:20px;
+    color:#cbd5e1;
+    text-align:center;
+}
+
+@media(max-width:900px){
+
+.editor{
+    grid-template-columns:1fr;
+}
+
 }
 
 </style>
@@ -72,50 +98,69 @@ textarea{
 
 <h1>Markdown Editor</h1>
 
-<p>
-Write and preview Markdown instantly.
+<p style="text-align:center;">
+Write Markdown with live preview.
 </p>
 
 <div class="editor">
 
 <textarea
-id="markdownInput"
-placeholder="# Hello World"></textarea>
+id="markdown"
+placeholder="Write Markdown here..."
+oninput="updatePreview()">
+
+# Hello World
+
+## Markdown Editor
+
+- Live Preview
+- Fast Editing
+- Developer Friendly
+
+</textarea>
 
 <div class="preview"
-id="preview">
-
-Markdown preview will appear here.
+id="preview"></div>
 
 </div>
 
+<button onclick="copyMarkdown()">
+Copy Markdown
+</button>
+
+<div class="note">
+Useful for GitHub, blogs & documentation writing.
 </div>
 
 </div>
 
 <script>
 
-const input =
-document.getElementById("markdownInput");
-
-input.addEventListener("input", updatePreview);
-
 function updatePreview(){
 
-    let text = input.value;
-
-    text = text
-    .replace(/^# (.*$)/gim, "<h1>$1</h1>")
-    .replace(/^## (.*$)/gim, "<h2>$1</h2>")
-    .replace(/^### (.*$)/gim, "<h3>$1</h3>")
-    .replace(/\*\*(.*)\*\*/gim, "<b>$1</b>")
-    .replace(/\*(.*)\*/gim, "<i>$1</i>")
-    .replace(/\n$/gim, "<br>");
+    const markdown =
+    document.getElementById("markdown").value;
 
     document.getElementById("preview")
-    .innerHTML = text;
+    .innerHTML =
+    marked.parse(markdown);
 
 }
+
+function copyMarkdown(){
+
+    const markdown =
+    document.getElementById("markdown");
+
+    markdown.select();
+
+    document.execCommand("copy");
+
+    alert("Markdown copied!");
+
+}
+
+updatePreview();
 
 </script>
 
