@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>HTTP Headers Checker</title>
+
+<meta name="description"
+content="Check HTTP response headers instantly online free.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    text-align:center;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    background:#3b82f6;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.output{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    overflow:auto;
+    white-space:pre-wrap;
+    word-break:break-word;
+    line-height:1.8;
+}
+
+.header{
+    background:#334155;
+    padding:12px;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+.note{
+    margin-top:20px;
+    text-align:center;
+    color:#cbd5e1;
+}
+
+.warning{
+    color:#f59e0b;
+    margin-top:15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>HTTP Headers Checker</h1>
+
+<p style="text-align:center;">
+Check website HTTP response headers instantly.
+</p>
+
+<input
+type="text"
+id="url"
+placeholder="Enter website URL">
+
+<button onclick="checkHeaders()">
+Check Headers
+</button>
+
+<div class="output"
+id="output">
+HTTP headers will appear here...
+</div>
+
+<div class="note">
+Useful for SEO, security & API debugging.
+</div>
+
+</div>
+
+<script>
+
+async function checkHeaders(){
+
+    const url =
+    document.getElementById("url").value;
+
+    const output =
+    document.getElementById("output");
+
+    if(url.trim() === ""){
+
+        output.innerHTML =
+        "Please enter website URL.";
+
+        return;
+
+    }
+
+    output.innerHTML =
+    "Loading headers...";
+
+    try{
+
+        const response =
+        await fetch(url);
+
+        let headersHTML = "";
+
+        response.headers.forEach(
+        (value,key) => {
+
+            headersHTML +=
+
+            `<div class="header">
+
+            <strong>${key}</strong>
+
+            <br>
+
+            ${value}
+
+            </div>`;
+
+        });
+
+        output.innerHTML =
+
+        `<h2>Status:
+        ${response.status}</h2>
+
+        ${headersHTML}`;
+
+    }
+
+    catch(error){
+
+        output.innerHTML =
+
+        `<div class="warning">
+
+        Unable to fetch headers.
+
+        <br><br>
+
+        Some websites block
+        browser requests because
+        of CORS policy.
+
+        </div>`;
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
