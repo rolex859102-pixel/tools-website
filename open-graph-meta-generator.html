@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Open Graph Meta Generator</title>
+
+<meta name="description"
+content="Generate Open Graph and Twitter meta tags instantly online free.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    text-align:center;
+}
+
+.form{
+    margin-top:30px;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:15px;
+    margin-top:18px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+textarea{
+    height:120px;
+    resize:none;
+}
+
+button{
+    margin-top:25px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.output{
+    margin-top:35px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    white-space:pre-wrap;
+    word-break:break-word;
+    overflow:auto;
+    line-height:1.8;
+}
+
+.note{
+    margin-top:20px;
+    text-align:center;
+    color:#cbd5e1;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Open Graph Meta Generator</h1>
+
+<p style="text-align:center;">
+Generate Facebook & Twitter meta tags instantly.
+</p>
+
+<div class="form">
+
+<input
+type="text"
+id="title"
+placeholder="Website/Page Title">
+
+<textarea
+id="description"
+placeholder="Website/Page Description"></textarea>
+
+<input
+type="text"
+id="url"
+placeholder="Website URL">
+
+<input
+type="text"
+id="image"
+placeholder="Image URL">
+
+<button onclick="generateMeta()">
+Generate Meta Tags
+</button>
+
+</div>
+
+<div class="output"
+id="output">
+Generated meta tags will appear here...
+</div>
+
+<div class="note">
+Useful for SEO, blogs & social sharing optimization.
+</div>
+
+</div>
+
+<script>
+
+function generateMeta(){
+
+    const title =
+    document.getElementById("title").value;
+
+    const description =
+    document.getElementById("description").value;
+
+    const url =
+    document.getElementById("url").value;
+
+    const image =
+    document.getElementById("image").value;
+
+    const output =
+    document.getElementById("output");
+
+    const tags =
+
+`<!-- Open Graph Meta Tags -->
+
+<meta property="og:title"
+content="${title}">
+
+<meta property="og:description"
+content="${description}">
+
+<meta property="og:url"
+content="${url}">
+
+<meta property="og:image"
+content="${image}">
+
+<meta property="og:type"
+content="website">
+
+<!-- Twitter Card Meta Tags -->
+
+<meta name="twitter:card"
+content="summary_large_image">
+
+<meta name="twitter:title"
+content="${title}">
+
+<meta name="twitter:description"
+content="${description}">
+
+<meta name="twitter:image"
+content="${image}">`;
+
+    output.innerText = tags;
+
+}
+
+</script>
+
+</body>
+</html>
