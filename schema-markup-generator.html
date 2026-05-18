@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Schema Markup Generator</title>
+
+<meta name="description"
+content="Generate JSON-LD schema markup instantly online free.">
+
+<style>
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:#0f172a;
+    padding:30px;
+    border-radius:14px;
+}
+
+h1{
+    text-align:center;
+}
+
+.form{
+    margin-top:30px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:15px;
+    margin-top:18px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+textarea{
+    height:120px;
+    resize:none;
+}
+
+button{
+    margin-top:25px;
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.output{
+    margin-top:35px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    white-space:pre-wrap;
+    word-break:break-word;
+    overflow:auto;
+    line-height:1.8;
+}
+
+.note{
+    margin-top:20px;
+    text-align:center;
+    color:#cbd5e1;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Schema Markup Generator</h1>
+
+<p style="text-align:center;">
+Generate JSON-LD schema markup instantly.
+</p>
+
+<div class="form">
+
+<select id="type">
+
+<option value="Organization">
+Organization
+</option>
+
+<option value="Article">
+Article
+</option>
+
+<option value="Product">
+Product
+</option>
+
+<option value="FAQPage">
+FAQ Page
+</option>
+
+</select>
+
+<input
+type="text"
+id="name"
+placeholder="Name / Title">
+
+<input
+type="text"
+id="url"
+placeholder="Website URL">
+
+<textarea
+id="description"
+placeholder="Description"></textarea>
+
+<button onclick="generateSchema()">
+Generate Schema
+</button>
+
+</div>
+
+<div class="output"
+id="output">
+Generated schema markup will appear here...
+</div>
+
+<div class="note">
+Useful for SEO, structured data & Google rich snippets.
+</div>
+
+</div>
+
+<script>
+
+function generateSchema(){
+
+    const type =
+    document.getElementById("type").value;
+
+    const name =
+    document.getElementById("name").value;
+
+    const url =
+    document.getElementById("url").value;
+
+    const description =
+    document.getElementById("description").value;
+
+    const output =
+    document.getElementById("output");
+
+    const schema = {
+
+        "@context":
+        "https://schema.org",
+
+        "@type":
+        type,
+
+        "name":
+        name,
+
+        "url":
+        url,
+
+        "description":
+        description
+
+    };
+
+    output.innerText =
+
+`<script type="application/ld+json">
+
+${JSON.stringify(schema,null,2)}
+
+</script>`;
+
+}
+
+</script>
+
+</body>
+</html>
